@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2008 http://mobeegal.in
+
+        All Rights Reserved.
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<!--
+    $Id::                                                                           $: Id of last commit
+    $Rev::                                                                          $: Revision of last commit
+    $Author::                                                                       $: Author of last commit
+    $Date::                                                                         $: Date of last commit
+-->
+
+<!-- Demonstrates using a relative layout to create a form -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dip">
+
+    <!--
+        TextView goes at the top left by default .
+    -->
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_welcome"
+        android:textColor="@android:color/primary_text_dark"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:focusable="false"
+            />
+
+    <TextView
+        android:id="@+id/select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/welcome"
+        android:text="@string/text_select"
+        android:textColor="@android:color/primary_text_dark"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold"
+        android:focusable="false"
+        android:layout_alignParentRight="true"
+            />
+
+    <Button
+            android:id="@+id/match"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/select"
+            android:text="@string/text_match"
+        />
+</RelativeLayout>
+

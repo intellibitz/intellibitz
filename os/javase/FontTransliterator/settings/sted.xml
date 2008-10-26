@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+/**
+ * Copyright (C) IntelliBitz Technologies.,  Muthu Ramadoss
+ * 168, Medavakkam Main Road, Madipakkam, Chennai 600091, Tamilnadu, India.
+ * http://www.intellibitz.com
+ * training@intellibitz.com
+ * +91 44 2247 5106
+ * http://groups.google.com/group/etoe
+ * http://sted.sourceforge.net
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ * STED, Copyright (C) 2007 IntelliBitz Technologies
+ * STED comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome
+ * to redistribute it under the GNU GPL conditions;
+ *
+ * Visit http://www.gnu.org/ for GPL License terms.
+ */
+-->
+
+<!--
+/**
+ * $Id: sted.xml 55 2007-05-19 05:55:34Z sushmu $
+ * $HeadURL: svn+ssh://sushmu@svn.code.sf.net/p/sted/code/FontTransliterator/trunk/settings/sted.xml $
+ */
+-->
+
+<settings name="sted.xml" version="0.80">
+    <option
+            name="icon.sted"
+            value="./images/sted.gif"
+    />
+    <option
+            name="icon.file.normal.state"
+            value="./images/gflag.png"
+    />
+    <option
+            name="icon.file.edit.state"
+            value="./images/rflag.png"
+    />
+    <option
+            name="icon.help"
+            value="./images/help.png"
+    />
+    <option
+            name="icon.help.home"
+            value="./images/home.png"
+    />
+    <option
+            name="icon.help.back"
+            value="./images/back.png"
+    />
+    <option
+            name="icon.help.forward"
+            value="./images/forward.png"
+    />
+    <option
+            name="icon.status.lock"
+            value="./images/lock.png"
+    />
+    <option
+            name="icon.status.unlock"
+            value="./images/unlock.png"
+    />
+    <!--    @since 0.62 -->
+    <option
+            name="icon.gc"
+            value="./images/gc.png"
+    />
+    <option
+            name="icon.gc.rollover"
+            value="./images/gc2.png"
+    />
+    <option
+            name="icon.file.input"
+            value="./images/input.png"
+    />
+    <option
+            name="icon.file.output"
+            value="./images/output.png"
+    />
+    <!--    @since -->
+    <option
+            name="title.about.sted"
+            value="About STED..."
+    />
+    <option
+            name="title.table.column.symbol1"
+            value="SYM1"
+    />
+    <option
+            name="title.table.column.symbol2"
+            value="SYM2"
+    />
+    <option
+            name="title.table.column.letter1"
+            value="First Letter"
+    />
+    <option
+            name="title.table.column.letter2"
+            value="Last Letter"
+    />
+    <option
+            name="title.table.column.followed"
+            value="Followed By"
+    />
+    <option
+            name="title.table.column.preceded"
+            value="Preceded By"
+    />
+    <option
+            name="title.table.column.equals"
+            value="="
+    />
+    <option
+            name="title.help"
+            value="STED - Help Topics"
+    />
+    <option
+            name="title.keypad"
+            value="KeyPad"
+    />
+    <option
+            name="tip.tab.input"
+            value="Select Input to View"
+    />
+    <option
+            name="title.tab.input"
+            value="Input"
+    />
+    <option
+            name="title.tab.output"
+            value="Output"
+    />
+    <option
+            name="title.mapping"
+            value="Mapping"
+    />
+    <option
+            name="title.mapping.rule"
+            value=" Mapping Rules [Optional] "
+    />
+    <option
+            name="title.mapping.preview"
+            value=" Mapping Preview - Transliteration for above mapping shown below "
+    />
+    <option
+            name="title.mapping.detail"
+            value="Mapping Rules:"
+    />
+    <option
+            name="title.sample.input"
+            value="Mapping Preview:"
+    />
+    <option
+            name="title.sample.output"
+            value="Output:"
+    />
+    <option
+            name="title.tab.fontmap"
+            value="FontMap:"
+    />
+    <option
+            name="tip.tab.fontmap"
+            value="Map Fonts and Select Input, Output and Transliterate"
+    />
+    <option
+            name="tip.tab.output"
+            value="Select Output to View"
+    />
+    <option
+            name="label.font.load"
+            value="Load Font from a folder"
+    />
+    <option
+            name="label.add"
+            value="Add"
+    />
+    <option
+            name="label.clear"
+            value="Clear"
+    />
+    <!-- The Number of Columns to arrange the Font Key Buttons in the Keypad -->
+    <option
+            name="keypad.column.count"
+            value="6"
+    />
+    <!-- The Maximum index to search for characters in the Font.. Ex: ASCII fonts - no need to set more than 255 -->
+    <option
+            name="font.char.maxindex"
+            value="65536"
+    />
+    <option
+            name="sample.input.text"
+            value="Enter &lt;sample&gt; text here to transliterate. You can use this box to test your mapping by typing words."
+    />
+    <!--    @since 0.73 -->
+    <option
+            name="sample.fontmap"
+            value="Adhawin-Tamil-Fontmap.xml"
+    />
+</settings>

@@ -1,0 +1,24 @@
+1. get profile
+
+url: http://.../api/get/profile/
+method: GET (google auth cookie required)
+
+description: 
+
+get current user's profile. return json result like the following:
+
+{"pk": 2, "model": "Profile", "retcode": 1, "fields": {"city": "beijing", "photo_id": null, "mood": "hello", "created": 1234326628938, "modified": 1234326628938, "points": 20, "location": "1.0,2.0", "nickname": "tutu"}}
+
+2. set profile
+
+url: http://.../api/set/profile/ 
+method: POST (google auth cookie required)
+parameter:
+	nickname = nickname of the profile
+	city = city of the profile
+	mood = mood of the profile
+	location = location of the profile. two float seprated by ','
+	
+description:
+
+update or create current user's profile. 

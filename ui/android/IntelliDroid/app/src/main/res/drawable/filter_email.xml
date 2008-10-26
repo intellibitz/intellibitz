@@ -1,0 +1,5 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/filter_email_layer_grey" android:state_selected="false" />
+    <item android:drawable="@drawable/filter_email_layer" android:state_selected="true" />
+    <item android:drawable="@drawable/ic_email_white_18dp" />
+</selector>

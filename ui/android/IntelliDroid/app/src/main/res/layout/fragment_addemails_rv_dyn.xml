@@ -1,0 +1,37 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_circle_white_60"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_addemails_rv_dyn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:gravity="center"
+            android:src="@drawable/gmail_icon" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_addemails_rv_dyn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center"
+        android:background="@android:color/transparent"
+        android:gravity="start|center"
+        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
+        android:text="@string/gmail"
+        android:textColor="@color/black" />
+
+</LinearLayout>

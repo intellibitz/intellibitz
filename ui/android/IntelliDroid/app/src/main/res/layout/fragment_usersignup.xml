@@ -1,0 +1,195 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray_b7"
+    android:clipToPadding="false"
+    android:fillViewport="false"
+    android:isScrollContainer="true"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context="intellibitz.intellidroid.MainActivity">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_mid"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_profileinfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/add_new_email"
+                android:textColor="@color/white" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="4dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_gravity="bottom"
+                        android:background="@drawable/shape_roundrecttop_white"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+                        <!--android:src="@drawable/profile_cam_layer" />-->
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_profileimage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/shape_circle_white"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <intellibitz.intellidroid.util.NetworkImageView
+                            android:id="@+id/profile_imageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/combined_shape_layer"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:src="@drawable/combined_shape_layer" />
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/shape_roundrectbot_white"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="12dp">
+
+                    <LinearLayout
+                        android:id="@+id/ll_avatar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="2dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
+                            android:gravity="center"
+                            android:paddingLeft="4dp"
+                            android:paddingStart="4dp"
+                            android:text="@string/user_notregistered"
+                            android:textColor="@color/red" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:padding="18dp">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_signup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_roundrect_red"
+                            android:padding="12dp">
+                            <!--android:background="@drawable/shape_circle">-->
+
+                            <!--android:background="@drawable/shape_rect"-->
+                            <Button
+                                android:id="@+id/btn_signup"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:text="@string/signup"
+                                android:textColor="@color/white"
+                                android:visibility="visible" />
+
+                            <ImageButton
+                                android:id="@+id/ibtn_signup"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/btn_signup"
+                                android:layout_toRightOf="@+id/btn_signup"
+                                android:background="@android:color/transparent"
+                                android:contentDescription="@string/app_title"
+                                android:src="@drawable/login_arrow"
+                                android:visibility="visible" />
+
+                        </RelativeLayout>
+
+                        <View
+                            android:layout_width="20dp"
+                            android:layout_height="20dp" />
+
+                        <RelativeLayout
+                            android:id="@+id/rl_tryagain"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/shape_roundrect_white"
+                            android:padding="2dp">
+                            <!--android:background="@drawable/shape_circle">-->
+
+                            <!--android:background="@drawable/shape_rect"-->
+                            <Button
+                                android:id="@+id/btn_tryagain"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:text="@string/try_again"
+                                android:textColor="@color/red_da"
+                                android:visibility="visible" />
+
+                            <ImageButton
+                                android:id="@+id/ibtn_tryagain"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/btn_tryagain"
+                                android:layout_toRightOf="@+id/btn_tryagain"
+                                android:background="@android:color/holo_red_dark"
+                                android:contentDescription="@string/app_title"
+                                android:padding="8dp"
+                                android:src="@drawable/login_arrow"
+                                android:visibility="visible" />
+
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
+
+
+

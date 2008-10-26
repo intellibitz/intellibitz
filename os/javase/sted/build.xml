@@ -1,0 +1,208 @@
+<!--
+/**
+ * Copyright (C) IntelliBitz Technologies.,  Muthu Ramadoss
+ * 168, Medavakkam Main Road, Madipakkam, Chennai 600091, Tamilnadu, India.
+ * http://www.intellibitz.com
+ * training@intellibitz.com
+ * +91 44 2247 5106
+ * http://groups.google.com/group/etoe
+ * http://sted.sourceforge.net
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ * STED, Copyright (C) 2007 IntelliBitz Technologies
+ * STED comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome
+ * to redistribute it under the GNU GPL conditions;
+ *
+ * Visit http://www.gnu.org/ for GPL License terms.
+ */
+-->
+
+<!--
+/**
+ * $Id: build.xml 55 2007-05-19 05:55:34Z sushmu $
+ * $HeadURL: svn+ssh://sushmu@svn.code.sf.net/p/sted/code/FontTransliterator/trunk/build.xml $
+ */
+-->
+
+<project name="STED" default="init" basedir=".">
+
+    <property file="build.properties"
+              description="STED User Environment Settings"/>
+
+    <target name="init">
+        <tstamp/>
+        <!-- Create the build directory structure used by compile -->
+        <mkdir dir="${BUILD_PATH}"/>
+        <mkdir dir="${CLASSES_PATH}"/>
+        <echo message="Project Path:    ${PROJECT_PATH}"/>
+        <echo message="Source Path:     ${SOURCE_PATH}"/>
+        <echo message="Classes Path:    ${CLASSES_PATH}"/>
+        <echo message="Deploy Path:     ${DEPLOY_PATH}"/>
+        <echo message="Jar Path:        ${STED.JAR}"/>
+    </target>
+
+    <path id="SOURCE_PATH">
+        <pathelement location="${SOURCE_PATH}"/>
+    </path>
+
+    <path id="CLASS_PATH">
+        <pathelement location="${CLASSES_PATH}"/>
+    </path>
+
+    <target name="copy.resource" depends="init">
+        <copy todir="${BUILD_PATH}" verbose="true">
+            <fileset
+                    dir="${PROJECT_PATH}"
+                    excludes="**/build/**, **/dist/**, **/test/**"
+                    defaultexcludes="true"
+                    />
+        </copy>
+    </target>
+
+    <target name="compile" depends="init" description="compiles source">
+        <javac
+                srcdir="${SOURCE_PATH}"
+                destdir="${CLASSES_PATH}"
+                deprecation="on"
+                verbose="true"
+                >
+        </javac>
+        <!--HACK for development builds only-->
+        <!--copy 'config' folder in classess.. since ResourceBundle would fail-->
+        <!--Deployment does not require this hack, because STED_HOME is set in classpath-->
+        <copy todir="${CLASSES_PATH}" verbose="true">
+            <fileset
+                    dir="${PROJECT_PATH}"
+                    includes="config/**"
+                    defaultexcludes="true"
+                    />
+        </copy>
+    </target>
+
+    <target name="deploy.widgets" depends="compile"
+            description="creates sted-widgets.jar">
+        <jar
+                basedir="${CLASSES_PATH}"
+                destfile="${STED-WIDGETS.JAR}"
+                includes="**/intellibitz/sted/widgets/**"
+                >
+            <manifest>
+                <attribute name="Built-By"
+                           value="IntelliBitz Technologies., Muthu Ramadoss."/>
+                <section name="STED Widgets - ReUsable Swing Components.">
+                    <attribute name="Specification-Title" value="STED"/>
+                    <attribute name="Specification-Version" value="${VERSION}"/>
+                    <attribute name="Specification-Vendor"
+                               value="IntelliBitz Technologies.,"/>
+                    <attribute name="Implementation-Title" value="STED"/>
+                    <attribute name="Implementation-Version"
+                               value="${VERSION} ${TODAY}"/>
+                    <attribute name="Implementation-Vendor"
+                               value="IntelliBitz Technologies.,"/>
+                </section>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="deploy.sted" depends="copy.resource, compile, deploy.widgets"
+            description="creates sted.jar">
+        <jar
+                basedir="${CLASSES_PATH}"
+                destfile="${STED.JAR}"
+                includes="**/intellibitz/**"
+                excludes="**/config/**, **/intellibitz/sted/widgets/**"
+                >
+            <manifest>
+                <attribute name="Main-Class" value="intellibitz.sted.Main"/>
+                <attribute name="Built-By"
+                           value="IntelliBitz Technologies., Muthu Ramadoss."/>
+                <section name="STED - Free OpenSource Transliterator/Editor.">
+                    <attribute name="Specification-Title" value="STED"/>
+                    <attribute name="Specification-Version" value="${VERSION}"/>
+                    <attribute name="Specification-Vendor"
+                               value="IntelliBitz Technologies.,"/>
+                    <attribute name="Implementation-Title" value="STED"/>
+                    <attribute name="Implementation-Version"
+                               value="${VERSION} ${TODAY}"/>
+                    <attribute name="Implementation-Vendor"
+                               value="IntelliBitz Technologies.,"/>
+                </section>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="clean.deploy" depends="clean.build, deploy.sted"
+            description="Cleans and Creates Deployment"/>
+
+    <target name="undeploy" description="removes sted.jar">
+        <delete verbose="true">
+            <fileset
+                    dir="${DEPLOY_PATH}"
+                    includes="${STED.JAR_NAME}"
+                    />
+        </delete>
+    </target>
+
+    <target name="clean.classes" description="deletes classes">
+        <delete includeemptydirs="true" verbose="true">
+            <fileset
+                    dir="${CLASSES_PATH}"
+                    excludes="**/.dependency-info/**"
+                    defaultexcludes="false"
+                    />
+        </delete>
+    </target>
+
+    <target name="clean.build" description="deletes build directory">
+        <delete includeemptydirs="true" verbose="true">
+            <fileset
+                    dir="${BUILD_PATH}"
+                    excludes="**/.dependency-info/**"
+                    defaultexcludes="false"
+                    />
+        </delete>
+    </target>
+
+    <target name="release.sted"
+            depends="clean.deploy"
+            description="Creates STED Production Deliverable">
+        <jar
+                basedir="${BUILD_PATH}"
+                destfile="${STED.ZIP}"
+                excludes="**/classes/**, **/src/**, **/temp/**, ${STED.ZIP}, ${STED-FULL.ZIP}"
+                >
+        </jar>
+    </target>
+
+    <target name="release.sted-full"
+            description="Creates STED Production Deliverable">
+        <jar
+                basedir="${BUILD_PATH}"
+                destfile="${STED-FULL.ZIP}"
+                excludes="**/classes/**, **/temp/**, ${STED.ZIP}, ${STED-FULL.ZIP}"
+                >
+        </jar>
+    </target>
+
+    <target name="run" depends="deploy.sted" description="runs sted">
+        <!-- WINDOWS -->
+        <!--<exec dir="${DEPLOY_PATH}" executable="sted.bat"/>-->
+        <!-- LINUX -->
+        <exec dir="${DEPLOY_PATH}" executable="./sted.sh"/>
+    </target>
+
+</project>

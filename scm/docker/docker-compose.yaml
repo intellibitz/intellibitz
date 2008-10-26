@@ -1,0 +1,27 @@
+# https://docs.docker.com/compose/compose-file/
+name: postgres
+
+services:
+  postgresql:
+    build:
+      context: .
+      dockerfile: postgres-Dockerfile
+    restart: always
+    hostname: 'postgres'
+    ports:
+      - '65432:5432'
+    environment:
+      POSTGRES_PASSWORD: 'admin'
+      SERVER_NAME: 'postgresql'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    # networks:
+    #   - host
+
+volumes:
+  pgdata:
+
+# networks:
+#   host:
+
+

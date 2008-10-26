@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WuffIT Tracker</string>
+    <string name="select_tracker_activity_label">WuffIT - Select Trackers from
+        Contacts
+    </string>
+    <string name="setup_wuffit_activity_label">WuffIT - Setup Trackers by SMS
+    </string>
+    <string name="request_location_activity_label">WuffIT - Request Tracker
+        Locations
+    </string>
+    <string name="display_location_activity_label">WuffIT - Display Tracker
+        Locations
+    </string>
+
+    <string name="main_menu_text">Back to Main</string>
+    <string name="empty_text">Empty. Please add items using Menu.</string>
+
+    <!--main.xml-->
+    <string name="select_tracker_text">Select Trackers from Contacts</string>
+    <string name="setup_wuffit_text">Setup Trackers by SMS</string>
+    <string name="request_location_text">Request Tracker Locations by SMS
+    </string>
+    <string name="display_location_text">Display Tracker Locations on Maps
+    </string>
+    <string name="exit_text">EXIT WuffIT Tracker</string>
+
+    <!--select_tracker.xml-->
+    <string name="pick_tracker_text">Pick Tracker</string>
+    <string name="sync_tracker_text">Sync All Trackers</string>
+
+    <string name="setup_text">SETUP</string>
+    <string name="edit_text">EDIT</string>
+
+    <!--setup_wuffit.xml-->
+    <string name="wuffit_setup_text">Setup ALL Trackers</string>
+    <string name="wuffit_message_text">#wuffit,0000,5, @*</string>
+
+    <!--request_location.xml-->
+    <string name="request_location_message_text">#wuffit,0000,10*</string>
+    <string name="location_text">REQUEST</string>
+
+    <!--footer_view.xml-->
+    <string name="footer_text1">Total:</string>
+    <string name="footer_text2">0</string>
+
+</resources>

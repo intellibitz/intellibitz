@@ -1,0 +1,5 @@
+<module rename-to="irp">
+	<inherits name="com.google.gwt.user.User"/>
+	<entry-point class='com.uc.irp.client.DynaTable' />
+	<servlet path='/reports' class='com.uc.irp.server.IncidentReportServiceImpl'/>
+</module>

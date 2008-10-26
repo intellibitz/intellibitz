@@ -1,0 +1,857 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="intellibitz.intellidroid">
+
+    <!-- ui automator requires min sdk 18 - if less that, the following override is required -->
+    <!--
+        <uses-sdk
+            android:targetSdkVersion="30"
+            tools:overrideLibrary="android.support.test.uiautomator.v18" />
+    -->
+    <uses-sdk tools:overrideLibrary="androidx.test.uiautomator:uiautomator:2.2.0"/>
+<!--    <uses-sdk tools:overrideLibrary="com.android.support.test.uiautomator.v18"/>-->
+    <!--<uses-sdk tools:overrideLibrary="android.support.test.uiautomator.v18,com.android.support.test.uiautomator:uiautomator-v18:2.1.2" />-->
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+
+    <!-- User for the camera itself. -->
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+
+    <!-- Used for creating new files from camera -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <!-- To auto-complete the emailItem text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_PROFILE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+
+    <!-- FCM DOES NOT REQUIRE THIS -->
+    <!--
+        &lt;!&ndash; GCM SERVICES WILL NEED TO RUN, WHEN MESSAGES ARE RECEIVED&ndash;&gt;
+        <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+        &lt;!&ndash; GCM PERMISSIONS &ndash;&gt;
+        <permission
+            android:name="intellibitz.intellidroididroid.permission.C2D_MESSAGE"
+            android:protectionLevel="signature" />
+
+        <uses-permission android:name="intellibitz.intellidroididroid.permission.C2D_MESSAGE" />
+    -->
+    <!-- FCM DOES NOT REQUIRE THIS - END -->
+
+    <!-- android:name="android.support.multidex.MultiDexApplication" -->
+    <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+    <!--android:theme="@style/AppTheme">-->
+    <!--android:theme="@style/ThemeOverlay.AppCompat.Dark"-->
+
+    <application
+        android:name="intellibitz.intellidroid.MainApplication"
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/appbackup"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="false"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <!--
+        already added by gradle
+                <meta-data
+                    android:name="com.google.android.gms.version"
+                    android:value="@integer/google_play_services_version" />
+        -->
+
+        <!-- You don't need to include android:required="false" if your app's
+             minSdkVersion is 28 or higher. -->
+        <uses-library android:name="android.test.runner"
+                      android:required="false"/>
+        <uses-library android:name="android.test.mock"
+            android:required="false" />
+        <uses-library android:name="android.test.base"
+            android:required="false" />
+
+        <activity
+            android:name="intellibitz.intellidroid.MainActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme">
+            <!--android:theme="@style/SplashTheme">-->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+        <!--android:windowSoftInputMode="adjustResize|adjustPan|adjustUnspecified"-->
+        <!-- android:screenOrientation="portrait" -->
+        <!-- android:theme="@style/Theme.AppCompat.Light.NoActionBar" /> -->
+        <activity android:name="intellibitz.intellidroid.domain.help.IntroScreenActivity"/>
+
+        <!-- Account Landing -->
+        <activity
+            android:name="intellibitz.intellidroid.account.AccountLandingActivity"
+            android:label="@string/account_landing"
+            android:parentActivityName="intellibitz.intellidroid.MainActivity"
+            android:theme="@style/LaunchTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.MainActivity"/>
+        </activity>
+
+        <!-- Check Email Available -->
+        <activity
+            android:name="intellibitz.intellidroid.account.CheckEmailAvailableActivity"
+            android:label="@string/login"
+            android:parentActivityName="intellibitz.intellidroid.MainActivity"
+            android:theme="@style/LaunchTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.MainActivity"/>
+        </activity>
+
+        <!-- Verify Code -->
+        <activity
+            android:name="intellibitz.intellidroid.account.VerifyCodeActivity"
+            android:label="@string/verify_code"
+            android:parentActivityName="intellibitz.intellidroid.MainActivity"
+            android:theme="@style/LaunchTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.MainActivity"/>
+        </activity>
+
+        <!-- Profile Signup -->
+        <activity
+            android:name="intellibitz.intellidroid.account.ProfileSignupActivity"
+            android:label="@string/profile"
+            android:parentActivityName="intellibitz.intellidroid.MainActivity"
+            android:theme="@style/LaunchTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.MainActivity"/>
+        </activity>
+
+        <!-- Schedules Create -->
+        <!--
+                <activity
+                    android:name=".schedule.SchedulesActivity"
+                    android:label="@string/schedules"
+                    android:parentActivityName=".IntellibitzActivity"
+                    android:theme="@style/LaunchTheme">
+                    <intent-filter>
+                        <category android:name="android.intent.category.MONKEY" />
+                    </intent-filter>
+                    <meta-data
+                        android:name="android.support.PARENT_ACTIVITY"
+                        android:value=".IntellibitzActivity" />
+                </activity>
+        -->
+
+        <!-- Company Create -->
+        <activity
+            android:name="intellibitz.intellidroid.company.CompanyCreateActivity"
+            android:label="@string/create_company"
+            android:parentActivityName="intellibitz.intellidroid.MainActivity"
+            android:theme="@style/LaunchTheme">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.MainActivity"/>
+        </activity>
+
+        <!-- Company List -->
+        <activity
+            android:name="intellibitz.intellidroid.company.CompanyListActivity"
+            android:label="@string/company_list"
+            android:parentActivityName="intellibitz.intellidroid.MainActivity"
+            android:theme="@style/LaunchTheme">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.MainActivity"/>
+        </activity>
+
+        <!-- Company Get Invites -->
+        <activity
+            android:name="intellibitz.intellidroid.company.GetInvitesActivity"
+            android:label="@string/note_get_invites"
+            android:parentActivityName="intellibitz.intellidroid.MainActivity"
+            android:theme="@style/LaunchTheme">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.MainActivity"/>
+        </activity>
+
+        <!-- Company Get Invites -->
+        <activity
+            android:name="intellibitz.intellidroid.company.InviteUsersActivity"
+            android:label="@string/invite_users"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity"
+            android:theme="@style/LaunchTheme"
+            android:windowSoftInputMode="adjustResize|adjustPan|adjustUnspecified">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <!-- Contact Get Details -->
+        <activity
+            android:name="intellibitz.intellidroid.contact.ContactDetailActivity"
+            android:label="@string/invite_users"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity"
+            android:theme="@style/LaunchTheme">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <!-- Login -->
+        <activity
+            android:name="intellibitz.intellidroid.activity.LoginActivity"
+            android:label="@string/login"
+            android:parentActivityName="intellibitz.intellidroid.MainActivity"
+            android:theme="@style/LaunchTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.MainActivity"/>
+        </activity>
+
+        <!-- OTP -->
+        <activity
+            android:name="intellibitz.intellidroid.activity.OTPActivity"
+            android:label="@string/prompt_otp"
+            android:parentActivityName="intellibitz.intellidroid.MainActivity"
+            android:theme="@style/LaunchTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.MainActivity"/>
+        </activity>
+
+        <!-- Profile Info -->
+        <activity
+            android:name="intellibitz.intellidroid.activity.ProfileInfoActivity"
+            android:label="@string/profile_info"
+            android:parentActivityName="intellibitz.intellidroid.MainActivity"
+            android:theme="@style/LaunchTheme">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.MainActivity"/>
+        </activity>
+
+        <!-- Add Email -->
+        <activity
+            android:name="intellibitz.intellidroid.activity.AddEmailActivity"
+            android:label="@string/add_email_account"
+            android:parentActivityName="intellibitz.intellidroid.MainActivity"
+            android:theme="@style/LaunchTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.MainActivity"/>
+        </activity>
+
+        <!-- Add Emails -->
+        <activity
+            android:name="intellibitz.intellidroid.activity.AddEmailsActivity"
+            android:label="@string/add_email_account"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity"
+            android:theme="@style/LaunchTheme">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <activity
+            android:name="intellibitz.intellidroid.domain.account.NewEmailAccountActivity"
+            android:label="@string/title_activity_registration"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity"
+            android:theme="@style/LaunchTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <activity android:name="intellibitz.intellidroid.domain.account.WebViewActivity"/>
+        <activity android:name="intellibitz.intellidroid.domain.account.NewEmailGetTokenActivity"/>
+        <activity
+            android:name="intellibitz.intellidroid.domain.SettingsActivity"
+            android:label="@string/title_activity_settings"/>
+
+        <!-- Add Email Accounts -->
+        <activity
+            android:name="intellibitz.intellidroid.domain.account.EmailAccountListActivity"
+            android:label="@string/title_emailaccount_list"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity"
+            android:theme="@style/LaunchTheme">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+        <activity
+            android:name="intellibitz.intellidroid.activity.EmailAccountDetailActivity"
+            android:label="@string/title_emailaccount_detail"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity"
+            android:theme="@style/LaunchTheme">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <!--android:configChanges="keyboardHidden|orientation|screenSize"-->
+        <activity
+            android:name="intellibitz.intellidroid.IntellibitzActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_title"
+            android:launchMode="singleInstance">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            </intent-filter>
+            <intent-filter>
+                <action android:name="intellibitzandroidapp.USER_REGISTRATION"/>
+            </intent-filter>
+
+            <!-- recieve files from the device -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="video/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="video/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="audio/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="audio/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="application/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+
+                <data android:mimeType="application/*"/>
+            </intent-filter>
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+        </activity>
+
+
+        <!-- Clutter Email -->
+        <activity
+            android:name="intellibitz.intellidroid.activity.ClutterEmailActivity"
+            android:label="@string/prompt_email"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <!-- Compose Email -->
+        <activity
+            android:name="intellibitz.intellidroid.activity.ComposeEmailActivity"
+            android:label="@string/compose_email"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <!-- Compose Feed -->
+        <!--
+                <activity
+                    android:name=".feed.ComposeFeedActivity"
+                    android:label="@string/create_new_feed"
+                    android:parentActivityName=".IntellibitzActivity">
+                    <intent-filter>
+                        <category android:name="android.intent.category.MONKEY" />
+                    </intent-filter>
+                    <meta-data
+                        android:name="android.support.PARENT_ACTIVITY"
+                        android:value=".IntellibitzActivity" />
+                </activity>
+        -->
+
+        <!-- Clutter Emails -->
+        <activity
+            android:name="intellibitz.intellidroid.activity.ClutterEmailsActivity"
+            android:label="@string/prompt_email"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <!-- People Detail -->
+        <activity
+            android:name="intellibitz.intellidroid.activity.PeopleDetailActivity"
+            android:label="@string/new_group"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <!-- Chat Groups -->
+        <activity
+            android:name="intellibitz.intellidroid.activity.MessageChatGroupActivity"
+            android:label="@string/new_group"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <!-- Create Groups -->
+        <activity
+            android:name="intellibitz.intellidroid.activity.MsgChatGrpContactsDetailActivity"
+            android:label="@string/new_group"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity"
+            android:windowSoftInputMode="adjustResize|adjustPan|adjustUnspecified">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <!-- Select Contacts Activity -->
+        <activity
+            android:name="intellibitz.intellidroid.activity.ContactSelectActivity"
+            android:label="@string/select_contacts"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.MONKEY"/>
+            </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <!-- Settings Activity -->
+        <activity
+            android:name="intellibitz.intellidroid.activity.ProfileActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <!-- My Account Activity -->
+        <activity
+            android:name="intellibitz.intellidroid.activity.MyAccountActivity"
+            android:label="@string/my_account"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <activity
+            android:name="intellibitz.intellidroid.activity.MsgsGrpDraftActivity"
+            android:label="@string/nest"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <!-- Broadcast contacts -->
+        <!--
+                <activity
+                    android:name=".activity.BroadcastContactsActivity"
+                    android:label="@string/broadcasts"
+                    android:parentActivityName=".IntellibitzActivity">
+                    <meta-data
+                        android:name="android.support.PARENT_ACTIVITY"
+                        android:value=".IntellibitzActivity" />
+                </activity>
+        -->
+
+        <!-- Broadcast contacts detail (edit) -->
+        <!--
+                <activity
+                    android:name=".activity.BroadcastContactsDetailActivity"
+                    android:label="@string/broadcast"
+                    android:parentActivityName=".IntellibitzActivity">
+                    <meta-data
+                        android:name="android.support.PARENT_ACTIVITY"
+                        android:value=".IntellibitzActivity" />
+                </activity>
+        -->
+
+        <!-- Messages -->
+        <activity
+            android:name="intellibitz.intellidroid.activity.MessagesActivity"
+            android:label="@string/stacks"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+
+        <!-- Msgs Stack Nest -->
+        <!--
+                <activity
+                    android:name=".activity.MsgsStackNestActivity"
+                    android:label="@string/stacks"
+                    android:parentActivityName=".IntellibitzActivity">
+                    <meta-data
+                        android:name="android.support.PARENT_ACTIVITY"
+                        android:value=".IntellibitzActivity" />
+                </activity>
+        -->
+
+        <!-- Msgs Grp Nest -->
+        <!--
+                <activity
+                    android:name=".activity.MsgsGrpNestDetailActivity"
+                    android:label="@string/nest"
+                    android:parentActivityName=".IntellibitzActivity">
+                    <meta-data
+                        android:name="android.support.PARENT_ACTIVITY"
+                        android:value=".IntellibitzActivity" />
+                </activity>
+        -->
+
+        <!-- Msgs Grp Nest -->
+        <!--
+                <activity
+                    android:name=".activity.MsgsGrpNestActivity"
+                    android:label="@string/nest"
+                    android:parentActivityName=".IntellibitzActivity">
+                    <meta-data
+                        android:name="android.support.PARENT_ACTIVITY"
+                        android:value=".IntellibitzActivity" />
+                </activity>
+        -->
+
+        <!-- Import Phone Contacts -->
+        <activity
+            android:name="intellibitz.intellidroid.domain.MainSettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="intellibitz.intellidroid.IntellibitzActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="intellibitz.intellidroid.IntellibitzActivity"/>
+        </activity>
+        <!-- Used for cropping images -->
+        <activity android:name="intellibitz.intellidroid.camera.CropImage"/>
+        <activity android:name="intellibitz.intellidroid.sound.AudioRecordActivity">
+            <intent-filter>
+                <action android:name="android.provider.MediaStore.RECORD_SOUND"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="intellibitz.intellidroid.service.RcvDocService"
+            android:enabled="true"
+            android:exported="false"/>
+        <service
+            android:name="intellibitz.intellidroid.service.ChatService"
+            android:enabled="true"
+            android:exported="false"/>
+        <service
+            android:name="intellibitz.intellidroid.service.EmailService"
+            android:enabled="true"
+            android:exported="false"/>
+        <service
+            android:name="intellibitz.intellidroid.service.UserEmailIntentService"
+            android:enabled="true"
+            android:exported="false"/>
+        <service
+            android:name="intellibitz.intellidroid.service.MessageAttachmentIntentService"
+            android:enabled="true"
+            android:exported="false"/>
+        <service
+            android:name="intellibitz.intellidroid.service.ContactService"
+            android:enabled="true"
+            android:exported="false"/>
+
+        <!-- AWS Service -->
+        <!--
+                <service
+                    android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+                    android:enabled="true" />
+        -->
+
+        <!-- GCM Service -->
+        <service
+            android:name="intellibitz.intellidroid.gcm.GCMMessageListenerService"
+            android:exported="false">
+            <!--android:exported="false">-->
+            <intent-filter>
+                <!-- FCM DOES NOT REQUIRE THIS -->
+                <!--<action android:name="com.google.android.c2dm.intent.RECEIVE" />-->
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name="intellibitz.intellidroid.gcm.GCMInstanceIDListenerService"
+            android:exported="false">
+            <!--android:exported="false">-->
+            <intent-filter>
+                <!-- FCM DOES NOT REQUIRE THIS -->
+                <!--<action android:name="com.google.android.gms.iid.InstanceID" />-->
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <service
+            android:name="intellibitz.intellidroid.gcm.GCMTokenIntentService"
+            android:exported="false"/>
+
+        <!-- FCM DOES NOT REQUIRE THIS -->
+        <!--
+                <receiver
+                    android:name="com.google.android.gms.gcm.GcmReceiver"
+                    android:exported="true"
+                    android:permission="com.google.android.c2dm.permission.SEND">
+                    <intent-filter>
+                        <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                        <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                        <category android:name="intellibitzandroidapp.gcm" />
+                    </intent-filter>
+                </receiver>
+        -->
+        <!-- FCM DOES NOT REQUIRE THIS - END -->
+
+        <provider
+            android:name="intellibitz.intellidroid.content.MsgsGrpPeopleContentProvider"
+            android:authorities="intellibitzandroidapp.content.MsgsGrpPeopleContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MsgsGrpPeopleChatsContentProvider"
+            android:authorities="intellibitzandroidapp.content.MsgsGrpPeopleChatsContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MsgsGrpPeopleChatGroupsContentProvider"
+            android:authorities="intellibitzandroidapp.content.MsgsGrpPeopleChatGroupsContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MsgsGrpPeopleEmailsContentProvider"
+            android:authorities="intellibitzandroidapp.content.MsgsGrpPeopleEmailsContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MsgsGrpClutterContentProvider"
+            android:authorities="intellibitzandroidapp.content.MsgsGrpClutterContentProvider"
+            android:exported="false"/>
+        <!--
+                <provider
+                    android:name=".content.MsgsStackNestContentProvider"
+                    android:authorities="intellibitzandroidapp.content.MsgsStackNestContentProvider"
+                    android:exported="false" />
+        -->
+        <!--
+                <provider
+                    android:name=".content.MsgsGrpNestContentProvider"
+                    android:authorities="intellibitzandroidapp.content.MsgsGrpNestContentProvider"
+                    android:exported="false" />
+        -->
+        <provider
+            android:name="intellibitz.intellidroid.content.MsgsGrpDraftContentProvider"
+            android:authorities="intellibitzandroidapp.content.MsgsGrpDraftContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MessagesChatGroupContentProvider"
+            android:authorities="intellibitzandroidapp.content.MessagesChatGroupContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MessageChatGroupContentProvider"
+            android:authorities="intellibitzandroidapp.content.MessageChatGroupContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MessagesChatContentProvider"
+            android:authorities="intellibitzandroidapp.content.MessagesChatContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MessageChatContentProvider"
+            android:authorities="intellibitzandroidapp.content.MessageChatContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MessagesEmailContentProvider"
+            android:authorities="intellibitzandroidapp.content.MessagesEmailContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MessageEmailContentProvider"
+            android:authorities="intellibitzandroidapp.content.MessageEmailContentProvider"
+            android:exported="false"/>
+        <!--
+                <provider
+                    android:name=".content.FeedContentProvider"
+                    android:authorities="intellibitzandroidapp.content.FeedContentProvider"
+                    android:exported="false" />
+                <provider
+                    android:name=".content.ScheduleContentProvider"
+                    android:authorities="intellibitzandroidapp.content.ScheduleContentProvider"
+                    android:exported="false" />
+        -->
+        <provider
+            android:name="intellibitz.intellidroid.content.UserContentProvider"
+            android:authorities="intellibitzandroidapp.content.UserContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.UserEmailContentProvider"
+            android:authorities="intellibitzandroidapp.content.UserEmailContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.DeviceContactContentProvider"
+            android:authorities="intellibitzandroidapp.content.DeviceContactContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MsgChatGrpContactsContentProvider"
+            android:authorities="intellibitzandroidapp.content.MsgChatGrpContactsContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MsgChatGrpContactContentProvider"
+            android:authorities="intellibitzandroidapp.content.MsgChatGrpContactContentProvider"
+            android:exported="false"/>
+        <!--
+                <provider
+                    android:name=".content.BroadcastContactsContentProvider"
+                    android:authorities="intellibitzandroidapp.content.BroadcastContactsContentProvider"
+                    android:exported="false" />
+                <provider
+                    android:name=".content.BroadcastContactContentProvider"
+                    android:authorities="intellibitzandroidapp.content.BroadcastContactContentProvider"
+                    android:exported="false" />
+        -->
+        <provider
+            android:name="intellibitz.intellidroid.content.MsgChatContactsContentProvider"
+            android:authorities="intellibitzandroidapp.content.MsgChatContactsContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MsgChatContactContentProvider"
+            android:authorities="intellibitzandroidapp.content.MsgChatContactContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MsgEmailContactsContentProvider"
+            android:authorities="intellibitzandroidapp.content.MsgEmailContactsContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MsgEmailContactContentProvider"
+            android:authorities="intellibitzandroidapp.content.MsgEmailContactContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MsgEmailAttachmentContentProvider"
+            android:authorities="intellibitzandroidapp.content.MsgEmailAttachmentContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MsgChatAttachmentContentProvider"
+            android:authorities="intellibitzandroidapp.content.MsgChatAttachmentContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.MsgChatGrpAttachmentContentProvider"
+            android:authorities="intellibitzandroidapp.content.MsgChatGrpAttachmentContentProvider"
+            android:exported="false"/>
+        <provider
+            android:name="intellibitz.intellidroid.content.IntellibitzContactContentProvider"
+            android:authorities="intellibitzandroidapp.content.IntellibitzContactContentProvider"
+            android:exported="false"/>
+    </application>
+
+</manifest>

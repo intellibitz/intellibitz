@@ -1,0 +1,67 @@
+<!-- FILTER TABS -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="2dp">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout3"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:theme="@style/AppTheme"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/red"
+        app:tabIndicatorHeight="4dp"
+        app:tabMode="scrollable"
+        app:tabPaddingEnd="1dp"
+        app:tabPaddingStart="1dp"
+        app:tabTextColor="@color/black" />
+
+    <!--app:theme="@style/AppTheme.OverflowTabBar"-->
+    <!--android:layout_toEndOf="@+id/tablayout3"-->
+
+    <!--android:layout_weight="2"-->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout3"
+        style="@style/AppTheme.AppBar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        android:visibility="gone"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/transparent_bg"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabPadding="0dp"
+        app:tabPaddingEnd="4dp"
+        app:tabPaddingStart="4dp"
+        app:tabTextColor="@color/black" />
+
+    <!--android:layout_weight="0.5"-->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        style="@style/AppTheme.ActionBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        android:visibility="gone"
+        app:layout_scrollFlags="scroll|enterAlways|snap">
+
+        <!--
+                        <TextView
+                            android:text="hi"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+        -->
+    </androidx.appcompat.widget.Toolbar>
+
+    <!--<include layout="@layout/toolbar_mainbox"/>-->
+    <!--<include layout="@layout/toolbar_contacts"/>-->
+</LinearLayout>

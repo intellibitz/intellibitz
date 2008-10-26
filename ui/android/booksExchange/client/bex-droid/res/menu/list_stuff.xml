@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright (C) 2009 Muthu Ramadoss. All rights reserved.
+-->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:icon="@android:drawable/ic_menu_add"
+        android:id="@+id/menu_item_add_search"
+        android:title="@string/menu_item_add_search_label"
+        android:alphabeticShortcut="a" />
+    <item
+        android:icon="@android:drawable/ic_menu_camera"
+        android:id="@+id/menu_item_add"
+        android:title="@string/menu_item_add_label"
+        android:alphabeticShortcut="b" />
+    <item
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:id="@+id/menu_item_check"
+        android:title="@string/menu_item_check_label"
+        android:alphabeticShortcut="c" />
+</menu>

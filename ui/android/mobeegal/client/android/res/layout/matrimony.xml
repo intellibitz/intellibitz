@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+            >
+
+
+        <TabHost
+                android:id="@+id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#000000">
+            <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"/>
+
+            <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:paddingTop="65px">
+
+                <!--   <<<<<<<<<<<<<<<<<<<<<<<<<<     MATRIMONY ISTUFF    >>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+
+                <AbsoluteLayout
+                        android:id="@+id/iStuffprofile"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="#000000"
+                        >
+
+                    <TextView
+                            android:id="@+id/widget40"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Religion"
+                            android:layout_x="20px"
+                            android:layout_y="25px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffreligion"
+                            android:layout_width="150dip"
+                            android:layout_height="35dip"
+                            android:textSize="12px"
+                            android:layout_x="125px"
+                            android:layout_y="20px">
+                    </Spinner>
+                    <TextView
+                            android:id="@+id/widget40"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:text="Caste"
+                            android:textSize="13px"
+                            android:layout_x="20px"
+                            android:layout_y="75px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffcaste"
+                            android:layout_width="150dip"
+                            android:layout_height="35dip"
+                            android:textSize="12px"
+                            android:layout_x="125px"
+                            android:layout_y="70px">
+                    </Spinner>
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:text="Age"
+                            android:textSize="13px"
+                            android:layout_x="20px"
+                            android:layout_y="125px">
+                    </TextView>
+
+                    <Spinner
+                            android:id="@+id/iStuffage"
+                            android:layout_width="150dip"
+                            android:layout_height="35dip"
+                            android:layout_x="125px"
+                            android:layout_y="120px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget33"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Sex"
+                            android:layout_x="20px"
+                            android:layout_y="170px">
+                    </TextView>
+
+                    <RadioGroup android:id="@+id/widget29"
+                                android:layout_width="180dip"
+                                android:layout_height="180dip"
+                                xmlns:android="http://schemas.android.com/apk/res/android"
+                                android:orientation="horizontal"
+                                android:layout_x="125px"
+                                android:layout_y="165px">
+
+                        <RadioButton android:id="@+id/iStuffmaleradiobutton"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:textSize="13px"
+                                     android:text="Male"
+                                     android:textColor="#F4EF0F"
+                                >
+                        </RadioButton>
+
+                        <RadioButton android:id="@+id/iStufffemaleradiobutton"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:textSize="13px"
+                                     android:text="Female"
+                                     android:textColor="#F4EF0F">
+                        </RadioButton>
+                    </RadioGroup>
+                    <TextView
+                            android:id="@+id/widget31"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Height"
+                            android:layout_x="20px"
+                            android:layout_y="220px">
+                    </TextView>
+
+                    <Spinner
+                            android:id="@+id/iStuffheight"
+                            android:layout_width="150dip"
+                            android:layout_height="35dip"
+                            android:layout_x="125px"
+                            android:layout_y="215px">
+                    </Spinner>
+
+
+                    <TextView
+                            android:id="@+id/widget32"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Weight"
+                            android:layout_x="20px"
+                            android:layout_y="265px">
+                    </TextView>
+
+                    <Spinner
+                            android:id="@+id/iStuffweight"
+                            android:layout_width="150dip"
+                            android:layout_height="35dip"
+                            android:layout_x="125px"
+                            android:layout_y="260px">
+                    </Spinner>
+                    <TextView
+                            android:id="@+id/widget34"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:text="Color"
+                            android:textSize="13px"
+                            android:layout_x="20px"
+                            android:layout_y="315px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffcolor"
+                            android:layout_width="150dip"
+                            android:layout_height="35dip"
+                            android:layout_x="125px"
+                            android:layout_y="310px">
+                    </Spinner>
+
+
+                    <TextView android:id="@+id/iarea"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="125px"
+                              android:layout_y="360px">
+                    </TextView>
+
+                    <TextView android:id="@+id/icity"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="125px"
+                              android:layout_y="380px">
+                    </TextView>
+                    <TextView android:id="@+id/icountry"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="125px"
+                              android:layout_y="400px">
+                    </TextView>
+                    <Button android:id="@+id/selectistufflocation"
+                            android:layout_width="75dip"
+                            android:layout_height="30dip"
+                            android:textSize="8px"
+                            android:text="Location"
+                            android:textColor="#000000"
+                            android:layout_x="20px"
+                            android:layout_y="360px"/>
+
+
+                </AbsoluteLayout>
+
+
+                <!--   <<<<<<<<<<<<<<<<<<<<<<<<<<     MATRIMONY USTUFF    >>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+                <AbsoluteLayout
+                        android:id="@+id/uStuffprofile"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="#000000"
+                        >
+
+
+                    <TextView
+                            android:id="@+id/widget40"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:text="Religion"
+                            android:textSize="13px"
+                            android:layout_x="20px"
+                            android:layout_y="25px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffReligion"
+                            android:layout_width="150dip"
+                            android:layout_height="35dip"
+                            android:layout_x="125px"
+                            android:layout_y="20px">
+                    </Spinner>
+                    <TextView
+                            android:id="@+id/widget40"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:text="Caste"
+                            android:textSize="13px"
+                            android:layout_x="20px"
+                            android:layout_y="75px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffCaste"
+                            android:layout_width="150dip"
+                            android:layout_height="35dip"
+                            android:layout_x="125px"
+                            android:layout_y="70px">
+                    </Spinner>
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:text="Age"
+                            android:textSize="13px"
+                            android:layout_x="20px"
+                            android:layout_y="125px">
+                    </TextView>
+
+                    <Spinner
+                            android:id="@+id/uStuffage"
+                            android:layout_width="150dip"
+                            android:layout_height="35dip"
+                            android:layout_x="125px"
+                            android:layout_y="120px">
+                    </Spinner>
+
+
+                    <TextView
+                            android:id="@+id/widget33"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:text="Sex"
+                            android:textSize="13px"
+                            android:layout_x="20px"
+                            android:layout_y="170px">
+                    </TextView>
+
+                    <RadioGroup android:id="@+id/widget29"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                xmlns:android="http://schemas.android.com/apk/res/android"
+                                android:orientation="horizontal"
+                                android:layout_x="125px"
+                                android:layout_y="165px">
+
+                        <RadioButton android:id="@+id/uStuffmaleradiobutton"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:textSize="13px"
+                                     android:text="Male"
+                                     android:textColor="#F4EF0F"
+                                >
+                        </RadioButton>
+
+                        <RadioButton android:id="@+id/uStufffemaleradiobutton"
+                                     android:layout_width="wrap_content"
+                                     android:layout_height="wrap_content"
+                                     android:textSize="13px"
+                                     android:text="Female"
+                                     android:textColor="#F4EF0F">
+                        </RadioButton>
+                    </RadioGroup>
+                    <TextView
+                            android:id="@+id/widget31"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Height"
+                            android:layout_x="20px"
+                            android:layout_y="220px">
+                    </TextView>
+
+                    <Spinner
+                            android:id="@+id/uStuffheight"
+                            android:layout_width="150dip"
+                            android:layout_height="35dip"
+                            android:layout_x="125px"
+                            android:layout_y="215px">
+                    </Spinner>
+
+
+                    <TextView
+                            android:id="@+id/widget32"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Weight"
+                            android:layout_x="20px"
+                            android:layout_y="265px">
+                    </TextView>
+
+                    <Spinner
+                            android:id="@+id/uStuffweight"
+                            android:layout_width="150dip"
+                            android:layout_height="35dip"
+                            android:layout_x="125px"
+                            android:layout_y="260px">
+                    </Spinner>
+                    <TextView
+                            android:id="@+id/widget34"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Color"
+                            android:layout_x="20px"
+                            android:layout_y="315px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffcolor"
+                            android:layout_width="150dip"
+                            android:layout_height="35dip"
+                            android:layout_x="125px"
+                            android:layout_y="310px">
+                    </Spinner>
+
+                    <Button android:id="@+id/Save"
+                            android:layout_width="75dip"
+                            android:layout_height="wrap_content"
+                            android:text="Save"
+                            android:textColor="#000555"
+                            android:layout_x="120px"
+                            android:layout_y="510px"/>
+                    <TextView android:id="@+id/uarea"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="125px"
+                              android:layout_y="360px">
+                    </TextView>
+
+                    <TextView android:id="@+id/ucity"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="125px"
+                              android:layout_y="380px">
+                    </TextView>
+                    <TextView android:id="@+id/ucountry"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="125px"
+                              android:layout_y="400px">
+                    </TextView>
+                    <Button android:id="@+id/selectustufflocation"
+                            android:layout_width="75dip"
+                            android:layout_height="30dip"
+                            android:textSize="8px"
+                            android:text="Location"
+                            android:textColor="#000000"
+                            android:layout_x="20px"
+                            android:layout_y="360px"/>
+
+                </AbsoluteLayout>
+
+
+            </FrameLayout>
+
+        </TabHost>
+
+    </LinearLayout>
+</ScrollView>
+

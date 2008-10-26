@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".contact.ContactListActivity">
+    <item
+        android:id="@+id/min_all"
+        android:title="@string/all"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/min_groups"
+        android:title="@string/stacks"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/min_fav"
+        android:title="@string/flagged"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/min_drafts"
+        android:title="@string/drafts"
+        app:showAsAction="always|withText" />
+</menu>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:padding="4dip"
+                android:gravity="center_horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+    <TextView
+            android:id="@+id/textservice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffff"
+            android:textSize="25sp"
+            android:text="Settings"
+            android:layout_x="85px"
+            android:layout_y="100px"/>
+
+    <ImageButton
+            android:id="@+id/activate_deactivate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/mobeegalservice"
+            android:layout_x="40px"
+            android:layout_y="160px">
+    </ImageButton>
+
+
+    <ImageButton
+            android:id="@+id/preference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/preference"
+            android:layout_x="120px"
+            android:layout_y="160px">
+    </ImageButton>
+
+
+    <ImageButton
+            android:id="@+id/helpsettings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/helpsettings"
+            android:layout_x="200px"
+            android:layout_y="160px">
+    </ImageButton>
+
+</AbsoluteLayout>

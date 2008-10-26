@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2008 http://mobeegal.in
+
+        All Rights Reserved.
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<!--
+    $Id::                                                                           $: Id of last commit
+    $Rev::                                                                          $: Revision of last commit
+    $Author::                                                                       $: Author of last commit
+    $Date::                                                                         $: Date of last commit
+-->
+
+<!-- Demonstrates using a relative layout to create a form -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dip">
+
+    <!--
+        TextView goes at the top left by default .
+    -->
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/text_title_result"
+        android:textColor="@android:color/primary_text_dark"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:focusable="false"
+            />
+
+    <TextView
+        android:id="@+id/title_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/profile"
+        android:text="@string/text_title_name"
+        android:textColor="@android:color/primary_text_dark"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textStyle="bold"
+        android:focusable="false"
+        android:layout_alignParentRight="true"
+            />
+
+    <!--
+        Put the EditText field under the TextView
+        Also give it a standard background (the "android:"
+        part in @android:drawable/editbox_background
+        means it is system resource rather than
+        an application resource.
+    -->
+    <EditText
+        android:id="@+id/name"
+        android:singleLine="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_name"
+        android:layout_alignParentRight="true"
+            />
+
+    <ImageButton android:id="@+id/picture"
+                 android:src="@android:drawable/ic_menu_send"
+                 android:text="@string/text_picture"
+                 android:layout_toLeftOf="@id/name"
+                 android:layout_alignTop="@id/name"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+            />
+
+    <!--
+        The OK button goes below the EditText field.
+        It is also aligned to the right edge of the parent
+        (respecting the parent's padding).
+        The OK button comes first so the Cancel button
+        can be specified relative to the OK button.
+    -->
+    <Button
+        android:id="@+id/ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/name"
+        android:text="@string/text_fight"
+        android:layout_centerHorizontal="true"
+            />
+
+    <!--
+        The Cancel button is aligned with the top of
+        the OK button and positioned to the left of it.
+        Since the OK button has a left margin of 10, there
+        is some space between the two buttons.
+    -->
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ok"
+        android:text="@string/text_cancel"
+        android:layout_centerHorizontal="true"
+            />
+
+</RelativeLayout>
+

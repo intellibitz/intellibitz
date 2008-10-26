@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Copyright (C) 2008 http://mobeegal.in
+
+        All Rights Reserved.
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<!--
+$Id::                                                                           $: Id of last commit
+$Rev::                                                                          $: Revision of last commit
+$Author::                                                                       $: Author of last commit
+$Date::                                                                         $: Date of last commit
+-->
+<resources>
+
+    <string name="fight_mime_type">vnd.fiteclub.cursor.dir/vnd.fiteclub.fight</string>
+    <string name="profile_mime_type">vnd.fiteclub.cursor.dir/vnd.fiteclub.profile</string>
+    <string name="rankings_mime_type">vnd.fiteclub.cursor.dir/vnd.fiteclub.rankings</string>
+    <string name="alert_mime_type">vnd.fiteclub.cursor.dir/vnd.fiteclub.alert</string>
+    <string name="result_mime_type">vnd.fiteclub.cursor.dir/vnd.fiteclub.result</string>
+
+</resources>

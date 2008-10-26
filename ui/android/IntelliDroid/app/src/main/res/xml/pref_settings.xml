@@ -1,0 +1,74 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- This preference simply launches an intent when selected. Use this UI sparingly, per
+         design guidelines. -->
+
+    <!-- PROFILE -->
+    <Preference android:title="@string/pref_title_profile">
+        <!--todo change this to profile action-->
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="intellibitz.intellidroid.profile.ProfileActivity"
+            android:targetPackage="intellibitz.intellidroid" />
+    </Preference>
+
+    <!-- ACCOUNT -->
+    <Preference android:title="@string/pref_title_account">
+        <intent
+            android:action="intellibitz.intellidroid.EMAIL_LIST"
+            android:targetClass="intellibitz.intellidroid.IntellibitzActivity"
+            android:targetPackage="intellibitz.intellidroid" />
+    </Preference>
+
+    <!-- CHAT AND EMAILS -->
+    <!--
+        <Preference android:title="@string/pref_title_chate">
+            &lt;!&ndash;todo change this to chat and emails action&ndash;&gt;
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetClass="intellibitz.intellidroididroid.domain.SettingsActivity"
+                android:targetPackage="intellibitz.intellidroididroid" />
+        </Preference>
+    -->
+
+    <!-- NOTIFICATIONS -->
+    <!--
+        <Preference android:title="@string/pref_title_notify">
+            &lt;!&ndash;todo change this to notification action&ndash;&gt;
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetClass="intellibitz.intellidroididroid.domain.SettingsActivity"
+                android:targetPackage="intellibitz.intellidroididroid" />
+        </Preference>
+    -->
+
+    <!-- CONTACTS -->
+    <!--
+        <Preference android:title="@string/pref_title_contacts">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:targetClass="intellibitz.intellidroididroid.contact.ContactListActivity"
+                android:targetPackage="intellibitz.intellidroididroid" />
+        </Preference>
+    -->
+
+    <!-- REGISTRATION -->
+    <!--todo .. can the user visit this if he had already registered?-->
+    <Preference android:title="@string/pref_title_registration">
+        <intent
+            android:action="intellibitz.intellidroid.USER_REGISTRATION"
+            android:targetClass="intellibitz.intellidroid.IntellibitzActivity"
+            android:targetPackage="intellibitz.intellidroid" />
+    </Preference>
+    <!--android:targetClass="intellibitz.intellidroididroid.deprecated.RegistrationActivity-->
+
+
+    <!-- HELP -->
+    <Preference android:title="@string/pref_title_help">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetClass="intellibitz.intellidroid.domain.help.IntroScreenActivity"
+            android:targetPackage="intellibitz.intellidroid" />
+    </Preference>
+
+</PreferenceScreen>

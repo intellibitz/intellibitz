@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string name="results_view_preferences">Results View</string>
+    <string name="summary_mapview_preference">Use Maps to show Results</string>
+
+    <string name="app_name">Dating Application</string>
+    <string name="welcome">Dream-Date Profile</string>
+    <string name="notifying_service_controller">
+        <b>
+            This service will update a status bar notification every 15
+            seconds for a minute
+        </b>
+    </string>
+    <string name="hit">Note: Please Hit On Bubble To View Details</string>
+    <string name="hint">Note: Please Select Menu >> Catalogs To Find Mobeegal
+        Results
+    </string>
+    <string name="start_service">Start Service</string>
+    <string name="stop_service">Stop Service</string>
+
+    <!-- menu String -->
+
+    <string name="mstuffs">Mobeegal Results</string>
+    <string name="catalogs">Catalogs</string>
+    <string name="settings">Services</string>
+    <string name="search">Search</string>
+    <string name="exits">Exits</string>
+    <string name="chat">Chat</string>
+    <string name="delete">Delete Query</string>
+    <string name="viewquery">View Query</string>
+    <string name="setthemes">Set Themes</string>
+    <string name="done">Done</string>
+    <string name="newquery">New Query</string>
+    <string name="sharemedia">Share Media</string>
+    <string name="shareimage">Share Image</string>
+    <string name="shareaudio">Share Audio</string>
+    <string name="sharevideo">Share Video</string>
+    <string name="editquery">Edit Query</string>
+    <string name="textview">Text View</string>
+    <string name="mapview">Map View</string>
+    <string name="satelliteview">Satellite View</string>
+    <string name="ignore">Ignore</string>
+    <string name="favorite">Favorite</string>
+    <string name="donequery">No Query to Modify \nPlease Fill New Query</string>
+    <string name="noviewquery">Query Not Found Please Create New\nQuery To Find
+        Mobeegal Result
+    </string>
+    <!-- menu String -->
+
+    <string name="status_bar_notifications_clear">
+        Clear notification
+    </string>
+    <string name="remote_service_started">
+        Matching Service started
+    </string>
+    <string name="remote_service_stopped">
+        Matching Service has stopped
+    </string>
+    <string name="remote_service_label">Remote Service</string>
+    <string name="notification_message">New text message</string>
+    <string name="notification_cancel">
+        Stop showing Notification
+    </string>
+
+    <!-- Use this IP for internet user 59.92.89.234 For local user IP is 192.168.1.68-->
+
+    <string name="RemoteServer">http://192.168.1.68/controller.php</string>
+    <string name="MediaServer">http://192.168.1.6/media.php</string>
+    <string name="ChatServer">192.168.1.68</string>
+    <string name="CatalogServer">http://192.168.1.6/register.php</string>
+    <string name="LocationRequest">http://192.168.1.6/location.php</string>
+    <string name="ShowMessage">Query Updated...</string>
+
+    <!--   partner profile    -->
+    <string name="textage">Age</string>
+    <string name="textheight">Height</string>
+    <string name="textweight">Weight</string>
+    <string name="partner">
+        Specify the partner profile: This will help others to have some
+        idea of what you want. Please fill all the fields that are an
+        absolutely must and desirable.
+    </string>
+
+    <!-- Main Profile   -->
+    <string name="help">
+        <b>
+            <u>Help</u>
+        </b>
+    </string>
+    <string name="helpprofile">
+        <b>
+            <u>Fill Your Profile :</u>
+        </b>
+        Filling your profile is done after selecting a catalog. There
+        are 2 profiles that you can fill inside a catalog. The profiles
+        are represented in a tab view. The first tab is called “iStuff”
+        which means your profile.
+    </string>
+    <string name="helppartner">
+        <b>
+            <u>Fill Your Target Profile :</u>
+        </b>
+        Filling your target profile is done after selecting a catalog.
+        There are 2 profiles that you can fill inside a catalog. The
+        profiles are represented in a tab view. The second tab is called
+        “mStuff” which means your match profile.
+    </string>
+    <string name="helpservice">
+        <b>
+            <u>Activate Service :</u>
+        </b>
+        To search using mobeegal, the mobeegal service in your mobile
+        needs to be activated. To activate the service, hit the
+        “Settings” menu. In the settings screen, there'll be a button
+        named “Activate Service”. Push this button to start the service.
+        Thats it. Now mobeegal will begin searching for the perfect
+        match. So to recap,to do a mobeegal search, you need to Fill
+        your profile (iStuff) Fill target profile (uStuff) Activate
+        Service
+    </string>
+    <string name="faq">
+        <b>
+            <u>Frequently Asked Questions :</u>
+        </b>
+    </string>
+    <string name="faq1">
+        <b>
+            <u>1.My Profile</u>
+        </b>
+        - again, care to explain? My Profile is what the user is. This
+        is the criteria that the user uses to describes his stuff. Ex:
+        In a Dating scenario, MyProfile would be your age, height,
+        weight etc.,
+    </string>
+
+    <string name="faq2">
+        <b>
+            <u>2.Target Profile</u>
+        </b>
+        - what is this? Target profile is what the user wants. This is
+        the criteria that the user is looking for in his match. Ex: In a
+        Dating scenario, TargetProfile would be your partners age,
+        height, weight etc.,
+    </string>
+
+    <string name="faq3">
+        <b>
+            <u>3.Match</u>
+        </b>
+        - can you explain? Match is something that you wanted and is
+        retrieved from the match result. The mobeegal server given your
+        search Query, will find relevant Match results and return to the
+        mobile. The server will return most probably a collection of
+        Match results.
+    </string>
+
+    <string name="faq4">
+        <b>
+            <u>4.Will there be User registration?</u>
+        </b>
+        No. mobeegal will be completely stateless and anonymous as far
+        as the User is concerned.
+    </string>
+
+    <string name="faq5">
+        <b>
+            <u>5.Is mobeegal Secure?</u>
+        </b>
+        Yes. All requests are encrypted for maximum User security.
+    </string>
+
+    <string name="faq6">
+        <b>
+            <u>6.Is mobeegal Private?</u>
+        </b>
+        Yes. Private information will never ever be send to the mobeegal
+        server. Only the public information is shared with his matches.
+    </string>
+
+    <string name="faq7">
+        <b>
+            <u>7.How can I search?</u>
+        </b>
+        The User fills MyProfile and TargetProfile for whatever catalog
+        that he cares. Now the search can begin.
+    </string>
+
+    <string name="faq8">
+        <b>
+            <u>>8.Do I need to activate the Service to search?</u>
+        </b>
+        Yes. The service must be activated for search. The service will
+        send the Query to the server only after its activated.
+    </string>
+
+    <string name="faq9">
+        <b>
+            <u>9.How many service runs in mobeegal client?</u>
+        </b>
+        Exactly one.
+    </string>
+
+    <string name="faq10">
+        <b>
+            <u>
+                10. Does the Service send the Query with every request
+                to the Server?
+            </u>
+        </b>
+        No. The Service will be smart enough to send it only once. If
+        the Query has not changed, any future service request might just
+        be a ping to the server to retrieve only the Match results.
+    </string>
+
+    <string name="faq11">
+        <b>
+            <u>
+                11.Do I need to fill both MyProfile and TargetProfile
+                for searching?
+            </u>
+        </b>
+        Yes. Filling both MyProfile and TargetProfile will be required
+        for search. Just like you need a search query for searching,
+        mobeegal requires the profiles to be filled which will included
+        in your search criteria to bring you the relevant Match results.
+    </string>
+
+    <string name="faq12">
+        <b>
+            <u>12.Can I have multiple Search Profiles filled up?</u>
+        </b>
+        Yes. Any number of Search profiles can be filled for as many
+        catalogs as the User likes. All Search queries will be bundled
+        into exactly one Query.
+    </string>
+
+    <string name="faq13">
+        <b>
+            <u>13.Can I search more than 1 catalog?</u>
+        </b>
+        Yes, More than one catalog will be available for searching.
+        Multiple profiles will be send as a single Query which will span
+        multiple catalogs.
+    </string>
+
+    <string name="faq14">
+        <b>
+            <u>14.Can I filter the Match results?</u>
+        </b>
+        Yes. You can filter the Matches by catalogs. There will be a
+        search button and a filter drop down available in your Match
+        result views.
+    </string>
+
+    <string name="faq15">
+        <b>
+            <u>15. Can I search within the Match results?</u>
+        </b>
+        Yes. A search box will be provided to search within the Match
+        results.
+    </string>
+
+    <string name="faq16">
+        <b>
+            <u>
+                16. Is there more than one way of looking at my Match
+                results?
+            </u>
+        </b>
+        The user can switch between text mode and map mode for viewing
+        the Match results. The search and filter widget will be
+        available for both modes of viewing.
+    </string>
+
+    <string name="faq17">
+        <b>
+            <u>17.How do I activate the Service?</u>
+        </b>
+        The User can hit the menu, go to settings. Activate/De-Activate
+        Service is available here.
+    </string>
+
+    <string name="faq18">
+        <b>
+            <u>18.Where do I store my Preferences?</u>
+        </b>
+        The User can hit the menu, go to settings. Preferences button is
+        available here. This would take the User to a separate screen to
+        store the User preferences.
+    </string>
+    <string name="helpalert">
+        <b>
+            <u>Alerts :</u>
+        </b>
+        A Dating notifier will run along with the Dating service. This
+        notifier will alert you of all dating matches found. The dating
+        alert will specify Proximity and the Closeness of the Match. The
+        Dating alert will use LBS, Maps and all kinds of locational
+        api's to interact with you.
+    </string>
+    <string name="helpinteraction">
+        <b>
+            <u>Interaction :</u>
+        </b>
+        You can interact with the matches in your own way. You can
+        select one or more matches and communicate with the match in an
+        anonymous way. You can save all the matching profiles in your
+        mobile device locally for future communication. Also you can
+        delete this matching information at anytime.
+    </string>
+    <string name="helpbroadcast">
+        <b>
+            <u>Location Broadcast :</u>
+        </b>
+        The dating service will be broadcasting your locations to the
+        dating server when you are on move. This location information
+        need not be sent, if you don't want. The polling interval can be
+        set by you to broadcast your location every 5 minutes and you
+        can also totally turn off this feature.
+    </string>
+</resources>

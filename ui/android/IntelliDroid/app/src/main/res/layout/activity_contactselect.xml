@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="intellibitz.intellidroid.MainActivity">
+
+    <!--
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/contact_list_app_bar"
+            style="@style/AppTheme.AppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/AppTheme.ActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/gray"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                android:title="@string/select_contacts"
+                app:popupTheme="@style/AppTheme" />
+
+        </android.support.design.widget.AppBarLayout>
+    -->
+
+    <include layout="@layout/activity_main_two_pane" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

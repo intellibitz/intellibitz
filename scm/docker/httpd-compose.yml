@@ -1,0 +1,23 @@
+# docker compose up -d
+# docker compose -f httpd-compose.yml up -d
+# docker compose logs -f
+# docker compose logs -f httpd
+# docker compose down
+# version: '3'
+
+# This configuration file defines a service called httpd with the httpd server running on port 65430 of your computer,
+
+name: httpd
+services:
+  httpd:
+    image: httpd
+    #    restart: always
+    container_name: httpd
+    ports:
+      - 65430:80
+    volumes:
+      - htdocs:/usr/local/apache2/htdocs
+    environment:
+      POSTGRES_PASSWORD: admin
+volumes:
+  htdocs:

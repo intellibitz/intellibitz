@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tab_overflow_item"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_tab"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone" />
+
+    <ImageButton
+        android:id="@+id/tg_tab"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_gravity="bottom|center"
+        android:contentDescription="@string/filter" />
+
+    <TextView
+        android:id="@+id/tv_tab"
+        style="@style/Text.Ten"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/selector_red"
+        android:visibility="visible"
+        tools:ignore="SmallSp" />
+
+    <!--
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+    -->
+    <!--android:button="@drawable/shape_circle"-->
+</LinearLayout>

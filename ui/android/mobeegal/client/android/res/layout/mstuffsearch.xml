@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : mstuffSearch.xml
+    Created on : May 5, 2008, 12:51 PM
+    Author     : gunasekaran
+    Description:
+        Purpose of the document follows.
+-->
+
+
+<AbsoluteLayout
+
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        >
+    <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="22px"
+            android:text="Filter"
+            android:layout_x="10px"
+            android:layout_y="2px"
+            >
+    </TextView>
+    <Spinner
+            android:id="@+id/filters"
+            android:layout_width="170dip"
+            android:layout_height="35dip"
+            android:drawSelectorOnTop="true"
+            android:layout_gravity="bottom"
+            android:layout_x="75px"
+            android:layout_y="0px"
+            >
+    </Spinner>
+    <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:layout_x="10px"
+            android:layout_y="47px"
+            >
+    </TextView>
+    <EditText
+            android:id="@+id/searchMstuff"
+            android:layout_width="141px"
+            android:layout_height="30px"
+            android:textSize="10px"
+            android:layout_x="70px"
+            android:layout_y="45px"
+            >
+    </EditText>
+    <Button
+            android:id="@+id/searchButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:layout_x="80px"
+            android:layout_y="82px"
+            >
+    </Button>
+    <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_x="10px"
+            android:layout_y="250px"
+            >
+    </TextView>
+</AbsoluteLayout>
+    

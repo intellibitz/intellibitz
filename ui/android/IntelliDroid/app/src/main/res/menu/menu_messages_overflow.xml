@@ -1,0 +1,32 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".contact.ContactListActivity">
+    <item
+        android:id="@+id/mi_chat"
+        android:icon="@drawable/filter_chat"
+        android:title="@string/menu_title_chat"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mi_group"
+        android:icon="@drawable/filter_group"
+        android:title="@string/menu_title_group"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mi_email"
+        android:icon="@drawable/filter_email"
+        android:title="@string/menu_title_email"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mi_files"
+        android:icon="@drawable/filter_files"
+        android:title="@string/menu_title_files"
+        app:showAsAction="never" />
+    <!--
+        <item
+            android:id="@+id/mi_reset"
+            android:title="@string/menu_title_reset"
+            android:icon="@drawable/filter_reset"
+            app:showAsAction="never" />
+    -->
+</menu>

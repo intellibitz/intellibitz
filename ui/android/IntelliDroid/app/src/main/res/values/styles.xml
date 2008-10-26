@@ -1,0 +1,163 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <!--
+        <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+            &lt;!&ndash; Customize your theme here. &ndash;&gt;
+            <item name="colorPrimary">@color/colorPrimary</item>
+            <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+            <item name="colorAccent">@color/colorAccent</item>
+        </style>
+    -->
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <style name="Text.Eight" parent="Text">
+        <item name="android:textSize">8sp</item>
+    </style>
+
+    <style name="Text.Ten" parent="Text">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="Text.Twelve" parent="Text">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Text" parent="android:TextAppearance"></style>
+
+
+    <style name="AppTheme.Button" parent="Widget.AppCompat.Button">
+        <!--<item name="theme">@style/AppTheme.AppBar</item>-->
+        <item name="android:theme">@style/AppTheme</item>
+    </style>
+
+    <style name="AppTheme.OverflowTabBar" parent="Widget.Design.TabLayout">
+        <item name="android:theme">@style/AppTheme.AppBar</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMaxWidth">0dp</item>
+        <item name="tabMode">scrollable</item>
+    </style>
+
+    <style name="AppTheme.TabBar" parent="Widget.Design.TabLayout">
+        <item name="android:theme">@style/AppTheme.AppBar</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMode">fixed</item>
+    </style>
+
+    <style name="AppTheme.ToolBar" parent="AppTheme.AppBar">
+        <item name="android:theme">@style/AppTheme.ActionBar</item>
+    </style>
+
+    <style name="AppTheme.ActionBar" parent="Widget.AppCompat.ActionBar">
+        <item name="android:theme">@style/AppTheme.AppBar</item>
+    </style>
+
+    <style name="AppTheme.ActionMode" parent="Widget.AppCompat.ActionMode">
+        <item name="height">?android:attr/actionBarSize</item>
+        <item name="android:height">?android:attr/actionBarSize</item>
+        <item name="android:theme">@style/AppTheme.AppBar</item>
+    </style>
+
+    <style name="AppTheme.SearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:theme">@style/AppTheme</item>
+        <item name="searchIcon">@drawable/lens</item>
+        <item name="android:searchIcon">@drawable/lens</item>
+        <item name="closeIcon">@drawable/ic_clear</item>
+        <item name="android:closeIcon">@drawable/ic_clear</item>
+    </style>
+
+    <style name="AppTheme.AppBar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="icon">@drawable/ic_action_ic_launcher_trans</item>
+        <item name="android:icon">@drawable/ic_action_ic_launcher_trans</item>
+        <item name="android:theme">@style/AppTheme</item>
+        <item name="popupTheme">@style/AppTheme</item>
+        <item name="android:popupTheme">@style/AppTheme</item>
+    </style>
+
+    <style name="AppTheme.AppBar.Dark" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="icon">@drawable/ic_action_ic_launcher_trans</item>
+        <item name="android:icon">@drawable/ic_action_ic_launcher_trans</item>
+        <item name="android:theme">@style/AppTheme.Dark</item>
+        <item name="popupTheme">@style/AppTheme</item>
+        <item name="android:popupTheme">@style/AppTheme</item>
+    </style>
+
+    <style name="AutoComplete" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="android:theme">@style/AppTheme</item>
+        <item name="android:background">@color/white</item>
+        <!--<item name="android:background">@color/green500</item>-->
+        <!--<item name="colorControlNormal">@color/amber500</item>-->
+        <!--<item name="colorControlActivated">@color/cyan500</item>-->
+    </style>
+
+    <style name="AutoComplete.Dark" parent="Widget.AppCompat.AutoCompleteTextView">
+        <item name="android:theme">@style/AppTheme.Dark</item>
+        <item name="android:background">@color/black</item>
+        <!--
+                <item name="android:textColor">@color/black</item>
+                <item name="colorControlNormal">@color/green</item>
+                <item name="colorControlActivated">@color/red</item>
+        -->
+    </style>
+
+    <!-- Base application theme. -->
+    <!-- Customize your theme here. -->
+    <style name="LaunchTheme.Dark" parent="AppTheme.Dark">
+        <item name="android:windowBackground">@drawable/launch_layer</item>
+    </style>
+
+    <style name="LaunchTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/launch_layer</item>
+    </style>
+
+    <style name="SplashTheme.Dark" parent="AppTheme.Dark">
+        <item name="android:windowBackground">@drawable/splash_layer</item>
+    </style>
+
+    <style name="SplashTheme" parent="AppTheme">
+        <item name="android:windowBackground">@drawable/splash_layer</item>
+    </style>
+
+    <style name="DialogTheme" parent="AlertDialog.AppCompat"></style>
+
+    <style name="AppTheme.Dark" parent="Theme.AppCompat.NoActionBar">
+        <item name="searchViewStyle">@style/AppTheme.SearchView</item>
+        <item name="android:searchViewStyle">@style/AppTheme.SearchView</item>
+        <item name="actionModeStyle">@style/AppTheme.ActionMode</item>
+        <item name="android:actionModeStyle">@style/AppTheme.ActionMode</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/statusBarColor</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+    </style>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="searchViewStyle">@style/AppTheme.SearchView</item>
+        <item name="android:searchViewStyle">@style/AppTheme.SearchView</item>
+        <item name="actionModeStyle">@style/AppTheme.ActionMode</item>
+        <item name="android:actionModeStyle">@style/AppTheme.ActionMode</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:statusBarColor">@color/statusBarColor</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <!--<item name="android:windowLightStatusBar" tools:targetApi="m">true</item>-->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+    </style>
+
+
+</resources>

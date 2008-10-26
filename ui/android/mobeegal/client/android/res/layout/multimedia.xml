@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#ddccaa"
+        >
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="20px"
+            android:text="Category"
+            android:layout_x="20px"
+            android:layout_y="30px">
+    </TextView>
+    <TextView
+            android:id="@+id/catalogmedia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="20px"
+            android:text=""
+            android:layout_x="120px"
+            android:layout_y="30px">
+    </TextView>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="20px"
+            android:text="Upload Image"
+            android:layout_x="20px"
+            android:layout_y="130px">
+    </TextView>
+    <ImageView
+            android:id="@+id/catalogimgupload"
+            android:layout_width="100px"
+            android:layout_height="100px"
+            android:src="@drawable/no_picture"
+            android:layout_x="160px"
+            android:layout_y="100px"
+            >
+    </ImageView>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="20px"
+            android:text="Audio"
+            android:layout_x="20px"
+            android:layout_y="210px">
+    </TextView>
+    <TextView
+            android:id="@+id/uplaoaudio"
+            android:layout_width="140dip"
+            android:layout_height="35dip"
+            android:text="Upload Audio"
+            android:textColor="#4751F9"
+            android:layout_x="130px"
+            android:layout_y="210px"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="20px"
+            android:text="Video"
+            android:layout_x="20px"
+            android:layout_y="280px">
+    </TextView>
+    <TextView
+            android:id="@+id/uplaovideo"
+            android:layout_width="140dip"
+            android:layout_height="35dip"
+            android:textColor="#4751F9"
+            android:text="Upload Video"
+            android:layout_x="130px"
+            android:layout_y="280px"/>
+    <Button android:id="@+id/sendmedia"
+            android:layout_width="75dip"
+            android:layout_height="30dip"
+            android:textSize="8px"
+            android:text="Upload"
+            android:textColor="#000555"
+            android:layout_x="120px"
+            android:layout_y="370px"/>
+</AbsoluteLayout>

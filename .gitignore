@@ -1,0 +1,7 @@
+.gradle
+.idea
+.kotlin
+*.iml
+target
+classes
+test-classes

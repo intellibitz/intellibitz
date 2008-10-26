@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    $Id:: AndroidManifest.xml 14 2008-08-19 06:36:45Z muthu.ramadoss                $: Id of last commit
+    $Rev:: 14                                                                       $: Revision of last commit
+    $Author:: muthu.ramadoss                                                        $: Author of last commit
+    $Date:: 2008-08-19 12:06:45 +0530 (Tue, 19 Aug 2008)                            $: Date of last commit
+    $HeadURL:: http://svn.assembla.com/svn/mobeegal/trunk/client/android/AndroidMan#$: Head URL of last commit
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.mobeegal.android"
+        >
+    <!--=====================================================================-->
+    <!--set up permission lists-->
+    <!--=====================================================================-->
+    <uses-permission
+            android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission
+            android:name="android.permission.ACCESS_NETWORK_LOCATION"/>
+    <uses-permission
+            android:name="android.permission.ACCESS_GPS"/>
+    <!--for checking networking connection state-->
+    <uses-permission
+            android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission
+            android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission
+            android:name="android.permission.CALL_PHONE"/>
+    <!--: required for VideoView -->
+    <uses-permission
+            android:name="android.permission.WAKE_LOCK"/>
+    <!--=====================================================================-->
+    <!--application settings-->
+    <!--=====================================================================-->
+    <application
+            android:icon="@drawable/mobeegalicon"
+            android:name=".MobeegalApplication"
+            >
+        <!--=====================================================================-->
+        <!--Library usage declarations-->
+        <!--=====================================================================-->
+        <uses-library android:name="com.google.android.maps"/>
+        <!--=====================================================================-->
+        <!--Service declarations-->
+        <!--=====================================================================-->
+        <service android:process=":remote"
+                 android:name=".service.CatalogService"/>
+
+        <!--=====================================================================-->
+        <!--Broadcast receivers-->
+        <!--=====================================================================-->
+
+
+        <receiver android:process=":remote"
+                  android:name=".content.MstuffQuery"/>
+        <receiver android:process=":remote"
+                  android:name=".content.SendLocation"/>
+
+        <!--=====================================================================-->
+        <!--Activity declarations-->
+        <!--=====================================================================-->
+        <activity android:label="Mobeegal Launcher"
+                  android:name=".activity.Mobeegal"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+
+        <activity android:label="MStuff Map View"
+                  android:name=".activity.MapResults"/>
+
+        <activity android:name=".activity.catalogs.ListQuery"
+                  android:label="Mobeegal">
+
+        </activity>
+
+
+        <activity android:name=".activity.catalogs.LocationFinder"
+                  android:label="Mobeegal">
+
+        </activity>
+
+        <activity android:name=".activity.catalogs.Matrimonylistquery"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.catalogs.Jewelrylistquery"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.catalogs.Carslistquery"
+                  android:label="Mobeegal">
+        </activity>
+
+        <activity android:name=".activity.catalogs.DeleteQuery"
+                  android:label="Mobeegal">
+        </activity>
+
+        <activity android:name=".activity.catalogs.Matrimonydeletequery"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.catalogs.Jewelrydeletequery"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.catalogs.Carsdeletequery"
+                  android:label="Mobeegal">
+        </activity>
+
+        <activity android:name=".activity.catalogs.CarsViewQuery"
+                  android:label="Mobeegal">
+        </activity>
+
+
+        <activity android:name=".activity.catalogs.ViewQuery"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.catalogs.Matrimonyviewquery"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.catalogs.Jewelryviewquery"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.catalogs.CarsViewQuery"
+                  android:label="Mobeegal">
+        </activity>
+
+
+        <activity android:name=".activity.catalogs.Home"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.catalogs.HomeListQuery"
+                  android:label="Mobeegal">
+        </activity>
+
+        <activity android:name=".activity.catalogs.DeleteHome"
+                  android:label="Mobeegal">
+        </activity>
+
+        <activity android:name=".activity.catalogs.HomeViewQuery"
+                  android:label="Mobeegal">
+        </activity>
+
+
+        <activity android:name=".activity.catalogs.Movies"
+                  android:label="Mobeegal">
+        </activity>
+
+        <activity android:name=".activity.catalogs.MoviesListQuery"
+                  android:label="Mobeegal">
+        </activity>
+
+        <activity android:name=".activity.catalogs.DeleteMoviesQuery"
+                  android:label="Mobeegal">
+        </activity>
+
+        <activity android:name=".activity.catalogs.MoviesViewQuery"
+                  android:label="Mobeegal">
+        </activity>
+
+
+        <activity android:name=".activity.catalogs.Restaurants"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.catalogs.RestaurantsListQuery"
+                  android:label="Mobeegal">
+        </activity>
+
+        <activity android:name=".activity.catalogs.DeleteRestaurants"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.catalogs.RestaurantsViewQuery"
+                  android:label="Mobeegal">
+        </activity>
+
+
+        <activity android:label="Mobeegal"
+                  android:name=".activity.FindandInstall">
+        </activity>
+        <activity android:label="Mobeegal" android:name=".activity.Subscribe">
+        </activity>
+        <activity android:label="Mobeegal" android:name=".activity.ListCatalog">
+        </activity>
+        <activity android:name=".activity.catalogs.Matrimony"
+                  android:label="Mobeegal">
+        </activity>
+
+        <activity android:name=".activity.catalogs.Jewelry"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.catalogs.Cars"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.catalogs.SettingTheme"
+                  android:label="Mobeegal">
+        </activity>
+
+        <activity android:name=".activity.CatalogServiceController"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.DataBaseWork"
+                  android:label="Catalogs">
+        </activity>
+        <activity android:name=".activity.catalogs.Dating"
+                  android:label="Matches">
+        </activity>
+
+        <activity android:name=".activity.catalogs.Home"
+                  android:label="Matches">
+        </activity>
+        <activity android:name=".activity.MStuffTextView"
+                  android:label="View Matches">
+        </activity>
+
+        <activity android:name=".activity.Chat" android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.MstuffSearch"
+                  android:label="MobeegalSearch">
+        </activity>
+        <activity android:name=".activity.Help" android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.MstuffSearchResults"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.MstuffTextSearchResults"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.DataBaseWork"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.Settings" android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.Response" android:label="Mobeegal">
+        </activity>
+
+        <activity android:name=".activity.Preferences" android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.TimeSettings"
+                  android:label="Mobeegal">
+        </activity>
+
+
+        <activity android:name=".activity.ServiceActivateDeactivate"
+                  android:label="Mobeegal">
+        </activity>
+
+        <service android:name=".service.CatalogService"
+                 android:process=":remote">
+            <intent-filter>
+                <!-- These are the interfaces supported by the serice, which
+                     you can bind to. -->
+                <action android:name="com.mobeegal.android.service.ICatalogService"/>
+                <action android:name="com.mobeegal.android.service.ISecondary"/>
+
+                <!-- This is an action code you can use to select the service
+                     without explicitly supplying the implementation class. -->
+                <action android:name="com.mobeegal.android.service.REMOTE_SERVICE"/>
+            </intent-filter>
+        </service>
+
+        <activity android:name=".activity.AndroidFileBrowser"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.ViewMedia"
+                  android:label="Mobeegal">
+        </activity>
+
+
+        <activity android:name=".activity.AndroidBrowser"
+                  android:label="Mobeegal">
+        </activity>
+
+        <activity android:name=".activity.PlayMedia"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.UploadGallery"
+                  android:label="Mobeegal">
+        </activity>
+
+        <activity android:name=".activity.Uploadmultimedia"
+                  android:label="Mobeegal">
+        </activity>
+
+
+        <activity android:name=".activity.CategoryList"
+                  android:label="Mobeegal">
+        </activity>
+        <activity android:name=".activity.Modes" android:label="Modes">
+        </activity>
+        <activity android:name=".activity.catalogs.TextLocations"
+                  android:label="Location">
+        </activity>
+        <activity android:name=".activity.StatusbarNotification"></activity>
+
+    </application>
+</manifest>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <!--
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar3"
+            style="@style/AppTheme.ActionBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Light"
+            android:visibility="visible"
+            app:layout_scrollFlags="scroll|enterAlways|snap">
+
+        </android.support.v7.widget.Toolbar>
+    -->
+
+    <TextView
+        android:id="@+id/tv_chat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="2dp"
+        android:paddingStart="2dp"
+        android:text="@string/menu_title_chat" />
+
+    <TextView
+        android:id="@+id/tv_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="2dp"
+        android:paddingStart="2dp"
+        android:text="@string/menu_title_group" />
+
+    <TextView
+        android:id="@+id/tv_mail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="2dp"
+        android:paddingStart="2dp"
+        android:text="@string/menu_title_email" />
+
+    <TextView
+        android:id="@+id/tv_files"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="2dp"
+        android:paddingStart="2dp"
+        android:text="@string/menu_title_files" />
+
+    <TextView
+        android:id="@+id/tv_reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingEnd="2dp"
+        android:paddingStart="2dp"
+        android:text="@string/menu_title_reset" />
+
+
+</LinearLayout>

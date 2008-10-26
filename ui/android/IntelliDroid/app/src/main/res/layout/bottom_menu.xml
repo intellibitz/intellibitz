@@ -1,0 +1,42 @@
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/appbar2"
+    style="@style/AppTheme.AppBar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal|bottom"
+    android:gravity="bottom"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    app:layout_behavior="intellibitz.intellidroid.widget.ScrollingTBBehavior">
+    <!--style="@style/AppTheme.ToolBar"-->
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        style="@style/AppTheme.AppBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_behavior="intellibitz.intellidroid.widget.ScrollingTBBehavior"
+        app:layout_scrollFlags="scroll|enterAlways" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout2"
+        style="@style/AppTheme.TabBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/gray_4"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:tabGravity="fill"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabPaddingEnd="-1dp"
+        app:tabPaddingStart="-1dp"
+        app:tabSelectedTextColor="@color/selector_red"
+        app:tabTextAppearance="@style/TextAppearance.AppCompat.Small"
+        app:tabTextColor="@color/selector_black" />
+    <!--app:tabBackground="@drawable/shape_circle_grey"-->
+
+
+</com.google.android.material.appbar.AppBarLayout>

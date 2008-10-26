@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+
+    <TabHost
+            android:id="@+id/tabs"
+            android:layout_width="fill_parent"
+            android:layout_height="375dip">
+        <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+
+        <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingTop="65px">
+            <!--   <<<<<<<<<<<<<<<<<<<<<<<<<<     mStuff view   >>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+            <AbsoluteLayout
+                    android:id="@+id/mStuffView"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    >
+
+                <TextView
+                        android:id="@+id/widget28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="mStuff View"
+                        android:textSize="18px"
+                        android:layout_x="0px"
+                        android:layout_y="40px">
+                </TextView>
+                <RadioGroup android:id="@+id/view"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:orientation="vertical"
+                            android:layout_x="90px"
+                            android:layout_y="100px">
+
+                    <RadioButton android:id="@+id/mapviewradiobutton"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="MapView"
+
+                            >
+                    </RadioButton>
+
+                    <RadioButton android:id="@+id/textviewradiobutton"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="TextView"
+
+                            >
+                    </RadioButton>
+                </RadioGroup>
+            </AbsoluteLayout>
+            <!--   <<<<<<<<<<<<<<<<<<<<<<<<<<     Service request interval   >>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+            <AbsoluteLayout
+                    android:id="@+id/servicerequestinterval"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    >
+
+                <TextView
+                        android:id="@+id/widget28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Service request interval"
+                        android:textSize="18px"
+                        android:layout_x="0px"
+                        android:layout_y="40px"/>
+
+                <RadioGroup android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:orientation="vertical"
+                            android:layout_x="90px"
+                            android:layout_y="100px">
+
+
+                    <RadioButton android:id="@+id/autoradiobutton"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="Auto"
+                            >
+                    </RadioButton>
+
+                    <RadioButton android:id="@+id/manualradiobutton"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="Manual"
+                            >
+                    </RadioButton>
+                </RadioGroup>
+
+                <Spinner
+                        android:id="@+id/timeinterval"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="90px"
+                        android:layout_y="170px">
+                </Spinner>
+
+
+            </AbsoluteLayout>
+            <!-- Three -->
+
+            <AbsoluteLayout
+                    android:id="@+id/Locationbroadcasting"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    >
+
+                <TextView
+                        android:id="@+id/widget28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Location Broadcast"
+                        android:textSize="18px"
+                        android:layout_x="0px"
+                        android:layout_y="40px"/>
+
+                <RadioGroup android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:orientation="vertical"
+                            android:layout_x="90px"
+                            android:layout_y="100px">
+
+
+                    <RadioButton android:id="@+id/turnonradiobutton"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="Turn On"
+                            >
+                    </RadioButton>
+                    <LinearLayout android:orientation="horizontal"
+                                  android:layout_width="fill_parent"
+                                  android:layout_height="fill_parent">
+                        <CheckBox android:id="@+id/auto"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="40px"
+                                  android:text="Auto"
+                                  android:layout_x="90px"
+                                  android:layout_y="100px"/>
+                        <CheckBox android:id="@+id/manual"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="40px"
+                                  android:text="Manual"
+                                  android:layout_x="90px"
+                                  android:layout_y="100px"/>
+                    </LinearLayout>
+
+                    <Spinner
+                            android:id="@+id/timeintervallocation"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="90px"
+                            android:layout_y="170px">
+                    </Spinner>
+                    <RadioButton android:id="@+id/turnoffradiobutton"
+                                 android:layout_width="wrap_content"
+                                 android:layout_height="wrap_content"
+                                 android:text="Turn Off"
+                            >
+                    </RadioButton>
+                </RadioGroup>
+            </AbsoluteLayout>
+
+        </FrameLayout>
+
+    </TabHost>
+
+    <Button
+            android:id="@+id/save"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_x="120px"
+            android:layout_y="372px"
+            ></Button>
+
+</LinearLayout>
+    
+    

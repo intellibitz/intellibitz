@@ -1,0 +1,1308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <array name="iStuffage">
+        <item>"18"</item>
+        <item>"19"</item>
+        <item>"20"</item>
+        <item>"21"</item>
+        <item>"22"</item>
+        <item>"23"</item>
+        <item>"24"</item>
+        <item>"25"</item>
+        <item>"26"</item>
+        <item>"27"</item>
+        <item>"28"</item>
+        <item>"29"</item>
+        <item>"30"</item>
+        <item>"31"</item>
+        <item>"32"</item>
+        <item>"33"</item>
+        <item>"34"</item>
+        <item>"35"</item>
+        <item>"36"</item>
+        <item>"37"</item>
+        <item>"38"</item>
+        <item>"39"</item>
+        <item>"40"</item>
+        <item>"41"</item>
+        <item>"42"</item>
+        <item>"43"</item>
+        <item>"44"</item>
+        <item>"45"</item>
+        <item>"46"</item>
+        <item>"47"</item>
+        <item>"48"</item>
+        <item>"49"</item>
+        <item>"50"</item>
+        <item>"50+"</item>
+    </array>
+
+    <array name="iStuffheight">
+        <item>"140"</item>
+        <item>"141"</item>
+        <item>"142"</item>
+        <item>"143"</item>
+        <item>"144"</item>
+        <item>"145"</item>
+        <item>"146"</item>
+        <item>"147"</item>
+        <item>"148"</item>
+        <item>"149"</item>
+        <item>"150"</item>
+        <item>"151"</item>
+        <item>"152"</item>
+        <item>"153"</item>
+        <item>"154"</item>
+        <item>"155"</item>
+        <item>"156"</item>
+        <item>"157"</item>
+        <item>"158"</item>
+        <item>"159"</item>
+        <item>"160"</item>
+        <item>"161"</item>
+        <item>"162"</item>
+        <item>"163"</item>
+        <item>"164"</item>
+        <item>"165"</item>
+        <item>"166"</item>
+        <item>"167"</item>
+        <item>"168"</item>
+        <item>"169"</item>
+        <item>"170"</item>
+        <item>"171"</item>
+        <item>"172"</item>
+        <item>"173"</item>
+        <item>"174"</item>
+        <item>"175"</item>
+        <item>"176"</item>
+        <item>"177"</item>
+        <item>"178"</item>
+        <item>"179"</item>
+        <item>"180"</item>
+        <item>"181"</item>
+        <item>"182"</item>
+        <item>"183"</item>
+        <item>"184"</item>
+        <item>"185"</item>
+        <item>185+</item>
+    </array>
+
+    <array name="iStuffweight">
+        <item>"40"</item>
+        <item>"41"</item>
+        <item>"42"</item>
+        <item>"43"</item>
+        <item>"44"</item>
+        <item>"45"</item>
+        <item>"46"</item>
+        <item>"47"</item>
+        <item>"48"</item>
+        <item>"49"</item>
+        <item>"50"</item>
+        <item>"51"</item>
+        <item>"52"</item>
+        <item>"53"</item>
+        <item>"54"</item>
+        <item>"55"</item>
+        <item>"56"</item>
+        <item>"57"</item>
+        <item>"58"</item>
+        <item>"59"</item>
+        <item>"60"</item>
+        <item>"61"</item>
+        <item>"62"</item>
+        <item>"63"</item>
+        <item>"64"</item>
+        <item>"65"</item>
+        <item>"66"</item>
+        <item>"67"</item>
+        <item>"68"</item>
+        <item>"69"</item>
+        <item>"70"</item>
+        <item>"71"</item>
+        <item>"72"</item>
+        <item>"73"</item>
+        <item>"74"</item>
+        <item>"75"</item>
+        <item>"76"</item>
+        <item>"77"</item>
+        <item>"78"</item>
+        <item>"79"</item>
+        <item>"80"</item>
+        <item>"81"</item>
+        <item>"82"</item>
+        <item>"83"</item>
+        <item>"84"</item>
+        <item>"85"</item>
+        <item>"85+"</item>
+    </array>
+
+    <array name="istuffreligion">
+        <item>Hindu</item>
+        <item>Muslims</item>
+        <item>Christian</item>
+        <item>Sikh</item>
+    </array>
+
+    <array name="istuffhindu">
+        <item></item>
+        <item>Adi Dravida</item>
+        <item>Aggarwal</item>
+        <item>Agri</item>
+        <item>Ambalavasi</item>
+        <item>Arora</item>
+        <item>Arunthathiyar</item>
+        <item>Arya Vysya</item>
+        <item>Baghel\/Pal\/Gaderiya</item>
+        <item>Baidya</item>
+        <item>Balija Naidu</item>
+        <item>Bania</item>
+        <item>Bari</item>
+        <item>Bhandari</item>
+        <item>Bhatia</item>
+        <item>Bhavsar</item>
+        <item>Billava</item>
+        <item>Boyer</item>
+        <item>Brahmin</item>
+        <item>Brahmin 6000 Niyogi</item>
+        <item>Brahmin Anavil</item>
+        <item>Brahmin Audichya</item>
+        <item>Brahmin Bhumihar</item>
+        <item>Brahmin Daivadnya</item>
+        <item>Brahmin Deshastha</item>
+        <item>Brahmin Garhwali</item>
+        <item>Brahmin Gaud Saraswat (GSB)</item>
+        <item>Brahmin Gaur</item>
+        <item>Brahmin Goswami</item>
+        <item>Brahmin Havyaka</item>
+        <item>Brahmin Iyengar</item>
+        <item>Brahmin Iyer</item>
+        <item>Brahmin Kanyakubj</item>
+        <item>Brahmin Karhade</item>
+        <item>Brahmin Kashmiri Pandit</item>
+        <item>Brahmin Koknastha</item>
+        <item>Brahmin Kumaoni</item>
+        <item>Brahmin Madhwa</item>
+        <item>Brahmin Maithil</item>
+        <item>Brahmin Nagar</item>
+        <item>Brahmin Narmadiya</item>
+        <item>Brahmin Pushkarna</item>
+        <item>Brahmin Rigvedi</item>
+        <item>Brahmin Sanadya</item>
+        <item>Brahmin Saraswat</item>
+        <item>Brahmin Saryuparin</item>
+        <item>Brahmin Shivalli</item>
+        <item>Brahmin Smartha</item>
+        <item>Brahmin Tyagi</item>
+        <item>Brahmin Vaidiki</item>
+        <item>Brahmin Viswa</item>
+        <item>Bunt</item>
+        <item>Chambhar</item>
+        <item>Chaurasia</item>
+        <item>Chettiar</item>
+        <item>CKP</item>
+        <item>Coorgi</item>
+        <item>Devadigas</item>
+        <item>Devanga</item>
+        <item>Dhangar</item>
+        <item>Dheevara</item>
+        <item>Dhobi</item>
+        <item>Edigas</item>
+        <item>Ezhava</item>
+        <item>Ezhuthachan</item>
+        <item>Gandla</item>
+        <item>Ganiga</item>
+        <item>Ganigashetty</item>
+        <item>Gavali</item>
+        <item>Gavara</item>
+        <item>Goud</item>
+        <item>Gounder</item>
+        <item>Gowda</item>
+        <item>Gujjar</item>
+        <item>Gupta</item>
+        <item>Hegde</item>
+        <item>Jaiswal</item>
+        <item>Jat</item>
+        <item>Jatav</item>
+        <item>Kalar</item>
+        <item>Kalinga</item>
+        <item>Kamboj</item>
+        <item>Kamma</item>
+        <item>Kapu</item>
+        <item>Kapu Munnuru</item>
+        <item>Karuneegar</item>
+        <item>Kayastha</item>
+        <item>Somvanshi Kayastha Prabhu</item>
+        <item>Khandayat</item>
+        <item>Khatik</item>
+        <item>Khatri</item>
+        <item>Koli</item>
+        <item>Kongu Vellala Gounder</item>
+        <item>Koshti</item>
+        <item>Kshatriya</item>
+        <item>SSK</item>
+        <item>Kshatriya Agnikula</item>
+        <item>Kulalar</item>
+        <item>Kumawat</item>
+        <item>Kumbhar</item>
+        <item>Kummari</item>
+        <item>Kunbi</item>
+        <item>Kurmi</item>
+        <item>Kuruba</item>
+        <item>Kurumbar</item>
+        <item>Kushwaha</item>
+        <item>Leva Patidar</item>
+        <item>Lingayat</item>
+        <item>Lohana</item>
+        <item>Lohar</item>
+        <item>Madiga</item>
+        <item>Maheshwari</item>
+        <item>Mahisya</item>
+        <item>Mala</item>
+        <item>Mali</item>
+        <item>Mallah</item>
+        <item>Maratha</item>
+        <item>Maruthuvar</item>
+        <item>Marwari</item>
+        <item>Maurya</item>
+        <item>Meenavar</item>
+        <item>Menon</item>
+        <item>Meru</item>
+        <item>Mogaveera</item>
+        <item>Mudaliar</item>
+        <item>Mudaliar Arcot</item>
+        <item>Monchi</item>
+        <item>Mudiraj</item>
+        <item>Mukkulathor</item>
+        <item>Muthuraja</item>
+        <item>Nadar</item>
+        <item>Naicker</item>
+        <item>Naidu</item>
+        <item>Nair</item>
+        <item>Nair Veluthedathu</item>
+        <item>Nair Vilakkithala</item>
+        <item>Naik</item>
+        <item>Nambiar</item>
+        <item>Namboodiri</item>
+        <item>Nayaka</item>
+        <item>Nepali</item>
+        <item>OBC - Barber (Nayee)</item>
+        <item>Padmashali</item>
+        <item>Panicker</item>
+        <item>Parkava Kulam</item>
+        <item>Patel</item>
+        <item>Patel Dodia</item>
+        <item>Patel Kadva</item>
+        <item>Patel Leva</item>
+        <item>Patil</item>
+        <item>Patil Leva</item>
+        <item>Patnaick</item>
+        <item>Pillai</item>
+        <item>Prajapati</item>
+        <item>Rajaka</item>
+        <item>Rajput</item>
+        <item>Rajput Garhwali</item>
+        <item>Rajput Kumaoni</item>
+        <item>Rajput Rohella\/Tank</item>
+        <item>Reddy</item>
+        <item>Sadgope</item>
+        <item>Saini</item>
+        <item>Saliya</item>
+        <item>Scheduled Caste</item>
+        <item>Senai Thalaivar</item>
+        <item>Shah</item>
+        <item>Shetty</item>
+        <item>Shimpi</item>
+        <item>Sindhi</item>
+        <item>Somvanshi</item>
+        <item>Sonar</item>
+        <item>Sourashtra</item>
+        <item>Sozhiya Vellalar</item>
+        <item>Srisayani</item>
+        <item>Sutar</item>
+        <item>Swarnkar</item>
+        <item>Tantuway</item>
+        <item>Telaga</item>
+        <item>Teli</item>
+        <item>Thevar</item>
+        <item>Thiyya</item>
+        <item>Vaish</item>
+        <item>Vaishnav</item>
+        <item>Vaishnav Vanik</item>
+        <item>Vaishya</item>
+        <item>Valmiki</item>
+        <item>Vanjari</item>
+        <item>Vankar</item>
+        <item>Vannar</item>
+        <item>Vannia Kula Kshatriyar</item>
+        <item>Vanniyar</item>
+        <item>Varshney</item>
+        <item>Veera Saivam</item>
+        <item>Veerashaiva</item>
+        <item>Velama</item>
+        <item>Vellalar</item>
+        <item>Vellalar Devandra Kula</item>
+        <item>Vishwakarma</item>
+        <item>Vokkaliga</item>
+        <item>Vysya</item>
+        <item>Yadav</item>
+        <item>Yadava</item>
+        <item>Others</item>
+    </array>
+
+    <array name="iStuffChrstian">
+        <item></item>
+        <item>Catholic</item>
+        <item>CMS</item>
+        <item>CSI</item>
+        <item>Evangelical</item>
+        <item>Indian Orthodox</item>
+        <item>Jacobite</item>
+        <item>Mangalorean</item>
+        <item>Marthomite</item>
+        <item>Nadar</item>
+        <item>Pentecost</item>
+        <item>Protestant</item>
+        <item>Syrian</item>
+        <item>Born Again</item>
+        <item>Others</item>
+    </array>
+
+    <array name="istuffmuslim">
+        <item></item>
+        <item>Dawoodi Bohra</item>
+        <item>Shia</item>
+        <item>Sunni</item>
+        <item>Others</item>
+    </array>
+
+    <array name="istuffsikh">
+        <item></item>
+        <item>Arora</item>
+        <item>Gursikh</item>
+        <item>Jat</item>
+        <item>Kamboj</item>
+        <item>Kesadhari</item>
+        <item>Khashap Rajpoot</item>
+        <item>Khatri</item>
+        <item>Labana</item>
+        <item>Mazhbi</item>
+        <item>Ramdasia</item>
+        <item>Ramgarhia</item>
+        <item>Saini</item>
+    </array>
+
+    <array name="age">
+        <item>"18-20"</item>
+        <item>"21-23"</item>
+        <item>"24-26"</item>
+        <item>"27-29"</item>
+        <item>"30-32"</item>
+        <item>"33-35"</item>
+        <item>"36-38"</item>
+        <item>"39-41"</item>
+        <item>"42-44"</item>
+        <item>"45-47"</item>
+        <item>"48-50"</item>
+        <item>"50+"</item>
+    </array>
+
+    <array name="height">
+        <item></item>
+        <item>140-145</item>
+        <item>146-150</item>
+        <item>151-155</item>
+        <item>156-160</item>
+        <item>161-165</item>
+        <item>166-170</item>
+        <item>171-175</item>
+        <item>176-180</item>
+        <item>181-185</item>
+        <item>above 185</item>
+    </array>
+
+    <array name="weight">
+        <item></item>
+        <item>40-45</item>
+        <item>46-50</item>
+        <item>51-55</item>
+        <item>56-60</item>
+        <item>61-65</item>
+        <item>66-70</item>
+        <item>71-75</item>
+        <item>76-80</item>
+        <item>81-85</item>
+        <item>above 85</item>
+    </array>
+
+    <array name="timeperiod">
+        <item>10 Seconds</item>
+        <item>1 Minutes</item>
+        <item>2 Minutes</item>
+        <item>5 Minutes</item>
+        <item>10 Minutes</item>
+        <item>15 Minutes</item>
+        <item>20 Minutes</item>
+        <item>25 Minutes</item>
+        <item>30 Minutes</item>
+        <item>35 Minutes</item>
+        <item>40 Minutes</item>
+        <item>45 Minutes</item>
+        <item>50 Minutes</item>
+        <item>55 Minutes</item>
+        <item>1 Hours</item>
+        <item>2 Hours</item>
+        <item>3 Hours</item>
+        <item>4 Hours</item>
+        <item>5 Hours</item>
+        <item>6 Hours</item>
+        <item>7 Hours</item>
+        <item>8 Hours</item>
+        <item>9 Hours</item>
+        <item>10 Hours</item>
+        <item>11 Hours</item>
+        <item>12 Hours</item>
+        <item>1 Day</item>
+    </array>
+
+    <array name="ChooseCategory">
+        <item>Dating</item>
+        <item>Matrimony</item>
+        <item>Jewellery</item>
+        <item>Cars</item>
+        <item>Restaurants</item>
+        <item>Movies</item>
+        <item>Rental</item>
+    </array>
+
+    <array name="iStuffcolor">
+        <item>Fair</item>
+        <item>Average</item>
+        <item>Whetish</item>
+    </array>
+
+    <array name="uStuffcolor">
+        <item>Any</item>
+        <item>Fair</item>
+        <item>Average</item>
+        <item>Wheatish</item>
+    </array>
+
+    <array name="ustuffreligion">
+        <item>Hindu</item>
+        <item>Muslims</item>
+        <item>Christian</item>
+        <item>Sikh</item>
+
+    </array>
+
+    <!--   jewelry   -->
+    <array name="jewelrytype">
+        <item>Rings</item>
+        <item>Earrings</item>
+        <item>Bracelets</item>
+        <item>Necklaces</item>
+        <item>Charms</item>
+        <item>Sets</item>
+        <item>Accessories</item>
+        <item>Wedding Set</item>
+        <item>Bands - Diamond</item>
+        <item>Bands - Traditional</item>
+        <item>Bridal Set</item>
+        <item>Childs</item>
+        <item>Fashion</item>
+        <item>Multi-Stone</item>
+        <item>Promise Ring</item>
+        <item>Solitaire</item>
+        <item>Three Stone</item>
+
+    </array>
+
+    <array name="jewelrygender">
+        <item>Child</item>
+        <item>Ladies</item>
+        <item>Men</item>
+    </array>
+
+    <array name="stonetype">
+        <item>No Stone</item>
+        <item>Alexandrite</item>
+        <item>Amethyst</item>
+        <item>Aquamarine</item>
+        <item>Blue Topaz</item>
+        <item>Ceylon Sapphire</item>
+        <item>Citrine</item>
+        <item>Cubic Zirconia</item>
+        <item>Diamond</item>
+        <item>Emerald</item>
+        <item>Garnet</item>
+        <item>Multi</item>
+        <item>Mystic Fire</item>
+        <item>Onyx</item>
+        <item>Opal</item>
+        <item>Pearl</item>
+        <item>Peridot</item>
+        <item>Ruby</item>
+        <item>Sapphire</item>
+        <item>Tanzanite</item>
+        <item>Tiger's Eye</item>
+        <item>Topaz</item>
+        <item>Iolite</item>
+        <item>Quartz</item>
+    </array>
+
+    <array name="metaltype">
+        <item>Gold</item>
+        <item>Gold Plate</item>
+        <item>Gold-Tone</item>
+        <item>Platinum</item>
+        <item>Stainless Steel</item>
+        <item>Sterling Silver</item>
+        <item>Titanium</item>
+        <item>Tungsten</item>
+    </array>
+
+    <array name="istuffweightingram">
+        <item>"1"</item>
+        <item>"2"</item>
+        <item>"3"</item>
+        <item>"4"</item>
+        <item>"5"</item>
+        <item>"6"</item>
+        <item>"7"</item>
+        <item>"8"</item>
+        <item>"9"</item>
+        <item>"10"</item>
+        <item>"11"</item>
+        <item>"12"</item>
+        <item>"13"</item>
+        <item>"14"</item>
+        <item>"15"</item>
+        <item>"16"</item>
+        <item>"17"</item>
+        <item>"18"</item>
+        <item>"19"</item>
+        <item>"20"</item>
+        <item>"21"</item>
+        <item>"22"</item>
+        <item>"23"</item>
+        <item>"24"</item>
+        <item>"25"</item>
+        <item>"26"</item>
+        <item>"27"</item>
+        <item>"28"</item>
+        <item>"29"</item>
+        <item>"30"</item>
+        <item>"31"</item>
+        <item>"32"</item>
+        <item>"33"</item>
+        <item>"34"</item>
+        <item>"35"</item>
+        <item>"36"</item>
+        <item>"37"</item>
+        <item>"38"</item>
+        <item>"39"</item>
+        <item>"40"</item>
+        <item>"more than 40</item>
+    </array>
+
+    <array name="ustuffweightingram">
+        <item>"1-5"</item>
+        <item>"6-10"</item>
+        <item>"11-15"</item>
+        <item>"16-20"</item>
+        <item>"21-25"</item>
+        <item>"26-30"</item>
+        <item>"31-35"</item>
+        <item>"36-40"</item>
+        <item>"41-45"</item>
+        <item>"46-50"</item>
+        <item>"more than 50"</item>
+    </array>
+    <!--   jewlery closed     -->
+
+    <!-- <<<<<<<<<<<<<<<<<<<<<<<<<< Restaurents >>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <array name="TypeofCuisine">
+        <item>african</item>
+        <item>arabic</item>
+        <item>asian</item>
+        <item>central american</item>
+        <item>central asian</item>
+        <item>chinese</item>
+        <item>creole and cajun</item>
+        <item>eastern european</item>
+        <item>ethnic</item>
+        <item>european</item>
+        <item>exotic</item>
+        <item>filipino</item>
+        <item>french</item>
+        <item>german</item>
+        <item>greek</item>
+        <item>indian</item>
+        <item>irish</item>
+        <item>italian</item>
+        <item>japanese</item>
+        <item>jewish</item>
+        <item>korean</item>
+        <item>kosher</item>
+        <item>medieval</item>
+        <item>mexican</item>
+        <item>middle eastern</item>
+        <item>north american</item>
+        <item>oceanian</item>
+        <item>oriental</item>
+        <item>religious</item>
+        <item>russian</item>
+        <item>scandinavian</item>
+        <item>south american</item>
+        <item>southern</item>
+        <item>spanish</item>
+        <item>swiss</item>
+        <item>thai</item>
+        <item>turkish</item>
+        <item>vietnamese</item>
+        <item>western european</item>
+    </array>
+    <array name="CookingMethod">
+        <item>baked</item>
+        <item>barbecue</item>
+        <item>braised</item>
+        <item>broiled</item>
+        <item>canned</item>
+        <item>clay pot</item>
+        <item>crockpot</item>
+        <item>fried</item>
+        <item>frozen</item>
+        <item>glaze</item>
+        <item>grilled</item>
+        <item>microwave</item>
+        <item>poached</item>
+        <item>pressure</item>
+        <item>roasted</item>
+        <item>skillet</item>
+        <item>skillet and wok</item>
+        <item>smoked</item>
+        <item>steamed</item>
+        <item>stir-fry</item>
+        <item>stove top</item>
+        <item>sun-dried</item>
+        <item>wok</item>
+    </array>
+    <array name="DieteticConsiderations">
+        <item>cholesterol</item>
+        <item>diabetic</item>
+        <item>digestion</item>
+        <item>fat-free</item>
+        <item>gluten-free</item>
+        <item>healthy</item>
+        <item>high-fiber</item>
+        <item>lacto</item>
+        <item>light</item>
+        <item>low-carb</item>
+        <item>low cholesterol</item>
+        <item>low sugar</item>
+        <item>low-calorie</item>
+        <item>low-fat</item>
+        <item>meatless</item>
+        <item>ovo-lacto</item>
+        <item>sugar-free</item>
+        <item>vegan</item>
+        <item>vegetarian</item>
+
+    </array>
+    <array name="TypeofCourse">
+        <item>appetizers</item>
+        <item>breakfast</item>
+        <item>brunch</item>
+        <item>desserts</item>
+        <item>dinner</item>
+        <item>entrees</item>
+        <item>lunch</item>
+        <item>side-dishes</item>
+        <item>snacks</item>
+    </array>
+    <array name="TypeofDish">
+        <item>baby foods</item>
+        <item>bakery</item>
+        <item>beverages</item>
+        <item>burgers</item>
+        <item>cakes</item>
+        <item>candies and sweets</item>
+        <item>casseroles</item>
+        <item>cheesecakes</item>
+        <item>chutneys</item>
+        <item>cocktails</item>
+        <item>coffee and tea</item>
+        <item>cookies and bars</item>
+        <item>curries</item>
+        <item>dips and spreads</item>
+        <item>dressings</item>
+        <item>garnishes</item>
+        <item>hot and spicy</item>
+        <item>ice cream and sherbet</item>
+        <item>icings and frostings</item>
+        <item>jams and jellies</item>
+        <item>marinades</item>
+        <item>muffins and biscuits</item>
+        <item>one-dish meals</item>
+        <item>pancakes and waffles</item>
+        <item>pastry</item>
+        <item>picnic</item>
+        <item>pizzas</item>
+        <item>prepared in advance</item>
+        <item>preserves</item>
+        <item>puddings and custards</item>
+        <item>quiches and souffles</item>
+        <item>quick and easy</item>
+        <item>salads</item>
+        <item>sandwiches</item>
+        <item>sauces and dressings</item>
+        <item>school lunch</item>
+        <item>soups and stews</item>
+        <item>spice mixes</item>
+        <item>stews</item>
+        <item>stuffings</item>
+        <item>tarts and pies</item>
+        <item>terrines/mousses</item>
+        <item>toppings</item>
+    </array>
+    <array name="MainIngredient">
+        <item>alcohol</item>
+        <item>beans</item>
+        <item>beef</item>
+        <item>blueberry</item>
+        <item>blackberry</item>
+        <item>catfish</item>
+        <item>cereals</item>
+        <item>cheese</item>
+        <item>cheese and eggs</item>
+        <item>cherry</item>
+        <item>chocolate</item>
+        <item>dairy</item>
+        <item>eggs</item>
+        <item>fig</item>
+        <item>fish</item>
+        <item>fruits</item>
+        <item>game</item>
+        <item>grains</item>
+        <item>hazelnut</item>
+        <item>herbs and spices</item>
+        <item>kiwi</item>
+        <item>lamb and mutton</item>
+        <item>lobster</item>
+        <item>meats</item>
+        <item>pastas and noodles</item>
+        <item>peach</item>
+        <item>pineapple</item>
+        <item>pistachio</item>
+        <item>pork</item>
+        <item>poultry</item>
+        <item>rabbit</item>
+        <item>rice and grains</item>
+        <item>seafood</item>
+        <item>vegetables</item>
+        <item>watermelon</item>
+    </array>
+    <array name="OccasionOrSeason">
+        <item>christmas</item>
+        <item>easter</item>
+        <item>halloween</item>
+        <item>holidays</item>
+        <item>party</item>
+        <item>passover</item>
+        <item>spring</item>
+        <item>summer</item>
+        <item>thanksgiving</item>
+        <item>valentine</item>
+        <item>winter</item>
+    </array>
+    <array name="Miscellaneous">
+        <item>food gifts ideas</item>
+        <item>from restaurants</item>
+        <item>fun and easy</item>
+        <item>leftovers</item>
+    </array>
+    <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<Movies Attributes >>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+
+    <array name="MovieType">
+        <item>Action</item>
+        <item>Cartoon</item>
+        <item>Comedy</item>
+        <item>Cult</item>
+        <item>Drama</item>
+        <item>Horror</item>
+        <item>Sci-Fi</item>
+        <item>Series</item>
+        <item>Thriller Suspense</item>
+    </array>
+
+    <array name="MovieLanguage">
+        <item>English</item>
+        <item>Hindi</item>
+        <item>Bengali</item>
+        <item>Tamil</item>
+        <item>Telugu</item>
+        <item>Oriya</item>
+        <item>Malayalam</item>
+
+    </array>
+    <array name="SeatingStyle">
+        <item>Elite Class</item>
+        <item>Premier Class</item>
+        <item>Economy Class</item>
+    </array>
+    <!-- <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< Rental Attributes>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>-->
+    <array name="iStuffRentalType">
+        <item>Flat Singleroom</item>
+        <item>Flat Doubleroom</item>
+        <item>Flat Multirooms</item>
+        <item>House</item>
+        <item>Paying guest</item>
+        <item>Building 1stFloor</item>
+        <item>Building 2ndFloor</item>
+        <item>Building 3rdFloor</item>
+    </array>
+
+    <array name="iStuffMiscellaneous">
+        <item>Silent Area</item>
+        <item>With Balcony</item>
+        <item>With Park</item>
+        <item>With Theater</item>
+        <item>With Garden</item>
+        <item>With car parkingArea</item>
+    </array>
+
+    <array name="iStuffStatus">
+        <item>Single</item>
+        <item>Married</item>
+    </array>
+    <array name="uStuffStatus">
+        <item>Single</item>
+        <item>Married</item>
+    </array>
+    <array name="iStuffRate">
+        <item>1500-2000</item>
+        <item>2000-3000</item>
+        <item>3500-4000</item>
+        <item>4500-5000</item>
+        <item>5000-5500</item>
+        <item>5500-6000</item>
+        <item>6000-6500</item>
+        <item>6500-7000</item>
+        <item>Above 7000</item>
+
+    </array>
+
+    <array name="uStuffRentalType">
+        <item>Flat Singleroom</item>
+        <item>Flat Doubleroom</item>
+        <item>Flat Multirooms</item>
+        <item>House</item>
+        <item>Paying guest</item>
+        <item>Building 1stFloor</item>
+        <item>Building 2ndFloor</item>
+        <item>Building 3rdFloor</item>
+    </array>
+
+    <array name="uStuffMiscellaneous">
+        <item>Silent Area</item>
+        <item>With Balcony</item>
+        <item>With Park</item>
+        <item>With Theater</item>
+        <item>With Garden</item>
+        <item>With car parkingArea</item>
+
+    </array>
+
+    <array name="uStuffRate">
+        <item>1500-2000</item>
+        <item>2000-3000</item>
+        <item>3500-4000</item>
+        <item>4500-5000</item>
+        <item>5000-5500</item>
+        <item>5500-6000</item>
+        <item>6000-6500</item>
+        <item>6500-7000</item>
+        <item>Above 7000</item>
+
+    </array>
+
+    <!--   <<<<<<<<<<<<<<<<<< Car Attribute Values >>>>>>>>>>>>>>>>>>>>>>  -->
+    <array name="MakeType">
+        <item>Audi</item>
+        <item>Bentley</item>
+        <item>BMW</item>
+        <item>Chevrolet</item>
+        <item>Chrysler</item>
+        <item>Daewoo</item>
+        <item>Ferrari</item>
+        <item>Fiat</item>
+        <item>Ford</item>
+        <item>HindustanMotors</item>
+        <item>Honda</item>
+        <item>Hummer</item>
+        <item>Hyundai</item>
+        <item>ICML</item>
+        <item>Lamborghini</item>
+        <item>LandRover</item>
+        <item>Lexus</item>
+        <item>Mahindra</item>
+        <item>MahindraRenault</item>
+        <item>Maini</item>
+        <item>Maruti</item>
+        <item>Maserati</item>
+        <item>Maybach</item>
+        <item>Mercedes</item>
+        <item>Mitsubishi</item>
+        <item>Nissan</item>
+        <item>Opel</item>
+        <item>Peugeot</item>
+        <item>Porsche</item>
+        <item>RollsRoyce</item>
+        <item>SanMotors</item>
+        <item>Sipani</item>
+        <item>Skoda</item>
+        <item>Tata</item>
+        <item>Toyota</item>
+        <item>Volkswagen</item>
+        <item>Volvo</item>
+    </array>
+
+    <array name="Audi">
+        <item></item>
+        <item>A4</item>
+        <item>A6</item>
+        <item>A8</item>
+        <item>Q7</item>
+        <item>TT</item>
+    </array>
+    <array name="Bentley">
+        <item>Arnage</item>
+        <item>Azure</item>
+        <item>Continental Flying Spur</item>
+        <item>Continental GT</item>
+        <item>Continental GTC</item>
+    </array>
+    <array name="BMW">
+        <item>1-Series</item>
+        <item>3-Series</item>
+        <item>5-Series</item>
+        <item>7-Series</item>
+        <item>M-Series</item>
+        <item>X3</item>
+        <item>X5</item>
+        <item>Z-Series</item>
+        <item>Z3</item>
+        <item>Z4</item>
+    </array>
+    <array name="Chevrolet">
+        <item>Aveo</item>
+        <item>Aveo U-VA</item>
+        <item>Captiva</item>
+        <item>Forester</item>
+        <item>Optra</item>
+        <item>Optra Magnum</item>
+        <item>Optra SRV</item>
+        <item>Spark</item>
+        <item>Tavera</item>
+        <item>Tavera Neo</item>
+    </array>
+    <array name="Chrysler">
+        <item>Avenger</item>
+    </array>
+    <array name="Daewoo">
+        <item>Cielo</item>
+        <item>Matiz</item>
+        <item>Nexia</item>
+    </array>
+    <array name="Ferrari">
+        <item>575 Superamerica</item>
+        <item>599 GTB Fiorana</item>
+        <item>612</item>
+        <item>F430</item>
+    </array>
+    <array name="Fiat">
+        <item>1100</item>
+        <item>Adventure</item>
+        <item>Adventure Sport</item>
+        <item>Millicento</item>
+        <item>Palio</item>
+        <item>Palio D</item>
+        <item>Palio NV</item>
+        <item>Palio Stile</item>
+        <item>Palio Stile Multijet</item>
+        <item>Petra</item>
+        <item>Petra D</item>
+        <item>Premier 118 NE</item>
+        <item>Premier Padmini</item>
+        <item>Siena</item>
+        <item>Siena Weekend</item>
+        <item>Uno</item>
+    </array>
+    <array name="Ford">
+        <item>Endeavourm</item>
+        <item>Escort</item>
+        <item>Fiesta</item>
+        <item>Fusion</item>
+        <item>Ikon</item>
+        <item>Model T</item>
+        <item>Mondeo</item>
+    </array>
+    <array name="HindustanMotors">
+        <item>Ambassador</item>
+        <item>Ambassador classic</item>
+        <item>Contessa</item>
+        <item>Trekker</item>
+    </array>
+    <array name="Honda">
+        <item>Accord</item>
+        <item>City</item>
+        <item>City ZX</item>
+        <item>Civic</item>
+        <item>CR-V</item>
+        <item>Step WGN</item>
+    </array>
+    <array name="Hummer">
+        <item>H2</item>
+        <item>H3</item>
+    </array>
+    <array name="Hyundai">
+        <item>Accent</item>
+        <item>Elantra</item>
+        <item>Getz</item>
+        <item>Getz Prime</item>
+        <item>i 10</item>
+        <item>Santro</item>
+        <item>Santro Xing</item>
+        <item>Sonata</item>
+        <item>Sonata Embera</item>
+        <item>Terracan</item>
+        <item>Tucson</item>
+        <item>Verna</item>
+    </array>
+    <array name="ICML">
+        <item>Rhino Rx</item>
+    </array>
+    <array name="Lamborghini">
+        <item>Gallardo</item>
+        <item>Murcielago</item>
+    </array>
+    <array name="LandRover">
+        <item>Defender</item>
+        <item>Discovery</item>
+        <item>Freelander</item>
+        <item>Freelander 2</item>
+        <item>Range Rover</item>
+        <item>Range Rover Sport</item>
+    </array>
+    <array name="Lexus">
+        <item>GS</item>
+        <item>IS</item>
+        <item>LS</item>
+        <item>RX</item>
+        <item>SC</item>
+    </array>
+    <array name="Mahindra">
+        <item>Armada</item>
+        <item>Bolero</item>
+        <item>CJ 340 DP</item>
+        <item>Commander</item>
+        <item>Jeep</item>
+        <item>Logan</item>
+        <item>Marshal</item>
+        <item>MM 550</item>
+        <item>Scorpio</item>
+        <item>Voyager</item>
+    </array>
+    <array name="MahindraRenault">
+        <item>Logan</item>
+    </array>
+    <array name="Maini">
+        <item>Reva Electric</item>
+    </array>
+    <array name="Maruti">
+        <item>1000</item>
+        <item>800</item>
+        <item>Alto</item>
+        <item>Baleno</item>
+        <item>Esteem</item>
+        <item>Grand Vitara</item>
+        <item>Gypsy</item>
+        <item>Omni</item>
+        <item>Swift</item>
+        <item>Swift Dzire</item>
+        <item>SX4</item>
+        <item>Versa</item>
+        <item>Wagon R Duo</item>
+        <item>WagonR</item>
+        <item>Zen</item>
+        <item>Zen Estilo</item>
+    </array>
+    <array name="Maserati">
+        <item>Quattroporte</item>
+    </array>
+    <array name="Maybach">
+        <item>57</item>
+        <item>57 S</item>
+        <item>62</item>
+    </array>
+    <array name="Mercedes">
+        <item>Benz</item>
+        <item>C-Class</item>
+        <item>CL</item>
+        <item>CLS-Class</item>
+        <item>E-Class</item>
+        <item>G</item>
+        <item>M-Class</item>
+        <item>MB-Class</item>
+        <item>S-Class</item>
+        <item>SL-Class</item>
+        <item>SLK-Class</item>
+        <item>SLR</item>
+    </array>
+    <array name="Mitsubishi">
+        <item>Cedia</item>
+        <item>Lancer</item>
+        <item>Lancer Cedia</item>
+        <item>Montero</item>
+        <item>Pajero</item>
+    </array>
+    <array name="Nissan">
+        <item>350Z</item>
+        <item>Cima</item>
+        <item>Gloria</item>
+        <item>Micra</item>
+        <item>Teana</item>
+        <item>X-Trail</item>
+    </array>
+    <array name="Opel">
+        <item>Astra</item>
+        <item>Corsa</item>
+        <item>Vectra</item>
+    </array>
+    <array name="Peugeot">
+        <item>309</item>
+        <item>Peugot 307</item>
+        <item>Peugot 405</item>
+    </array>
+    <array name="Porsche">
+        <item>911</item>
+        <item>Boxter</item>
+        <item>Cayenne</item>
+        <item>Cayman</item>
+    </array>
+    <array name="RollsRoyce">
+        <item>Phantom</item>
+        <item>Phantom Coupe</item>
+        <item>Phantom Drophead Coupe</item>
+    </array>
+    <array name="SanMotors">
+        <item>Storm</item>
+    </array>
+    <array name="Sipani">
+        <item>Montego</item>
+    </array>
+    <array name="Skoda">
+        <item>Fabia</item>
+        <item>Laura</item>
+        <item>Octavia</item>
+        <item>Octavia Combi</item>
+        <item>Superb</item>
+    </array>
+    <array name="Tata">
+        <item>Estate</item>
+        <item>Indica</item>
+        <item>Indica V2</item>
+        <item>Indica V2 DICOR</item>
+        <item>Indica V2 LPG DUO</item>
+        <item>Indica V2 Turbo</item>
+        <item>Indica V2 XETA</item>
+        <item>Indicab</item>
+        <item>Indigo</item>
+        <item>Indigo CS</item>
+        <item>Indigo Marina</item>
+        <item>Indigo V Series</item>
+        <item>Indigo XL</item>
+        <item>Safari</item>
+        <item>Sierra</item>
+        <item>Sumo</item>
+        <item>Sumo Grande</item>
+        <item>Sumo Victa</item>
+    </array>
+    <array name="Toyota">
+        <item>Camry</item>
+        <item>Corolla</item>
+        <item>Corona</item>
+        <item>Crown</item>
+        <item>Cynos</item>
+        <item>Innova</item>
+        <item>Land Cruiser</item>
+        <item>MR2</item>
+        <item>Qualis</item>
+    </array>
+    <array name="Volkswagen">
+        <item>Jetta</item>
+        <item>Passat</item>
+        <item>Touareg</item>
+    </array>
+    <array name="Volvo">
+        <item>S80</item>
+        <item>XC90</item>
+    </array>
+    <array name="Year">
+        <item>"2008"</item>
+        <item>"2007"</item>
+        <item>"2006"</item>
+        <item>"2005"</item>
+        <item>"2004"</item>
+        <item>"2003"</item>
+        <item>"2002"</item>
+        <item>"2001"</item>
+        <item>"2000"</item>
+        <item>"1999"</item>
+        <item>"1998"</item>
+        <item>"1997"</item>
+    </array>
+    <array name="Color">
+        <item>Cherry</item>
+        <item>Maroon</item>
+        <item>Green</item>
+        <item>Cream</item>
+        <item>White</item>
+        <item>Red</item>
+        <item>Yellow</item>
+        <item>Silver</item>
+        <item>Black</item>
+        <item>Ash</item>
+        <item>Steel</item>
+        <item>Light-Blue</item>
+    </array>
+    <array name="FuelType">
+        <item>Diesel</item>
+        <item>Petrol</item>
+    </array>
+    <array name="Price">
+        <item>"1-2"</item>
+        <item>"2-4"</item>
+        <item>"4-6"</item>
+        <item>"6-8"</item>
+        <item>"8-10"</item>
+        <item>"10-12"</item>
+        <item>"12-14"</item>
+        <item>"14-16"</item>
+        <item>"16-18"</item>
+        <item>"18-20"</item>
+        <item>"20-40"</item>
+        <item>"40-60"</item>
+        <item>"60 above"</item>
+    </array>
+
+    <array name="selecttheme">
+        <item>Default</item>
+        <item>Theme_Dialog</item>
+        <item>Theme_Dialog_Alert</item>
+        <item>Theme_Dialog_AppError</item>
+    </array>
+
+</resources>
+

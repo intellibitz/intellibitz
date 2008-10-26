@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/menu_schedules"
+            android:title="@string/schedules">
+            <menu>
+                <item
+                    android:id="@+id/mi_schedules"
+                    android:icon="@drawable/schedule_arrow"
+                    android:orderInCategory="100"
+                    android:title="@string/messages"
+                    android:visible="true" />
+            </menu>
+        </item>
+    </group>
+
+
+    <group>
+        <item
+            android:id="@+id/menu_email_accounts"
+            android:title="@string/email_accounts">
+            <menu>
+                <item
+                    android:id="@+id/action_email_accounts"
+                    android:icon="@drawable/ic_email_black_18dp"
+                    android:orderInCategory="100"
+                    android:title="@string/add_email_account" />
+            </menu>
+        </item>
+    </group>
+
+    <group>
+        <item
+            android:id="@+id/gi_company_accounts"
+            android:title="@string/company_accounts">
+            <menu>
+                <item
+                    android:id="@+id/mi_company_accounts"
+                    android:icon="@drawable/other_mail_icon"
+                    android:orderInCategory="100"
+                    android:title="@string/company_list" />
+            </menu>
+        </item>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/mi_company"
+            android:icon="@drawable/tab_main"
+            android:title="@string/company">
+            <menu>
+                <item
+                    android:id="@+id/mi_create_company"
+                    android:icon="@drawable/add_contact"
+                    android:orderInCategory="200"
+                    android:title="@string/create_company" />
+                <item
+                    android:id="@+id/mi_join_company"
+                    android:icon="@drawable/ic_check"
+                    android:orderInCategory="300"
+                    android:title="@string/join_company" />
+                <item
+                    android:id="@+id/mi_invite_users"
+                    android:icon="@drawable/add_contact"
+                    android:orderInCategory="300"
+                    android:title="@string/invite_users" />
+            </menu>
+        </item>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_action_messages"
+            android:icon="@drawable/tab_main"
+            android:title="@string/messages">
+            <menu>
+                <item
+                    android:id="@+id/action_drafts"
+                    android:icon="@drawable/drawer_archive"
+                    android:orderInCategory="100"
+                    android:title="@string/drafts"
+                    android:visible="false" />
+                <item
+                    android:id="@+id/action_unsent"
+                    android:icon="@drawable/drawer_saved"
+                    android:orderInCategory="200"
+                    android:title="@string/unsent"
+                    android:visible="false" />
+                <item
+                    android:id="@+id/action_outbox"
+                    android:icon="@drawable/files"
+                    android:orderInCategory="300"
+                    android:title="@string/outbox"
+                    android:visible="false" />
+            </menu>
+        </item>
+    </group>
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/menu_action_settings"
+            android:title="@string/settings">
+            <menu>
+                <item
+                    android:id="@+id/nav_contact"
+                    android:icon="@drawable/contacts_icon"
+                    android:onClick="selectContactsTab"
+                    android:title="@string/pref_title_contacts"
+                    android:visible="false" />
+                <!--
+                        <item
+                            android:id="@+id/nav_nest"
+                            android:icon="@drawable/ic_folder_open_black_18dp"
+                            android:onClick="selectNestTab"
+                            android:title="@string/menu_title_nest" />
+                -->
+                <item
+                    android:id="@+id/action_settings"
+                    android:icon="@drawable/tab_settings"
+                    android:orderInCategory="100"
+                    android:title="@string/profile" />
+                <!--
+                        <item
+                            android:id="@+id/action_help"
+                    android:onClick="selectProfileTab"
+                            android:icon="@drawable/message"
+                            android:title="@string/help_amp_feedback" />
+                -->
+            </menu>
+        </item>
+    </group>
+
+    <!--
+        <group android:checkableBehavior="single">
+        </group>
+    -->
+
+</menu>

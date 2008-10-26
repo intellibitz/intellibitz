@@ -1,0 +1,20 @@
+<resources>
+    <!--
+    Layout alias to replace the single-pane version of the layout with a
+    two-pane version on screens with a width of at least 900 density-independent pixels (dips).
+
+    For more on layout aliases, see:
+    http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
+    -->
+    <!--<item name="activity_main_2" type="layout">@layout/activity_main_twopane</item>-->
+    <!--
+        <item name="contact_list_two_pane" type="layout">@layout/contact_list_twopane</item>
+        <item name="activity_main_two_pane" type="layout">@layout/activity_main_twopane</item>
+        <item name="emailaccount_list" type="layout">@layout/emailaccount_list_twopane</item>
+        <item name="message_list_two_pane" type="layout">@layout/message_list_twopane</item>
+        <item name="nest_list_two_pane" type="layout">@layout/nest_list_twopane</item>
+        <item name="stack_list_two_pane" type="layout">@layout/stack_list_twopane</item>
+        <item name="profile_list_two_pane" type="layout">@layout/profile_list_twopane</item>
+        <item name="group_detail_two_pane" type="layout">@layout/group_detail_twopane</item>
+    -->
+</resources>

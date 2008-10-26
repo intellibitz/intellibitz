@@ -1,0 +1,326 @@
+<!--<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:isScrollContainer="true"
+    android:orientation="vertical"
+    tools:context="intellibitz.intellidroid.MainActivity">
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:fitsSystemWindows="false"
+        android:orientation="vertical"
+        android:padding="8dp"
+        tools:context="intellibitz.intellidroid.MainActivity">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom">
+
+            <LinearLayout
+                android:id="@+id/ll_top"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/launch_logo_big" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/launch_text" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_mid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/ll_top"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_end"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/ll_mid"
+                android:layout_gravity="bottom"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/setting_up_intellibitz_is_easy" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:background="@drawable/shape_roundrect_white"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:padding="2dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="2dp">
+
+                            <TextView
+                                android:id="@+id/name"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:visibility="gone" />
+
+
+                            <!--
+                                                    <android.support.design.widget.TextInputLayout
+                                                        android:layout_width="fill_parent"
+                                                        android:layout_height="match_parent"
+                                                        android:visibility="gone">
+                            -->
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/username"
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:hint="@string/prompt_username"
+                                android:imeActionLabel="@string/action_sign_in_short"
+                                android:imeOptions="actionDone"
+                                android:inputType="text"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:visibility="gone" />
+
+
+                            <!--</android.support.design.widget.TextInputLayout>-->
+
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingEnd="4dp"
+                                android:src="@drawable/phone_icon" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:paddingStart="4dp"
+                                android:text="@string/phone_amp_country"
+                                android:textColor="@color/black" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:id="@+id/ll_country"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@color/gray_l"
+                                android:orientation="horizontal">
+
+                                <Button
+                                    android:id="@+id/btnCountry"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:background="@color/gray_l"
+                                    android:hint="@string/country"
+                                    android:maxLength="4"
+                                    android:text="IN"
+                                    android:textColor="@color/black"
+                                    android:visibility="visible" />
+
+                                <ImageButton
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@color/gray_l"
+                                    android:contentDescription="@string/app_title"
+                                    android:src="@drawable/country_sel_arrow"
+                                    android:visibility="visible" />
+                            </LinearLayout>
+
+
+                            <!--
+                                                    <android.support.design.widget.TextInputLayout
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_weight="1">
+                            -->
+
+                            <AutoCompleteTextView
+                                android:id="@+id/country"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/code"
+                                android:imeActionLabel="@string/action_sign_in_short"
+                                android:imeOptions="actionUnspecified"
+                                android:inputType="textAutoComplete"
+                                android:maxLength="6"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text="+91"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp14" />
+
+                            <!--</android.support.design.widget.TextInputLayout>-->
+
+                            <!--
+                                                    <android.support.design.widget.TextInputLayout
+                                                        android:layout_width="0dp"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_weight="9">
+                            -->
+
+                            <AutoCompleteTextView
+                                android:id="@+id/mobile"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:hint="@string/prompt_getcode"
+                                android:imeActionLabel="@string/action_sign_in_short"
+                                android:imeOptions="actionNext"
+                                android:inputType="phone"
+                                android:maxLength="15"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text="0000000000"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/sp14" />
+
+
+                            <!--</android.support.design.widget.TextInputLayout>-->
+
+                        </LinearLayout>
+                    </LinearLayout>
+                    <!--
+                            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                android:background="@color/green"
+                                android:clipChildren="true"
+                                android:id="@+id/card_view"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="4dp"
+                                card_view:cardCornerRadius="4dp"
+                                card_view:cardElevation="4dp"
+                                card_view:cardBackgroundColor="?android:attr/colorAccent"
+                                card_view:contentPadding="2dp"
+                                card_view:cardPreventCornerOverlap="false">
+                    -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+
+                        <RelativeLayout
+                            android:id="@+id/rl_login"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/shape_roundrect"
+                            android:padding="2dp">
+                            <!--android:background="@drawable/shape_circle">-->
+
+                            <!--android:background="@drawable/shape_rect"-->
+                            <Button
+                                android:id="@+id/btn_login"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@android:color/transparent"
+                                android:text="@string/login"
+                                android:visibility="visible" />
+
+                            <ImageButton
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_toEndOf="@+id/btn_login"
+                                android:background="@android:color/transparent"
+                                android:contentDescription="@string/app_title"
+                                android:src="@drawable/login_arrow"
+                                android:visibility="visible" />
+
+                        </RelativeLayout>
+                        <!--</android.support.v7.widget.CardView>-->
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_perm"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@color/graydk"
+                        android:orientation="horizontal"
+                        android:padding="4dp"
+                        android:visibility="gone">
+
+                        <ProgressBar
+                            android:id="@+id/progress"
+                            style="@android:style/Widget.ProgressBar.Horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:indeterminate="true"
+                            android:visibility="gone" />
+
+                        <TextView
+                            style="@style/TextAppearance.AppCompat.Inverse"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/contacts_autocomplete_permission"
+                            android:visibility="gone" />
+
+                        <Button
+                            android:id="@+id/btn_perm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/graydk"
+                            android:text="@string/grant_permission"
+                            android:textColor="@color/green"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+</ScrollView><!--</android.support.v4.widget.NestedScrollView>-->
+
+
+

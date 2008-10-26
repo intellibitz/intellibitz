@@ -1,0 +1,53 @@
+<!-- DETAIL FILTER TABS -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout5"
+        style="@style/AppTheme.AppBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:theme="@style/ThemeOverlay.AppCompat"
+        android:visibility="gone"
+        app:layout_scrollFlags="enterAlways|snap"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/red"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabPaddingEnd="1dp"
+        app:tabPaddingStart="1dp"
+        app:tabTextColor="@color/black" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout5"
+        style="@style/AppTheme.AppBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:background="@color/graydk"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        android:visibility="gone"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/transparent_bg"
+        app:tabIndicatorHeight="0dp"
+        app:tabMode="fixed"
+        app:tabPadding="0dp"
+        app:tabPaddingEnd="4dp"
+        app:tabPaddingStart="4dp" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar5"
+        style="@style/AppTheme.ActionBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"
+        android:visibility="gone"
+        app:layout_scrollFlags="scroll|enterAlways|snap" />
+
+</LinearLayout>

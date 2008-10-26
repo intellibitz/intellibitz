@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    $Id::                                                                           $: Id of last commit
+    $Rev::                                                                          $: Revision of last commit
+    $Author::                                                                       $: Author of last commit
+    $Date::                                                                         $: Date of last commit
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.androidworks.navsys.wuffit"
+          android:versionCode="1"
+          android:versionName="1.0">
+    <!--=====================================================================-->
+    <!--set up permission lists-->
+    <!--=====================================================================-->
+    <uses-permission
+            android:name="android.permission.INTERNET"/>
+    <uses-permission
+            android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission
+            android:name="android.permission.READ_CONTACTS"/>
+    <!--SMS-->
+    <uses-permission
+            android:name="android.permission.READ_SMS"/>
+    <uses-permission
+            android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission
+            android:name="android.permission.WRITE_SMS"/>
+    <uses-permission
+            android:name="android.permission.SEND_SMS"/>
+    <!--maps-->
+    <uses-permission
+            android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission
+            android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
+    <!--TODO: remove debuggable='true' in production version-->
+    <!--=====================================================================-->
+    <!--application settings-->
+    <!--=====================================================================-->
+    <application android:label="@string/app_name"
+                 android:name=".WuffITApplication"
+                 android:description="@string/app_name"
+                 android:debuggable="true"
+            >
+
+        <!--=====================================================================-->
+        <!--set up library usage-->
+        <!--=====================================================================-->
+        <uses-library
+                android:name="com.google.android.maps"/>
+
+        <!--=====================================================================-->
+        <!--Activity declarations-->
+        <!--=====================================================================-->
+        <activity android:name=".activity.WuffITTracker"
+                  android:label="@string/app_name"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="com.androidworks.navsys.wuffit.ACTION_MAIN_MENU"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.SelectTracker"
+                  android:label="@string/select_tracker_activity_label"
+                >
+            <intent-filter>
+                <action android:name="com.androidworks.navsys.wuffit.ACTION_SELECT_TRACKER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.SetupWuffIT"
+                  android:label="@string/setup_wuffit_activity_label"
+                >
+            <intent-filter>
+                <action android:name="com.androidworks.navsys.wuffit.ACTION_SETUP_WUFFIT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.RequestLocation"
+                  android:label="@string/request_location_activity_label"
+                >
+            <intent-filter>
+                <action android:name="com.androidworks.navsys.wuffit.ACTION_REQUEST_LOCATION"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".activity.DisplayLocation"
+                  android:label="@string/display_location_activity_label"
+                >
+            <!--android:theme="@android:style/Theme.Dialog"-->
+            <intent-filter>
+                <action android:name="com.androidworks.navsys.wuffit.ACTION_DISPLAY_LOCATION"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <!--=====================================================================-->
+        <!--Content Providers-->
+        <!--=====================================================================-->
+        <provider android:name=".content.TrackerProvider"
+                  android:authorities="com.androidworks.navsys.wuffit.content.Tracker"
+                />
+
+        <!--=====================================================================-->
+        <!--Broadcast receivers-->
+        <!--=====================================================================-->
+        <receiver android:name=".content.WuffITSMSReceiver"
+                  android:process=":remote">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
+            </intent-filter>
+        </receiver>
+
+        <!--=====================================================================-->
+        <!--Service declarations-->
+        <!--=====================================================================-->
+        <service android:name=".service.SMSHandler">
+            <intent-filter>
+                <!-- This is an action code you can use to select the service
+                     without explicitly supplying the implementation class. -->
+                <action android:name="com.androidworks.navsys.wuffit.SERVICE_SMS_HANDLER"/>
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest> 

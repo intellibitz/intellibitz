@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?><!--android:background="@drawable/side_nav_bar"-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_header_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="24dp"
+    android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+    tools:context="intellibitz.intellidroid.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="0dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="top"
+                android:background="@color/crim"
+                android:orientation="horizontal"
+                android:paddingStart="100dp">
+                <!--android:src="@drawable/profile_cam_layer" />-->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/app_title"
+                        android:textColor="@color/white"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/sp10" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:paddingEnd="6dp"
+                    android:src="@android:drawable/ic_menu_share" />
+
+
+            </LinearLayout>
+
+            <!--android:background="@drawable/shape_circle_white"-->
+            <LinearLayout
+                android:id="@+id/ll_profile"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="bottom"
+                android:gravity="bottom|center"
+                android:orientation="horizontal">
+
+                <intellibitz.intellidroid.util.NetworkImageView
+                    android:id="@+id/niv_profile"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="bottom|center"
+                    android:background="@android:drawable/ic_menu_share"
+                    android:clickable="true"
+                    android:src="@android:drawable/ic_menu_share" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

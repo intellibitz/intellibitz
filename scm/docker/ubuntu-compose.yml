@@ -1,0 +1,19 @@
+# docker compose up -d
+# docker compose -f ubuntu-compose.yml up -d
+# docker compose logs -f
+# docker compose logs -f ubuntu
+# docker compose down
+# version: '3'
+
+# This configuration file defines a service called ubuntu with the ubuntu running on your computer,
+
+name: ubuntu
+services:
+  ubuntu:
+    image: intellibitz/docker:ubuntu-latest
+    container_name: ubuntu
+    restart: on-failure
+    command:
+      - -i
+    volumes:
+      - /mnt/NTFS:/mnt/NTFS

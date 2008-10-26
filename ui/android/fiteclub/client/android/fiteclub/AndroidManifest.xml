@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2008 http://mobeegal.in
+
+        All Rights Reserved.
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<!--
+    $Id::                                                                           $: Id of last commit
+    $Rev::                                                                          $: Revision of last commit
+    $Author::                                                                       $: Author of last commit
+    $Date::                                                                         $: Date of last commit
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.fiteclub.android"
+      android:versionCode="1"
+      android:versionName="1.0">
+    <!--=====================================================================-->
+    <!--set up permission lists-->
+    <!--=====================================================================-->
+    <uses-permission
+            android:name="android.permission.INTERNET"/>
+
+    <!--TODO: remove debuggable='true' in production version-->
+    <!--=====================================================================-->
+    <!--application settings-->
+    <!--=====================================================================-->
+    <application android:label="@string/app_name"
+                 android:name=".FiteClubApplication"
+                 android:description="@string/app_name"
+                 android:icon="@drawable/fiteclub"
+                 android:debuggable="true"
+            >
+        <!--=====================================================================-->
+        <!--Activity declarations-->
+        <!--=====================================================================-->
+        <activity android:name=".activity.FiteClub"
+                  android:label="@string/label_fiteclub"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:label="@string/label_fight"
+                  android:name=".activity.Fight"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.fiteclub.cursor.dir/vnd.fiteclub.fight"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:label="@string/label_profile"
+                  android:name=".activity.Profile"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.fiteclub.cursor.dir/vnd.fiteclub.profile"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:label="@string/label_rankings"
+                  android:name=".activity.Rankings"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.fiteclub.cursor.dir/vnd.fiteclub.rankings"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:label="@string/label_alert"
+                  android:name=".activity.Alert"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.fiteclub.cursor.dir/vnd.fiteclub.alert"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:label="@string/label_result"
+                  android:name=".activity.Result"
+                >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.fiteclub.cursor.dir/vnd.fiteclub.result"/>
+            </intent-filter>
+        </activity>
+
+		<service android:name=".smack.MatchService" />
+		<activity android:name=".smack.GameTestActivity" />
+        <receiver android:name=".smack.MatchReceiver">
+            <intent-filter>
+                <action android:name="com.fiteclub.match.ALL" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest> 

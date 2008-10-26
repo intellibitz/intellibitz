@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/two_pane_container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    <Button
+        android:id="@+id/tv_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableBottom="@drawable/ic_add_circle_outline_black_18dp"
+        android:gravity="top|center"
+        android:inputType="textCapWords|textMultiLine"
+        android:onClick="emptyOnClick"
+        android:text=""
+        android:visibility="gone" />
+
+    <include layout="@layout/message_list_two_pane" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_add_box_white_18dp"
+        app:layout_behavior="intellibitz.intellidroid.widget.ScrollingFABBehavior" />
+
+</FrameLayout>
+

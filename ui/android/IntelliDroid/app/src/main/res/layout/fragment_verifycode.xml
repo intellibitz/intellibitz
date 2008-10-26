@@ -1,0 +1,313 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:fillViewport="false"
+    android:isScrollContainer="true"
+    android:orientation="vertical"
+    android:padding="8dp"
+    tools:context="intellibitz.intellidroid.MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ll_top"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/launch_logo_big" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_mid"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_top"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_weight="1" />
+        </LinearLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_end"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@drawable/shape_roundrect_white"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingEnd="4dp"
+                        android:paddingRight="4dp"
+                        android:src="@drawable/email_accounts_2" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:paddingLeft="4dp"
+                        android:paddingStart="4dp"
+                        android:text="@string/verify_code"
+                        android:textColor="@color/black" />
+
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/note_verifycode"
+                    android:textColor="@color/graylt" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_otp_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_roundrect_black"
+                        android:ems="16"
+                        android:gravity="center"
+                        android:hint="-"
+                        android:imeActionLabel="@string/action_sign_in_short"
+                        android:imeOptions="flagNoExtractUi"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:padding="16dp"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:textSize="24sp" />
+
+                    <View
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:padding="0dp" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_otp_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_roundrect_black"
+                        android:ems="16"
+                        android:gravity="center"
+                        android:hint="-"
+                        android:imeActionLabel="@string/action_sign_in_short"
+                        android:imeOptions="flagNoExtractUi"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:padding="16dp"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:textSize="24sp" />
+
+                    <View
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:padding="0dp" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_otp_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_roundrect_black"
+                        android:ems="16"
+                        android:gravity="center"
+                        android:hint="-"
+                        android:imeActionLabel="@string/action_sign_in_short"
+                        android:imeOptions="flagNoExtractUi"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:padding="16dp"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+                        android:textSize="24sp" />
+
+                    <View
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:padding="0dp" />
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_otp_4"
+                        style="@android:style/TextAppearance.DeviceDefault.Large"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_roundrect_black"
+                        android:ems="16"
+                        android:gravity="center"
+                        android:hint="-"
+                        android:imeActionLabel="@string/action_sign_in_short"
+                        android:imeOptions="flagNoExtractUi|actionGo"
+                        android:inputType="number"
+                        android:maxLength="1"
+                        android:maxLines="1"
+                        android:padding="16dp"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/white"
+
+                        android:textSize="24sp" />
+                    <!--
+                    -->
+
+                </LinearLayout>
+                <!--style="?android:attr/buttonBarStyle"-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <LinearLayout
+                        android:id="@+id/rl_login"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/shape_roundrect"
+                        android:orientation="horizontal"
+                        android:padding="4dp">
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/app_title"
+                            android:gravity="center"
+                            android:padding="8dp"
+                            android:src="@drawable/email_accounts_2"
+                            android:visibility="visible" />
+
+                        <!--android:background="@drawable/shape_circle">-->
+
+                        <!--android:background="@drawable/shape_rect"-->
+                        <!--style="?android:attr/buttonBarStyle"-->
+                        <!--android:gravity="end|center"-->
+                        <Button
+                            android:id="@+id/btn_resendOTP"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@android:color/transparent"
+                            android:gravity="center"
+                            android:text="@string/resend_verifycode"
+                            android:textColor="@color/white"
+                            android:visibility="visible" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="40dp"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_continue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:background="@drawable/shape_roundrect"
+                        android:orientation="horizontal"
+                        android:padding="2dp">
+                        <!--android:background="@drawable/shape_circle">-->
+
+                        <ImageButton
+                            android:id="@+id/btn_continue"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center"
+                            android:layout_toEndOf="@+id/btn_login"
+                            android:layout_toRightOf="@+id/btn_login"
+                            android:background="@android:color/transparent"
+                            android:contentDescription="@string/app_title"
+                            android:padding="20dp"
+                            android:src="@drawable/login_arrow"
+                            android:visibility="visible" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_perm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/graydk"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <TextView
+                        style="@style/TextAppearance.AppCompat.Inverse"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="@string/device_id_permission" />
+
+                    <Button
+                        android:id="@+id/btn_perm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:background="@color/graydk"
+                        android:text="@string/grant_permission"
+                        android:textColor="@color/green"
+                        android:visibility="visible" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</RelativeLayout>
+
+
+

@@ -1,0 +1,20 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--<item android:drawable="@drawable/contacts_icon" android:state_selected="false" />-->
+    <!--<item android:drawable="@drawable/ic_launcher" android:state_selected="true" />-->
+    <!--<item android:drawable="@drawable/tab_contacts_layer" android:state_selected="true" />-->
+    <!--<item android:drawable="@drawable/contacts_icon" />-->
+
+    <item android:color="@color/red_f9" android:drawable="@drawable/tab_contacts_layer" android:state_checked="true" android:state_window_focused="false" />
+    <item android:color="@color/gray_b7" android:drawable="@drawable/contacts_icon" android:state_checked="false" android:state_window_focused="false" />
+
+    <item android:color="@color/red_f9" android:drawable="@drawable/tab_contacts_layer" android:state_checked="true" android:state_pressed="true" />
+    <item android:color="@color/gray_b7" android:drawable="@drawable/contacts_icon" android:state_checked="false" android:state_pressed="true" />
+
+    <item android:color="@color/red_f9" android:drawable="@drawable/tab_contacts_layer" android:state_checked="true" android:state_focused="true" />
+    <item android:color="@color/gray_b7" android:drawable="@drawable/contacts_icon" android:state_checked="false" android:state_focused="true" />
+
+    <item android:color="@color/gray_b7" android:drawable="@drawable/contacts_icon" android:state_checked="false" />
+    <item android:color="@color/red_f9" android:drawable="@drawable/tab_contacts_layer" android:state_checked="true" />
+
+
+</selector>

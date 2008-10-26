@@ -1,0 +1,2 @@
+./compiletests.sh
+./instrumentall.sh

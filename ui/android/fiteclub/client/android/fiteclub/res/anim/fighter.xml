@@ -1,0 +1,11 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+        >
+    <item android:drawable="@drawable/fighter1" android:duration="300" />
+    <item android:drawable="@drawable/fighter2" android:duration="300" />
+    <item android:drawable="@drawable/fighter3" android:duration="300" />
+    <item android:drawable="@drawable/fighter4" android:duration="300" />
+    <item android:drawable="@drawable/fighter5" android:duration="300" />
+    <item android:drawable="@drawable/fighter4" android:duration="300" />
+    <item android:drawable="@drawable/fighter3" android:duration="300" />
+    <item android:drawable="@drawable/fighter2" android:duration="300" />
+</animation-list>

@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+	<!--
+		/* * Copyright (C) 2009 Muthu Ramadoss. All rights reserved. * */
+	-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	package="com.androidrocks.bex" android:sharedUserId="com.androidrocks.bex"
+	android:sharedUserLabel="@string/app_name" android:versionCode="1"
+	android:versionName="1.0.0">
+
+	<!-- API Level 3 compatible only with SDK 1.5 -->
+	<uses-sdk android:minSdkVersion="3" />
+
+	<uses-permission android:name="android.permission.INTERNET" />
+
+	<!--
+		=====================================================================
+	-->
+	<!--set up permission lists-->
+	<!--
+		=====================================================================
+	-->
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.CAMERA" />
+	<uses-permission android:name="android.permission.VIBRATE" />
+	<!--maps-->
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
+	<!--TODO: remove debuggable='true' in production version-->
+	<!--
+		=====================================================================
+	-->
+	<!--application settings-->
+	<!--
+		=====================================================================
+	-->
+	<application android:icon="@drawable/books_ex"
+		android:label="@string/app_name" android:name=".BEXApplication"
+		android:description="@string/app_name" android:debuggable="true">
+
+		<!--
+			=====================================================================
+		-->
+		<!--set up library usage-->
+		<!--
+			=====================================================================
+		-->
+		<uses-library android:name="com.google.android.maps" />
+
+		<!--
+			=====================================================================
+		-->
+		<!--Activity declarations-->
+		<!--
+			=====================================================================
+		-->
+		<activity android:name=".BEXActivity" android:launchMode="singleTask"
+			android:label="@string/app_name">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+
+		<activity android:name=".activity.ListStuffActivity"
+			android:label="@string/list_stuff_label" android:theme="@android:style/Theme.Light.NoTitleBar">
+			<!--
+
+				<intent-filter> <action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" /> <data
+				android:mimeType="vnd.android.cursor.dir/vnd.com.androidrocks.bex.provider.list"
+				/> </intent-filter>
+			-->
+		</activity>
+
+		<activity android:name=".activity.ConnectActivity"
+			android:label="@string/connect_label">
+			<intent-filter>
+				<action android:name="com.androidrocks.bex.activity.ConnectActivity" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+		<!--
+       SHELVES
+        -->
+
+		<activity android:name=".activity.ShelvesActivity"
+			android:launchMode="singleTask" android:label="@string/application_name"
+			android:theme="@style/Theme.Shelves">
+			<intent-filter>
+				<action android:name="com.androidworks.bex.intent.action.VIEW_SHELVES" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data
+					android:mimeType="vnd.android.cursor.dir/vnd.com.androidrocks.bex.provider.list" />
+			</intent-filter>
+			<!--
+
+				<intent-filter> <action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.LAUNCHER" />
+				</intent-filter>
+			-->
+			<intent-filter>
+				<action android:name="android.intent.action.SEARCH" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+
+			<meta-data android:name="android.app.searchable"
+				android:resource="@xml/searchable" />
+
+		</activity>
+
+		<activity android:name=".activity.AddBookActivity"
+			android:label="@string/activity_add_book" android:theme="@android:style/Theme.Light.NoTitleBar" />
+
+		<activity android:name="com.androidrocks.bex.activity.BookDetailsActivity"
+			android:label="@string/activity_book_details" android:theme="@android:style/Theme.Light.NoTitleBar">
+
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<data
+					android:mimeType="vnd.android.cursor.item/vnd.org.curiouscreature.provider.shelves" />
+			</intent-filter>
+
+		</activity>
+
+		<activity android:name=".activity.SettingsActivity"
+			android:label="@string/activity_preferences" />
+
+		<provider android:name=".provider.BooksProvider"
+			android:authorities="com.androidrocks.bex.shelves" />
+
+		<meta-data android:name="android.app.default_searchable"
+			android:value=".activity.ShelvesActivity" />
+
+
+		<!--
+       ZXING
+        -->
+
+		<activity android:name=".zxing.client.android.CaptureActivity"
+			android:screenOrientation="landscape" android:configChanges="orientation|keyboardHidden"
+			android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+			<!--
+				<intent-filter> <action android:name="android.intent.action.MAIN"/>
+				<category android:name="android.intent.category.LAUNCHER"/>
+				</intent-filter>
+			-->
+			<intent-filter>
+				<action android:name="com.androidrocks.bex.zxing.client.android.SCAN" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+			<intent-filter>
+				<!--
+					For compatibility only - do not use in new code, this will go away!
+				-->
+				<action android:name="com.android.barcodes.SCAN" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+			<!--
+				Allow web apps to launch Barcode Scanner by linking to
+				http://zxing.appspot.com/scan.
+			-->
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="http" android:host="zxing.appspot.com"
+					android:path="/scan" />
+			</intent-filter>
+			<!-- We also support a Google Product Search URL. -->
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="http" android:host="www.google.com"
+					android:path="/m/products/scan" />
+			</intent-filter>
+			<!-- And the UK version. -->
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.BROWSABLE" />
+				<data android:scheme="http" android:host="www.google.co.uk"
+					android:path="/m/products/scan" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".zxing.client.android.PreferencesActivity"
+			android:label="@string/preferences_name">
+		</activity>
+		<activity android:name=".zxing.client.android.EncodeActivity">
+			<intent-filter>
+				<action android:name="com.androidrocks.bex.zxing.client.android.ENCODE" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+			<intent-filter>
+				<!--
+					For compatibility only - do not use in new code, this will go away!
+				-->
+				<action android:name="com.android.barcodes.ENCODE" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".zxing.client.android.SearchBookContentsActivity"
+			android:label="@string/sbc_name" android:screenOrientation="landscape"
+			android:configChanges="orientation|keyboardHidden">
+			<intent-filter>
+				<action
+					android:name="com.androidrocks.bex.zxing.client.android.SEARCH_BOOK_CONTENTS" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+			<intent-filter>
+				<!--
+					For compatibility only - do not use in new code, this will go away!
+				-->
+				<action android:name="com.android.barcodes.SEARCH_BOOK_CONTENTS" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".zxing.client.android.ShareActivity"
+			android:label="@string/share_name" android:screenOrientation="user">
+			<intent-filter>
+				<action android:name="com.androidrocks.bex.zxing.client.android.SHARE" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".zxing.client.android.BookmarkPickerActivity"
+			android:label="@string/bookmark_picker_name">
+			<intent-filter>
+				<action android:name="android.intent.action.PICK" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+		<activity android:name=".zxing.client.android.HelpActivity"
+			android:screenOrientation="user">
+			<intent-filter>
+				<action android:name="android.intent.action.VIEW" />
+				<category android:name="android.intent.category.DEFAULT" />
+			</intent-filter>
+		</activity>
+
+	</application>
+</manifest> 

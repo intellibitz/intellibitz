@@ -1,0 +1,25 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/primary"
+    android:theme="@style/AppTheme"
+    tools:context=".mainbox.message.ChatEmailMessageActivity">
+    <item
+        android:id="@+id/menu_lock"
+        android:icon="@android:drawable/ic_lock_lock"
+        android:orderInCategory="100"
+        android:title="@string/multiselect_delete"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_delete"
+        android:icon="@android:drawable/ic_delete"
+        android:orderInCategory="200"
+        android:title="@string/multiselect_delete"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_moveto"
+        android:icon="@android:drawable/ic_menu_share"
+        android:orderInCategory="300"
+        android:title="@string/menu_title_moveto"
+        app:showAsAction="ifRoom" />
+</menu>
