@@ -1,0 +1,6 @@
+* whitespace=!indent,trail,space
+*.* whitespace
+*.java ident
+*.xml ident
+*.txt ident
+* ident

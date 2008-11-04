@@ -1,0 +1,11 @@
+temp
+*.iml
+*.ipr
+*.iws
+R.java
+ISearch*.java
+bin
+*.sh
+*.start
+*.emu
+*.sdcard*
