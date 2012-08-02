@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android:LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:orientation="vertical"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center"
+                      android:layout_margin="5dp"
+        >
+
+    <Button android:id="@+id/select_tracker"
+            android:text="@string/select_tracker_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            />
+
+    <Button android:id="@+id/setup_wuffit"
+            android:text="@string/setup_wuffit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            />
+
+    <Button android:id="@+id/request_location"
+            android:text="@string/request_location_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            />
+
+    <Button android:id="@+id/display_location"
+            android:text="@string/display_location_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            />
+
+    <Button android:id="@+id/exit"
+            android:text="@string/exit_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            />
+
+</android:LinearLayout>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android:LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:orientation="vertical"
+                      android:layout_width="fill_parent"
+                      android:layout_height="fill_parent"
+                      android:layout_gravity="center"
+                      android:layout_margin="5dp"
+        >
+    <ListView android:id="@android:id/list"
+              android:clickable="false"
+              android:focusable="false"
+              android:stackFromBottom="true"
+              android:transcriptMode="alwaysScroll"
+              android:layout_width="fill_parent"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="1"
+            />
+
+    <ScrollView android:id="@android:id/empty"
+                android:fillViewport="true"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+            >
+        <TextView android:id="@+id/emptyText"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:text="@string/empty_text"
+                  android:textSize="20sp"
+                  android:textColor="?android:attr/textColorSecondary"
+                  android:paddingLeft="10dip"
+                  android:paddingRight="10dip"
+                  android:paddingTop="10dip"
+                  android:gravity="center"
+                  android:lineSpacingMultiplier="0.92"/>
+    </ScrollView>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="2dp"
+            >
+        <Button android:id="@+id/pick_tracker"
+                android:text="@string/pick_tracker_text"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                />
+        <Button android:id="@+id/sync_tracker"
+                android:text="@string/sync_tracker_text"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                />
+        <Button android:id="@+id/main_menu"
+                android:text="@string/main_menu_text"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                />
+
+    </LinearLayout>
+</android:LinearLayout>
+

@@ -1,0 +1,1 @@
+emulator -wipe-data -skin G1 -scale 0.7 -timezone Asia/Calcutta -sdcard /opt/sdcard/g1.sdcard

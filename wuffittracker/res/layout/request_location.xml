@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android:LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:orientation="vertical"
+                      android:layout_width="fill_parent"
+                      android:layout_height="fill_parent"
+        >
+    <ListView android:id="@android:id/list"
+              android:clickable="false"
+              android:focusable="false"
+              android:stackFromBottom="true"
+              android:transcriptMode="alwaysScroll"
+              android:layout_width="fill_parent"
+              android:layout_height="0dp"
+              android:layout_gravity="center"
+              android:layout_weight="1"
+            />
+    <ScrollView android:id="@android:id/empty"
+                android:fillViewport="true"
+                android:layout_width="fill_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+            >
+        <TextView android:id="@+id/emptyText"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:text="@string/empty_text"
+                  android:textSize="20sp"
+                  android:textColor="?android:attr/textColorSecondary"
+                  android:paddingLeft="10dip"
+                  android:paddingRight="10dip"
+                  android:paddingTop="10dip"
+                  android:gravity="center"
+                  android:lineSpacingMultiplier="0.92"/>
+    </ScrollView>
+
+    <LinearLayout android:id="@+id/request_location_message"
+                  android:orientation="horizontal"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+            >
+        <TextView android:id="@+id/request_location_message_text"
+                  android:text="@string/request_location_message_text"
+                  android:layout_weight="1"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="5dip"
+                  android:focusable="true"
+                />
+        <Button
+                android:id="@+id/edit"
+                android:text="@string/edit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                />
+    </LinearLayout>
+    <LinearLayout android:id="@+id/request_location_message_edit"
+                  android:orientation="horizontal"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:visibility="gone"
+            >
+        <EditText android:id="@+id/request_location_message_edittext"
+                  android:text="@string/request_location_message_text"
+                  android:lines="1"
+                  android:maxLines="1"
+                  android:layout_weight="1"
+                  android:layout_width="0dp"
+                  android:layout_height="wrap_content"
+                  android:layout_marginTop="5dip"
+                  android:focusable="true"
+                  android:singleLine="true"
+                />
+        <ImageButton
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:src="@android:drawable/ic_menu_save"
+                />
+    </LinearLayout>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="2dp"
+            >
+        <Button android:id="@+id/request_location"
+                android:text="@string/request_location_text"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                />
+        <Button android:id="@+id/main_menu"
+                android:text="@string/main_menu_text"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center"
+                />
+    </LinearLayout>
+</android:LinearLayout>
+
