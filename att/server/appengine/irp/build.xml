@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project>
+	<property name="sdk.dir" location="/opt/tools/appengine" />
+	<property name="appengine.sdk" location="/opt/tools/appengine" />
+
+	<import file="${sdk.dir}/config/user/ant-macros.xml" />
+
+	<path id="project.classpath">
+		<pathelement path="war/WEB-INF/classes" />
+		<fileset dir="war/WEB-INF/lib">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${sdk.dir}/lib">
+			<include name="shared/**/*.jar" />
+		</fileset>
+		<!-- GWT 
+    <pathelement location="${gwt.sdk}/gwt-user.jar"/>
+    <fileset dir="${gwt.sdk}" includes="gwt-dev*.jar"/>
+  	-->
+	</path>
+
+	<target name="copyjars" description="Copies the App Engine JARs to the WAR.">
+		<copy todir="war/WEB-INF/lib" flatten="true">
+			<fileset dir="${sdk.dir}/lib/user">
+				<include name="**/*.jar" />
+			</fileset>
+		</copy>
+		<!-- GWT
+    <copy todir="war/WEB-INF/lib" file="${gwt.sdk}/gwt-servlet.jar" />
+  	 -->
+	</target>
+
+	<target name="compile" depends="copyjars" description="Compiles Java source and copies other source files to the WAR.">
+		<mkdir dir="war/WEB-INF/classes" />
+		<copy todir="war/WEB-INF/classes">
+			<fileset dir="src">
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+		<javac srcdir="src" destdir="war/WEB-INF/classes" classpathref="project.classpath" debug="on" />
+	</target>
+
+	<target name="datanucleusenhance" depends="compile" description="Performs JDO enhancement on compiled data classes.">
+		<enhance_war war="war" />
+	</target>
+
+	<target name="runserver" depends="gwtc,datanucleusenhance" description="Starts the development server.">
+		<dev_appserver war="war" />
+	</target>
+
+	<target name="update" depends="datanucleusenhance,build" description="Uploads the application to App Engine.">
+		<appcfg action="update" war="war" />
+	</target>
+
+	<target name="update_indexes" depends="datanucleusenhance" description="Uploads just the datastore index configuration to App Engine.">
+		<appcfg action="update_indexes" war="war" />
+	</target>
+
+	<target name="rollback" depends="datanucleusenhance" description="Rolls back an interrupted application update.">
+		<appcfg action="rollback" war="war" />
+	</target>
+
+	<target name="request_logs" description="Downloads log data from App Engine for the application.">
+		<appcfg action="request_logs" war="war">
+			<options>
+				<arg value="--num_days=5" />
+			</options>
+			<args>
+				<arg value="logs.txt" />
+			</args>
+		</appcfg>
+	</target>
+
+
+	<!-- ========================= -->
+	<!-- GWT Integration - Begin -->
+	<!-- ========================= -->
+	<!-- Configure path to GWT SDK -->
+	<property name="gwt.sdk" location="/opt/tools/gwt" />
+
+	<path id="project.class.path">
+		<pathelement location="war/WEB-INF/classes" />
+		<pathelement location="${gwt.sdk}/gwt-user.jar" />
+		<fileset dir="${gwt.sdk}" includes="gwt-dev*.jar" />
+		<fileset dir="war/WEB-INF/lib" includes="**/*.jar" />
+		<!-- Add any additional non-server libs (such as JUnit) -->
+		<path refid="project.classpath" />
+		<pathelement location="${appengine.sdk}/lib/appengine-tools-api.jar" />
+		<fileset dir="${appengine.sdk}/lib/tools">
+			<include name="**/asm-*.jar" />
+			<include name="**/datanucleus-enhancer-*.jar" />
+		</fileset>
+	</path>
+
+	<target name="libs" description="Copy libs to WEB-INF/lib" depends="copyjars">
+		<mkdir dir="war/WEB-INF/lib" />
+		<copy todir="war/WEB-INF/lib" file="${gwt.sdk}/gwt-servlet.jar" />
+		<!-- Add any additional server libs that need to be copied -->
+		<copy todir="war/WEB-INF/lib" file="/home/muthu/.m2/repository/org/mortbay/jetty/jetty-util/6.1.16/jetty-util-6.1.16.jar" />
+	</target>
+
+	<target name="javac" depends="libs" description="Compile java source">
+		<mkdir dir="war/WEB-INF/classes" />
+		<javac srcdir="src" includes="**" encoding="utf-8" destdir="war/WEB-INF/classes" source="1.5" target="1.5" nowarn="true" debug="true" debuglevel="lines,vars,source">
+			<classpath refid="project.class.path" />
+		</javac>
+		<copy todir="war/WEB-INF/classes">
+			<fileset dir="src" excludes="**/*.java" />
+		</copy>
+		<antcall target="datanucleusenhance" />
+	</target>
+
+	<target name="gwtc" depends="javac" description="GWT compile to JavaScript">
+		<java failonerror="true" fork="true" classname="com.google.gwt.dev.Compiler">
+			<classpath>
+				<pathelement location="src" />
+				<path refid="project.class.path" />
+			</classpath>
+			<!-- add jvmarg -Xss16M or similar if you see a StackOverflowError -->
+			<jvmarg value="-Xmx256M" />
+			<!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
+			<arg value="com.uc.irp.irp" />
+		</java>
+	</target>
+
+	<target name="hosted" depends="javac" description="Run hosted mode">
+		<java failonerror="true" fork="true" classname="com.google.gwt.dev.HostedMode">
+			<classpath>
+				<pathelement location="src" />
+				<path refid="project.class.path" />
+			</classpath>
+			<jvmarg value="-Xmx256M" />
+			<arg value="-startupUrl" />
+			<arg value="index.html" />
+			<!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
+			<arg value="-server" />
+			<arg value="com.google.appengine.tools.development.gwt.AppEngineLauncher" />
+			<arg value="com.uc.irp.irp" />
+		</java>
+	</target>
+
+	<target name="build" depends="gwtc" description="Build this project" />
+
+	<target name="war" depends="build" description="Create a war file">
+		<zip destfile="irp.war" basedir="war" />
+	</target>
+
+	<target name="clean" description="Cleans this project">
+		<delete dir="war/WEB-INF/classes" failonerror="false" />
+		<delete dir="war/irp" failonerror="false" />
+	</target>
+
+</project>

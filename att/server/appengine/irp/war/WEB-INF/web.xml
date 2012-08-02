@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd">
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+  <!-- Servlets -->
+    <servlet>
+        <servlet-name>upload</servlet-name>
+        <servlet-class>com.uc.irp.server.UploadServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>view</servlet-name>
+        <jsp-file>/view.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>clean</servlet-name>
+        <jsp-file>/clean.jsp</jsp-file>
+    </servlet>
+  <servlet>
+    <servlet-name>reports</servlet-name>
+    <servlet-class>com.uc.irp.server.IncidentReportServiceImpl</servlet-class>
+  </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>upload</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>view</servlet-name>
+        <url-pattern>/view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>clean</servlet-name>
+        <url-pattern>/clean.db</url-pattern>
+    </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>reports</servlet-name>
+    <url-pattern>/irp/reports</url-pattern>
+  </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+</web-app>

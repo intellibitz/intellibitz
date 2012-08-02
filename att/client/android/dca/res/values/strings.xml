@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">DCAActivity</string>
+    <string name="dca_name">Incident Report Agent</string>
+    <string name="dca_desc">Incident Report Solution from United Commtel</string>
+</resources>
