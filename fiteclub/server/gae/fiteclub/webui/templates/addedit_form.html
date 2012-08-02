@@ -1,0 +1,66 @@
+{% if not support_gadget %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us" xml:lang="en-us" >
+<head>
+<title>{{ title }}</title>
+</head>
+<body>
+{% endif %}
+{% load admin_list i18n %}
+<link rel="stylesheet" type="text/css" href="/media/django/forms.css" />
+<script type="text/javascript" src="/jsi18n/"></script>
+{% for js in javascript_imports %}{% include_admin_script js %}{% endfor %}
+
+{% if message %}
+	<ul class="messagelist"><li>{{ message|escape }}</li></ul>
+{% endif %}
+<!-- Content -->
+<div id="content" class="colM">
+	<h1>{{ title }}</h1>
+	{% if not is_popup %}
+		<ul class="object-tools"><li>
+			{% if parent_url %}
+				<a href="{{ parent_url }}" class="historylink">Back to parent</a>
+			{% else %}
+				<a href="../" class="historylink">Back to list</a>
+			{% endif %}
+		</li></ul>
+	{% endif %}
+<div id="content-main">
+
+<form action="{{ form_url }}" method="post" id="{{ module_name }}_form">
+<div>
+{% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
+{% if form_error %}
+    <p class="errornote">{{ form_error }}</p>
+{% endif %}
+
+<fieldset class="module aligned ()">
+
+{% for result in results %}
+<div class="form-row" >
+  {% if result.error %}<ul class="errorlist"><li>{{ result.error }}</li></ul>{% endif %}
+  <label {{ result.class }}>{{ result.label }}:</label> 
+  {{ result.inner }}
+</div>
+{% endfor %}
+
+{% submit_row %}
+</div>
+</form>
+</div>
+	<br class="clear">
+{% for detail in details %}
+	<A NAME="{{ detail.name }}"></A>
+	{% if detail.addhtml %} {{ detail.addhtml }} {% endif %}
+	<div class="module">
+		<h2>{{ detail.title }}</h2>
+		{% result_list detail %}
+	</div>
+	<br class="clear">
+{% endfor %}
+</div>
+<!-- END Content -->
+{% if not support_gadget %}
+</body></html>
+{% endif %}

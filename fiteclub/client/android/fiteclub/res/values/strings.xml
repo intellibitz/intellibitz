@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2008 http://mobeegal.in
+
+        All Rights Reserved.
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<!--
+    $Id::                                                                           $: Id of last commit
+    $Rev::                                                                          $: Revision of last commit
+    $Author::                                                                       $: Author of last commit
+    $Date::                                                                         $: Date of last commit
+-->
+<resources>
+    <string name="app_name">FiteClub</string>
+
+    <string name="label_fiteclub">F I T E C L U B</string>
+    <string name="label_profile">P R O F I L E</string>
+    <string name="label_rankings">R A N K I N G S</string>
+    <string name="label_alert">A L E R T</string>
+    <string name="label_result">R E S U L T</string>
+    <string name="label_fight">F I G H T</string>
+
+
+    <string name="text_welcome">WELCOME TO FITECLUB</string>
+    <string name="text_select">SELECT A FIGTHER TO FIGHT</string>
+    <string name="text_match">FIND FIGHTER</string>
+</resources>

@@ -1,0 +1,24 @@
+#==============================================================================
+$Id$
+#==============================================================================
+temp
+*.iml
+*.ipr
+*.iws
+R.java
+bin
+*.sh
+*.start
+*.emu
+*.sdcard*
+.DS_Store
+<<<<<<< HEAD:.gitignore
+*.idea
+.classpath
+=======
+.classpath
+.idea
+>>>>>>> ef8b6f3e238871fc520f63169cdc81fbf9cf2adb:.gitignore
+.project
+nbbuild.xml
+nbproject

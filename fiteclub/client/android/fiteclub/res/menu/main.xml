@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+     Copyright (C) 2008 http://mobeegal.in
+
+        All Rights Reserved.
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+<!--
+$Id::                                                                           $: Id of last commit
+$Rev::                                                                          $: Revision of last commit
+$Author::                                                                       $: Author of last commit
+$Date::                                                                         $: Date of last commit
+-->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/menu_fight"
+          android:alphabeticShortcut="f"
+          android:title="@string/menu_fight"
+          android:icon="@drawable/fiteclub"
+            />
+
+    <item android:id="@+id/menu_profile"
+          android:alphabeticShortcut="p"
+          android:title="@string/menu_profile"
+          android:icon="@android:drawable/ic_menu_myplaces"
+            />
+
+    <item android:id="@+id/menu_rankings"
+          android:alphabeticShortcut="r"
+          android:title="@string/menu_rankings"
+          android:icon="@android:drawable/ic_menu_gallery"
+            />
+
+</menu>

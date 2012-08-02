@@ -1,0 +1,68 @@
+
+STATUS_CHOICES_DICT = {
+	1: 'normal',
+	2: 'frozen',
+	3: 'deleted'
+}
+
+IMAGETYPE_CHOICES_DICT  = {
+    images.JPEG: 'jpg',
+    images.PNG: 'png'
+}
+
+ImageStore:
+    """Image Store"""
+    image = db.BlobProperty()
+    thumbWidth = db.IntegerProperty(default=45)
+    thumbHeight = db.IntegerProperty(default=50)
+    fileName = db.StringProperty(required=True)
+    imageType = db.IntegerProperty(choices=IMAGETYPE_CHOICES_DICT, default=images.JPEG)
+    status = db.IntegerProperty(choices=STATUS_CHOICES_DICT, default=1)
+	created = db.DateTimeProperty(auto_now_add=True)
+	modified = db.DateTimeProperty(auto_now=True)
+	
+Profile:
+    """profile for a fighter"""
+    nickname = db.StringProperty(required=True)
+    user = db.UserProperty()            #Represents a user with a Google account
+    mood = db.StringProperty()
+    city = db.StringProperty()
+    photo = db.ReferenceProperty(ImageStore)
+    points = db.IntegerProperty(default=20)
+    location = db.GeoPtProperty()               #class GeoPt(lat, lon)
+    status = db.IntegerProperty(choices=STATUS_CHOICES_DICT, default=1)
+	created = db.DateTimeProperty(auto_now_add=True)
+	modified = db.DateTimeProperty(auto_now=True)
+
+Challenge(BaseStatusModel):
+    """challenge store"""
+    name = db.StringProperty(required=True)
+    question = db.TextProperty(required=True)
+    answer = db.StringProperty(required=True)
+    points = db.IntegerProperty(required=True)  #points got if win the challenge
+    status = db.IntegerProperty(choices=STATUS_CHOICES_DICT, default=1)
+	created = db.DateTimeProperty(auto_now_add=True)
+	modified = db.DateTimeProperty(auto_now=True)
+
+MATCH_CHOICES_DICT = {
+    1: 'start',
+    2: 'progress',
+    3: 'win',
+    4: 'run',
+}
+
+Match(BaseStatusModel):
+    """match record"""
+    player1 = db.ReferenceProperty(Profile, required=True, collection_name='player1')
+    player2 = db.ReferenceProperty(Profile, required=True, collection_name='player2')
+    challenge = db.ReferenceProperty(Challenge, required=True)  #current challenge
+    state = db.IntegerProperty(choices=MATCH_CHOICES_DICT, default=1)
+    wintarget = db.IntegerProperty(required=True)       #win rounds of this match
+    winpoints = db.IntegerProperty(required=True)       #points got if a player win
+    runpoints = db.IntegerProperty(required=True)       #points loss if a player run
+    win1 = db.IntegerProperty(default=0)                         #win count by player1; -1 means the player run
+    win2 = db.IntegerProperty(default=0)                         #win count by player2; -1 means the player run
+    status = db.IntegerProperty(choices=STATUS_CHOICES_DICT, default=1)
+	created = db.DateTimeProperty(auto_now_add=True)
+	modified = db.DateTimeProperty(auto_now=True)
+    
