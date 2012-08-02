@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Twitter4J-2.0.9-SNAPSHOT"/>
+	<classpathentry kind="lib" path="/home/muthu/.m2/repository/net/homeip/yusuke/twitter4j/2.0.9-SNAPSHOT/twitter4j-2.0.9-SNAPSHOT.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/GSON"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>
