@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:padding="5dip"
+        >
+
+    <TextView
+            android:id="@+id/next"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Next update"
+            android:padding="2dip"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            />
+
+    <WebView
+            android:id="@+id/events"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Events"
+            android:autoLink="web"
+            android:padding="2dip"
+            android:layout_weight="1"
+            />
+
+    <TextView
+            android:id="@+id/as_of"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="as of: "
+            android:padding="2dip"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            />
+
+    <TextView
+            android:id="@+id/info"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="www.griffininfosystems.com info@griffininfosystems.com"
+            android:autoLink="all"
+            android:padding="2dip"
+            android:textStyle="italic"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            />
+
+</LinearLayout>
+
