@@ -1,0 +1,5 @@
+<module rename-to="bex">
+	<inherits name="com.google.gwt.user.User"/>
+	<entry-point class='com.androidrocks.bex.client.BEXEntry' />
+	<servlet path='/reports' class='com.androidrocks.bex.server.BEXServiceImpl'/>
+</module>

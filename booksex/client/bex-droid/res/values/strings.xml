@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * Copyright (C) 2009 Muthu Ramadoss. All rights reserved.
+ *
+ */
+-->
+
+<resources>
+	<string name="app_name">Books-EX</string>
+	<string name="app_name_full">Books-Exchange</string>
+	<string name="list_stuff_label">List Books</string>
+	<string name="connect_label">Connect with Friends</string>
+
+	<!--main.xml-->
+	<string name="list_stuff_text">List</string>
+	<string name="connect_friends_text">Connect</string>
+	<string name="exchange_stuff_text">Exchange
+    </string>
+
+	<!-- list_stuff.xml -->
+	<!--
+		<string name="menu_item_add_search_label">Search and Add</string>
+		<string name="menu_item_add_label">Scan and Add</string> <string
+		name="menu_item_check_label">Scan to Find</string>
+	-->
+
+</resources>

@@ -1,0 +1,29 @@
+[saraneya@localhost wuffittracker]$  
+keytool -list -alias androiddebugkey -keystore ~/.android/debug.keystore -storepass android -keypass android
+
+androiddebugkey, Oct 20, 2008, PrivateKeyEntry,
+Certificate fingerprint (MD5): 41:88:B5:B1:09:5D:7A:62:F3:DB:C5:0B:AE:69:65:FA
+
+========
+
+
+Thank you for signing up for an Android Maps API key!
+Your key is:
+
+07LspMAcR7tQi3FWjU9O5uRSxoJZCrUs_7qJLCA
+
+This key is good for all apps signed with your certificate whose fingerprint is:
+
+8A:F3:B2:47:5D:BC:24:52:94:FA:05:99:83:8A:A9:38
+
+Here is an example xml layout to get you started on your way to mapping glory:
+
+              <com.google.android.maps.MapView
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:apiKey="07LspMAcR7tQi3FWjU9O5uRSxoJZCrUs_7qJLCA"
+                 />
+            
+
+===================
+$ keytool -list -keystore ~/.android/debug.keystore
