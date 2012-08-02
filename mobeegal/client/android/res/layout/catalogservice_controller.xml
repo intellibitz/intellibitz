@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:padding="4dip"
+                android:gravity="center_horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+    <TextView android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_weight="0"
+              android:paddingBottom="4dip"
+              android:textStyle="bold"
+              android:text="Your/Dream-mate profile sent to Dating server.Please Activate the service to get Dream-mate matching profile."/>
+
+    <Button
+            android:id="@+id/buttonActivate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Service"
+            android:layout_x="40px"
+            android:layout_y="75px">
+    </Button>
+
+    <TextView android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_weight="0"
+              android:paddingBottom="4dip"
+              android:textStyle="bold"
+              android:text="Activate"
+              android:layout_x="40px"
+              android:layout_y="130px"/>
+
+    <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="StopService"
+            android:layout_x="160px"
+            android:layout_y="75px">
+    </Button>
+
+    <TextView android:layout_width="fill_parent"
+              android:layout_height="wrap_content"
+              android:layout_weight="0"
+              android:paddingBottom="4dip"
+              android:textStyle="bold"
+              android:text="Deactivate"
+              android:layout_x="155px"
+              android:layout_y="130px"/>
+</AbsoluteLayout>

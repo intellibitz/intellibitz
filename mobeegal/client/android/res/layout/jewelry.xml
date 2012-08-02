@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+    <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical" android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#000000">
+
+
+        <TabHost android:id="@+id/tabs"
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                >
+            <TabWidget android:id="@android:id/tabs"
+                       android:layout_width="fill_parent"
+                       android:layout_height="fill_parent"/>
+
+            <FrameLayout android:id="@android:id/tabcontent"
+                         android:layout_width="fill_parent"
+                         android:layout_height="fill_parent"
+                         android:paddingTop="65px">
+
+                <!--   <<<<<<<<<<<<<<<<<<<<<<<<<<    JEWELRY ISTUFF    >>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+
+                <AbsoluteLayout android:id="@+id/iStuffprofile"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:background="#000000">
+                    <TextView android:id="@+id/widget28"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="18px" android:layout_x="120px"
+                              android:layout_y="20px">
+                    </TextView>
+
+                    <TextView android:id="@+id/widget40"
+                              android:layout_width="wrap_content"
+                              android:layout_height="19px"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Jewelry Type"
+                              android:layout_x="20px"
+                              android:layout_y="55px">
+                    </TextView>
+                    <Spinner android:id="@+id/iStuffitemtype"
+                             android:layout_width="140dip"
+                             android:layout_height="35dip"
+                             android:textSize="12px" android:layout_x="130px"
+                             android:layout_y="50px">
+                    </Spinner>
+
+                    <TextView android:id="@+id/widget41"
+                              android:layout_width="wrap_content"
+                              android:layout_height="19px"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Gender" android:layout_x="20px"
+                              android:layout_y="105px">
+                    </TextView>
+                    <Spinner android:id="@+id/iStuffgender"
+                             android:layout_width="140dip"
+                             android:layout_height="35dip"
+                             android:textSize="12px" android:layout_x="130px"
+                             android:layout_y="100px">
+                    </Spinner>
+
+                    <TextView android:id="@+id/widget42"
+                              android:layout_width="wrap_content"
+                              android:layout_height="19px"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Stone Type" android:layout_x="20px"
+                              android:layout_y="158px">
+                    </TextView>
+                    <Spinner android:id="@+id/iStuffstonetype"
+                             android:layout_width="140dip"
+                             android:layout_height="35dip"
+                             android:textSize="12px" android:layout_x="130px"
+                             android:layout_y="155px">
+                    </Spinner>
+
+                    <TextView android:id="@+id/widget43"
+                              android:layout_width="wrap_content"
+                              android:layout_height="19px"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Metal Type" android:layout_x="20px"
+                              android:layout_y="208px">
+                    </TextView>
+                    <Spinner android:id="@+id/iStuffmetaltype"
+                             android:layout_width="140dip"
+                             android:layout_height="35dip"
+                             android:textSize="12px" android:layout_x="130px"
+                             android:layout_y="200px">
+                    </Spinner>
+
+
+                    <TextView android:id="@+id/widget46"
+                              android:layout_width="wrap_content"
+                              android:layout_height="19px"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Weight" android:layout_x="20px"
+                              android:layout_y="258px">
+                    </TextView>
+
+                    <TextView android:id="@+id/widget39"
+                              android:layout_width="wrap_content"
+                              android:layout_height="19px"
+                              android:textColor="#F4EF0F"
+                              android:text="Grams"
+                              android:layout_x="270px" android:layout_y="258px">
+
+                    </TextView>
+                    <Spinner android:id="@+id/iStuffweight"
+                             android:layout_width="140dip"
+                             android:layout_height="35dip"
+                             android:textSize="12px" android:layout_x="130px"
+                             android:layout_y="255px">
+                    </Spinner>
+                    <TextView android:id="@+id/iarea"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="140px"
+                              android:layout_y="310px">
+                    </TextView>
+
+                    <TextView android:id="@+id/icity"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="140px"
+                              android:layout_y="330px">
+                    </TextView>
+                    <TextView android:id="@+id/icountry"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="140px"
+                              android:layout_y="350px">
+                    </TextView>
+
+                    <Button android:id="@+id/selectistufflocation"
+                            android:layout_width="75dip"
+                            android:layout_height="30dip"
+                            android:textSize="8px"
+                            android:text="Location"
+                            android:textColor="#000555"
+                            android:layout_x="20px"
+                            android:layout_y="345px"/>
+
+
+                </AbsoluteLayout>
+
+
+                <!--   <<<<<<<<<<<<<<<<<<<<<<<<<<    JEWELRY USTUFF    >>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+                <AbsoluteLayout android:id="@+id/uStuffprofile"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent"
+                                android:background="#000000">
+
+                    <TextView android:id="@+id/widget28"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="18px" android:layout_x="120px"
+                              android:layout_y="20px">
+                    </TextView>
+
+                    <TextView android:id="@+id/widget40"
+                              android:layout_width="wrap_content"
+                              android:layout_height="19px"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Jewelry Type"
+                              android:layout_x="20px"
+                              android:layout_y="55px">
+                    </TextView>
+                    <Spinner android:id="@+id/uStuffitemtype"
+                             android:layout_width="140dip"
+                             android:layout_height="35dip"
+                             android:textSize="12px" android:layout_x="130px"
+                             android:layout_y="50px">
+                    </Spinner>
+
+                    <TextView android:id="@+id/widget41"
+                              android:layout_width="wrap_content"
+                              android:layout_height="19px"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Gender" android:layout_x="20px"
+                              android:layout_y="105px">
+                    </TextView>
+                    <Spinner android:id="@+id/uStuffgender"
+                             android:layout_width="140dip"
+                             android:layout_height="35dip"
+                             android:textSize="12px" android:layout_x="130px"
+                             android:layout_y="100px">
+                    </Spinner>
+
+                    <TextView android:id="@+id/widget42"
+                              android:layout_width="wrap_content"
+                              android:layout_height="19px"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Stone Type" android:layout_x="20px"
+                              android:layout_y="158px">
+                    </TextView>
+                    <Spinner android:id="@+id/uStuffstonetype"
+                             android:layout_width="140dip"
+                             android:layout_height="35dip"
+                             android:textSize="12px" android:layout_x="130px"
+                             android:layout_y="155px">
+                    </Spinner>
+
+                    <TextView android:id="@+id/widget43"
+                              android:layout_width="wrap_content"
+                              android:layout_height="19px"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Metal Type" android:layout_x="20px"
+                              android:layout_y="208px">
+                    </TextView>
+                    <Spinner android:id="@+id/uStuffmetaltype"
+                             android:layout_width="140dip"
+                             android:layout_height="35dip"
+                             android:textSize="12px" android:layout_x="130px"
+                             android:layout_y="200px">
+                    </Spinner>
+
+
+                    <TextView android:id="@+id/widget46"
+                              android:layout_width="wrap_content"
+                              android:layout_height="19px"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Weight" android:layout_x="20px"
+                              android:layout_y="258px">
+                    </TextView>
+
+                    <TextView android:id="@+id/widget39"
+                              android:layout_width="wrap_content"
+                              android:layout_height="19px"
+                              android:textColor="#F4EF0F" android:text="Grams"
+                              android:layout_x="270px" android:layout_y="258px">
+
+                    </TextView>
+                    <Spinner android:id="@+id/uStuffweight"
+                             android:layout_width="140dip"
+                             android:layout_height="35dip"
+                             android:textSize="12px" android:layout_x="130px"
+                             android:layout_y="255px">
+                    </Spinner>
+
+                    <TextView android:id="@+id/uarea"
+                              android:layout_width="wrap_content"
+
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="140px"
+                              android:layout_y="310px">
+                    </TextView>
+
+                    <TextView android:id="@+id/ucity"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="140px"
+                              android:layout_y="330px">
+                    </TextView>
+                    <TextView android:id="@+id/ucountry"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="140px"
+                              android:layout_y="350px">
+
+                    </TextView>
+
+
+                    <Button android:id="@+id/selectustufflocation"
+                            android:layout_width="75dip"
+                            android:layout_height="30dip"
+                            android:textSize="8px"
+                            android:text="Location"
+                            android:textColor="#000555"
+                            android:layout_x="20px"
+                            android:layout_y="345px"/>
+
+
+                    <Button android:id="@+id/Save"
+                            android:layout_width="75dip"
+                            android:layout_height="wrap_content"
+                            android:text="Save"
+                            android:textColor="#000555"
+                            android:layout_x="150px"
+                            android:layout_y="455px"/>
+
+
+                </AbsoluteLayout>
+            </FrameLayout>
+        </TabHost>
+    </LinearLayout>
+</ScrollView>
+            
+            

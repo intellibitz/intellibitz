@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#c3c3e5">
+
+
+    <TabHost android:id="@+id/tabs"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent">
+        <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"/>
+        <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingTop="65px">
+            <TextView
+                    android:id="@+id/widget28"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:textSize="18px"
+                    android:layout_x="120px"
+                    android:layout_y="250px">
+            </TextView>
+
+            <!--   <<<<<<<<<<<<<<<<<<<<<<<<<<     RESTUARANT    >>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+            <AbsoluteLayout
+                    android:id="@+id/Restaurant"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff">
+
+
+                <TextView
+                        android:id="@+id/Restaurant"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="18px"
+                        android:layout_x="120px"
+                        android:layout_y="20px">
+                </TextView>
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="15px"
+                        android:text="Food"
+                        android:layout_x="10px"
+                        android:layout_y="25px">
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/FoodType"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="95px"
+                        android:layout_y="20px">
+                </Spinner>
+
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="15px"
+                        android:text="Misc"
+                        android:layout_x="15px"
+                        android:layout_y="71px">
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/Misc"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="95px"
+                        android:layout_y="69px">
+                </Spinner>
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="15px"
+                        android:text="Country"
+                        android:layout_x="14px"
+                        android:layout_y="120px">
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/resCountry"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="95px"
+                        android:layout_y="119px">
+                </Spinner>
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="15px"
+                        android:text="City"
+                        android:layout_x="10px"
+                        android:layout_y="165px">
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/resCity"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="95px"
+                        android:layout_y="163px">
+                </Spinner>
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="15px"
+                        android:text="Area"
+                        android:layout_x="10px"
+                        android:layout_y="220px">
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/resArea"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="95px"
+                        android:layout_y="217px">
+                </Spinner>
+            </AbsoluteLayout>
+
+            <!--   <<<<<<<<<<<<<<<<<<<<<<<<<<     MOVIES    >>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+            <AbsoluteLayout
+                    android:id="@+id/MovieDetails"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#ffffff"
+                    android:layout_x="210px"
+                    android:layout_y="320px">
+
+                <TextView
+                        android:id="@+id/Movies"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="18px"
+                        android:layout_x="120px"
+                        android:layout_y="20px">
+                </TextView>
+
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="15px"
+                        android:text="MovieType"
+                        android:layout_x="10px"
+                        android:layout_y="30px">
+
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/MovieType"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="111px"
+                        android:layout_y="25px">
+                </Spinner>
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="15px"
+                        android:text="Misc"
+                        android:layout_x="10px"
+                        android:layout_y="80px">
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/Misc1"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="111px"
+                        android:layout_y="75px">
+                </Spinner>
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="15px"
+                        android:text="Country"
+                        android:layout_x="10px"
+                        android:layout_y="126px">
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/MovieCountry"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="111px"
+                        android:layout_y="120px">
+                </Spinner>
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="15px"
+                        android:text="City"
+                        android:layout_x="10px"
+                        android:layout_y="169px">
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/MovieCity"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="111px"
+                        android:layout_y="166px">
+                </Spinner>
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="15px"
+                        android:text="Area"
+                        android:layout_x="10px"
+                        android:layout_y="215px">
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/MovieArea"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="111px"
+                        android:layout_y="212px">
+                </Spinner>
+
+                <Button android:id="@+id/Save"
+                        android:layout_width="75dip"
+                        android:layout_height="wrap_content"
+                        android:text="Save"
+                        android:textColor="#000000"
+                        android:layout_x="200px"
+                        android:layout_y="300px"/>
+
+
+            </AbsoluteLayout>
+        </FrameLayout>
+    </TabHost>
+</LinearLayout>
+              

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="#000000">
+    <TabHost android:id="@+id/tabs"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent">
+        <TabWidget android:id="@android:id/tabs"
+                   android:layout_width="fill_parent"
+                   android:layout_height="fill_parent"/>
+        <FrameLayout android:id="@android:id/tabcontent"
+                     android:layout_width="fill_parent"
+                     android:layout_height="fill_parent"
+                     android:paddingTop="65px">
+
+            <!--   <<<<<<<<<<<<<<<<<<<<<<<<<<    iStuff_MOVIES    >>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+
+            <AbsoluteLayout android:id="@+id/iStuffprofile"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            android:background="#000000">
+
+                <TextView android:id="@+id/Movies"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textColor="#000000"
+                          android:textSize="18px"
+                          android:layout_x="120px"
+                          android:layout_y="20px">
+                </TextView>
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#F4EF0F"
+                        android:textSize="15px"
+                        android:text="Movie Type"
+                        android:layout_x="10px"
+                        android:layout_y="25px">
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/iStuffmovietype"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="125px"
+                        android:layout_y="20px">
+                </Spinner>
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#F4EF0F"
+                        android:textSize="15px"
+                        android:text="Movie Language"
+                        android:layout_x="10px"
+                        android:layout_y="71px">
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/iStuffmovielanguage"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="125px"
+                        android:layout_y="69px">
+                </Spinner>
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#F4EF0F"
+                        android:textSize="15px"
+                        android:text="Seating Style"
+                        android:layout_x="10px"
+                        android:layout_y="120px">
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/iStuffMisc"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="125px"
+                        android:layout_y="119px">
+                </Spinner>
+
+                <TextView android:id="@+id/iarea"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textColor="#F4EF0F"
+                          android:textSize="13px"
+                          android:text="Null"
+                          android:layout_x="140px"
+                          android:layout_y="220px">
+                </TextView>
+
+                <TextView android:id="@+id/icity"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textColor="#F4EF0F"
+                          android:textSize="13px"
+                          android:text="Null"
+                          android:layout_x="140px"
+                          android:layout_y="240px">
+                </TextView>
+                <TextView android:id="@+id/icountry"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textColor="#F4EF0F"
+                          android:textSize="13px"
+                          android:text="Null"
+                          android:layout_x="140px"
+                          android:layout_y="260px">
+                </TextView>
+                <Button android:id="@+id/selectistufflocation"
+                        android:layout_width="75dip"
+                        android:layout_height="30dip"
+                        android:textSize="8px"
+                        android:text="Location"
+                        android:textColor="#000555"
+                        android:layout_x="20px"
+                        android:layout_y="220px"/>
+
+            </AbsoluteLayout>
+
+            <!--   <<<<<<<<<<<<<<<<<<<<<<<<<<    uStuff_MOVIES    >>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+            <AbsoluteLayout
+                    android:id="@+id/uStuffprofile"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:background="#000000"
+                    >
+
+                <TextView
+                        android:id="@+id/Movies"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#000000"
+                        android:textSize="18px"
+                        android:layout_x="120px"
+                        android:layout_y="20px">
+                </TextView>
+
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#F4EF0F"
+                        android:textSize="15px"
+                        android:text="Movie Type"
+                        android:layout_x="10px"
+                        android:layout_y="25px">
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/uStuffmovietype"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="125px"
+                        android:layout_y="20px">
+                </Spinner>
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#F4EF0F"
+                        android:textSize="15px"
+                        android:text="Movie Language"
+                        android:layout_x="10px"
+                        android:layout_y="71px">
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/uStuffmovielanguage"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="125px"
+                        android:layout_y="69px">
+                </Spinner>
+
+                <TextView
+                        android:id="@+id/widget29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#F4EF0F"
+                        android:textSize="15px"
+                        android:text="Seating Style"
+                        android:layout_x="10px"
+                        android:layout_y="120px">
+                </TextView>
+
+                <Spinner
+                        android:id="@+id/uStuffMisc"
+                        android:layout_width="170dip"
+                        android:layout_height="35dip"
+                        android:layout_x="125px"
+                        android:layout_y="119px">
+                </Spinner>
+
+                <TextView android:id="@+id/uarea"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textColor="#F4EF0F"
+                          android:textSize="13px"
+                          android:text="Null"
+                          android:layout_x="140px"
+                          android:layout_y="220px">
+                </TextView>
+
+                <TextView android:id="@+id/ucity"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textColor="#F4EF0F"
+                          android:textSize="13px"
+                          android:text="Null"
+                          android:layout_x="140px"
+                          android:layout_y="240px">
+                </TextView>
+                <TextView android:id="@+id/ucountry"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:textColor="#F4EF0F"
+                          android:textSize="13px"
+                          android:text="Null"
+                          android:layout_x="140px"
+                          android:layout_y="260px">
+                </TextView>
+                <Button android:id="@+id/selectustufflocation"
+                        android:layout_width="75dip"
+                        android:layout_height="30dip"
+                        android:textSize="8px"
+                        android:text="Location"
+                        android:textColor="#000555"
+                        android:layout_x="20px"
+                        android:layout_y="220px"/>
+
+                <Button android:id="@+id/Save"
+                        android:layout_width="75dip"
+                        android:layout_height="wrap_content"
+                        android:text="Save"
+                        android:textColor="#000000"
+                        android:layout_x="120px"
+                        android:layout_y="300px"/>
+            </AbsoluteLayout>
+        </FrameLayout>
+    </TabHost>
+</LinearLayout>
+            

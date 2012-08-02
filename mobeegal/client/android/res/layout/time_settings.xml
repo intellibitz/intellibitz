@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:padding="4dip"
+              android:gravity="center_horizontal"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Select Activate to Enable the Service">
+    </TextView>
+
+    <AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical"
+                    android:padding="4dip"
+                    android:gravity="center_horizontal"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+        <RadioGroup android:id="@+id/view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical"
+                    android:layout_x="70px"
+                    android:layout_y="5px">
+
+            <RadioButton android:id="@+id/activateradiobutton"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="Activate"
+                         android:textColor="#ffffff"
+                    >
+            </RadioButton>
+
+            <RadioButton android:id="@+id/deactivateradiobutton"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:text="Deactivate"
+
+                    >
+            </RadioButton>
+        </RadioGroup>
+
+
+        <ImageButton
+                android:id="@+id/buttonActivate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ok"
+                android:layout_x="40px"
+                android:layout_y="85px">
+        </ImageButton>
+
+
+        <ImageButton
+                android:id="@+id/buttonBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/cancel"
+                android:layout_x="160px"
+                android:layout_y="85px">
+        </ImageButton>
+
+
+    </AbsoluteLayout>
+</LinearLayout>

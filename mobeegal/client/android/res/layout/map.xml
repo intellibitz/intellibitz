@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+$Id:: map.xml 13 2008-08-18 10:10:28Z muthu.ramadoss                            $: Id of last commit
+$Rev:: 13                                                                       $: Revision of last commit
+$Author:: muthu.ramadoss                                                        $: Author of last commit
+$Date:: 2008-08-18 15:40:28 +0530 (Mon, 18 Aug 2008)                            $: Date of last commit
+$HeadURL:: http://svn.assembla.com/svn/mobeegal/trunk/client/android/res/layout#$: Head URL of last commit
+-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+        >
+    <!--
+        <com.google.android.maps.MapView
+                android:id="@+id/map"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:enabled="true"
+                android:clickable="true"
+                />
+    -->
+    <LinearLayout android:id="@+id/layout_map"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+            />
+    <LinearLayout android:id="@+id/layout_zoom"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignParentBottom="true"
+                  android:layout_centerHorizontal="true"
+            />
+    <!--
+        <view class="com.google.android.maps.MapView"
+              android:id="@+id/map"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"/>
+    -->
+    <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="fill_parent"
+            android:layout_height="168px"
+            android:layout_x="7px"
+            android:layout_y="373px"
+            android:visibility="gone"
+            >
+
+        <TextView android:id="@+id/detailstext"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:textSize="10sp"
+                  android:textColor="#ffffff"
+                />
+        <!--TextView android:id="@+id/hinttext"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:textSize="11sp"
+                  android:textColor="#F4EF0F"
+        /-->
+
+    </LinearLayout>
+    <LinearLayout
+            android:id="@+id/hitlayout"
+
+            android:layout_width="fill_parent"
+            android:layout_height="10px"
+            android:layout_x="7px"
+            android:layout_y="399px"
+            android:visibility="gone"
+            >
+
+        <TextView android:id="@+id/hittext"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:text="@string/hit"
+                  android:textSize="10sp"
+                  android:textColor="#F4EF0F"
+                />
+
+    </LinearLayout>
+    <LinearLayout
+            android:id="@+id/hintlayout"
+
+            android:layout_width="fill_parent"
+            android:layout_height="10px"
+            android:layout_x="7px"
+            android:layout_y="412px"
+            android:visibility="gone"
+            >
+
+        <TextView android:id="@+id/hinttext"
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:text="@string/hint"
+                  android:textSize="10sp"
+                  android:textColor="#F4EF0F"
+                />
+
+    </LinearLayout>
+
+    <AbsoluteLayout
+            android:id="@+id/iconslayout"
+            android:layout_width="182px"
+            android:layout_height="56px"
+            android:layout_x="130px"
+            android:layout_y="317px"
+            android:visibility="gone"
+            >
+        <ImageView
+                android:id="@+id/favorites"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/favorites"
+                android:layout_x="8px"
+                android:layout_y="6px"
+                >
+        </ImageView>
+        <ImageView
+                android:id="@+id/ignore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ignore"
+                android:layout_x="54px"
+                android:layout_y="7px"
+                >
+        </ImageView>
+        <ImageView
+                android:id="@+id/chat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/chat"
+                android:layout_x="98px"
+                android:layout_y="7px"
+                >
+        </ImageView>
+        <ImageView
+                android:id="@+id/media"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/media"
+                android:layout_x="142px"
+                android:layout_y="7px"
+                >
+        </ImageView>
+        <TextView
+                android:id="@+id/widget56"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Favorite"
+                android:textSize="8sp"
+                android:layout_x="4px"
+                android:layout_y="37px"
+                android:textColor="#ffffff"
+                >
+        </TextView>
+        <TextView
+                android:id="@+id/widget57"
+                android:layout_width="wrap_content"
+                android:layout_height="9px"
+                android:text="Ignore"
+                android:textSize="8sp"
+                android:layout_x="53px"
+                android:layout_y="37px"
+                android:textColor="#ffffff"
+                >
+        </TextView>
+        <TextView
+                android:id="@+id/widget94"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chat"
+                android:textSize="8sp"
+                android:layout_x="101px"
+                android:layout_y="37px"
+                android:textColor="#ffffff"
+                >
+        </TextView>
+        <TextView
+                android:id="@+id/widget95"
+                android:layout_width="wrap_content"
+                android:layout_height="10px"
+                android:text="Media"
+                android:textSize="8sp"
+                android:layout_x="142px"
+                android:layout_y="37px"
+                android:textColor="#ffffff"
+                >
+        </TextView>
+    </AbsoluteLayout>
+</RelativeLayout>

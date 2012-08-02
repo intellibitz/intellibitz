@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#000000"
+        >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+                  android:background="#000000">
+
+        <TabHost android:id="@+id/tabs"
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent">
+            <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"/>
+            <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:paddingTop="65px">
+
+                <!--   <<<<<<<<<<<<<<<<<<<<<<<<<<    iStuff_RESTUARANT    >>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+                <AbsoluteLayout
+                        android:id="@+id/iStuffprofile"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="#000000"
+                        >
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Type of Cuisine"
+                            android:layout_x="10px"
+                            android:layout_y="50px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffCuisinetype"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="50px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Cooking Method"
+                            android:layout_x="10px"
+                            android:layout_y="95px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffCookingMethod"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="95px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Dietetic"
+                            android:layout_x="10px"
+                            android:layout_y="145px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffDietetic"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="140px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Type of Course"
+                            android:layout_x="10px"
+                            android:layout_y="185px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffCourseType"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="185px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Type of Dish"
+                            android:layout_x="10px"
+                            android:layout_y="230px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffDishType"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="230px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Main Ingredient"
+                            android:layout_x="10px"
+                            android:layout_y="280px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffMainIngredient"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="280px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Occasion/Season"
+                            android:layout_x="10px"
+                            android:layout_y="325px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffOccasionOrSeason"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="325px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Miscellaneous"
+                            android:layout_x="10px"
+                            android:layout_y="375px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffMiscellaneous"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="375px">
+                    </Spinner>
+
+                    <TextView android:id="@+id/iarea"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="140px"
+                              android:layout_y="425px">
+                    </TextView>
+
+                    <TextView android:id="@+id/icity"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="140px"
+                              android:layout_y="445px">
+                    </TextView>
+                    <TextView android:id="@+id/icountry"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="140px"
+                              android:layout_y="465px">
+                    </TextView>
+                    <Button android:id="@+id/selectistufflocation"
+                            android:layout_width="75dip"
+                            android:layout_height="30dip"
+                            android:textSize="8px"
+                            android:text="Location"
+                            android:textColor="#000555"
+                            android:layout_x="20px"
+                            android:layout_y="425px"/>
+                </AbsoluteLayout>
+
+                <!--   <<<<<<<<<<<<<<<<<<<<<<<<<<    uStuff_RESTUARANT    >>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+                <AbsoluteLayout
+                        android:id="@+id/uStuffprofile"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="#000000">
+
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Type of Cuisine"
+                            android:layout_x="10px"
+                            android:layout_y="50px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffCuisinetype"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="50px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Cooking Method"
+                            android:layout_x="10px"
+                            android:layout_y="95px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffCookingMethod"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="95px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Dietetic"
+                            android:layout_x="10px"
+                            android:layout_y="145px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffDietetic"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="140px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Type of Course"
+                            android:layout_x="10px"
+                            android:layout_y="185px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffCourseType"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="185px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Type of Dish"
+                            android:layout_x="10px"
+                            android:layout_y="230px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffDishType"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="230px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Main Ingredient"
+                            android:layout_x="10px"
+                            android:layout_y="280px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffMainIngredient"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="280px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Occasion/Season"
+                            android:layout_x="10px"
+                            android:layout_y="325px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffOccasionOrSeason"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="325px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget29"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#F4EF0F"
+                            android:textSize="15px"
+                            android:text="Miscellaneous"
+                            android:layout_x="10px"
+                            android:layout_y="375px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffMiscellaneous"
+                            android:layout_width="170dip"
+                            android:layout_height="35dip"
+                            android:layout_x="150px"
+                            android:layout_y="375px">
+                    </Spinner>
+                    <TextView android:id="@+id/uarea"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="140px"
+                              android:layout_y="420px">
+                    </TextView>
+
+                    <TextView android:id="@+id/ucity"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="140px"
+                              android:layout_y="440px">
+                    </TextView>
+                    <TextView android:id="@+id/ucountry"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="140px"
+                              android:layout_y="460px">
+                    </TextView>
+                    <Button android:id="@+id/selectustufflocation"
+                            android:layout_width="75dip"
+                            android:layout_height="30dip"
+                            android:textSize="8px"
+                            android:text="Location"
+                            android:textColor="#000555"
+                            android:layout_x="20px"
+                            android:layout_y="420px"/>
+
+                    <Button android:id="@+id/Save"
+                            android:layout_width="75dip"
+                            android:layout_height="wrap_content"
+                            android:text="Save"
+                            android:textColor="#000000"
+                            android:layout_x="150px"
+                            android:layout_y="515px"/>
+                </AbsoluteLayout>
+            </FrameLayout>
+        </TabHost>
+    </LinearLayout>
+</ScrollView>

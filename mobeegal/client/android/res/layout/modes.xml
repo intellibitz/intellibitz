@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : modes.xml
+    Created on : July 27, 2008, 8:14 PM
+    Author     : work
+    Description:
+        Purpose of the document follows.
+-->
+
+
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingTop="3px"
+        android:paddingLeft="3px"
+        android:paddingBottom="3px"
+        android:paddingRight="3px"
+        >
+    <RadioGroup android:id="@+id/modegroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:gravity="left"
+                android:paddingTop="3px"
+                android:paddingLeft="3px"
+                android:paddingBottom="3px"
+                android:paddingRight="3px"
+            >
+        <RadioButton
+                android:id="@+id/basic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Basic"
+                >
+        </RadioButton>
+        <RadioButton
+                android:id="@+id/standard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Standard"
+                >
+        </RadioButton>
+        <RadioButton
+                android:id="@+id/premium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Premium"
+                >
+        </RadioButton>
+    </RadioGroup>
+    <com.mobeegal.android.view.TransparentPanel
+            android:id="@+id/transparent_panel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            android:paddingTop="3px"
+            android:paddingLeft="3px"
+            android:paddingBottom="3px"
+            android:paddingRight="3px">
+
+        <Button
+                android:id="@+id/modeyes"
+                android:layout_width="50px"
+                android:layout_height="40px"
+                android:text="yes"
+                android:textStyle="bold"
+                android:gravity="center"
+                >
+        </Button>
+        <Button
+                android:id="@+id/modeno"
+                android:layout_width="50px"
+                android:layout_height="40px"
+                android:text="No"
+                android:gravity="center"
+                android:textStyle="bold"
+                >
+        </Button>
+    </com.mobeegal.android.view.TransparentPanel>
+</LinearLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+$Id:: preferences.xml 14 2008-08-19 06:36:45Z muthu.ramadoss                    $: Id of last commit
+$Rev:: 14                                                                       $: Revision of last commit
+$Author:: muthu.ramadoss                                                        $: Author of last commit
+$Date:: 2008-08-19 12:06:45 +0530 (Tue, 19 Aug 2008)                            $: Date of last commit
+$HeadURL:: http://svn.assembla.com/svn/mobeegal/trunk/client/android/res/xml/pr#$: Head URL of last commit
+-->
+
+<!-- This is a primitive example showing the different types of preferences available. -->
+<PreferenceScreen
+        xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+            android:title="@string/results_view_preferences">
+
+        <CheckBoxPreference
+                android:key="mapview_preference"
+                android:title="@string/mapview"
+                android:summary="@string/summary_mapview_preference"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

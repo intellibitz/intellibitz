@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout
+        android:id="@+id/widget34"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        >
+
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+              android:id="@+id/myGrid"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:padding="10dip"
+              android:verticalSpacing="10dip"
+              android:horizontalSpacing="10dip"
+              android:numColumns="auto_fit"
+              android:columnWidth="60dip"
+              android:stretchMode="columnWidth"
+              android:gravity="center"/>
+
+
+    <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:gravity="bottom"
+            android:paddingLeft="5px"
+            android:paddingTop="5px"
+            android:paddingBottom="5px"
+            android:paddingRight="5px">
+
+        <com.mobeegal.android.view.TransparentPanel
+                android:id="@+id/transparent_panel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5px"
+                android:paddingLeft="5px"
+                android:paddingBottom="5px"
+                android:paddingRight="5px">
+
+            <Button
+                    android:id="@+id/mostpopular"
+                    android:layout_width="106px"
+                    android:layout_height="40px"
+                    android:text="MostPopular"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    >
+            </Button>
+            <Button
+                    android:id="@+id/popular"
+                    android:layout_width="96px"
+                    android:layout_height="40px"
+                    android:text="Popular"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    >
+            </Button>
+            <Button
+                    android:id="@+id/otherpopular"
+                    android:layout_width="105px"
+                    android:layout_height="40px"
+                    android:text="General"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    >
+            </Button>
+        </com.mobeegal.android.view.TransparentPanel>
+    </LinearLayout>
+</AbsoluteLayout>
+    

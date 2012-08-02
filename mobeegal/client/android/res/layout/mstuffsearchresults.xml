@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : mstuffsearchresults.xml
+    Created on : May 5, 2008, 7:01 PM
+    Author     : gunasekaran
+    Description:
+        Purpose of the document follows.
+-->
+
+<AbsoluteLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#ff000000"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        >
+    <view class="com.google.android.maps.MapView"
+          android:id="@+id/mapSearch"
+          android:layout_width="fill_parent"
+          android:layout_height="fill_parent"/>
+    <ImageButton
+            android:id="@+id/zoomin1"
+            android:layout_width="20px"
+            android:layout_height="20px"
+            android:src="@drawable/zoomin"
+            android:layout_x="0px"
+            android:layout_y="0px"
+            />
+    <ImageButton
+            android:id="@+id/zoomout1"
+            android:layout_width="20px"
+            android:layout_height="20px"
+            android:src="@drawable/zoomout"
+            android:layout_x="300px"
+            android:layout_y="0px"/>
+
+
+</AbsoluteLayout>

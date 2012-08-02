@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : playmedia.xml
+    Created on : May 22, 2008, 4:25 PM
+    Author     : gunasekaran
+    Description:
+        Purpose of the document follows.
+-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+
+    <VideoView
+            android:id="@+id/video"
+            android:layout_width="200px"
+            android:layout_height="200px"
+            />
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            >
+        <Button android:id="@+id/play"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Play"/>
+
+        <Button android:id="@+id/pause"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Pause"/>
+        <Button android:id="@+id/resume"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Resume"/>
+        <Button android:id="@+id/stop"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Stop"/>
+    </LinearLayout>
+</LinearLayout>
+

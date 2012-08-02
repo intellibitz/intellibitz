@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  <AbsoluteLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+   
+    xmlns:android="http://schemas.android.com/apk/res/android"
+>
+    <TextView android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:text="Set the Location.........."
+    			android:textColor="#F4EF0F"
+    			android:layout_x="0px"
+                 android:layout_y="0px"/>
+    <AbsoluteLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+   android:layout_x="0px"
+        android:layout_y="30px"
+    
+>
+     <view class="com.google.android.maps.MapView"
+              android:id="@+id/map"
+              android:layout_width="fill_parent"
+              android:layout_height="300px"/>
+  
+          
+              <ImageButton
+        android:id="@+id/zoomin"
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:src="@drawable/zoomin"
+        android:layout_x="0px"
+        android:layout_y="0px"
+    />
+    <ImageButton
+        android:id="@+id/zoomout"
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:src="@drawable/zoomout"
+        android:layout_x="300px"
+        android:layout_y="0px"/>
+       
+   </AbsoluteLayout>
+   <TextView android:id="@+id/latandlong"
+              android:layout_width="wrap_content"
+    			android:layout_height="wrap_content"
+    			android:text=""
+    			android:textColor="#F4EF0F"
+    			android:layout_x="100px"
+                 android:layout_y="345px"/>
+                 <Button
+        android:id="@+id/trackinglocation"
+        android:layout_width="70px"
+        android:layout_height="40px"
+        android:text="Track"
+        android:layout_x="0px"
+        android:layout_y="360px"/>
+           <Button
+        android:id="@+id/savinglocation"
+        android:layout_width="70px"
+        android:layout_height="40px"
+        android:text="Save"
+        android:layout_x="0px"
+        android:layout_y="400px"/>
+
+</AbsoluteLayout>
+-->
+
+<AbsoluteLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView android:id="@+id/latandlong"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="Use Track To Set Location"
+              android:textColor="#F4EF0F"
+              android:layout_x="3px"
+              android:layout_y="0px"/>
+    <Button
+            android:id="@+id/trackinglocation"
+            android:layout_width="60px"
+            android:layout_height="35px"
+            android:text="Track"
+            android:textSize="10px"
+            android:layout_x="190px"
+            android:layout_y="02px"/>
+    <Button
+            android:id="@+id/savinglocation"
+            android:layout_width="60px"
+            android:layout_height="35px"
+            android:text="Set"
+            android:textSize="10px"
+            android:layout_x="255px"
+            android:layout_y="02px"/>
+    <AbsoluteLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_x="0px"
+            android:layout_y="33px">
+        <view class="com.google.android.maps.MapView"
+              android:id="@+id/map"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"/>
+        <ImageButton
+                android:id="@+id/zoomin"
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:src="@drawable/zoomin"
+                android:layout_x="0px"
+                android:layout_y="0px"/>
+        <ImageButton
+                android:id="@+id/zoomout"
+                android:layout_width="20px"
+                android:layout_height="20px"
+                android:src="@drawable/zoomout"
+                android:layout_x="300px"
+                android:layout_y="0px"/>
+    </AbsoluteLayout>
+</AbsoluteLayout>

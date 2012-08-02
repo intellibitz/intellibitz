@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : mstufftextview.xml
+    Created on : April 26, 2008, 12:22 PM
+    Author     : nithin
+    Description:
+        Purpose of the document follows.
+-->
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:paddingLeft="8dip"
+                android:paddingRight="8dip">
+    <ListView android:id="@android:id/list"
+              android:layout_width="fill_parent"
+              android:layout_height="384dip"
+              android:layout_weight="1"
+              android:drawSelectorOnTop="false"
+              android:layout_x="0px"
+              android:layout_y="0px"/>
+    <TextView android:id="@+id/details"
+              android:layout_width="fill_parent"
+              android:layout_height="45px"
+              android:textColor="#ffff00"
+              android:layout_x="0px"
+              android:layout_y="386px"/>
+
+</AbsoluteLayout>

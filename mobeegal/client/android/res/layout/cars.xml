@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+        >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  android:orientation="vertical"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent"
+            >
+
+
+        <TabHost
+                android:id="@+id/tabs"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="#000000">
+            <TabWidget
+                    android:id="@android:id/tabs"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"/>
+
+            <FrameLayout
+                    android:id="@android:id/tabcontent"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:paddingTop="65px">
+
+                <!--   <<<<<<<<<<<<<<<<<<<<<<<<<<    CARS ISTUFF    >>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+                <AbsoluteLayout
+                        android:id="@+id/iStuffprofile"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="#000000"
+                        >
+
+
+                    <TextView
+                            android:id="@+id/widget40"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Make"
+                            android:layout_x="20px"
+                            android:layout_y="25px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffMake"
+                            android:layout_width="140dip"
+                            android:layout_height="35dip"
+                            android:textSize="12px"
+                            android:layout_x="130px"
+                            android:layout_y="27px">
+                    </Spinner>
+                    <TextView
+                            android:id="@+id/widget40"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Model"
+                            android:layout_x="20px"
+                            android:layout_y="75px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffModel"
+                            android:layout_width="140dip"
+                            android:layout_height="35dip"
+                            android:textSize="12px"
+                            android:layout_x="130px"
+                            android:layout_y="77px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget43"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Year"
+                            android:layout_x="20px"
+                            android:layout_y="125px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffYear"
+                            android:layout_width="140dip"
+                            android:layout_height="35dip"
+                            android:textSize="12px"
+                            android:layout_x="130px"
+                            android:layout_y="127px">
+                    </Spinner>
+                    <TextView
+                            android:id="@+id/widget40"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Color"
+                            android:layout_x="20px"
+                            android:layout_y="175px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffColor"
+                            android:layout_width="140dip"
+                            android:layout_height="35dip"
+                            android:textSize="12px"
+                            android:layout_x="130px"
+                            android:layout_y="177px">
+                    </Spinner>
+                    <TextView
+                            android:id="@+id/widget40"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="FuelType"
+                            android:layout_x="20px"
+                            android:layout_y="225px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffFuelType"
+                            android:layout_width="140dip"
+                            android:layout_height="35dip"
+                            android:textSize="12px"
+                            android:layout_x="130px"
+                            android:layout_y="227px">
+                    </Spinner>
+                    <TextView
+                            android:id="@+id/widget40"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Price"
+                            android:layout_x="20px"
+                            android:layout_y="275px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/iStuffPrice"
+                            android:layout_width="140dip"
+                            android:layout_height="35dip"
+                            android:textSize="12px"
+                            android:layout_x="130px"
+                            android:layout_y="277px">
+                    </Spinner>
+
+
+                    <Button android:id="@+id/selectistufflocation"
+                            android:layout_width="75dip"
+                            android:layout_height="30dip"
+                            android:textSize="8px"
+                            android:text="Location"
+                            android:textColor="#000000"
+                            android:layout_x="25px"
+                            android:layout_y="335px"/>
+
+                    <TextView android:id="@+id/iarea"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="125px"
+                              android:layout_y="350px">
+                    </TextView>
+
+                    <TextView android:id="@+id/icity"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="125px"
+                              android:layout_y="375px">
+                    </TextView>
+                    <TextView android:id="@+id/icountry"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="125px"
+                              android:layout_y="400px">
+                    </TextView>
+
+
+                </AbsoluteLayout>
+
+
+                <!--   <<<<<<<<<<<<<<<<<<<<<<<<<<    CARS USTUFF    >>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+
+                <AbsoluteLayout
+                        android:id="@+id/uStuffprofile"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:background="#000000"
+                        >
+
+                    <TextView
+                            android:id="@+id/widget40"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Make"
+                            android:layout_x="20px"
+                            android:layout_y="25px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffMake"
+                            android:layout_width="140dip"
+                            android:layout_height="35dip"
+                            android:textSize="12px"
+                            android:layout_x="130px"
+                            android:layout_y="27px">
+                    </Spinner>
+                    <TextView
+                            android:id="@+id/widget40"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Model"
+                            android:layout_x="20px"
+                            android:layout_y="75px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffModel"
+                            android:layout_width="140dip"
+                            android:layout_height="35dip"
+                            android:textSize="12px"
+                            android:layout_x="130px"
+                            android:layout_y="77px">
+                    </Spinner>
+
+                    <TextView
+                            android:id="@+id/widget43"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Year"
+                            android:layout_x="20px"
+                            android:layout_y="125px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffYear"
+                            android:layout_width="140dip"
+                            android:layout_height="35dip"
+                            android:textSize="12px"
+                            android:layout_x="130px"
+                            android:layout_y="127px">
+                    </Spinner>
+                    <TextView
+                            android:id="@+id/widget40"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Color"
+                            android:layout_x="20px"
+                            android:layout_y="175px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffColor"
+                            android:layout_width="140dip"
+                            android:layout_height="35dip"
+                            android:textSize="12px"
+                            android:layout_x="130px"
+                            android:layout_y="177px">
+                    </Spinner>
+                    <TextView
+                            android:id="@+id/widget40"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="FuelType"
+                            android:layout_x="20px"
+                            android:layout_y="225px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffFuelType"
+                            android:layout_width="140dip"
+                            android:layout_height="35dip"
+                            android:textSize="12px"
+                            android:layout_x="130px"
+                            android:layout_y="227px">
+                    </Spinner>
+                    <TextView
+                            android:id="@+id/widget40"
+                            android:layout_width="wrap_content"
+                            android:layout_height="19px"
+                            android:textColor="#F4EF0F"
+                            android:textSize="13px"
+                            android:text="Price"
+                            android:layout_x="20px"
+                            android:layout_y="275px">
+                    </TextView>
+                    <Spinner
+                            android:id="@+id/uStuffPrice"
+                            android:layout_width="140dip"
+                            android:layout_height="35dip"
+                            android:textSize="12px"
+                            android:layout_x="130px"
+                            android:layout_y="277px">
+                    </Spinner>
+
+
+                    <Button android:id="@+id/selectustufflocation"
+                            android:layout_width="75dip"
+                            android:layout_height="30dip"
+                            android:textSize="8px"
+                            android:text="Location"
+                            android:textColor="#000000"
+                            android:layout_x="25px"
+                            android:layout_y="335px"/>
+
+                    <TextView android:id="@+id/uarea"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="125px"
+                              android:layout_y="350px">
+                    </TextView>
+
+                    <TextView android:id="@+id/ucity"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="125px"
+                              android:layout_y="375px">
+                    </TextView>
+                    <TextView android:id="@+id/ucountry"
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:textColor="#F4EF0F"
+                              android:textSize="13px"
+                              android:text="Null"
+                              android:layout_x="125px"
+                              android:layout_y="400px">
+                    </TextView>
+
+                    <Button
+                            android:id="@+id/Save"
+                            android:layout_width="75dip"
+                            android:layout_height="wrap_content"
+                            android:text="Save"
+                            android:textColor="#000555"
+                            android:layout_x="120px"
+                            android:layout_y="440px"/>
+                </AbsoluteLayout>
+            </FrameLayout>
+        </TabHost>
+    </LinearLayout>
+</ScrollView>
