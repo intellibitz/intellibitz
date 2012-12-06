@@ -1,0 +1,1261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontmap name="Adhawin-Tamil-fontmap.xml" version="0.73">
+    <font>
+        <font_from value="Adhawin-Tamil Regular"
+                   path="../resource/ADHAWIN.TTF"/>
+        <font_to value="Adhawin-Tamil Regular" path="../resource/ADHAWIN.TTF"/>
+    </font>
+    <font_entry>
+        <entry_from value="Nu"/>
+        <entry_to value="Æ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="NA"/>
+        <entry_to value="¦ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="n-ai"/>
+        <entry_to value="¾¨"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="v"/>
+        <entry_to value="®Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="rI"/>
+        <entry_to value="¬×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="nU"/>
+        <entry_to value="Ò»"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="s"/>
+        <entry_to value="£Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="the"/>
+        <entry_to value="¼§"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="sri"/>
+        <entry_to value="à"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="jai"/>
+        <entry_to value="¾¹"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="mau"/>
+        <entry_to value="¼ª°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="xi"/>
+        <entry_to value="ºÓ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="sU"/>
+        <entry_to value="ã"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ki"/>
+        <entry_to value="¡Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="nA"/>
+        <entry_to value="²ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="sO"/>
+        <entry_to value="½£ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="zau"/>
+        <entry_to value="¼¯°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="mA"/>
+        <entry_to value="ªß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ze"/>
+        <entry_to value="¼¯"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="sI"/>
+        <entry_to value="£×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="so"/>
+        <entry_to value="¼£ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ta"/>
+        <entry_to value="¥"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="xU"/>
+        <entry_to value="ºí"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="yU"/>
+        <entry_to value="Ëâ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ro"/>
+        <entry_to value="¼¬ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ri"/>
+        <entry_to value="¬Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="E"/>
+        <entry_to value="ú"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="pI"/>
+        <entry_to value="©×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="L"/>
+        <entry_to value="°Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Lau"/>
+        <entry_to value="¼°°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="tai"/>
+        <entry_to value="¾¥"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="kU"/>
+        <entry_to value="á"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="mI"/>
+        <entry_to value="ª×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="u"/>
+        <entry_to value="÷"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ja"/>
+        <entry_to value="¹"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Le"/>
+        <entry_to value="¼°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ka"/>
+        <entry_to value="¡"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="si"/>
+        <entry_to value="£Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ngau"/>
+        <entry_to value="¼¢°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="LE"/>
+        <entry_to value="½°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="tu"/>
+        <entry_to value="Å"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Sau"/>
+        <entry_to value="¼µ°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="hA"/>
+        <entry_to value="¸ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="hI"/>
+        <entry_to value="¸×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="rE"/>
+        <entry_to value="½¬"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ne"/>
+        <entry_to value="¼²"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="shi"/>
+        <entry_to value="´Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="shA"/>
+        <entry_to value="´ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="sau"/>
+        <entry_to value="¼£°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="n-o"/>
+        <entry_to value="¼¨ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Li"/>
+        <entry_to value="°Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="yE"/>
+        <entry_to value="½«"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ngu"/>
+        <entry_to value="Â"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="je"/>
+        <entry_to value="¼¹"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="te"/>
+        <entry_to value="¼¥"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Na"/>
+        <entry_to value="¦"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ngU"/>
+        <entry_to value="Âí"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="RI"/>
+        <entry_to value="±×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="zI"/>
+        <entry_to value="¯×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="vU"/>
+        <entry_to value="Îâ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="sho"/>
+        <entry_to value="¼´ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="r"/>
+        <entry_to value="¬Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="yA"/>
+        <entry_to value="«ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="xo"/>
+        <entry_to value="¼ºß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="vA"/>
+        <entry_to value="®ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="zO"/>
+        <entry_to value="½¯ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="pu"/>
+        <entry_to value="É"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="njI"/>
+        <entry_to value="¤×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="n-A"/>
+        <entry_to value="¨ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="mO"/>
+        <entry_to value="½ªß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="la"/>
+        <entry_to value="­"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ku"/>
+        <entry_to value="Á"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="tha"/>
+        <entry_to value="§"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Ra"/>
+        <entry_to value="±"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Nai"/>
+        <entry_to value="¾¦"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="po"/>
+        <entry_to value="¼©ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="yo"/>
+        <entry_to value="¼«ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="lA"/>
+        <entry_to value="­ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ngo"/>
+        <entry_to value="¼¢ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="mE"/>
+        <entry_to value="½ª"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="yai"/>
+        <entry_to value="¾«"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="nai"/>
+        <entry_to value="¾²"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="re"/>
+        <entry_to value="¼¬"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="rai"/>
+        <entry_to value="¾¬"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ngA"/>
+        <entry_to value="¢ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="jO"/>
+        <entry_to value="½¹ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="thi"/>
+        <entry_to value="§Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="n-E"/>
+        <entry_to value="½¨"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ti"/>
+        <entry_to value="¥Õ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Rau"/>
+        <entry_to value="¼±°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="xA"/>
+        <entry_to value="ºß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="p"/>
+        <entry_to value="©Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="nja"/>
+        <entry_to value="¤"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="rau"/>
+        <entry_to value="¼¬°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="th"/>
+        <entry_to value="§Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="lau"/>
+        <entry_to value="¼­°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="za"/>
+        <entry_to value="¯"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="q"/>
+        <entry_to value="þ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="hai"/>
+        <entry_to value="¾¸"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="zU"/>
+        <entry_to value="Ïí"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="hE"/>
+        <entry_to value="½¸"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ji"/>
+        <entry_to value="¹Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="shI"/>
+        <entry_to value="´×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="n-"/>
+        <entry_to value="¨Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="o"/>
+        <entry_to value="ü"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="va"/>
+        <entry_to value="®"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="sha"/>
+        <entry_to value="´"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="he"/>
+        <entry_to value="¼¸"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ngO"/>
+        <entry_to value="½¢ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="hO"/>
+        <entry_to value="½¸ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="yI"/>
+        <entry_to value="«×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="tO"/>
+        <entry_to value="½¥ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Sa"/>
+        <entry_to value="µ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="nj"/>
+        <entry_to value="¤Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ng"/>
+        <entry_to value="¢Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="pai"/>
+        <entry_to value="¾©"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="LI"/>
+        <entry_to value="°×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="lu"/>
+        <entry_to value="Í"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="SI"/>
+        <entry_to value="µ×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="La"/>
+        <entry_to value="°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="mi"/>
+        <entry_to value="ªÓ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="vai"/>
+        <entry_to value="¾®"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="jau"/>
+        <entry_to value="¼¹°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Ru"/>
+        <entry_to value="Ñ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="n-au"/>
+        <entry_to value="¼¨°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="vo"/>
+        <entry_to value="¼®ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="zi"/>
+        <entry_to value="¯Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Ri"/>
+        <entry_to value="±Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="thO"/>
+        <entry_to value="½§ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="No"/>
+        <entry_to value="¼¦ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="RA"/>
+        <entry_to value="±ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="xe"/>
+        <entry_to value="¼º"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="njA"/>
+        <entry_to value="¤ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="mo"/>
+        <entry_to value="¼ªß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="tI"/>
+        <entry_to value="¥×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="a"/>
+        <entry_to value="ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ma"/>
+        <entry_to value="ª"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="sh"/>
+        <entry_to value="´Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="RU"/>
+        <entry_to value="Ñ»"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="NI"/>
+        <entry_to value="¦×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="sE"/>
+        <entry_to value="½£"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ai"/>
+        <entry_to value="û"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="SE"/>
+        <entry_to value="½µ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="n-i"/>
+        <entry_to value="¨Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="t"/>
+        <entry_to value="¥Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="shE"/>
+        <entry_to value="½´"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="me"/>
+        <entry_to value="¼ª"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="vu"/>
+        <entry_to value="Î"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="nji"/>
+        <entry_to value="¤Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="njE"/>
+        <entry_to value="½¤"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="rU"/>
+        <entry_to value="Ìí"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="na"/>
+        <entry_to value="²"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="I"/>
+        <entry_to value="ö"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="rA"/>
+        <entry_to value="¬ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Re"/>
+        <entry_to value="¼±"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ve"/>
+        <entry_to value="¼®"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="sA"/>
+        <entry_to value="£ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="se"/>
+        <entry_to value="¼£"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="n-a"/>
+        <entry_to value="¨"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="shau"/>
+        <entry_to value="¼´°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="SU"/>
+        <entry_to value="µí"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Lu"/>
+        <entry_to value="Ð"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="jo"/>
+        <entry_to value="¼¹ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="xai"/>
+        <entry_to value="¾º"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ya"/>
+        <entry_to value="«"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ko"/>
+        <entry_to value="¼¡ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="nga"/>
+        <entry_to value="¢"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="pi"/>
+        <entry_to value="©Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Su"/>
+        <entry_to value="µä"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="LA"/>
+        <entry_to value="°ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="So"/>
+        <entry_to value="¼µß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ngai"/>
+        <entry_to value="¾¢"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="n-I"/>
+        <entry_to value="¨×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="N"/>
+        <entry_to value="¦Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ru"/>
+        <entry_to value="Ì"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="kA"/>
+        <entry_to value="¡ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="lai"/>
+        <entry_to value="¾­"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="su"/>
+        <entry_to value="Ã"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Nau"/>
+        <entry_to value="¼¦°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="hi"/>
+        <entry_to value="¸Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="zA"/>
+        <entry_to value="¯ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Lai"/>
+        <entry_to value="¾°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="yO"/>
+        <entry_to value="½«ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="nI"/>
+        <entry_to value="²×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="n-e"/>
+        <entry_to value="¼¨"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="O"/>
+        <entry_to value="ý"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="vO"/>
+        <entry_to value="½®ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="to"/>
+        <entry_to value="¼¥ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="pU"/>
+        <entry_to value="Éâ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ni"/>
+        <entry_to value="²Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="xa"/>
+        <entry_to value="º"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Se"/>
+        <entry_to value="¼µ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="pO"/>
+        <entry_to value="½©ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="no"/>
+        <entry_to value="¼²ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="thu"/>
+        <entry_to value="Ç"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="vau"/>
+        <entry_to value="¼®°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Sai"/>
+        <entry_to value="¾µ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="zai"/>
+        <entry_to value="¾¯"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="kE"/>
+        <entry_to value="½¡"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="zE"/>
+        <entry_to value="½¯"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="z"/>
+        <entry_to value="¯Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="vE"/>
+        <entry_to value="½®"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="yi"/>
+        <entry_to value="«Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="njo"/>
+        <entry_to value="¼¤ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Lo"/>
+        <entry_to value="¼°ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="mU"/>
+        <entry_to value="Êí"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="rO"/>
+        <entry_to value="½¬ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="thau"/>
+        <entry_to value="¼§°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="nge"/>
+        <entry_to value="¼¢"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="lE"/>
+        <entry_to value="½­"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="xau"/>
+        <entry_to value="¼º°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ha"/>
+        <entry_to value="¸"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="tA"/>
+        <entry_to value="¥ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="thE"/>
+        <entry_to value="½§"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="sai"/>
+        <entry_to value="¾£"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="jU"/>
+        <entry_to value="¹í"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Si"/>
+        <entry_to value="µÓ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="yau"/>
+        <entry_to value="¼«°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="kau"/>
+        <entry_to value="¼¡°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="nu"/>
+        <entry_to value="Ò"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="j"/>
+        <entry_to value="¹Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="A"/>
+        <entry_to value="ô"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="shU"/>
+        <entry_to value="´í"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="njai"/>
+        <entry_to value="¾¤"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="xE"/>
+        <entry_to value="½º"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="kai"/>
+        <entry_to value="¾¡"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="pe"/>
+        <entry_to value="¼©"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="k"/>
+        <entry_to value="¡Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="jI"/>
+        <entry_to value="¹×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="n"/>
+        <entry_to value="²Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="hau"/>
+        <entry_to value="¼¸°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ngi"/>
+        <entry_to value="¢Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="lo"/>
+        <entry_to value="¼­ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="kI"/>
+        <entry_to value="¡×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="le"/>
+        <entry_to value="¼­"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="mu"/>
+        <entry_to value="Ê"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="NU"/>
+        <entry_to value="Æ»"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="pE"/>
+        <entry_to value="½©"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="tE"/>
+        <entry_to value="½¥"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="RO"/>
+        <entry_to value="½±ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="thA"/>
+        <entry_to value="§ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="LU"/>
+        <entry_to value="Ðí"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="R"/>
+        <entry_to value="±Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="nO"/>
+        <entry_to value="½²ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="tU"/>
+        <entry_to value="å"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="xu"/>
+        <entry_to value="ºä"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="S"/>
+        <entry_to value="µÙ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="thI"/>
+        <entry_to value="§×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ngE"/>
+        <entry_to value="½¢"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="y"/>
+        <entry_to value="«Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="x"/>
+        <entry_to value="ºÙ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="mai"/>
+        <entry_to value="¾ª"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="njU"/>
+        <entry_to value="¤í"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="e"/>
+        <entry_to value="ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="hu"/>
+        <entry_to value="¸ä"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="tau"/>
+        <entry_to value="¼¥°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="yu"/>
+        <entry_to value="Ë"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ra"/>
+        <entry_to value="¬"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="xI"/>
+        <entry_to value="º×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ngI"/>
+        <entry_to value="¢×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="NE"/>
+        <entry_to value="½¦"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="lU"/>
+        <entry_to value="Í»"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="nje"/>
+        <entry_to value="¼¤"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="tho"/>
+        <entry_to value="¼§ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="nE"/>
+        <entry_to value="½²"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="n-O"/>
+        <entry_to value="½¨ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="she"/>
+        <entry_to value="¼´"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="n-U"/>
+        <entry_to value="È»"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="kO"/>
+        <entry_to value="½¡ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ju"/>
+        <entry_to value="¹ä"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="vI"/>
+        <entry_to value="®×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="U"/>
+        <entry_to value="ø"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="zo"/>
+        <entry_to value="¼¯ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="RE"/>
+        <entry_to value="½±"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="i"/>
+        <entry_to value="õ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="jA"/>
+        <entry_to value="¹ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="pau"/>
+        <entry_to value="¼©°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="jE"/>
+        <entry_to value="½¹"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Rai"/>
+        <entry_to value="¾±"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="njau"/>
+        <entry_to value="¼¤°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ke"/>
+        <entry_to value="¼¡"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ho"/>
+        <entry_to value="¼¸ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="pA"/>
+        <entry_to value="©ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="n-u"/>
+        <entry_to value="È"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Ne"/>
+        <entry_to value="¼¦"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="njO"/>
+        <entry_to value="½¤ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="zu"/>
+        <entry_to value="Ï"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="au"/>
+        <entry_to value="ü°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="shai"/>
+        <entry_to value="¾´"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="SO"/>
+        <entry_to value="½µß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="h"/>
+        <entry_to value="¸Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="shO"/>
+        <entry_to value="½´ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="xO"/>
+        <entry_to value="½ºß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="nau"/>
+        <entry_to value="¼²°"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Ro"/>
+        <entry_to value="¼±ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="lI"/>
+        <entry_to value="­×"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="li"/>
+        <entry_to value="­Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="nju"/>
+        <entry_to value="Ä"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="m"/>
+        <entry_to value="ªÙ"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="ye"/>
+        <entry_to value="¼«"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="sa"/>
+        <entry_to value="£"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Ni"/>
+        <entry_to value="¦Ó"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="lO"/>
+        <entry_to value="½­ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="pa"/>
+        <entry_to value="©"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="NO"/>
+        <entry_to value="½¦ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="thai"/>
+        <entry_to value="¾§"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="l"/>
+        <entry_to value="­Ù"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="hU"/>
+        <entry_to value="¸í"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="SA"/>
+        <entry_to value="µß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="thU"/>
+        <entry_to value="Ç»"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="LO"/>
+        <entry_to value="½°ß"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="shu"/>
+        <entry_to value="´ä"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="vi"/>
+        <entry_to value="®Ó"/>
+    </font_entry>
+</fontmap>
+    

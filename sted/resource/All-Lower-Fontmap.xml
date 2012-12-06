@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontmap name="All-Lower-Fontmap.xml" version="0.73">
+    <font>
+        <font_from value="Adhawin-Tamil Regular"
+                   path="../resource/ADHAWIN.TTF"/>
+        <font_to value="Adhawin-Tamil Regular"
+                 path="../resource/ADHAWIN.TTF"/>
+    </font>
+    <font_entry>
+        <entry_from value="L"/>
+        <entry_to value="l"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="J"/>
+        <entry_to value="j"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="O"/>
+        <entry_to value="o"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="E"/>
+        <entry_to value="e"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="C"/>
+        <entry_to value="c"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="N"/>
+        <entry_to value="n"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="M"/>
+        <entry_to value="m"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="K"/>
+        <entry_to value="k"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="R"/>
+        <entry_to value="r"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="A"/>
+        <entry_to value="a"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="H"/>
+        <entry_to value="h"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="V"/>
+        <entry_to value="v"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="W"/>
+        <entry_to value="w"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="X"/>
+        <entry_to value="x"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Y"/>
+        <entry_to value="y"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Z"/>
+        <entry_to value="z"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="U"/>
+        <entry_to value="u"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="T"/>
+        <entry_to value="t"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="S"/>
+        <entry_to value="s"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="Q"/>
+        <entry_to value="q"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="I"/>
+        <entry_to value="i"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="B"/>
+        <entry_to value="b"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="D"/>
+        <entry_to value="d"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="P"/>
+        <entry_to value="p"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="G"/>
+        <entry_to value="g"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="F"/>
+        <entry_to value="f"/>
+        <conditional value="AND"/>
+    </font_entry>
+</fontmap>

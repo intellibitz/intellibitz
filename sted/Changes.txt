@@ -1,0 +1,78 @@
+# <!--
+# /# #
+ #  Copyright (C) IntelliBitz Technologies.,  Muthu Ramadoss
+ #  168, Medavakkam Main Road, Madipakkam, Chennai 600091, Tamilnadu, India.
+ #  http://www.intellibitz.com
+ #  training@intellibitz.com
+ #  +91 44 2247 5106
+ #
+ #  This program is free software; you can redistribute it and/or
+ #  modify it under the terms of the GNU General Public License
+ #  as published by the Free Software Foundation; either version 2
+ #  of the License, or (at your option) any later version.
+ #
+ #  This program is distributed in the hope that it will be useful,
+ #  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ #  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ #  GNU General Public License for more details.
+ #
+ #  You should have received a copy of the GNU General Public License
+ #  along with this program; if not, write to the Free Software
+ #  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ #
+ #  STED, Copyright (C) 2007 IntelliBitz Technologies
+ #  STED comes with ABSOLUTELY NO WARRANTY;
+ #  This is free software, and you are welcome
+ #  to redistribute it under the GNU GPL conditions;
+ #
+ #  Visit http://www.gnu.org/ for GPL License terms.
+ # /
+#-->
+
+#<!--
+# #
+ #  $Id: Changes.txt 59 2007-05-19 08:11:31Z sushmu $
+ #  $HeadURL: svn+ssh://sushmu@svn.code.sf.net/p/sted/code/FontTransliterator/trunk/Changes.txt $
+ # /
+#-->
+
+<!-- build 0.73 -->
+Bugfix: Sample fontmaps - fontmap location fixed to relative path.
+Bugfix: Refactoring.
+
+<!-- build 0.72 -->
+Feature: Sample Fontmaps added and can be viewed from Samples Menu.
+Feature: Toolbar buttons added.
+Bugfix: Reload from disk, Reopen menu action.
+
+<!-- build 0.71 -->
+Bugfix: Fonts correctly displayed in mapping & preview panel.
+Bugfix: Close menu action.
+
+<!-- build 0.70 -->
+MDI Console.
+JDK 1.6.0
+
+<!-- build 0.62 -->
+Console launch option.
+Memory Status and Progress in Status Panel.
+
+<!-- build 0.61 -->
+Menu
+    - Context based Menu added.
+    - 'Options' Menu added.
+FontMap
+    - Associated Menu's grouped together for FontMap
+BugFixes
+
+<!-- build 0.60 -->
+FontMap Menu
+    - ReOpen Recently opened FontMaps.
+Edit Menu Added
+    - Undo/Redo, Cut/Copy/Paste, SelectAll, Delete.
+View Menu Added
+    - View/Hide ToolBar, StatusBar etc.,
+Look And Feel
+    - Supports Windows, Motif, Metal.
+FontMap file format changed to XML.
+For more changes, See the list of changes at http://sted.sourceforge.net
