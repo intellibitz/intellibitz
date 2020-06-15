@@ -94,7 +94,7 @@
         <spring.webflow.version>2.0.9.RELEASE</spring.webflow.version>
         <aspectj.version>1.6.6</aspectj.version>
         <hibernate.core.version>3.5.2-Final</hibernate.core.version>
-        <hibernate.validator.version>4.0.2.GA</hibernate.validator.version>
+        <hibernate.validator.version>5.3.5.Final</hibernate.validator.version>
     </properties>
 
     <dependencies>
