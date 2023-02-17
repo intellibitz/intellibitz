@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sv"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    android:fillViewport="false"
+    android:isScrollContainer="true"
+    android:orientation="vertical"
+    android:padding="18dp"
+    tools:context="intellibitz.intellidroid.account.AccountLandingActivity">
+
+    <TextView
+        android:id="@+id/txt_intellibitzTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/launch_logo_big"
+        android:gravity="center"
+        android:text="@string/intellibitz_desc"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp16" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9" />
+
+    <Button
+        android:id="@+id/btn_gotInvite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_transy_button"
+        android:text="@string/got_invite"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/sp16" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp" />
+
+    <Button
+        android:id="@+id/btn_newTeam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_white_button"
+        android:text="@string/create_new_team"
+        android:textColor="@color/red_da"
+        android:textSize="@dimen/sp16" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/txt_signIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/red_bf"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="@string/have_acct_signin"
+        android:textColor="@android:color/white"
+        android:textSize="22sp" />
+
+    <!--
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+
+        </ScrollView>
+    -->
+
+</LinearLayout>

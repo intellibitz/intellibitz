@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_filter"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/tv_filter"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_roundrect_white"
+        android:text="3"
+        android:visibility="gone" />
+
+    <ToggleButton
+        android:id="@+id/tb_filter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:button="@android:color/transparent"
+        android:drawableEnd="@drawable/people_filter_toggle"
+        android:gravity="center"
+        android:padding="0dp"
+        android:textColor="@drawable/people_filter_toggle"
+        android:textOff="3"
+        android:textOn="3" />
+
+</LinearLayout>

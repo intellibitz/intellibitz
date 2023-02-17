@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".contact.ContactListActivity">
+    <item
+        android:id="@+id/mi_tidy"
+        android:icon="@drawable/filter_chat"
+        android:title="@string/tidy_up"
+        app:showAsAction="never" />
+</menu>

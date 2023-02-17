@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <bitmap
+            android:gravity="fill"
+            android:src="@drawable/bg_landing" />
+        <!--android:src="@drawable/launch_bg" />-->
+    </item>
+    <!--
+        <item>
+            <bitmap
+                android:gravity="top"
+                android:src="@drawable/launch_logo_big" />
+        </item>
+    -->
+    <!--
+        <item>
+            <inset
+                android:gravity="top"
+                android:drawable="@drawable/launch_icon_inset" />
+        </item>
+    -->
+</layer-list>

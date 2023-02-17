@@ -1,0 +1,31 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/primary"
+    android:theme="@style/AppTheme"
+    tools:context=".mainbox.message.ChatEmailMessageActivity">
+    <item
+        android:id="@+id/menu_stack"
+        android:icon="@drawable/ic_add_box_white_18dp"
+        android:orderInCategory="100"
+        android:title="@string/stack"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_update"
+        android:icon="@drawable/ic_brush_white_18dp"
+        android:orderInCategory="200"
+        android:title="@string/update"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_delete"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:orderInCategory="300"
+        android:title="@string/multiselect_delete"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/menu_moveto"
+        android:icon="@android:drawable/ic_menu_share"
+        android:orderInCategory="400"
+        android:title="@string/menu_title_moveto"
+        app:showAsAction="ifRoom" />
+</menu>

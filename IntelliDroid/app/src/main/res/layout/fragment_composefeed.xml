@@ -1,0 +1,91 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_composeemail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="intellibitz.intellidroid.MainActivity">
+
+    <include layout="@layout/toolbar_composefeed" />
+
+    <EditText
+        android:id="@+id/et_message"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:enabled="true"
+        android:focusable="true"
+        android:hint="@string/type_message" />
+
+    <!--
+        This is the bottom sheet. You can use any View as a bottom sheet by marking it with
+        app:layout_behavior as BottomSheetBehavior.
+    -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/bottom_sheet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/windowBackground"
+            android:elevation="16dp"
+            android:orientation="vertical"
+            app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+            <LinearLayout
+                android:id="@+id/email_send_message_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <!--
+                                <ImageButton
+                                    android:id="@+id/iv_attach"
+                                    style="@style/Widget.AppCompat.Button.Colored"
+                                    android:layout_width="60dp"
+                                    android:layout_height="wrap_content"
+                                    android:contentDescription="Attach to messageItemStack"
+                                    android:src="@drawable/ic_attach_file_white_18dp" />
+                -->
+
+                <ImageButton
+                    android:id="@+id/ib_audio"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Records Audio"
+                    android:src="@drawable/ic_mic_none_white_18dp" />
+
+                <ImageButton
+                    android:id="@+id/ib_camera"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Records Video"
+                    android:src="@drawable/ic_photo_camera_white_18dp" />
+
+                <ImageButton
+                    android:id="@+id/ib_video"
+                    style="@style/Widget.AppCompat.Button.Colored"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Records Video"
+                    android:src="@drawable/ic_personal_video_white_18dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

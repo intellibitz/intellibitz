@@ -1,0 +1,13 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="intellibitz.intellidroid.MainActivity">
+    <item
+        android:id="@+id/mict_cancel"
+        android:title="@string/cancel"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/mict_done"
+        android:title="@string/ok"
+        app:showAsAction="always|withText" />
+</menu>

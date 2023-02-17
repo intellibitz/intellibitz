@@ -1,0 +1,170 @@
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tb_bottom"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|center_horizontal"
+    android:background="@color/gray_3"
+    android:gravity="top"
+    android:theme="@style/AppTheme.ActionBar"
+    app:layout_scrollFlags="scroll|enterAlways|snap">
+
+    <!--
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+    -->
+
+    <!--
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+    -->
+
+    <RadioGroup
+        android:id="@+id/rg_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <!--
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+        -->
+        <!--android:button="@drawable/tab_main"-->
+        <RadioButton
+            android:id="@+id/rb_mainbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@android:color/transparent"
+            android:drawableTop="@drawable/tab_main"
+            android:gravity="center"
+            android:text="@string/mainbox"
+            android:textColor="@drawable/tab_main"
+            android:textOff=""
+            android:textOn="" />
+
+        <RadioButton
+            android:id="@+id/rb_feeds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@android:color/transparent"
+            android:drawableTop="@drawable/tab_feeds"
+            android:gravity="center"
+            android:text="@string/feeds"
+            android:textColor="@drawable/tab_feeds"
+            android:textOff=""
+            android:textOn="" />
+
+        <RadioButton
+            android:id="@+id/rb_contacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@android:color/transparent"
+            android:drawableTop="@drawable/tab_contacts"
+            android:gravity="center"
+            android:text="@string/contacts"
+            android:textColor="@drawable/tab_contacts"
+            android:textOff=""
+            android:textOn="" />
+
+        <RadioButton
+            android:id="@+id/rb_files"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@android:color/transparent"
+            android:drawableTop="@drawable/tab_files"
+            android:gravity="center"
+            android:text="@string/files"
+            android:textColor="@drawable/tab_files"
+            android:textOff=""
+            android:textOn="" />
+
+        <!--
+                        <TextView
+                            android:id="@+id/tv_mainbox"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:text="@string/mainbox"
+                            android:textColor="@color/black" />
+        -->
+    </RadioGroup>
+
+
+    <!--</RadioGroup>-->
+
+    <!--
+            <LinearLayout
+                android:id="@+id/ll_contacts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+    &lt;!&ndash;
+                android:button="@drawable/tab_contacts"
+                android:src="@drawable/tab_contacts"
+    &ndash;&gt;
+                <RadioButton
+                    android:id="@+id/iv_contacts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tv_contacts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/contacts"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_files"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+    &lt;!&ndash;
+                android:button="@drawable/tab_files"
+                android:src="@drawable/tab_files"
+    &ndash;&gt;
+                <RadioButton
+                    android:id="@+id/iv_files"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/black" />
+
+                <TextView
+                    android:id="@+id/tv_files"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/files"
+                    android:textColor="@color/black" />
+
+            </LinearLayout>
+    -->
+
+    <!--</LinearLayout>-->
+    <!--</RadioGroup>-->
+</androidx.appcompat.widget.Toolbar>

@@ -1,0 +1,64 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="intellibitz.intellidroid.intellibitz.intellidroid.MainActivity">
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/lens"
+        android:orderInCategory="100"
+        android:theme="@style/AppTheme.SearchView"
+        android:title="@string/search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_new_message"
+        android:icon="@drawable/compose_new_icon"
+        android:orderInCategory="200"
+        android:title="@string/menu_title_new_message"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/mi_c_contact"
+        android:icon="@drawable/add_contact"
+        android:orderInCategory="300"
+        android:title="@string/menu_title_new_message"
+        app:showAsAction="always" />
+    <!--
+    <item
+        android:id="@+id/action_email_accounts"
+        android:icon="@drawable/ic_mail_outline_black_18dp"
+        android:orderInCategory="200"
+        android:title="@string/email_accounts"
+        app:showAsAction="never" />
+        <item
+            android:id="@+id/action_settings"
+            android:icon="@drawable/ic_tune_black_18dp"
+            android:orderInCategory="100"
+            android:title="@string/menu_title_settings"
+            app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_help"
+        android:orderInCategory="200"
+        android:title="@string/help_amp_feedback"
+        app:showAsAction="never" />
+    -->
+    <!--
+        <item
+            android:id="@+id/action_email_accounts"
+            android:icon="@drawable/ic_email_white_18dp"
+            android:orderInCategory="100"
+            android:title="@string/action_email_accounts"
+            app:showAsAction="ifRoom" />
+    -->
+    <!--
+        <item
+            android:id="@+id/action_new_group"
+            android:orderInCategory="100"
+            android:title="@string/menu_title_new_group"
+            app:showAsAction="never" />
+    -->
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        app:showAsAction="never" />
+</menu>

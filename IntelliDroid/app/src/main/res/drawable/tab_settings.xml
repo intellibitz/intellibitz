@@ -1,0 +1,6 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_account_circle_black_24dp" android:state_selected="false" />
+    <!--<item android:drawable="@drawable/ic_launcher" android:state_selected="true" />-->
+    <item android:drawable="@drawable/tab_settings_layer" android:state_selected="true" />
+    <item android:drawable="@drawable/ic_account_circle_black_24dp" />
+</selector>

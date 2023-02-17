@@ -1,0 +1,109 @@
+<!--
+/**
+ * Copyright (C) IntelliBitz Technologies.,  Muthu Ramadoss
+ * 168, Medavakkam Main Road, Madipakkam, Chennai 600091, Tamilnadu, India.
+ * http://www.intellibitz.com
+ * training@intellibitz.com
+ * +91 44 2247 5106
+ * http://groups.google.com/group/etoe
+ * http://sted.sourceforge.net
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ * STED, Copyright (C) 2007 IntelliBitz Technologies
+ * STED comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome
+ * to redistribute it under the GNU GPL conditions;
+ *
+ * Visit http://www.gnu.org/ for GPL License terms.
+ */
+-->
+
+        <!--
+        /**
+         * $Id:sted-fontmap.dtd 55 2007-05-19 05:55:34Z sushmu $
+         * $HeadURL: svn+ssh://sushmu@svn.code.sf.net/p/sted/code/FontTransliterator/trunk/config/sted-fontmap.dtd $
+         */
+        -->
+
+        <!-- DTD used by the STED fontmap.xml -->
+
+        <!ELEMENT fontmap (font, font_entry+)>
+
+        <!ELEMENT font (font_from, font_to)>
+
+        <!ELEMENT font_from EMPTY>
+
+        <!ELEMENT font_to EMPTY>
+
+        <!ELEMENT font_entry
+                (entry_from, entry_to, begins_with?, ends_with?, followed_by?, preceded_by?, conditional?)>
+
+        <!ELEMENT entry_from EMPTY>
+
+        <!ELEMENT entry_to EMPTY>
+
+        <!ELEMENT begins_with EMPTY>
+
+        <!ELEMENT ends_with EMPTY>
+
+        <!ELEMENT followed_by EMPTY>
+
+        <!ELEMENT preceded_by EMPTY>
+
+        <!ELEMENT conditional EMPTY>
+
+        <!ATTLIST fontmap
+                name ID #REQUIRED
+                version CDATA #REQUIRED
+                >
+
+        <!ATTLIST font_from
+                value CDATA #REQUIRED
+                location CDATA #OPTIONAL
+                >
+
+        <!ATTLIST font_to
+                value CDATA #REQUIRED
+                location CDATA #OPTIONAL
+                >
+
+        <!ATTLIST entry_from
+                value CDATA #REQUIRED
+                >
+
+        <!ATTLIST entry_to
+                value CDATA #REQUIRED
+                >
+
+        <!ATTLIST begins_with
+                value (true | false) "false"
+                >
+
+        <!ATTLIST ends_with
+                value (true | false) "false"
+                >
+
+        <!ATTLIST followed_by
+                value CDATA #REQUIRED
+                >
+
+        <!ATTLIST preceded_by
+                value CDATA #REQUIRED
+                >
+
+        <!ATTLIST conditional
+                value (AND | OR | NOT) "OR"
+                >

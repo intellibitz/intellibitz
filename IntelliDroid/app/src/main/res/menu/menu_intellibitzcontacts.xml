@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="intellibitz.intellidroid.MainActivity">
+    <item
+        android:id="@+id/micc_clear"
+        android:title="@string/clear_selection"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/micc_select"
+        android:title="@string/selected"
+        app:showAsAction="always|withText" />
+    <item
+        android:id="@+id/micc_done"
+        android:title="@string/done"
+        app:showAsAction="always|withText" />
+</menu>

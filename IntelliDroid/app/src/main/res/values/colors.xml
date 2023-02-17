@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--BASE THEME COLOR-->
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="splash">#CB5971</color>
+    <color name="green_l">#2FC98E</color>
+    <color name="gray_l">#ECECEC</color>
+    <color name="gray_2">#979797</color>
+    <color name="gray_3">#FFF4F5F6</color>
+    <color name="gray_4">#E6FAFAFA</color>
+    <color name="blue">#FF4A90E2</color>
+    <color name="blue_l">#FFEBF1F6</color>
+    <color name="crim">#FFD81B44</color>
+    <color name="gray_b7">#B7B7B7</color>
+    <color name="red_f9">#F92C53</color>
+
+    <color name="purple">#8280C4</color>
+    <color name="gray_ee">#EEECEE</color>
+    <color name="gray_e5">#E5E5F0</color>
+    <color name="red_da">#DA4B55</color>
+    <color name="red_bf">#BF5A5C</color>
+    <color name="graylte">#ffeaeaea</color>
+    <color name="graylt">#ffd3d3d3</color>
+    <color name="gray">#ff888888</color>
+    <color name="graydk">#ff444444</color>
+    <color name="red">#ffff0000</color>
+    <color name="white">#ffffffff</color>
+    <color name="black">#ff000000</color>
+    <color name="aqua">#458B74</color>
+    <color name="green">#40b68f</color>
+
+    <color name="statusBarColor">@color/colorPrimaryDark</color>
+    <!--<color name="statusBarColor">@color/colorPrimary</color>-->
+    <color name="textColorPrimary">#000000</color>
+
+    <color name="primary">#2196F3</color>
+    <color name="primary_dark">#2196F3</color>
+    <color name="primary_light">#90CAF9</color>
+    <color name="accent">#2196F3</color>
+    <color name="primary_text">#fff</color>
+    <color name="secondary_text">#fff</color>
+    <color name="divider">#1fffffff</color>
+    <color name="tab_text_color">#BBDEFB</color>
+    <color name="tab_text_color_selected">#fff</color>
+    <color name="tab_indicator">#90CAF9</color>
+    <color name="text_selected">#558</color>
+    <color name="transparent_bg">#fff</color>
+
+
+    <color name="bg_item_normal_state">#fff0f0f0</color>
+    <color name="bg_item_dragging_state">#ffffdddd</color>
+    <color name="bg_item_dragging_active_state">#ffff9999</color>
+    <color name="bg_item_swiping_state">#ffddddff</color>
+    <color name="bg_item_swiping_active_state">#ff9999ff</color>
+
+    <color name="bg_group_item_normal_state">#ffddffdd</color>
+    <color name="bg_group_item_normal_pressed_state">#ff99cc99</color>
+    <color name="bg_group_item_expanded_state">#ff88dd88</color>
+    <color name="bg_group_item_expanded_pressed_state">#ff99cc99</color>
+    <color name="bg_group_item_dragging_state">#ffeeccff</color>
+    <color name="bg_group_item_dragging_active_state">#ffee99ff</color>
+    <color name="bg_group_item_swiping_state">#ffddccff</color>
+    <color name="bg_group_item_swiping_active_state">#ffbb99ff</color>
+
+    <color name="bg_swipe_item_neutral">@android:color/transparent</color>
+    <color name="bg_swipe_item_pinned">#fff9930d</color>
+    <color name="bg_swipe_item_dismiss">#ff2f8b2a</color>
+    <color name="bg_swipe_group_item_pinned">#fff45f30</color>
+    <color name="bg_swipe_group_item_dismiss">#ff295db3</color>
+
+    <color name="snackbar_action_color_done">#ffccccff</color>
+
+    <color name="expandable_item_indicator_color">#42000000</color>
+
+
+</resources>

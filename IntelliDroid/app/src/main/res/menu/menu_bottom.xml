@@ -1,0 +1,42 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="intellibitz.intellidroid.MainActivity">
+    <item
+        android:id="@+id/action_chattymail"
+        android:icon="@drawable/tab_main"
+        android:title="@string/mainbox"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_contacts"
+        android:icon="@drawable/tab_contacts"
+        android:title="@string/action_contacts"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_files"
+        android:icon="@drawable/tab_files"
+        android:title="@string/files"
+        app:showAsAction="always" />
+    <!--
+        <item
+            android:id="@+id/action_settings"
+            android:icon="@drawable/tab_settings"
+            android:title="@string/toolbar_profile_title"
+            app:showAsAction="always" />
+    -->
+    <!--
+    <item
+        android:id="@+id/action_nest"
+        android:icon="@drawable/tab_nest"
+        android:title="@string/menu_title_nest"
+        app:showAsAction="always" />
+    -->
+    <!--
+        <item
+            android:id="@+id/action_email_accounts"
+            android:icon="@drawable/ic_mail_outline_black_18dp"
+            android:orderInCategory="400"
+            android:title="@string/menu_title_email"
+            app:showAsAction="always" />
+    -->
+</menu>

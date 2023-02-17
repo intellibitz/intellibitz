@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fontmap name="Rules-Fontmap.xml" version="0.73">
+    <font>
+        <font_from value="Adhawin-Tamil Regular"
+                   path="./resource/ADHAWIN.TTF"/>
+        <font_to value="Adhawin-Tamil Regular"
+                 path="./resource/ADHAWIN.TTF"/>
+    </font>
+    <font_entry>
+        <entry_from value="ex"/>
+        <entry_to value="xe"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="x"/>
+        <entry_to value="X"/>
+        <preceded_by value="o"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="t"/>
+        <entry_to value="T"/>
+        <followed_by value="o"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="E"/>
+        <entry_to value="e"/>
+        <begins_with value="true"/>
+        <conditional value="AND"/>
+    </font_entry>
+    <font_entry>
+        <entry_from value="e"/>
+        <entry_to value="E"/>
+        <ends_with value="true"/>
+        <conditional value="AND"/>
+    </font_entry>
+</fontmap>

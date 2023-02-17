@@ -1,0 +1,16 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:color="@color/gray_b7" android:drawable="@drawable/filters_selected" android:state_checked="true" android:state_window_focused="false" />
+    <item android:color="@color/red_f9" android:drawable="@drawable/filters_closed" android:state_checked="false" android:state_window_focused="false" />
+
+    <item android:color="@color/gray_b7" android:drawable="@drawable/filters_selected" android:state_checked="true" android:state_pressed="true" />
+    <item android:color="@color/red_f9" android:drawable="@drawable/filters_closed" android:state_checked="false" android:state_pressed="true" />
+
+    <item android:color="@color/gray_b7" android:drawable="@drawable/filters_selected" android:state_checked="true" android:state_focused="true" />
+    <item android:color="@color/red_f9" android:drawable="@drawable/filters_closed" android:state_checked="false" android:state_focused="true" />
+
+    <item android:color="@color/red_f9" android:drawable="@drawable/filters_closed" android:state_checked="false" />
+    <item android:color="@color/gray_b7" android:drawable="@drawable/filters_selected" android:state_checked="true" />
+
+
+</selector>

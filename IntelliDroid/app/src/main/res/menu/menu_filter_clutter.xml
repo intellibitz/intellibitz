@@ -1,0 +1,27 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".contact.ContactListActivity">
+    <item
+        android:id="@+id/mi_flagged"
+        android:icon="@drawable/filter_flagged"
+        android:title="@string/flagged"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mi_files"
+        android:icon="@drawable/filter_files"
+        android:title="@string/menu_title_files"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/mi_unread"
+        android:icon="@drawable/filter_unread"
+        android:title="@string/menu_title_unread"
+        app:showAsAction="never" />
+    <!--
+        <item
+            android:id="@+id/mi_reset"
+            android:title="@string/menu_title_reset"
+            android:icon="@drawable/filter_reset"
+            app:showAsAction="never" />
+    -->
+</menu>

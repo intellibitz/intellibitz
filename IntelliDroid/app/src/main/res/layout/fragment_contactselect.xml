@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="intellibitz.intellidroid.MainActivity">
+
+    <include layout="@layout/toolbar_contactselect" />
+
+    <!--
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/contactselect_app_bar"
+            style="@style/AppTheme.AppBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            &lt;!&ndash; DETAIL FILTER TABS &ndash;&gt;
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tablayout5"
+                    style="@style/AppTheme.AppBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/graydk"
+                    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                    android:visibility="visible"
+                    app:layout_scrollFlags="enterAlways|snap"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="@color/red"
+                    app:tabIndicatorHeight="0dp"
+                    app:tabMode="fixed"
+                    app:tabPaddingEnd="1dp"
+                    app:tabPaddingStart="1dp"
+                    app:tabTextColor="@color/white" />
+
+                <android.support.v7.widget.Toolbar
+                    android:id="@+id/toolbar5"
+                    style="@style/AppTheme.ActionBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light"
+                    android:visibility="gone"
+                    app:layout_scrollFlags="scroll|enterAlways|snap" />
+
+            </LinearLayout>
+            &lt;!&ndash;</LinearLayout>&ndash;&gt;
+
+        </android.support.design.widget.AppBarLayout>
+    -->
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/swiperefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/recyclerview"
+            android:name="intellibitz.intellidroid.contact.akcontact.AKContactItemFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            app:layoutManager="LinearLayoutManager"
+            tools:context="intellibitz.intellidroid.MainActivity"
+            tools:listitem="@layout/listitem_intellibitzcontact" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

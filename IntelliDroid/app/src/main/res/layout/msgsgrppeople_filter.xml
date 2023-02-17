@@ -1,0 +1,66 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_msgsgrppeople_filter"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:visibility="visible">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="6dp"
+        android:text="@string/bring_on_top"
+        android:textAllCaps="true" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!--
+                    android:button="@null"
+                    android:drawableBottom="@android:drawable/btn_radio"
+        -->
+        <CheckBox
+            android:id="@+id/cb_mail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_weight="1"
+            android:button="@android:color/transparent"
+            android:checked="true"
+            android:drawableBottom="@drawable/circle_float"
+            android:gravity="center"
+            android:text="@string/mail"
+            android:textColor="@drawable/circle_float" />
+
+        <CheckBox
+            android:id="@+id/cb_chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@android:color/transparent"
+            android:checked="true"
+            android:drawableBottom="@drawable/circle_float"
+            android:gravity="center"
+            android:text="@string/menu_title_chat"
+            android:textColor="@drawable/circle_float" />
+
+        <CheckBox
+            android:id="@+id/cb_groups"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:button="@android:color/transparent"
+            android:checked="true"
+            android:drawableBottom="@drawable/circle_float"
+            android:gravity="center"
+            android:text="@string/groups"
+            android:textColor="@drawable/circle_float" />
+
+    </LinearLayout>
+
+</LinearLayout>

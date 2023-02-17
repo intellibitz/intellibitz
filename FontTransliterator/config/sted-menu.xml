@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="yes"?>
+<!--
+/**
+ * Copyright (C) IntelliBitz Technologies.,  Muthu Ramadoss
+ * 168, Medavakkam Main Road, Madipakkam, Chennai 600091, Tamilnadu, India.
+ * http://www.intellibitz.com
+ * training@intellibitz.com
+ * +91 44 2247 5106
+ * http://groups.google.com/group/etoe
+ * http://sted.sourceforge.net
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ *
+ * STED, Copyright (C) 2007 IntelliBitz Technologies
+ * STED comes with ABSOLUTELY NO WARRANTY;
+ * This is free software, and you are welcome
+ * to redistribute it under the GNU GPL conditions;
+ *
+ * Visit http://www.gnu.org/ for GPL License terms.
+ */
+-->
+
+<!--
+/**
+ * $Id:sted-menu.xml 55 2007-05-19 05:55:34Z sushmu $
+ * $HeadURL: svn+ssh://sushmu@svn.code.sf.net/p/sted/code/FontTransliterator/trunk/config/sted-menu.xml $
+ */
+-->
+
+<!DOCTYPE
+        menubars
+        [
+                <!ELEMENT menubars (menubar)+    >
+                <!ELEMENT menubar (menu+, popup_menu*)    >
+                <!ELEMENT popup_menu (menuitem*, menuitemref*, menu*, seperator*, menuitem*,menuitemref*, menu*)*    >
+                <!ELEMENT menu (menuitem*, menuitemref*, menu*, seperator*, menuitem*,menuitemref*, menu*)*>
+                <!ELEMENT menuitem EMPTY>
+                <!ELEMENT menuitemref EMPTY>
+                <!ELEMENT seperator EMPTY>
+
+                <!ATTLIST menubar
+                        name ID #REQUIRED
+                        toolBarName CDATA #IMPLIED
+                        description CDATA "enter menubar description here"
+                        >
+
+                <!ATTLIST popup_menu
+                        name ID #REQUIRED
+                        >
+                <!ATTLIST menu
+                        name ID #REQUIRED
+                        mnemonic CDATA #REQUIRED
+                        action CDATA #IMPLIED
+                        actionEnabled (true|false) "true"
+                        >
+                <!ATTLIST menuitem
+                        name CDATA #REQUIRED
+                        type CDATA "javax.swing.JMenuItem"
+                        mnemonic CDATA #IMPLIED
+                        accelerator CDATA #IMPLIED
+                        tooltip CDATA #REQUIRED
+                        icon CDATA #IMPLIED
+                        action CDATA #REQUIRED
+                        actionCommand CDATA #REQUIRED
+                        actionEnabled (true|false) "true"
+                        actionMode (on|off) "on"
+                        listener CDATA #IMPLIED
+                        toolButton CDATA "javax.swing.JButton"
+                        toolButtonVisible (true|false) "true"
+                        toolButtonTextVisible (true|false) "false"
+                        >
+                <!ATTLIST menuitemref
+                        name CDATA #REQUIRED
+                        >
+                ]>
+
+<menubars>
+    <menubar
+            name="STED-MenuBar"
+            toolBarName="STED-MenuBar"
+            description="The STED Application MenuBar">
+
+        <menu
+                name="FontMap"
+                mnemonic="F"
+        >
+            <menuitem
+                    name="New"
+                    mnemonic="N"
+                    accelerator="control N"
+                    tooltip="Create a New FontMap"
+                    icon="./images/new.png"
+                    action="intellibitz.sted.actions.NewFontMapAction"
+                    actionCommand="New"
+            />
+            <menuitem
+                    name="Open..."
+                    mnemonic="O"
+                    accelerator="control O"
+                    tooltip="Open Existing FontMap"
+                    icon="./images/load.png"
+                    action="intellibitz.sted.actions.OpenFontMapAction"
+                    actionCommand="Open..."
+            />
+            <seperator/>
+            <menu
+                    name="ReOpen"
+                    mnemonic="O"
+                    action="intellibitz.sted.actions.ReOpenAction"
+                    actionEnabled="false"
+            >
+                <seperator/>
+                <menuitem
+                        name="Clear List"
+                        tooltip="Clear the list of ReOpen FontMap"
+                        action="intellibitz.sted.actions.ClearReOpenAction"
+                        actionCommand="ClearList"
+                        actionEnabled="true"
+                        toolButtonVisible="false"
+                />
+            </menu>
+            <seperator/>
+            <menuitem
+                    name="Save"
+                    mnemonic="S"
+                    accelerator="control S"
+                    tooltip="Save FontMap"
+                    icon="./images/save.png"
+                    action="intellibitz.sted.actions.SaveFontMapAction"
+                    actionCommand="Save"
+                    actionEnabled="false"
+            />
+            <menuitem
+                    name="Save As..."
+                    mnemonic="A"
+                    tooltip="Save FontMap As"
+                    icon="./images/saveas.png"
+                    action="intellibitz.sted.actions.SaveAsAction"
+                    actionCommand="Save As..."
+                    actionEnabled="false"
+                    toolButtonVisible="false"
+            />
+            <seperator/>
+            <menuitem
+                    name="ReLoad from Disk"
+                    mnemonic="k"
+                    accelerator="control K"
+                    tooltip="ReLoad Existing FontMap"
+                    icon="./images/reload.png"
+                    action="intellibitz.sted.actions.LoadFontMapAction"
+                    actionCommand="ReLoad"
+                    actionEnabled="false"
+                    toolButtonVisible="false"
+            />
+            <seperator/>
+            <menuitem
+                    name="Close"
+                    mnemonic="C"
+                    accelerator="control F4"
+                    tooltip="Close FontMap"
+                    icon="./images/close.png"
+                    action="intellibitz.sted.actions.CloseAction"
+                    actionCommand="Close"
+                    actionEnabled="false"
+                    toolButtonVisible="false"
+            />
+            <seperator/>
+            <menuitem
+                    name="Exit"
+                    mnemonic="X"
+                    tooltip="Exit"
+                    action="intellibitz.sted.actions.ExitAction"
+                    actionCommand="Exit"
+                    toolButtonVisible="false"
+            />
+        </menu>
+        <menu
+                name="Edit"
+                mnemonic="E"
+        >
+            <menuitem
+                    name="Undo"
+                    mnemonic="u"
+                    accelerator="control Z"
+                    tooltip="Undo Edit"
+                    icon="./images/undo.png"
+                    action="intellibitz.sted.actions.UndoAction"
+                    actionEnabled="false"
+                    actionCommand="Undo"
+            />
+            <menuitem
+                    name="Redo"
+                    mnemonic="r"
+                    accelerator="control shift Z"
+                    tooltip="Redo Edit"
+                    icon="./images/redo.png"
+                    action="intellibitz.sted.actions.RedoAction"
+                    actionEnabled="false"
+                    actionCommand="Redo"
+            />
+            <seperator/>
+            <menuitem
+                    name="Cut"
+                    mnemonic="t"
+                    accelerator="control X"
+                    tooltip="Cut Selected Mapping"
+                    icon="./images/cut.png"
+                    action="intellibitz.sted.actions.CutAction"
+                    actionCommand="Cut"
+                    actionEnabled="false"
+            />
+            <menuitem
+                    name="Copy"
+                    mnemonic="C"
+                    accelerator="control C"
+                    tooltip="Copy Selected Mapping"
+                    icon="./images/copy.png"
+                    action="intellibitz.sted.actions.CopyAction"
+                    actionCommand="Copy"
+                    actionEnabled="false"
+            />
+            <menuitem
+                    name="Paste"
+                    mnemonic="P"
+                    accelerator="control V"
+                    tooltip="Paste"
+                    icon="./images/paste.png"
+                    action="intellibitz.sted.actions.PasteAction"
+                    actionCommand="Paste"
+                    actionEnabled="false"
+            />
+            <seperator/>
+            <menuitem
+                    name="Select All"
+                    mnemonic="A"
+                    accelerator="control A"
+                    tooltip="Select All Mapping"
+                    action="intellibitz.sted.actions.SelectAllAction"
+                    actionCommand="Select All"
+                    actionEnabled="false"
+                    toolButtonVisible="false"
+            />
+            <seperator/>
+            <menuitem
+                    name="Delete"
+                    mnemonic="D"
+                    accelerator="DELETE"
+                    tooltip="Delete Selected Mapping"
+                    icon="./images/delete.png"
+                    action="intellibitz.sted.actions.DeleteAction"
+                    actionCommand="Delete"
+                    actionEnabled="false"
+                    toolButtonVisible="false"
+            />
+        </menu>
+        <menu
+                name="Transliterate"
+                mnemonic="T"
+        >
+            <menuitem
+                    name="Input"
+                    mnemonic="I"
+                    accelerator="control alt I"
+                    tooltip="Select Input file - source"
+                    icon="./images/input.png"
+                    action="intellibitz.sted.actions.FileSelectAction"
+                    actionEnabled="false"
+                    actionCommand="Input"
+            />
+            <menuitem
+                    name="Output"
+                    mnemonic="O"
+                    accelerator="control alt O"
+                    tooltip="Select Output file - target"
+                    icon="./images/output.png"
+                    action="intellibitz.sted.actions.FileSelectAction"
+                    actionEnabled="false"
+                    actionCommand="Output"
+            />
+            <seperator/>
+            <menuitem
+                    name="Convert"
+                    mnemonic="C"
+                    accelerator="control alt C"
+                    tooltip="Convert based on the current FontMap"
+                    icon="./images/convert.png"
+                    action="intellibitz.sted.actions.TransliterateAction"
+                    actionCommand="Convert"
+                    actionEnabled="false"
+            />
+            <menuitem
+                    name="Stop"
+                    mnemonic="S"
+                    accelerator="control alt S"
+                    tooltip="Stop Conversion"
+                    icon="./images/stop.png"
+                    action="intellibitz.sted.actions.TransliterateStopAction"
+                    actionCommand="Stop"
+                    actionEnabled="false"
+            />
+        </menu>
+        <menu
+                name="Options"
+                mnemonic="O"
+        >
+            <menuitem
+                    name="Reverse Transliterate"
+                    type="javax.swing.JCheckBoxMenuItem"
+                    mnemonic="R"
+                    accelerator="control alt R"
+                    tooltip="Transliterate in Reverse direction"
+                    action="intellibitz.sted.actions.ItemListenerAction"
+                    actionCommand="Reverse"
+                    actionMode="off"
+                    toolButton="javax.swing.JCheckBox"
+                    toolButtonVisible="false"
+            />
+            <menuitem
+                    name="Preserve &lt;Tags&gt;"
+                    type="javax.swing.JCheckBoxMenuItem"
+                    mnemonic="P"
+                    accelerator="control alt P"
+                    tooltip="Dont Transliterate words in tags"
+                    action="intellibitz.sted.actions.ItemListenerAction"
+                    actionCommand="Preserve"
+                    actionMode="off"
+                    toolButton="javax.swing.JCheckBox"
+                    toolButtonTextVisible="true"
+            />
+            <seperator/>
+            <menu
+                    name="Look &amp; Feel"
+                    mnemonic="L"
+            >
+            </menu>
+        </menu>
+        <menu
+                name="View"
+                mnemonic="V"
+        >
+            <menuitem
+                    name="Toolbar"
+                    type="javax.swing.JCheckBoxMenuItem"
+                    mnemonic="T"
+                    accelerator="control shift T"
+                    tooltip="Show/Hide Toolbar"
+                    action="intellibitz.sted.actions.ViewAction$ViewToolBar"
+                    actionCommand="ViewTool"
+                    toolButtonVisible="false"
+            />
+            <menuitem
+                    name="Status Bar"
+                    type="javax.swing.JCheckBoxMenuItem"
+                    mnemonic="S"
+                    accelerator="control shift S"
+                    tooltip="Show/Hide Status Bar"
+                    action="intellibitz.sted.actions.ViewAction$ViewStatus"
+                    actionCommand="ViewStatus"
+                    toolButtonVisible="false"
+            />
+            <seperator/>
+            <menuitem
+                    name="Mapping Rules"
+                    type="javax.swing.JCheckBoxMenuItem"
+                    mnemonic="M"
+                    accelerator="control shift M"
+                    tooltip="Show/Hide Mapping Details"
+                    action="intellibitz.sted.actions.ViewAction$ViewMapping"
+                    actionCommand="ViewMapping"
+                    actionEnabled="false"
+                    toolButtonVisible="false"
+            />
+            <menuitem
+                    name="Mapping Preview"
+                    type="javax.swing.JCheckBoxMenuItem"
+                    mnemonic="A"
+                    accelerator="control shift A"
+                    tooltip="Show/Hide Sample Text"
+                    action="intellibitz.sted.actions.ViewAction$ViewSample"
+                    actionCommand="ViewSample"
+                    actionEnabled="false"
+                    toolButtonVisible="false"
+            />
+        </menu>
+        <menu
+                name="Samples"
+                mnemonic="S"
+        >
+        </menu>
+        <menu
+                name="Help"
+                mnemonic="H"
+        >
+            <menuitem
+                    name="Help Topics"
+                    mnemonic="T"
+                    accelerator="F1"
+                    tooltip="Display Help Topics"
+                    icon="./images/help.png"
+                    action="intellibitz.sted.actions.HelpAction"
+                    actionCommand="Help"
+            />
+            <seperator/>
+            <menuitem
+                    name="About"
+                    mnemonic="A"
+                    tooltip="About STED"
+                    icon="./images/sted.gif"
+                    action="intellibitz.sted.actions.AboutAction"
+                    actionCommand="About"
+            />
+        </menu>
+
+        <popup_menu name="Mapping">
+            <menuitemref
+                    name="Undo"
+            />
+            <menuitemref
+                    name="Redo"
+            />
+            <seperator/>
+            <menuitemref
+                    name="Cut"
+            />
+            <menuitemref
+                    name="Copy"
+            />
+            <menuitemref
+                    name="Paste"
+            />
+            <seperator/>
+            <menuitemref
+                    name="Select All"
+            />
+            <seperator/>
+            <menuitemref
+                    name="Delete"
+            />
+        </popup_menu>
+    </menubar>
+
+    <!--
+        <menubar
+            name="FontMap-MenuBar"
+            toolBarName="FontMap-MenuBar"
+            description="The FontMap Context MenuBar">
+
+            <menu
+                name="File"
+                mnemonic="F"
+                >
+            </menu>
+
+
+        </menubar>
+    -->
+</menubars>
+
+

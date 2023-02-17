@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="intellibitz.intellidroid.MainActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/email_msg_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/email_msg_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary"
+            android:minHeight="?attr/actionBarSize"
+            android:subtitle="true"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/email_msg_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <!--app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+    <!--android:theme="@style/AppTheme.ActionBar"-->
+
+
+</LinearLayout>
