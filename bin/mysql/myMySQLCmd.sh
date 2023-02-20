@@ -10,10 +10,19 @@ systemctl status mysql
 # https://dev.mysql.com/doc/refman/8.0/en/starting-server.html
 systemctl start mysqld
 
+#https://dev.mysql.com/doc/refman/8.0/en/testing-server.html
+mysqladmin version
+mysqladmin variables
+mysqladmin -u root -p version
+mysqladmin -u root shutdown
+mysqld_safe --user=mysql &
+mysqlshow
+mysqlshow mysql
+mysql -e "SELECT User, Host, plugin FROM mysql.user" mysql
+
 # https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 
 # To install and use a MySQL binary distribution, the command sequence looks like this:
-
 groupadd mysql
 useradd -r -g mysql -s /bin/false mysql
 cd /usr/local
@@ -29,14 +38,25 @@ bin/mysqld_safe --user=mysql &
 # Next command is optional
 cp support-files/mysql.server /etc/init.d/mysql.server
 
-https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
-
+#https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 mysql -u root -p
 mysql -u root --skip-password
 mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'root-password';
 mysqladmin -u root -p shutdown
 
 #Creating Accounts and Granting Privileges
+CREATE USER 'username'@'host' IDENTIFIED WITH authentication_plugin BY 'password';
+CREATE USER 'sammy'@'localhost' IDENTIFIED BY 'password';
+CREATE USER 'sammy'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+ALTER USER 'sammy'@'localhost' IDENTIFIED WITH caching_sha2_plugin BY 'password';
+GRANT PRIVILEGE ON database.table TO 'username'@'host';
+GRANT CREATE, ALTER, DROP, INSERT, UPDATE, INDEX, DELETE, SELECT, REFERENCES, RELOAD
+on *.*
+TO 'sammy'@'localhost'
+WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON *.* TO 'sammy'@'localhost' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
 CREATE USER 'finley'@'localhost'
   IDENTIFIED BY 'password';
 GRANT ALL
@@ -130,6 +150,56 @@ mysql> SHOW DATABASES;
 mysql> SELECT DATABASE();
 mysql> SHOW TABLES;
 mysql> DESCRIBE pet;
+
+#https://dev.mysql.com/doc/refman/8.0/en/creating-database.html
+mysql> CREATE DATABASE menagerie;
+mysql> USE menagerie
+mysql -h host -u user -p menagerie
+
+CREATE DATABASE `birthdays`;
+USE birthdays;
+CREATE TABLE tourneys (
+name varchar(30),
+wins real,
+best real,
+size real
+);
+INSERT INTO tourneys (name, wins, best, size)
+VALUES ('Dolly', '7', '245', '8.5'),
+('Etta', '4', '283', '9'),
+('Irma', '9', '266', '7'),
+('Barbara', '2', '197', '7.5'),
+('Gladys', '13', '273', '8');
+CREATE TABLE dinners (
+name varchar(30),
+birthdate date,
+entree varchar(30),
+side varchar(30),
+dessert varchar(30)
+);
+INSERT INTO dinners (name, birthdate, entree, side, dessert)
+VALUES ('Dolly', '1946-01-19', 'steak', 'salad', 'cake'),
+('Etta', '1938-01-25', 'chicken', 'fries', 'ice cream'),
+('Irma', '1941-02-18', 'tofu', 'fries', 'cake'),
+('Barbara', '1948-12-25', 'tofu', 'salad', 'ice cream'),
+('Gladys', '1944-05-28', 'steak', 'fries', 'ice cream');
+
+#https://dev.mysql.com/doc/refman/8.0/en/creating-tables.html
+mysql> SHOW TABLES;
+mysql> CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20),
+       species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
+mysql> DESCRIBE pet;
+mysql> LOAD DATA LOCAL INFILE '/path/pet.txt' INTO TABLE pet;
+mysql> LOAD DATA LOCAL INFILE '/path/pet.txt' INTO TABLE pet
+       LINES TERMINATED BY '\r\n';
+mysql> INSERT INTO pet
+       VALUES ('Puffball','Diane','hamster','f','1999-03-30',NULL);
+
+#https://dev.mysql.com/doc/refman/8.0/en/retrieving-data.html
+SELECT what_to_select
+FROM which_table
+WHERE conditions_to_satisfy;
+
 
 #Using mysql in Batch Mode
 mysql < batch-file
