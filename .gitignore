@@ -5,6 +5,5 @@
 /*.gen
 gradle-wrapper.jar
 target
-bin
 classes
 test-classes
