@@ -1,3 +1,10 @@
-/.idea/
+.gradle
+.idea
+.gen
 /*.iml
-/.git/
+/*.gen
+gradle-wrapper.jar
+target
+bin
+classes
+test-classes
