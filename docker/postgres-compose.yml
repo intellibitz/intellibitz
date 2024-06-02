@@ -1,0 +1,37 @@
+# docker compose up -d
+# docker compose -f postgres-compose.yml up -d
+# docker compose logs -f
+# docker compose logs -f postgres
+# docker compose logs -f pgadmin
+# docker compose down
+# version: '3'
+
+# This configuration file defines a service called postgres with the PostgreSQL server running on port 65432 of your computer,
+#  and a second service called ptadmin that runs pgAdmin on port 65431. Both services require storage, so two volumes are
+#  also created for them. Using separate volumes for storage allows the data to persist if the containers are stopped and restarted.
+
+services:
+  postgres:
+    image: postgres
+#    restart: always
+    container_name: postgres
+    ports:
+      - 65432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: admin
+  pgadmin:
+    image: dpage/pgadmin4
+#    restart: always
+    container_name: pgadmin
+    ports:
+      - 65431:80
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: muthu.ramadoss@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+volumes:
+  pgdata:
+  pgadmin:

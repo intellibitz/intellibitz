@@ -1,0 +1,24 @@
+# Dockerfile for ubuntu development environment
+
+FROM ubuntu:latest
+LABEL maintainer="Muthu Ramadoss <muthu.ramadoss@gmail.com>"
+LABEL description="Ubuntu Development Environment"
+
+RUN <<EOF
+    apt-get update && apt-get install -y \
+        sudo \
+        curl \
+        wget \
+        zsh \
+        fish \
+        nano \
+    && rm -rf /var/lib/apt/lists/*
+    #apt-get install -y git gnupg locales
+    #locale-gen en_US.UTF-8
+    useradd -s /bin/bash -m -c "Muthu" muthu
+    echo "muthu:admin" | chpasswd &&  usermod -aG sudo muthu
+EOF
+
+USER muthu
+CMD ["/usr/bin/fish"]
+
