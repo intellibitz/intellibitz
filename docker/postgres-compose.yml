@@ -10,6 +10,7 @@
 #  and a second service called ptadmin that runs pgAdmin on port 65431. Both services require storage, so two volumes are
 #  also created for them. Using separate volumes for storage allows the data to persist if the containers are stopped and restarted.
 
+name: postgres
 services:
   postgres:
     image: postgres
@@ -19,6 +20,8 @@ services:
       - 65432:5432
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - db
     environment:
       POSTGRES_PASSWORD: admin
   pgadmin:
@@ -29,9 +32,14 @@ services:
       - 65431:80
     volumes:
       - pgadmin:/var/lib/pgadmin
+    networks:
+      - db
     environment:
       PGADMIN_DEFAULT_EMAIL: muthu.ramadoss@gmail.com
       PGADMIN_DEFAULT_PASSWORD: admin
 volumes:
   pgdata:
   pgadmin:
+networks:
+  # The presence of these objects is sufficient to define them
+  db: {}
