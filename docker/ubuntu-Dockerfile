@@ -5,6 +5,21 @@ FROM ubuntu:latest
 LABEL maintainer="Muthu Ramadoss <muthu.ramadoss@gmail.com>"
 LABEL description="Ubuntu Development Environment"
 
+ARG USERNAME=muthu
+ARG HOME=/home/$USERNAME
+#ARG USER_UID=1000
+#ARG USER_GID=$USER_UID
+
+#RUN groupadd -f --gid $USER_GID $USERNAME
+#RUN useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME -c "ubuntu user home muthu"
+#RUN mkdir -p "/etc/sudoers.d/$USERNAME"
+#RUN echo "$USERNAME ALL=\(root\) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME
+#RUN chmod 0440 /etc/sudoers.d/$USERNAME
+RUN <<EOF
+    useradd -s /bin/bash -m $USERNAME -c "ubuntu user home muthu" \
+    && echo "muthu:admin" | chpasswd &&  usermod -aG sudo muthu
+EOF
+
 RUN <<EOF
     apt-get update \
     && apt-get install -y \
@@ -23,21 +38,6 @@ RUN <<EOF
 
     #apt-get install -y git gnupg locales
     #locale-gen en_US.UTF-8
-EOF
-
-ARG USERNAME=muthu
-ARG HOME=/home/$USERNAME
-#ARG USER_UID=1000
-#ARG USER_GID=$USER_UID
-
-#RUN groupadd -f --gid $USER_GID $USERNAME
-#RUN useradd -s /bin/bash --uid $USER_UID --gid $USER_GID -m $USERNAME -c "ubuntu user home muthu"
-#RUN mkdir -p "/etc/sudoers.d/$USERNAME"
-#RUN echo "$USERNAME ALL=\(root\) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME
-#RUN chmod 0440 /etc/sudoers.d/$USERNAME
-RUN <<EOF
-    useradd -s /bin/bash -m $USERNAME -c "ubuntu user home muthu" \
-    && echo "muthu:admin" | chpasswd &&  usermod -aG sudo muthu
 EOF
 
 USER $USERNAME
