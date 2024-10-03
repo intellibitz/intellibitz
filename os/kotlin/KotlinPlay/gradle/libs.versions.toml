@@ -1,0 +1,27 @@
+[versions]
+kotlin = "2.0.20"
+kotlinxCoroutinesCore = "1.8.1"
+kotlinxSerializationCore = "1.7.2"
+kotlinxDatetime = "0.6.0"
+kotlinxLincheck = "2.34"
+ktor = "3.0.0-rc-1"
+
+[libraries]
+kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin" }
+kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
+kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin" }
+kotlinx-lincheck = { group="org.jetbrains.kotlinx", name ="lincheck", version.ref="kotlinxLincheck"}
+kotlinx-metadata-jvm = { group = "org.jetbrains.kotlin", name = "kotlin-metadata-jvm", version.ref = "kotlin" }
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinxCoroutinesCore" }
+kotlinx-serialization-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-core", version.ref = "kotlinxSerializationCore" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+
+[bundles]
+kotlinx = ["kotlinx-coroutines-core", "kotlinx-serialization-core", "kotlinx-datetime", "kotlinx-metadata-jvm"]
+ktor-client = ["ktor-client-core"]
+
+[plugins]
+kotlin-jvm = {id="org.jetbrains.kotlin.jvm", version.ref="kotlin"}
+kotlin-multiplatform = {id="org.jetbrains.kotlin.multiplatform", version.ref="kotlin"}
+
