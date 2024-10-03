@@ -1,0 +1,31 @@
+# This configuration file defines a service called db with the PostgreSQL server running on port 5432 of your computer,
+#  and a second service called admin that runs pgAdmin on port 8080. Both services require storage, so two volumes are
+#  also created for them. Using separate volumes for storage allows the data to persist if the containers are stopped and restarted.
+
+# docker compose up -d
+# docker compose down
+# version: '3'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: admin
+    ports:
+      - 65432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  admin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: muthu.ramadoss@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - 65430:80
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+volumes:
+  pgdata:
+  pgadmin:

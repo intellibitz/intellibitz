@@ -1,0 +1,48 @@
+# https://docs.docker.com/compose/compose-file/
+# name: postgres
+
+services:
+  postgres:
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
+    image: postgres
+    restart: always
+    # hostname: 'postgres'
+    ports:
+      - '65432:5432'
+    environment:
+      # SERVER_NAME: 'postgres'
+      POSTGRES_PASSWORD: 'admin'
+      # POSTGRES_DB: 'postgres'
+      # PGDATA: '/postgres/16/data'
+    # set shared memory limit when using docker-compose
+    shm_size: 128mb
+    # or set shared memory limit when deploy via swarm stack
+    # networks:
+    #   - pg-net
+    #volumes:
+    #  - type: tmpfs
+    #    target: /dev/shm
+    #    tmpfs:
+    #      size: 134217728 # 128*2^20 bytes = 128Mb
+    # volumes:
+    #   - type: volume
+    #     source: pgdata
+    #     target: /var/lib/postgresql/data
+    # volumes:
+    #   - ./init:/docker-entrypoint-initdb.d/
+    #   - /mnt/NTFS:/mnt/NTFS
+    #   - ~/docker-vols/standalone:/postgres/16/data
+
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 68080:8080
+
+# networks:
+#   pg-net:
+
+# volumes:
+#   pgdata:
