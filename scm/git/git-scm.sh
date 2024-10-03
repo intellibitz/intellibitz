@@ -43,6 +43,7 @@ git rebase branch_name #Reapply commits on top of another branch
 git rebase --continue #continues with the rebase process after having resolved merge conflicts
 git rebase --abort #stops the rebase process and go back to the state before the rebase
 
+git reset --hard HEAD~1
 git switch -
 
 #--
