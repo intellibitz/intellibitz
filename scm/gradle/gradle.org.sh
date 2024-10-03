@@ -18,3 +18,39 @@ $ ./gradlew --version
 $ ./gradlew wrapper --gradle-version 8.10.2
 $ ./gradlew --status
 
+gradlew --help
+gradlew -h
+
+#To execute a task called taskName on the root project, type:
+$ gradle :taskName
+
+#To pass an option to a task, prefix the option name with -- after the task name:
+$ gradle taskName --exampleOption=exampleValue
+
+#The primary purpose of the settings file is to add subprojects to your build.
+<< 'settings.gradle.kts'
+
+rootProject.name = "root-project"
+include("sub-project-a")
+include("sub-project-b")
+include("sub-project-c")
+
+settings.gradle.kts
+#The settings file is a script. It is either a settings.gradle file written in Groovy or a
+# settings.gradle.kts file in Kotlin.
+#There is only one root project per build.
+
+#In the build file, two types of dependencies can be added:
+#The libraries and/or plugins on which Gradle and the build script depend.
+#The libraries on which the project sources (i.e., source code) depend.
+<< 'build.gradle.kts'
+plugins {
+    id("application")
+}
+
+application {
+    mainClass = "com.example.Main"
+}
+build.gradle.kts
+#Every Gradle build comprises at least one build script.
+
