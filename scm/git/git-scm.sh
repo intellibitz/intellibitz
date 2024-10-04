@@ -1,7 +1,9 @@
 # https://git-scm.com
+# https://git-scm.com/docs/gitcredentials
+# https://git-scm.com/doc/credential-helpers
 # https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things
-#https://git-scm.com/docs/gitcredentials
-#https://git-scm.com/doc/credential-helpers
+# https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
+# https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository
 
 git config credential.https://example.com.username myusername
 git config credential.helper "[helper] [options]"
@@ -22,23 +24,53 @@ $ git config --global init.defaultBranch main
 $ git config user.name
 
 #--
-git init -b ["main"] #creates or reinitializes local git repository as main branch
 #Start a new Git repository for an existing code base
 $ cd /path/to/my/codebase
+#Initial branch configuration: git init also sets up an initial branch (traditionally main). However, this
+# branch doesn't have any commits until you make your first commit.
 $ git init                        #(1) Create a /path/to/my/codebase/.git directory.
 $ git add .                       #(2) Add all existing files to the index.
 $ git commit -m "commit_message"  #(3) Record the pristine state as the first commit in the history.
+git init -b ["main"] #creates or reinitializes local git repository as main branch
 
 #You clone a repository with git clone <url>. For example, if you want to clone the
 # Git linkable library called libgit2, you can do so like this:
+git clone URL #clones remote git repository
 $ git clone https://github.com/libgit2/libgit2
 #If you want to clone the repository into a directory named something other than libgit2, you can
 # specify the new directory name as an additional argument:
+git clone URL directory_name #clones a remote repository
 $ git clone https://github.com/libgit2/libgit2 mylibgit
 #Git has a number of different transfer protocols you can use. The previous example uses the https:// protocol, but
 # you may also see git:// or user@server:path/to/repo.git, which uses the SSH transfer protocol.
 
+#The .git folder manages your project's repo. Git doesn't run as a server*. Instead the .git folder acts as your
+# local 'server' that all the git commands communicate with. Basically, running a git command edits the contents of the .git folder.
+
+git clone vs. git init
+#--
+#While git init is used to create a new repository, git clone is used to copy an existing repository. If you're
+# starting a new project from scratch use git init. If you're contributing to an existing project or want to create a
+# local copy of a project, you'll use git clone followed by the repository's URL.
+
+#The git clone command automatically sets up the necessary config for your repo to connect back to a remote.
+# But you can also manually configure a repo set up with git init to connect to a remote.
+
+Best practices for Using git init
+#--
+#One project per repository: It's a best practice to keep each Git repository limited to a single project or
+# logical grouping of files to maintain clarity and organization.
+#Immediate .gitignore creation: After initializing your repository, create a .gitignore file to specify
+# intentionally untracked files that Git should ignore. Common examples include compiled code, system files, and editor configuration.
+
 git status #shows modified, unmodified files
+
+git remote #List the remote repository connections stored in the local repository by shortname
+git remote -v #List the remote repository connections in the local repository with shortnames and URLs
+git remote add shortname URL #adds a connection to a remote repository named <shortname> at <URL>
+#remove the old 'origin' remote and add new origin remote
+git remote remove origin
+git remote add origin new_repo_path.git
 
 git add filename #adds files to staging
 git add -A #adds all files from working directory to staging, tracking on
@@ -71,13 +103,6 @@ git reset --hard HEAD~1
 git switch -
 
 #--
-git clone URL directory_name #clones a remote repository
-git clone URL #clones remote git repository
-
-git remote #List the remote repository connections stored in the local repository by shortname
-git remote -v #List the remote repository connections in the local repository with shortnames and URLs
-git remote add shortname URL #adds a connection to a remote repository named <shortname> at <URL>
-
 git log --all #shows commit history for all branches in local repository
 git branch --all #lists local branches and remote-tracking branches
 git branch -vv #lists the local branches and their upstream branches, if they have any
@@ -97,12 +122,6 @@ git pull #if an upstream branch is defined for the current branch, fetch and int
 git pull shortname branch_name #fetches and integrates changes from the <shortname> remote repository for the specified <branch_name>
 git pull -p #removes remote-tracking branches that correspond to deleted remote branches and fetches and integrates changes from the <shortname> remote repository for the specified <branch_name>
 
-# https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
-# https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository
-cat .gitignore
-#*.[oa]
-#*~
-
 # https://git-scm.com/docs/git-init
 #Start a new Git repository for an existing code base
 cd /path/to/my/codebase || exit
@@ -121,39 +140,43 @@ git branch -a
 
 #The .git directory structure
 HEAD:
-
+#--
 #The HEAD file is a reference to the current branch that's checked out. By default, it points to the master or
 # main branch, but it won't actually refer to a valid branch until you make your first commit. It can also point to a
 # commit if you're in a 'detached HEAD' state.
 config:
-
+#--
 #This file contains repository-specific configuration settings. These settings can include user information, remote
 # repository URLs, and branch configurations. The settings here override the global Git configuration settings for
 # this specific repository.
 objects/:
-
+#--
 #The objects directory stores all the data for your commits, including files and the structure of the commit tree. This
 # data is stored in a compressed format, making Git very efficient. The objects are identified by a SHA-1 hash of their content.
 refs/:
-
+#--
 #The refs directory contains references to commit objects in the repository, organized into subdirectories such as
 # heads/ for branch heads and tags/ for tag objects. These references are updated as you commit and branch within your repository.
 hooks/:
-
+#--
 #This directory contains client-side or server-side scripts that are invoked at different phases of the Git workflow, such as
 # before a commit is finalized (pre-commit) or before pushing to a remote repository (pre-push). By default, Git populates this
 # directory with example scripts. These scripts are not active until renamed (removing the .sample extension).
 info/:
-
+#--
 #Inside, you'll find the exclude file, which works like a .gitignore file but is specific to this repository. The patterns listed in
 # the exclude file will be ignored by Git, similar to how .gitignore works, but without the need to commit this file into the repository.
 description:
-
+#--
 #This file is only used by the GitWeb program, which is a Git web interface. By default, it contains a placeholder text
 # ("Unnamed repository; edit this file 'description' to name the repository."), which can be changed to provide a
 # meaningful description of your repository for viewers on GitWeb.
 index:
-
+#--
 #The index file (not present immediately after git init but created upon first adding files to the staging area)
 # acts as the staging area ("index") for Git. It tracks which files will be included in the next commit.
+
+cat .gitignore
+#*.[oa]
+#*~
 
