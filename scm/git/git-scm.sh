@@ -5,15 +5,39 @@
 
 git config credential.https://example.com.username myusername
 git config credential.helper "[helper] [options]"
-
+#If you want to check your configuration settings, you can use the git config --list command to
+# list all the settings Git can find at that point:
+$ git config --list
+#You can view all of your settings and where they are coming from using:
+$ git config --list --show-origin
 git config --global --list
 git config --global user.name=["name"]
 git config --global user.email=["email"]
-
 git config --global --add safe.directory dir-path
+#If you want to use a different text editor, such as Emacs, you can do the following:
+$ git config --global core.editor emacs
+#To set main as the default branch name do:
+$ git config --global init.defaultBranch main
+#You can also check what Git thinks a specific key’s value is by typing git config <key>:
+$ git config user.name
 
 #--
 git init -b ["main"] #creates or reinitializes local git repository as main branch
+#Start a new Git repository for an existing code base
+$ cd /path/to/my/codebase
+$ git init                        #(1) Create a /path/to/my/codebase/.git directory.
+$ git add .                       #(2) Add all existing files to the index.
+$ git commit -m "commit_message"  #(3) Record the pristine state as the first commit in the history.
+
+#You clone a repository with git clone <url>. For example, if you want to clone the
+# Git linkable library called libgit2, you can do so like this:
+$ git clone https://github.com/libgit2/libgit2
+#If you want to clone the repository into a directory named something other than libgit2, you can
+# specify the new directory name as an additional argument:
+$ git clone https://github.com/libgit2/libgit2 mylibgit
+#Git has a number of different transfer protocols you can use. The previous example uses the https:// protocol, but
+# you may also see git:// or user@server:path/to/repo.git, which uses the SSH transfer protocol.
+
 git status #shows modified, unmodified files
 
 git add filename #adds files to staging
@@ -94,4 +118,42 @@ git status
 git pull
 git push
 git branch -a
+
+#The .git directory structure
+HEAD:
+
+#The HEAD file is a reference to the current branch that's checked out. By default, it points to the master or
+# main branch, but it won't actually refer to a valid branch until you make your first commit. It can also point to a
+# commit if you're in a 'detached HEAD' state.
+config:
+
+#This file contains repository-specific configuration settings. These settings can include user information, remote
+# repository URLs, and branch configurations. The settings here override the global Git configuration settings for
+# this specific repository.
+objects/:
+
+#The objects directory stores all the data for your commits, including files and the structure of the commit tree. This
+# data is stored in a compressed format, making Git very efficient. The objects are identified by a SHA-1 hash of their content.
+refs/:
+
+#The refs directory contains references to commit objects in the repository, organized into subdirectories such as
+# heads/ for branch heads and tags/ for tag objects. These references are updated as you commit and branch within your repository.
+hooks/:
+
+#This directory contains client-side or server-side scripts that are invoked at different phases of the Git workflow, such as
+# before a commit is finalized (pre-commit) or before pushing to a remote repository (pre-push). By default, Git populates this
+# directory with example scripts. These scripts are not active until renamed (removing the .sample extension).
+info/:
+
+#Inside, you'll find the exclude file, which works like a .gitignore file but is specific to this repository. The patterns listed in
+# the exclude file will be ignored by Git, similar to how .gitignore works, but without the need to commit this file into the repository.
+description:
+
+#This file is only used by the GitWeb program, which is a Git web interface. By default, it contains a placeholder text
+# ("Unnamed repository; edit this file 'description' to name the repository."), which can be changed to provide a
+# meaningful description of your repository for viewers on GitWeb.
+index:
+
+#The index file (not present immediately after git init but created upon first adding files to the staging area)
+# acts as the staging area ("index") for Git. It tracks which files will be included in the next commit.
 
