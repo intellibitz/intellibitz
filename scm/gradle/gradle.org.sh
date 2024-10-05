@@ -21,6 +21,7 @@ $ ./gradlew --status
 gradlew --help
 gradlew -h
 
+https://docs.gradle.org/current/userguide/getting_started_eng.html
 #To execute a task called taskName on the root project, type:
 $ gradle :taskName
 
@@ -99,6 +100,10 @@ $ ./gradlew build
 #All available tasks in your project come from Gradle plugins and build scripts.
 #You can list all the available tasks in the project by running the following command in the terminal:
 $ ./gradlew tasks
+#You can also list the tasks only available in the app subproject by running
+$ ./gradlew :app:tasks.
+#You can obtain more information in the task listing using the --all option:
+$ ./gradlew tasks --all
 
 #The run task is executed with ./gradlew run:
 $ ./gradlew run
@@ -148,6 +153,156 @@ $ ./gradlew compileJava --console=verbose
 $ ./gradlew compileJava --build-cache
 
 #A build scan is a representation of metadata captured as you run your build.
+#A Build Scan is a shareable and centralized record of a build and is available as a free service from Gradle.
 #To enable build scans on a gradle command, add --scan to the command line option:
 $ ./gradlew build --scan
 
+https://docs.gradle.org/current/userguide/part1_gradle_init.html
+$ gradle
+$ gradle init --type java-application  --dsl kotlin
+
+https://docs.gradle.org/current/userguide/part2_gradle_tasks.html#part2_begin
+<< 'build.gradle.kts'
+tasks.register<Copy>("copyTask") {
+    from("source")
+    into("target")
+    include("*.war")
+}
+
+tasks.register("hello") {
+    doLast {
+        println("Hello!")
+    }
+}
+
+tasks.register("greet") {
+    doLast {
+        println("How are you?")
+    }
+    dependsOn("hello")
+}
+build.gradle.kts
+
+https://docs.gradle.org/current/userguide/part3_gradle_dep_man.html#part3_begin
+<< 'build.gradle.kts'
+repositories {
+    // Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+
+dependencies {
+    // Use JUnit Jupiter for testing.
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    // This dependency is used by the application.
+    implementation(libs.guava)
+}
+
+Some key concepts in Gradle dependency management include:
+
+Repositories - The source of dependencies → mavenCentral()
+Maven Central is a collection of jar files, plugins, and libraries provided by the Maven community and backed by
+ Sonatype. It is the de-facto public artifact store for Java and is used by many build systems.
+Dependencies - Dependencies declared via configuration types → libs.junit.jupiter and libs.guava
+
+Gradle needs specific information to find a dependency. Let’s look at
+ libs.guava → com.google.guava:guava:32.1.2-jre and
+  libs.junit.jupiter → org.junit.jupiter:junit-jupiter-api:5.9.1; they are broken down as follows:
+
+Description	                            com.google.guava:guava:32.1.2-jre,	org.junit.jupiter:junit-jupiter-api:5.9.1
+Group / identifier of an organization   com.google.guava , org.junit.jupiter
+Name  / dependency identifier           guava , junit-jupiter-api
+Version / version # to import           32.1.2-jre , 5.9.1
+build.gradle.kts
+
+https://docs.gradle.org/current/userguide/part4_gradle_plugins.html#part4_begin
+#The Maven Publish Plugin provides the ability to publish build artifacts to an Apache Maven repository. It can also
+# publish to Maven local which is a repository located on your machine.
+<< 'build.gradle.kts'
+plugins {
+    // Apply the application plugin to add support for building a CLI application in Java.
+    application
+    id("maven-publish")
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = "com.gradle.tutorial"
+            artifactId = "tutorial"
+            version = "1.0"
+
+            from(components["java"])
+        }
+    }
+}
+build.gradle.kts
+
+#The publishToMavenLocal task builds the POM file and the artifacts to be published. It then installs them into the local Maven repository.
+$ ./gradlew :app:publishToMavenLocal
+
+#Plugins are used to extend build capability and customize Gradle. Using plugins is the primary mechanism for organizing build logic.
+#Plugin authors can either keep their plugins private or distribute them to the public. As such, plugins are distributed three ways:
+
+Core plugins - Gradle develops and maintains a set of Core Plugins.
+Community plugins - Gradle’s community shares plugins via the Gradle Plugin Portal.
+Custom plugins - Gradle enables user to create custom plugins using APIs.
+Convention plugins are plugins used to share build logic between subprojects /modules .
+
+#Users can wrap common logic in a convention plugin. For example, a code coverage plugin used as a convention plugin can
+# survey code coverage for the entire project and not just a specific subproject.
+
+Gradle highly recommends the use of Convention plugins.
+
+https://docs.gradle.org/current/userguide/part5_gradle_inc_builds.html#part5_begin
+$ ./gradlew :app:clean :app:build
+$ ./gradlew :app:build
+
+#There are four labels that developers can use to view task outcomes when verbose mode is turned on:
+#OutcomeLabel	Description
+UP-TO-DATE    Task that has been already executed and hasn’t changed ~incremental build feature
+SKIPPED       Task was explicitly prevented from running
+FROM-CACHE    Task output has been copied to local directory from previous builds in the build cache ~caching feature
+NO-SOURCE     Task was not executed because its required inputs were not available
+#If there is no label, the task was newly executed by Gradle ~locally.
+
+https://docs.gradle.org/current/userguide/part6_gradle_caching.html#part6_begin
+https://docs.gradle.org/current/userguide/gradle_directories.html
+#Add org.gradle.caching=true to the gradle.properties file:
+<< 'gradle.properties'
+org.gradle.console=verbose
+org.gradle.caching=true
+gradle.properties
+
+$ ./gradlew :app:clean :app:build
+$ ./gradlew :app:build
+
+#Gradle lets us know the outcome of each task in the console output:
+FROM-CACHE - tasks have been fetched from the local build cache.
+UP-TO-DATE - tasks that used incremental build and were not re-run.
+
+#To summarize:
+First, we used the build task to populate our local cache with task inputs and outputs, we can imagine this was done a week ago.
+Then, we used the clean task to mimic switching branches, overriding previous outputs.
+Finally, we used the build task, unlike incremental builds, the previous outputs were stored in the local cache and could be reused.
+
+Gradle is efficient, especially with the local build cache turned on. Gradle will look at the cache directory on your
+ machine to check for output files that may already exist. If they do, instead of running that task, it will copy its
+  ~output results into your project build directory.
+The outcome label FROM-CACHE lets the user know that Gradle has fetched the task results from the local build cache.
+
+https://docs.gradle.org/current/userguide/part7_gradle_refs.html#part7_begin
+#http://gradle.org/docs/current/javadoc/
+https://docs.gradle.org/current/dsl/index.html
+https://docs.gradle.org/current/kotlin-dsl/index.html
+https://docs.gradle.org/current/userguide/plugin_reference.html#plugin_reference
+#https://plugins.gradle.org/
+#https://gradle.org/releases/
+http://gradle.org/docs/current/release-notes
+#https://discuss.gradle.org/
+#https://gradle-community.slack.com/
+#https://gradle.org/courses/
+
+https://docs.gradle.org/current/userguide/command_line_interface.html#command_line_interface
+
+https://docs.gradle.org/current/userguide/getting_started_dev.html
