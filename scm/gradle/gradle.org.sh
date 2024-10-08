@@ -2034,3 +2034,410 @@ Consult the Developing Plugins chapter to learn more.
 https://docs.gradle.org/current/userguide/custom_plugins.html#custom_plugins
 
 https://docs.gradle.org/current/userguide/partr1_gradle_init.html
+$ mkdir authoring-tutorial
+$ cd authoring-tutorial
+Run gradle init with parameters to generate a Java application:
+$ gradle init --type java-application  --dsl kotlin
+~Select defaults for any additional prompts.
+
+Step 2. Understanding the Directory layout
+The project root directory contains all source files from your project.
+When you are done with Gradle init, the directory should look as follows:
+
+.
+├── gradle
+    ├── libs.version.toml
+│   └── wrapper
+├── gradlew
+├── gradlew.bat
+├── settings.gradle.kts
+└── app
+    ├── build.gradle.kts
+    └── src
+        ├── main
+        │   └── java
+        │       └── demo
+        │           └── App.java
+        └── test
+            └── java
+                └── demo
+                    └── AppTest.java
+
+Generated folder for wrapper files
+Version catalog for dependencies
+Gradle wrapper start scripts
+Settings file to define build name and subprojects
+Build script for app subproject
+Default Java source folder for app subproject
+Default Java test source folder for app subproject
+The authoring-tutorial folder is the root project directory. Inside the root project directory are one or more
+ subprojects, build scripts, and the Gradle wrapper.
+
+~While the Gradle Wrapper is local to the root project, the Gradle executable is found in the GRADLE_USER_HOME.
+The GRADLE_USER_HOME, which defaults to USER_HOME/.gradle, is also where Gradle stores its
+global configuration properties, initialization scripts, caches, log files and more.
+
+Step 3. Review the Gradle Files
+The ~settings.gradle.kts file has two interesting lines:
+<< 'settings.gradle.kts'
+rootProject.name = "authoring-tutorial"
+include("app")
+#rootProject.name assigns a name to the build, overriding the default behavior of naming the build after its directory name.
+#include("app") defines that the build consists of one subproject called app that contains its own source code and build logic.
+#More subprojects can be added by additional include() statements.
+settings.gradle.kts
+
+Our build contains one subproject called app representing the Java application we are building. It is configured in the
+ app/~build.gradle.kts file:
+
+<< 'build.gradle.kts'
+plugins {
+#Apply the application plugin to add support for building a CLI application in Java.
+    id("application")
+}
+
+repositories {
+#Use Maven Central for resolving dependencies.
+    mavenCentral()
+}
+
+dependencies {
+#Use JUnit Jupiter for testing (using the version catalog).
+#This dependency is used by the application (referred using the version catalog).
+    testImplementation(libs.junit.jupiter)
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation(libs.guava)
+}
+
+java {
+    toolchain {
+#Define the toolchain version.
+        languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+application {
+#Define the main class for the application.
+    mainClass = "org.example.App"
+}
+
+tasks.named<Test>("test") {
+#Use JUnit Platform for unit tests.
+    useJUnitPlatform()
+}
+#The build script in the app subproject directory declares the dependencies the app code will need to be assembled and tested.
+build.gradle.kts
+
+$ ./gradlew run
+$ ./gradlew build
+$ ./gradlew build --scan
+
+https://docs.gradle.org/current/userguide/partr2_build_lifecycle.html#partr2_build_lifecycle
+Step 1. Understanding the Build Lifecycle
+A Gradle build has three distinct phases:
+Phase 1 - Initialization
+During the initialization phase, Gradle determines which projects will take part in the build, and
+ creates a Project instance for each project.
+Phase 2 - Configuration
+During the configuration phase, the Project objects are configured using the build scripts of all projects in the build.
+ Gradle determines the set of tasks to be executed.
+Phase 3 - Execution
+During the execution phase, Gradle executes each of the selected tasks.
+
+When Gradle is invoked to execute a task, the lifecycle begins. Let’s see it in action.
+
+Step 2. Update the Settings File
+Add the following line to the top of the Settings file:
+<< 'settings.gradle.kts'
+println("SETTINGS FILE: This is executed during the initialization phase")
+settings.gradle.kts
+
+Step 3. Update the Build Script
+Add the following lines to the bottom of the Build script:
+<< 'app/build.gradle.kts'
+println("BUILD SCRIPT: This is executed during the configuration phase")
+
+tasks.register("task1"){
+    println("REGISTER TASK1: This is executed during the configuration phase")
+}
+
+tasks.register("task2"){
+    println("REGISTER TASK2: This is executed during the configuration phase")
+}
+
+tasks.named("task1"){
+    println("NAMED TASK1: This is executed during the configuration phase")
+    doFirst {
+        println("NAMED TASK1 - doFirst: This is executed during the execution phase")
+    }
+    doLast {
+        println("NAMED TASK1 - doLast: This is executed during the execution phase")
+    }
+}
+
+tasks.named("task2"){
+    println("NAMED TASK2: This is executed during the configuration phase")
+    doFirst {
+        println("NAMED TASK2 - doFirst: This is executed during the execution phase")
+    }
+    doLast {
+        println("NAMED TASK2 - doLast: This is executed during the execution phase")
+    }
+}
+app/build.gradle.kts
+
+Step 4. Run a Gradle Task
+Run the task1 task that you registered and configured in Step 3:
+$ ./gradlew task1
+
+SETTINGS FILE: This is executed during the initialization phase
+
+> Configure project :app
+BUILD SCRIPT: This is executed during the configuration phase
+REGISTER TASK1: This is executed during the configuration phase
+NAMED TASK1: This is executed during the configuration phase
+
+> Task :app:task1
+NAMED TASK1 - doFirst: This is executed during the execution phase
+NAMED TASK1 - doLast: This is executed during the execution phase
+
+BUILD SUCCESSFUL in 25s
+5 actionable tasks: 3 executed, 2 up-to-date
+Initialization: Gradle executes ~settings.gradle.kts to determine the projects to be built and creates a Project object for each one.
+Configuration: Gradle configures each project by executing the ~build.gradle.kts files. It resolves dependencies and
+ creates a dependency graph of all the available tasks.
+Execution: Gradle executes the tasks passed on the command line and any prerequisite tasks.
+It is important to note that while task1 was configured and executed, task2 was not. This is called
+ task configuration avoidance and prevents unnecessary work.
+
+Task configuration avoidance is when Gradle avoids configuring task2 when task1 was called and task1 does NOT depend. on task2.
+
+https://docs.gradle.org/current/userguide/partr3_multi_project_builds.html#partr3_multi_project_builds
+Step 1. About Multi-Project Builds
+Typically, builds contain multiple projects, such as shared libraries or separate applications that will be deployed in your ecosystem.
+In Gradle, a multi-project build consists of:
+~settings.gradle.kts file representing your Gradle build including required subprojects
+#e.g. include("app", "model", "service")
+~build.gradle.kts and source code for each subproject in corresponding subdirectories
+Our build currently consists of a root project called authoring-tutorial, which has a single app subproject:
+
+.
+├── app
+│   ...
+│   └── build.gradle.kts
+└── settings.gradle.kts
+
+The authoring-tutorial root project
+The app subproject
+The app source code
+The app build script
+The optional settings file
+
+Step 2. Add another Subproject to the Build
+Imagine that our project is growing and requires a custom library to function.
+Let’s create this imaginary lib. First, create a lib folder:
+mkdir lib
+cd lib
+Create a file called ~build.gradle.kts and add the following lines to it:
+<< 'lib/build.gradle.kts'
+plugins {
+    id("java")
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation("org.junit.jupiter:junit-jupiter:5.9.3")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("com.google.guava:guava:32.1.1-jre")
+}
+
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+}
+
+tasks.register("task3"){
+    println("REGISTER TASK3: This is executed during the configuration phase")
+}
+
+tasks.named("task3"){
+    println("NAMED TASK3: This is executed during the configuration phase")
+    doFirst {
+        println("NAMED TASK3 - doFirst: This is executed during the execution phase")
+    }
+    doLast {
+        println("NAMED TASK3 - doLast: This is executed during the execution phase")
+    }
+}
+lib/build.gradle.kts
+Your project should look like this:
+
+.
+├── app
+│   ...
+│   └── build.gradle.kts
+├── lib
+│   └── build.gradle.kts
+└── settings.gradle.kts
+
+Let’s add some code to the lib subproject. Create a new directory:
+mkdir -p lib/src/main/java/com/gradle
+Create a Java class called CustomLib in a file called CustomLib.java with the following source code:
+
+<< 'lib/src/main/java/com/gradle/CustomLib.java'
+package com.gradle;
+
+public class CustomLib {
+    public static String identifier = "I'm a String from a lib.";
+}
+lib/src/main/java/com/gradle/CustomLib.java
+The project should now have the following file and directory structure:
+
+.
+├── app
+│   ├── build.gradle.kts
+│   └── src
+│       └── main
+│           └── java
+│               └── authoring
+│                   └── tutorial
+│                       └── App.java
+├── lib
+│   ├── build.gradle.kts
+│   └── src
+│       └── main
+│           └── java
+│               └── com
+│                   └── gradle
+│                       └── CustomLib.java
+└── settings.gradle.kts
+
+However, the lib subproject does not belong to the build, and you won’t be able to execute task3, until it is added to
+ the ~settings.gradle.kts file.
+
+To add lib to the build, update the ~settings.gradle.kts file in the root accordingly:
+
+<< 'settings.gradle.kts'
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.7.0"
+}
+
+rootProject.name = "authoring-tutorial"
+
+include("app")
+include("lib") // Add lib to the build
+settings.gradle.kts
+Let’s add the lib subproject as an app dependency in app/~build.gradle.kts:
+
+<< 'app/build.gradle.kts'
+dependencies {
+    implementation(project(":lib")) // Add lib as an app dependency
+}
+app/build.gradle.kts
+Update the app source code so that it imports the lib:
+
+<< 'app/src/main/java/authoring/tutorial/App.java'
+package authoring.tutorial;
+
+import com.gradle.CustomLib;
+
+public class App {
+    public String getGreeting() {
+        return "CustomLib identifier is: " + CustomLib.identifier;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new App().getGreeting());
+    }
+}
+app/src/main/java/authoring/tutorial/App.java
+Finally, let’s run the app with the command ./gradlew run:
+$ ./gradlew run
+Our build for the root project authoring-tutorial now includes two subprojects, app and lib. app depends on lib. You can
+ build lib independent of app. However, to build app, Gradle will also build lib.
+
+Step 3. Understand Composite Builds
+A composite build is simply a build that includes other builds. Composite builds allow you to:
+Extract your build logic from your project build \(and re-use it among subprojects\)
+Combine builds that are usually developed independently \(such as a plugin and an application\)
+Decompose a large build into smaller, more isolated chunks
+
+Step 4. Add build to the Build
+Let’s add a plugin to our build. First, create a new directory called license-plugin in the gradle directory:
+cd gradle
+mkdir license-plugin
+cd license-plugin
+Once in the gradle/license-plugin directory, run gradle init. Make sure that you select the Gradle plugin project as
+ well as the other options for the init task below:
+$ gradle init --dsl kotlin --type kotlin-gradle-plugin --project-name license
+~Select defaults for any additional prompts.
+Your project should look like this:
+
+.
+├── app
+│   ...
+│   └── build.gradle.kts
+├── lib
+│   ...
+│   └── build.gradle.kts
+├── gradle
+│    ├── ...
+│    └── license-plugin
+│        ├── settings.gradle.kts
+│        └── plugin
+│            ├── gradle
+│            │   └── ....
+│            ├── src
+│            │   ├── functionalTest
+│            │   │   └── ....
+│            │   ├── main
+│            │   │   └── kotlin
+│            │   │       └── license
+│            │   │           └── LicensePlugin.kt
+│            │   └── test
+│            │       └── ...
+│            └── build.gradle.kts
+│
+└── settings.gradle.kts
+
+Take the time to look at the LicensePlugin.kt or LicensePlugin.groovy code and the
+ gradle/license-plugin/~settings.gradle.kts file. It’s important to note that this is an entirely separate build with its
+  own settings file and build script:
+
+<< 'gradle/license-plugin/settings.gradle.kts'
+rootProject.name = "license"
+include("plugin")
+gradle/license-plugin/settings.gradle.kts
+To add our license-plugin build to the root project, update the root ~settings.gradle.kts file accordingly:
+
+<< 'settings.gradle.kts'
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.7.0"
+}
+
+rootProject.name = "authoring-tutorial"
+
+include("app")
+include("subproject")
+
+includeBuild("gradle/license-plugin") // Add the new build
+settings.gradle.kts
+You can view the structure of the root project by running ./gradlew projects in the root folder authoring-tutorial:
+$ ./gradlew projects
+Our build for the root project authoring-tutorial now includes two subprojects, app and lib, and another build, license-plugin.
+When in the project root, running:
+
+./gradlew build - Builds app and lib
+./gradlew :app:build - Builds app and lib
+./gradlew :lib:build - Builds lib only
+./gradlew :license-plugin:plugin:build - Builds license-plugin only
+
+There are many ways to design a project’s architecture with Gradle.
+Multi-project builds are great for organizing projects with many modules such as mobile-app, web-app, api, lib, and
+ documentation that have dependencies between them.
+#Composite (include) builds are great for separating build logic (i.e., convention plugins) or testing systems (i.e., patching a library)
+
+https://docs.gradle.org/current/userguide/partr4_settings_file.html
+
