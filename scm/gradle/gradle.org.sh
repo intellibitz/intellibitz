@@ -2321,7 +2321,7 @@ To add lib to the build, update the ~settings.gradle.kts file in the root accord
 
 << 'settings.gradle.kts'
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.7.0"
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
 rootProject.name = "authoring-tutorial"
@@ -2414,7 +2414,7 @@ To add our license-plugin build to the root project, update the root ~settings.g
 
 << 'settings.gradle.kts'
 plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.7.0"
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 
 rootProject.name = "authoring-tutorial"
@@ -2440,4 +2440,309 @@ Multi-project builds are great for organizing projects with many modules such as
 #Composite (include) builds are great for separating build logic (i.e., convention plugins) or testing systems (i.e., patching a library)
 
 https://docs.gradle.org/current/userguide/partr4_settings_file.html
+Step 1. Gradle scripts
+Build scripts and setting files are code. They are written in Kotlin or Groovy.
+You use the Kotlin DSL, Groovy DSL and Gradle APIs to write the scripts.
+https://docs.gradle.org/current/kotlin-dsl
+https://docs.gradle.org/current/javadoc
+The methods that can be used within a Gradle script primarily include:
+Gradle APIs - such as getRootProject\(\) from the Settings API
+https://docs.gradle.org/current/javadoc/org/gradle/api/initialization/Settings.html
+Blocks defined in the DSL - such as the plugins{} block from KotlinSettingsScript
+https://docs.gradle.org/current/kotlin-dsl/gradle/org.gradle.kotlin.dsl/-kotlin-settings-script/index.html
+Extensions defined by Plugins - such as implementation\(\) and api\(\) provided by the java plugin when applied
+
+Step 2. The Settings object
+The settings file is the entry point of every Gradle build.
+During the initialization phase, Gradle finds the settings file in your project root directory.
+When the settings file, ~settings.gradle.kts, is found, Gradle instantiates a Settings object.
+One of the purposes of the Settings object is to allow you to declare all the projects to be included in the build.
+You can use any of the methods and properties on the Settings interface directly in your settings file.
+~For example:
+<< 'settings.gradle.kts'
+includeBuild("some-build")                         // Delegates to Settings.includeBuild()
+reportsDir = findProject("/myInternalProject")     // Delegates to Settings.findProject()
+settings.gradle.kts
+
+Step 3. The Settings file
+Let’s break down the settings file in our project root directory:
+<< 'settings.gradle.kts'
+#plugins({}) from the PluginDependenciesSpec API
+#https://docs.gradle.org/current/dsl/org.gradle.plugin.use.PluginDependenciesSpec.html
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
+#id() method from the PluginDependenciesSpec API
+}
+
+rootProject.name = "authoring-tutorial"
+#getRootProject() method from the Settings API
+#https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html
+
+include("app")
+include("lib")
+#include() method from the Settings API
+
+includeBuild("gradle/license-plugin")
+#includeBuild() method from the Settings API
+settings.gradle.kts
+
+https://docs.gradle.org/current/userguide/partr5_build_scripts.html#partr5_build_scripts
+Step 1. The Project object
+Build scripts invoke Gradle APIs to configure the build.
+During the configuration phase, Gradle finds the build scripts in the root and subproject directories.
+When a build script, ~build.gradle.kts, is found, Gradle configures a Project object.
+https://docs.gradle.org/current/javadoc/org/gradle/api/Project.html
+The purpose of the Project object is to create a collection of Task objects, apply plugins, and retrieve dependencies.
+https://docs.gradle.org/current/javadoc/org/gradle/api/Task.html
+You can use any of the methods and properties on the Project interface directly in your script.
+~For example:
+<< '~build.gradle.kts'
+defaultTasks("some-task")      // Delegates to Project.defaultTasks()
+reportsDir = file("reports")   // Delegates to Project.file() and the Java Plugin
+~build.gradle.kts
+
+Step 2. The Build script
+Let’s break down the build script for the plugin:
+<< 'gradle/license-plugin/plugin/build.gradle.kts'
+#Use the plugins{} block from KotlinSettingsScript in the Kotlin DSL
+#https://docs.gradle.org/current/kotlin-dsl/gradle/org.gradle.kotlin.dsl/-kotlin-settings-script/index.html
+#Apply the Java Gradle plugin development plugin to add support for developing Gradle plugins
+#Apply the Kotlin JVM plugin to add support for Kotlin
+plugins {
+    `java-gradle-plugin`
+    id("org.jetbrains.kotlin.jvm") version "2.0.20"
+}
+
+#Use Project.repositories() to configure the repositories for this project
+#Use Maven Central for resolving dependencies
+#https://repo.maven.apache.org/maven2/
+repositories {
+    mavenCentral()
+}
+
+#Use Project.dependencies() to configure the dependencies for this project
+#Use the Kotlin JUnit 5 integration
+dependencies {
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+#Use the gradlePlugin{} block from GradlePluginDevelopmentExtension in the Kotlin DSL
+#https://docs.gradle.org/current/kotlin-dsl/gradle/org.gradle.plugin.devel/-gradle-plugin-development-extension/index.html
+#Define the plugin id and implementationClass
+gradlePlugin {
+    val greeting by plugins.creating {
+        id = "license.greeting"
+        implementationClass = "license.LicensePlugin"
+    }
+}
+
+#Plugins, which enhance your build capabilities, are included like this:
+plugins {
+    id("java")                          // core plugin, no version required
+    id("org.some.plugin") version "2.8" // community plugin, version required
+}
+
+#The repositories section lets Gradle know where to pull dependencies from:
+repositories {
+    mavenCentral()  // get dependencies from the Maven central repository
+}
+
+#Dependencies are requirements for building your application or library:
+dependencies {
+    // group: 'org.apache.commons', name: 'commons-lang3', version: '3.13.0'
+    implementation("org.apache.commons:commons-lang3:3.13.0")
+}
+
+#In this example, implementation() means that the commons-lang3 library must be added to the Java classpath.
+#Every dependency declared for a Gradle project must apply to a scope. That is, the dependency is either needed at
+# compile time, runtime, or both. This is called a configuration and the implementation configuration is used when the
+#  dependency is only needed in the runtime classpath.
+#Configuration blocks (not to be confused with dependency configurations above) are typically used to configure an applied plugin:
+gradlePlugin {  // Define a custom plugin
+    val greeting by plugins.creating {  // Define `greeting` plugin using the `plugins.creating` method
+        id = "license.greeting" // Create plugin with the specified ID
+        implementationClass = "license.LicensePlugin"   // and specified implementation class
+    }
+}
+
+#When the java-gradle-plugin is applied, users must configure the plugin they are developing using the gradlePlugin{} configuration block.
+#Tasks are units of work executed during your build. They can be defined by plugins or inline:
+val functionalTest by tasks.registering(Test::class) {
+    testClassesDirs = functionalTestSourceSet.output.classesDirs
+    classpath = functionalTestSourceSet.runtimeClasspath
+    useJUnitPlatform()
+}
+
+tasks.named<Test>("test") {
+    // Use JUnit Jupiter for unit tests.
+    useJUnitPlatform()
+}
+
+#In the example generated by Gradle init, we define two tasks:
+#functionalTest: This task is registered using tasks.register(). It configures the test task for functional tests.
+#test: This task is configured using tasks.named() for the existing test task. It also configures the task to use JUnit Jupiter for unit tests.
+gradle/license-plugin/plugin/build.gradle.kts
+
+Step 3. Apply the Plugin
+Let’s apply our license plugin to the app subproject:
+<< 'app/build.gradle.kts'
+plugins {
+    application
+    id("com.tutorial.license")  // Apply the license plugin
+}
+app/build.gradle.kts
+
+Step 4. View Plugin Task
+Build init creates a "hello world" plugin when generating a Gradle plugin project. Inside LicensePlugin is simply a
+task that prints a greeting to the console, the task name is greeting:
+<< 'gradle/license-plugin/plugin/src/main/kotlin/license/LicensePlugin.kt'
+class LicensePlugin: Plugin<Project> {
+    override fun apply(project: Project) {                          // Apply plugin
+        project.tasks.register("greeting") { task ->                // Register a task
+            task.doLast {
+                println("Hello from plugin 'com.tutorial.greeting'")  // Hello world printout
+            }
+        }
+    }
+}
+gradle/license-plugin/plugin/src/main/kotlin/license/LicensePlugin.kt
+As we can see, the license plugin, when applied, exposes a greeting task with a simple print statement.
+
+Step 5. View Plugin Tasks
+When the license plugin is applied to the app project, the greeting task becomes available:
+To view the task in the root directory, run:
+$ ./gradlew tasks --all
+
+Finally, run the greeting task using ./gradlew greeting or:
+$ ./gradlew :app:greeting
+
+https://docs.gradle.org/current/userguide/partr6_writing_tasks.html#partr6_writing_tasks
+Step 1. Understand Tasks
+A Task is an executable piece of code that contains sequences of actions.
+Actions are added to a Task via the doFirst{} and doLast{} closures.
+A Task can depend on other tasks.
+
+Step 2. Register and Configure Tasks
+Early on in the tutorial, we registered and configured task1 in the app build script:
+<< 'app/build.gradle.kts'
+#You can use the register() method to create new tasks.
+tasks.register("task1"){
+    println("REGISTER TASK1: This is executed during the configuration phase")
+}
+
+#You can use the named() method to configure existing tasks.
+tasks.named("task1"){
+    println("NAMED TASK1: This is executed during the configuration phase")
+    doFirst {
+        println("NAMED TASK1 - doFirst: This is executed during the execution phase")
+    }
+    doLast {
+        println("NAMED TASK1 - doLast: This is executed during the execution phase")
+    }
+}
+app/build.gradle.kts
+
+Step 3. Create a custom Task
+To create a custom task, you must subclass DefaultTask in Groovy DSL or DefaultTask in Kotlin DSL.
+Create a custom class called LicenseTask with the code below and add it to the bottom of the
+ gradle/license-plugin/plugin/src/main/kotlin/license/LicensePlugin.kt file:
+<< 'gradle/license-plugin/plugin/src/main/kotlin/license/LicensePlugin.kt'
+import org.gradle.api.Project
+import org.gradle.api.Plugin
+import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.TaskAction
+import java.io.File
+import java.io.InputStream
+import java.nio.charset.Charset
+
+class LicensePlugin: Plugin<Project> {
+    // Don't change anything here
+}
+
+abstract class LicenseTask : DefaultTask() {
+    @Input
+    val fileName = project.rootDir.toString() + "/license.txt"
+
+    @TaskAction
+    fun action() {
+        // Read the license text
+        val licenseText = File(fileName).readText()
+        // Walk the directories looking for java files
+        File(project.rootDir.toString()).walk().forEach {
+            if (it.extension == "java") {
+                // Read the source code
+                var ins: InputStream = it.inputStream()
+                var content = ins.readBytes().toString(Charset.defaultCharset())
+                // Write the license and the source code to the file
+                it.writeText(licenseText + content)
+            }
+        }
+    }
+}
+gradle/license-plugin/plugin/src/main/kotlin/license/LicensePlugin.kt
+The LicenseTask class encapsulates the task action logic and declares any inputs and outputs the task expects.
+The task action is annotated with @TaskAction. Inside, the logic first finds a file called "license.txt".
+This file contains text for an Apache license:
+<< 'license.txt'
+/*
+* Licensed under the Apache License
+*/
+license.txt
+The task then looks for files with the extension .java and adds a license header.
+The task has a single input, the license file name, annotated with @Input.
+Gradle uses the @Input annotation to determine if the task needs to run. If the task has not run before or if the
+ input value has changed since the previous execution, then Gradle will execute the task.
+~While a custom class has been created, it is not yet added to the LicensePlugin. Running LicenseTask is not currently possible.
+All you can do for now is make sure ./gradlew build runs without failing:
+$ ./gradlew build
+
+https://docs.gradle.org/current/userguide/partr7_writing_plugins.html#partr7_writing_plugins
+Step 1. Develop the Plugin
+Let’s tie our custom LicenseTask to our plugin.
+<< 'gradle/license-plugin/plugin/src/main/kotlin/license/LicensePlugin.kt'
+#Update the LicensePlugin with the code for the Plugin below (don’t change anything else in the file):
+class LicensePlugin: Plugin<Project> {
+    override fun apply(project: Project) {
+        project.tasks.register("license", LicenseTask::class.java) { task ->
+            task.description = "add a license header to source code"   // Add description
+            task.group = "from license plugin"                         // Add group
+        }
+    }
+}
+gradle/license-plugin/plugin/src/main/kotlin/license/LicensePlugin.kt
+
+Step 2. Add a license.txt file
+Add a file called license.txt to the root directory of the project and add the following text to it:
+<< 'license.txt'
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+license.txt
+
+Step 3. Apply the Plugin
+<< 'app/build.gradle.kts'
+#Apply the plugin to the app subproject (if not done already):
+plugins {
+    application
+    id("com.tutorial.license") // Apply custom plugin
+}
+app/build.gradle.kts
+Make sure the plugin is correctly applied by listing the available tasks in the app subproject:
+$ ./gradlew :app:tasks
+
+Next, let’s run the task with
+$ ./gradlew :app:license:
+
 
