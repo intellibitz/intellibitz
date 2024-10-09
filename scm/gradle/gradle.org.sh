@@ -2745,4 +2745,18 @@ $ ./gradlew :app:tasks
 Next, let’s run the task with
 $ ./gradlew :app:license:
 
+https://docs.gradle.org/current/userguide/multi_project_builds.html#multi_project_builds
+It is important to structure your Gradle project to optimize build performance.
+A multi-project build is the standard in Gradle.
+A multi-project build consists of one root project and one or more subprojects.
+Gradle can build the root project and any number of the subprojects in a single execution.
+
+Project locations
+Multi-project builds contain a single root project in a directory that Gradle views as the root path: ..
+Subprojects are located physically under the root path: ./subproject.
+A subproject has a path, which denotes the position of that subproject in the multi-project build. In most cases,
+ the project path is consistent with its location in the file system.
+The project structure is created in the ~settings.gradle.kts file. The settings file must be present in the root directory.
+
+
 
