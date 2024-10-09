@@ -1,9 +1,6 @@
 .gradle
 .idea
-.gen
-/*.iml
-/*.gen
-gradle-wrapper.jar
+.kotlin
 target
 classes
 test-classes
