@@ -2745,7 +2745,7 @@ $ ./gradlew :app:tasks
 Next, let’s run the task with
 $ ./gradlew :app:license:
 
-https://docs.gradle.org/current/userguide/multi_project_builds.html#multi_project_builds
+#https://docs.gradle.org/current/userguide/multi_project_builds.html#multi_project_builds
 It is important to structure your Gradle project to optimize build performance.
 A multi-project build is the standard in Gradle.
 A multi-project build consists of one root project and one or more subprojects.
@@ -2754,9 +2754,666 @@ Gradle can build the root project and any number of the subprojects in a single 
 Project locations
 Multi-project builds contain a single root project in a directory that Gradle views as the root path: ..
 Subprojects are located physically under the root path: ./subproject.
+#https://docs.gradle.org/current/userguide/intro_multi_project_builds.html#sec:project_path
 A subproject has a path, which denotes the position of that subproject in the multi-project build. In most cases,
  the project path is consistent with its location in the file system.
 The project structure is created in the ~settings.gradle.kts file. The settings file must be present in the root directory.
+
+A simple multi-project build
+Let’s look at a basic multi-project build example that contains a root project and a single subproject.
+The root project is called basic-multiproject, located somewhere on your machine.
+From Gradle’s perspective, the root is the top-level directory ..
+The project contains a single subproject called ./app:
+
+.
+├── app
+│   ...
+│   └── build.gradle.kts
+└── settings.gradle.kts
+
+This is the recommended project structure for starting any Gradle project. The build init plugin also
+generates skeleton projects that follow this structure - a root project with a single subproject:
+#https://docs.gradle.org/current/userguide/build_init_plugin.html#build_init_plugin
+The ~settings.gradle.kts file describes the project structure to Gradle:
+<< 'settings.gradle.kts'
+rootProject.name = "basic-multiproject"
+include("app")
+#In this case, Gradle will look for a build file for the app subproject in the ./app directory.
+settings.gradle.kts
+You can view the structure of a multi-project build by running the projects command:
+$ ./gradlew -q projects
+
+In this example, the app subproject is a Java application that applies the application plugin and configures the
+ main class. The application prints Hello World to the console:
+#https://docs.gradle.org/current/userguide/application_plugin.html#application_plugin
+<< 'app/build.gradle.kts'
+plugins {
+    id("application")
+}
+
+application {
+    mainClass = "com.example.Hello"
+}
+app/build.gradle.kts
+<< 'app/src/main/java/com/example/Hello.java'
+package com.example;
+
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!");
+    }
+}
+app/src/main/java/com/example/Hello.java
+You can run the application by executing the run task from the application plugin in the project root:
+$ ./gradlew -q run
+Hello, world!
+
+Adding a subproject
+In the settings file, you can use the include method to add another subproject to the root project:
+<< 'settings.gradle.kts'
+include("project1", "project2:child1", "project3:child1")
+settings.gradle.kts
+The include method takes project paths as arguments. The project path is assumed to be equal to the
+relative physical file system path. For example, a path services:api is mapped by default to a folder
+#./services/api (relative to the project root .).
+https://docs.gradle.org/current/userguide/intro_multi_project_builds.html#sec:project_path
+More examples of how to work with the project path can be found in the DSL documentation of Settings.include\(java.lang.String[]\).
+#https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html#org.gradle.api.initialization.Settings:include(java.lang.String[])
+Let’s add another subproject called lib to the previously created project.
+All we need to do is add another include statement in the root settings file:
+<< 'settings.gradle.kts'
+rootProject.name = "basic-multiproject"
+include("app")
+include("lib")
+settings.gradle.kts
+Gradle will then look for the build file of the new lib subproject in the ./lib/ directory:
+
+.
+├── app
+│   ...
+│   └── build.gradle.kts
+├── lib
+│   ...
+│   └── build.gradle.kts
+└── settings.gradle.kts
+
+Project Descriptors
+To further describe the project architecture to Gradle, the settings file provides project descriptors.
+You can modify these descriptors in the settings file at any time.
+To access a descriptor, you can:
+<< 'settings.gradle.kts'
+include("project-a")
+println(rootProject.name)
+println(project(":project-a").name)
+settings.gradle.kts
+Using this descriptor, you can change the name, project directory, and build file of a project:
+<< 'settings.gradle.kts'
+rootProject.name = "main"
+include("project-a")
+project(":project-a").projectDir = file("custom/my-project-a")
+project(":project-a").buildFileName = "project-a.gradle.kts"
+settings.gradle.kts
+#https://docs.gradle.org/current/javadoc/org/gradle/api/initialization/ProjectDescriptor.html
+Consult the ProjectDescriptor class in the API documentation for more information.
+
+Modifying a subproject path
+Let’s take a hypothetical project with the following structure:
+
+.
+├── app
+│   ...
+│   └── build.gradle.kts
+├── subs // Gradle may see this as a subproject
+│   └── web // Gradle may see this as a subproject
+│       └── my-web-module // Intended subproject
+│           ...
+│           └── build.gradle.kts
+└── settings.gradle.kts
+
+#If your ~settings.gradle.kts looks like this:
+<< 'settings.gradle.kts'
+include(':subs:web:my-web-module')
+settings.gradle.kts
+Gradle sees a subproject with a logical project name of :subs:web:my-web-module and two, possibly unintentional, other
+ subprojects logically named :subs and :subs:web. This can lead to phantom build directories, especially when using allprojects{} or subproject{}.
+To avoid this, you can use:
+<< 'settings.gradle.kts'
+include(':my-web-module')
+project(':my-web-module').projectDir = "subs/web/my-web-module"
+settings.gradle.kts
+So that you only end up with a single subproject named :my-web-module.
+So, while the physical project layout is the same, the logical results are different.
+
+Naming recommendations
+As your project grows, naming and consistency get increasingly more important.
+ To keep your builds maintainable, we recommend the following:
+1. Keep default project names for subprojects: It is possible to configure custom project names in the
+ settings file. However, it’s an unnecessary extra effort for the developers to track which projects belong to what folders.
+2. Use lower case hyphenation for all project names: All letters are lowercase, and words are separated with a dash - character.
+3. Define the root project name in the settings file: The rootProject.name effectively assigns a name to the
+ build, used in reports like Build Scans. If the root project name is not set, the name will be the
+  container directory name, which can be unstable
+#  (i.e., you can check out your project in any directory). The name will be generated randomly if the
+#   root project name is not set and checked out to a file system’s root (e.g., / or C:\).
+
+https://docs.gradle.org/current/userguide/declaring_dependencies_between_subprojects.html
+What if one subproject depends on another subproject? What if one project needs the artifact produced by another project?
+This is a common use case for multi-project builds. Gradle offers project dependencies for this.
+https://docs.gradle.org/current/userguide/declaring_dependencies_adv.html#sub:project_dependencies
+
+Depending on another project
+Let’s explore a theoretical multi-project build with the following layout:
+
+.
+├── api
+│   ├── src
+│   │   └──...
+│   └── build.gradle.kts
+├── services
+│   └── person-service
+│       ├── src
+│       │   └──...
+│       └── build.gradle.kts
+├── shared
+│   ├── src
+│   │   └──...
+│   └── build.gradle.kts
+└── settings.gradle.kts
+
+In this example, there are three subprojects called shared, api, and person-service:
+The person-service subproject depends on the other two subprojects, shared and api.
+The api subproject depends on the shared subproject.
+We use the : separator to define a project path such as services:person-service or :shared.
+#https://docs.gradle.org/current/userguide/intro_multi_project_builds.html#sec:project_path
+# Consult the DSL documentation of Settings.include(java.lang.String[]) for more information about defining project paths.
+#https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html#org.gradle.api.initialization.Settings:include(java.lang.String[])
+
+<< 'settings.gradle.kts'
+rootProject.name = "dependencies-java"
+include("api", "shared", "services:person-service")
+settings.gradle.kts
+<< 'shared/build.gradle.kts'
+plugins {
+    id("java")
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation("junit:junit:4.13")
+}
+shared/build.gradle.kts
+<< 'api/build.gradle.kts'
+plugins {
+    id("java")
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation("junit:junit:4.13")
+    implementation(project(":shared"))
+}
+api/build.gradle.kts
+<< 'services/person-service/build.gradle.kts'
+plugins {
+    id("java")
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation("junit:junit:4.13")
+    implementation(project(":shared"))
+    implementation(project(":api"))
+}
+services/person-service/build.gradle.kts
+A project dependency affects execution order. It causes the other project to be built first and adds the output with the
+ classes of the other project to the classpath. It also adds the dependencies of the other project to the classpath.
+~If you execute
+./gradlew :api:compile
+, first the shared project is built, and then the api project is built.
+
+Depending on artifacts produced by another project
+Sometimes, you might want to depend on the output of a specific task within another project rather than the
+ entire project. However, explicitly declaring a task dependency from one project to another is discouraged as it
+  introduces unnecessary coupling between tasks.
+The recommended way to model dependencies, where a task in one project depends on the output of another, is to
+ produce the output and mark it as an "outgoing" artifact. Gradle’s dependency management engine allows you to
+  share arbitrary artifacts between projects and build them on demand.
+#https://docs.gradle.org/current/userguide/cross_project_publications.html#cross_project_publications
+
+https://docs.gradle.org/current/userguide/sharing_build_logic_between_subprojects.html
+Subprojects in a multi-project build typically share some common dependencies.
+Instead of copying and pasting the same Java version and libraries in each subproject build script, Gradle provides a
+ special directory for storing shared build logic that can be automatically applied to subprojects.
+
+Share logic in buildSrc
+buildSrc is a Gradle-recognized and protected directory which comes with some benefits:
+Reusable Build Logic:
+buildSrc allows you to organize and centralize your custom build logic, tasks, and plugins in a structured manner. The
+ code written in buildSrc can be reused across your project, making it easier to maintain and share common build functionality.
+Isolation from the Main Build:
+Code placed in buildSrc is isolated from the other build scripts of your project. This helps keep the
+ main build scripts cleaner and more focused on project-specific configurations.
+Automatic Compilation and Classpath:
+The contents of the buildSrc directory are automatically compiled and included in the classpath of your main build. This
+means that classes and plugins defined in buildSrc can be directly used in your project’s build scripts without any additional configuration.
+Ease of Testing:
+Since buildSrc is a separate build, it allows for easy testing of your custom build logic. You can write tests for
+ your build code, ensuring that it behaves as expected.
+Gradle Plugin Development:
+~If you are developing custom Gradle plugins for your project, buildSrc is a convenient place to house the
+ plugin code. This makes the plugins easily accessible within your project.
+The buildSrc directory is treated as an included build.
+#https://docs.gradle.org/current/userguide/composite_builds.html#composite_build_intro
+~For multi-project builds, there can be only one buildSrc directory, which must be in the root project directory.
+The downside of using buildSrc is that any change to it will invalidate every task in your project and require a rerun.
+buildSrc uses the same source code conventions applicable to Java, Groovy, and Kotlin projects. It also provides direct access to the Gradle API.
+#https://docs.gradle.org/current/userguide/java_plugin.html#javalayout
+A typical project including buildSrc has the following layout:
+
+.
+├── buildSrc
+│   ├── src
+│   │   └──main
+│   │      └──kotlin
+│   │         └──MyCustomTask.kt
+│   ├── shared.gradle.kts
+│   └── build.gradle.kts
+├── api
+│   ├── src
+│   │   └──...
+│   └── build.gradle.kts
+├── services
+│   └── person-service
+│       ├── src
+│       │   └──...
+│       └── build.gradle.kts
+├── shared
+│   ├── src
+│   │   └──...
+│   └── build.gradle.kts
+└── settings.gradle.kts
+
+Create the MyCustomTask task.
+A shared build script.
+Uses the MyCustomTask task and shared build script.
+In the buildSrc, the build script ~shared.gradle.kts is created. It contains dependencies and
+ other build information that is common to multiple subprojects:
+
+<< 'shared.gradle.kts'
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.slf4j:slf4j-api:1.7.32")
+}
+shared.gradle.kts
+In the buildSrc, the MyCustomTask is also created. It is a helper task that is used as part of the build logic for multiple subprojects:
+
+<< 'MyCustomTask.kt'
+import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.TaskAction
+
+open class MyCustomTask : DefaultTask() {
+    @TaskAction
+    fun calculateSum() {
+        // Custom logic to calculate the sum of two numbers
+        val num1 = 5
+        val num2 = 7
+        val sum = num1 + num2
+
+        // Print the result
+        println("Sum: $sum")
+    }
+}
+MyCustomTask.kt
+The MyCustomTask task is used in the build script of the api and shared projects. The task is automatically available because it’s part of buildSrc.
+The ~shared.build.kts file is also applied:
+
+<< 'build.gradle.kts'
+// Apply any other configurations specific to your project
+
+// Use the build script defined in buildSrc
+apply(from = rootProject.file("buildSrc/shared.gradle"))
+
+// Use the custom task defined in buildSrc
+tasks.register<MyCustomTask>("myCustomTask")
+build.gradle.kts
+
+Share logic using convention plugins
+Gradle’s recommended way of organizing build logic is to use its plugin system.
+We can write a plugin that encapsulates the build logic common to several subprojects in a project.
+This kind of plugin is called a convention plugin.
+~While writing plugins is outside the scope of this section, the recommended way to build a Gradle project is to
+ put common build logic in a convention plugin located in the buildSrc.
+Let’s take a look at an example project:
+
+.
+├── buildSrc
+│   ├── src
+│   │   └──main
+│   │      └──kotlin
+│   │         └──myproject.java-conventions.gradle.kts
+│   └── build.gradle.kts
+├── api
+│   ├── src
+│   │   └──...
+│   └── build.gradle.kts
+├── services
+│   └── person-service
+│       ├── src
+│       │   └──...
+│       └── build.gradle.kts
+├── shared
+│   ├── src
+│   │   └──...
+│   └── build.gradle.kts
+└── settings.gradle.kts
+
+Create the myproject.java-conventions convention plugin.
+Applies the myproject.java-conventions convention plugin.
+This build contains three subprojects:
+
+<< 'settings.gradle.kts'
+rootProject.name = "dependencies-java"
+include("api", "shared", "services:person-service")
+settings.gradle.kts
+The source code for the convention plugin created in the buildSrc directory is as follows:
+
+<< 'buildSrc/src/main/kotlin/myproject.java-conventions.gradle.kts'
+plugins {
+    id("java")
+}
+
+group = "com.example"
+version = "1.0"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation("junit:junit:4.13")
+}
+buildSrc/src/main/kotlin/myproject.java-conventions.gradle.kts
+~For the convention plugin to compile, basic configuration needs to be applied in the build file of the buildSrc directory:
+
+<< 'buildSrc/build.gradle.kts'
+plugins {
+    `kotlin-dsl`
+}
+
+repositories {
+    mavenCentral()
+}
+buildSrc/build.gradle.kts
+The convention plugin is applied to the api, shared, and person-service subprojects:
+
+<< 'api/build.gradle.kts'
+plugins {
+    id("myproject.java-conventions")
+}
+
+dependencies {
+    implementation(project(":shared"))
+}
+api/build.gradle.kts
+<< 'shared/build.gradle.kts'
+plugins {
+    id("myproject.java-conventions")
+}
+shared/build.gradle.kts
+<< 'services/person-service/build.gradle.kts'
+plugins {
+    id("myproject.java-conventions")
+}
+
+dependencies {
+    implementation(project(":shared"))
+    implementation(project(":api"))
+}
+services/person-service/build.gradle.kts
+
+~Do not use cross-project configuration
+An improper way to share build logic between subprojects is cross-project configuration via the subprojects {} and allprojects {} DSL constructs.
+Avoid using subprojects {} and allprojects {}.
+With cross-configuration, build logic can be injected into a subproject which is not obvious when looking at its build script.
+In the long run, cross-configuration usually grows in complexity and becomes a burden. Cross-configuration can also
+ introduce configuration-time coupling between projects, which can prevent optimizations like configuration-on-demand from working properly.
+Convention plugins versus cross-configuration
+The two most common uses of cross-configuration can be better modeled using convention plugins:
+Applying plugins or other configurations to subprojects of a certain type.
+Often, the cross-configuration logic is if subproject is of type X, then configure Y. This is equivalent to
+ applying X-conventions plugin directly to a subproject.
+Extracting information from subprojects of a certain type.
+This use case can be modeled using outgoing configuration variants.
+#https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
+
+https://docs.gradle.org/current/userguide/composite_builds.html
+A composite build is a build that includes other builds.
+A composite build is similar to a Gradle multi-project build, except that instead of including subprojects, entire builds are included.
+Composite builds allow you to:
+Combine builds that are usually developed independently, for instance, when trying out a bug fix in a library that your application uses.
+Decompose a large multi-project build into smaller, more isolated chunks that can be worked on independently or together as needed.
+A build that is included in a composite build is referred to as an included build. Included builds do not share any
+configuration with the composite build or the other included builds. Each included build is configured and executed in isolation.
+
+Defining a composite build
+The following example demonstrates how two Gradle builds, normally developed separately, can be combined into a composite build.
+
+my-composite
+├── gradle
+├── gradlew
+├── settings.gradle.kts
+├── build.gradle.kts
+├── my-app
+│   ├── settings.gradle.kts
+│   └── app
+│       ├── build.gradle.kts
+│       └── src/main/java/org/sample/my-app/Main.java
+└── my-utils
+    ├── settings.gradle.kts
+    ├── number-utils
+    │   ├── build.gradle.kts
+    │   └── src/main/java/org/sample/numberutils/Numbers.java
+    └── string-utils
+        ├── build.gradle.kts
+        └── src/main/java/org/sample/stringutils/Strings.java
+
+The my-utils multi-project build produces two Java libraries, number-utils and string-utils. The my-app build produces an
+ executable using functions from those libraries.
+The my-app build does not depend directly on my-utils. Instead, it declares binary dependencies on the libraries produced by my-utils:
+
+<< 'my-app/app/build.gradle.kts'
+plugins {
+    id("application")
+}
+
+application {
+    mainClass = "org.sample.myapp.Main"
+}
+
+dependencies {
+    implementation("org.sample:number-utils:1.0")
+    implementation("org.sample:string-utils:1.0")
+}
+my-app/app/build.gradle.kts
+
+Defining a composite build via --include-build
+The --include-build command-line argument turns the executed build into a composite, substituting dependencies from the
+ included build into the executed build.
+~For example, the output of ./gradlew run --include-build ../my-utils run from my-app:
+$ ./gradlew --include-build ../my-utils run
+
+Defining a composite build via the settings file
+It’s possible to make the above arrangement persistent by using Settings.includeBuild\(java.lang.Object\) to declare the
+ included build in the ~settings.gradle.kts file.
+#https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html#org.gradle.api.initialization.Settings:includeBuild(java.lang.Object)
+The settings file can be used to add subprojects and included builds simultaneously.
+Included builds are added by location:
+<< 'settings.gradle.kts'
+includeBuild("my-utils")
+settings.gradle.kts
+In the example, the ~settings.gradle.kts file combines otherwise separate builds:
+<< 'settings.gradle.kts'
+rootProject.name = "my-composite"
+
+includeBuild("my-app")
+includeBuild("my-utils")
+settings.gradle.kts
+To execute the run task in the my-app build from my-composite, run
+./gradlew my-app:app:run.
+You can optionally define a run task in my-composite that depends on my-app:app:run so that you can execute
+./gradlew run:
+<< 'build.gradle.kts'
+tasks.register("run") {
+    dependsOn(gradle.includedBuild("my-app").task(":app:run"))
+}
+build.gradle.kts
+
+Including builds that define Gradle plugins
+A special case of included builds are builds that define Gradle plugins.
+These builds should be included using the includeBuild statement inside the pluginManagement {} block of the settings file.
+Using this mechanism, the included build may also contribute a settings plugin that can be applied in the settings file itself:
+<<'settings.gradle.kts'
+pluginManagement {
+    includeBuild("../url-verifier-plugin")
+}
+settings.gradle.kts
+
+Restrictions on included builds
+Most builds can be included in a composite, including other composite builds. There are some restrictions.
+In a regular build, Gradle ensures that each project has a unique project path. It makes projects identifiable and addressable without conflicts.
+In a composite build, Gradle adds additional qualification to each project from an included build to
+ avoid project path conflicts. The full path to identify a project in a composite build is called a
+  build-tree path. It consists of a build path of an included build and a project path of the project.
+By default, build paths and project paths are derived from directory names and structure on disk. Since included builds can
+ be located anywhere on disk, their build path is determined by the name of the containing directory. This can sometimes lead to conflicts.
+To summarize, the included builds must fulfill these requirements:
+Each included build must have a unique build path.
+Each included build path must not conflict with any project path of the main build.
+These conditions guarantee that each project can be uniquely identified even in a composite build.
+~If conflicts arise, the way to resolve them is by changing the build name of an included build:
+<<'settings.gradle.kts'
+includeBuild("some-included-build") {
+    name = "other-name"
+}
+settings.gradle.kts
+When a composite build is included in another composite build, both builds have the same parent.
+In other words, the nested composite build structure is flattened.
+
+Interacting with a composite build
+Interacting with a composite build is generally similar to a regular multi-project build. Tasks can be executed, tests can
+ be run, and builds can be imported into the IDE.
+Executing tasks
+Tasks from an included build can be executed from the command-line or IDE in the same way as tasks from a
+ regular multi-project build. Executing a task will result in task dependencies being executed, as well as those
+  tasks required to build dependency artifacts from other included builds.
+You can call a task in an included build using a fully qualified path, for example,
+ :included-build-name:project-name:taskName. Project and task names can be abbreviated.
+#https://docs.gradle.org/current/userguide/command_line_interface.html#sec:name_abbreviation
+$ ./gradlew :included-build:subproject-a:compileJava
+> Task :included-build:subproject-a:compileJava
+$ ./gradlew :i-b:sA:cJ
+> Task :included-build:subproject-a:compileJava
+To exclude a task from the command line, you need to provide the fully qualified path to the task.
+#https://docs.gradle.org/current/userguide/command_line_interface.html#sec:excluding_tasks_from_the_command_line
+Included build tasks are automatically executed to generate required dependency artifacts, or the including build can
+ declare a dependency on a task from an included build.
+#https://docs.gradle.org/current/userguide/composite_builds.html#included_build_task_dependencies
+
+Declaring dependencies substituted by an included build
+By default, Gradle will configure each included build to determine the dependencies it can provide. The algorithm for
+ doing this is simple. Gradle will inspect the group and name for the projects in the included build and
+ substitute project dependencies for any external dependency matching ${project.group}:${project.name}.
+By default, substitutions are not registered for the main build.
+To make the ~sub~projects of the main build addressable by ${project.group}:${project.name}, you can tell Gradle to
+ treat the main build like an included build by self-including it:
+<<'settings.gradle.kts'
+ includeBuild(".").
+settings.gradle.kts
+There are cases when the default substitutions determined by Gradle are insufficient or must be corrected for a
+ particular composite. For these cases, explicitly declaring the substitutions for an included build is possible. For example,
+  a single-project build called anonymous-library, produces a Java utility library but does not declare a value for
+ the group attribute:
+<<'build.gradle.kts'
+plugins {
+    java
+}
+#When this build is included in a composite, it will attempt to substitute for the dependency module
+# undefined:anonymous-library (undefined being the default value for project.group, and anonymous-library being the root project name).
+build.gradle.kts
+  Clearly, this isn’t useful in a composite build.
+To use the unpublished library in a composite build, you can explicitly declare the substitutions that it provides:
+<<'settings.gradle.kts'
+includeBuild("anonymous-library") {
+    dependencySubstitution {
+        substitute(module("org.sample:number-utils")).using(project(":"))
+    }
+}
+settings.gradle.kts
+With this configuration, the my-app composite build will substitute any dependency on org.sample:number-utils with a
+ dependency on the root project of anonymous-library.
+
+Deactivate included build substitutions for a configuration
+~If you need to resolve a published version of a module that is also available as part of an included build, you can
+ deactivate the included build substitution rules on the ResolutionStrategy of the Configuration that is resolved.
+  This is necessary because the rules are globally applied in the build, and Gradle does not consider published versions during resolution by default.
+#https://docs.gradle.org/current/userguide/declaring_dependencies_adv.html#sec:resolvable-consumable-configs
+#https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.ResolutionStrategy.html
+~For example, we create a separate publishedRuntimeClasspath configuration that gets resolved to the published versions of
+modules that also exist in one of the local builds. This is done by deactivating global dependency substitution rules:
+<<'build.gradle.kts'
+configurations.create("publishedRuntimeClasspath") {
+    resolutionStrategy.useGlobalDependencySubstitutionRules = false
+
+    extendsFrom(configurations.runtimeClasspath.get())
+    isCanBeConsumed = false
+    attributes.attribute(Usage.USAGE_ATTRIBUTE, objects.named(Usage.JAVA_RUNTIME))
+}
+build.gradle.kts
+A use-case would be to compare published and locally built JAR files.
+
+Depending on tasks in an included build
+~While included builds are isolated from one another and cannot declare direct dependencies, a composite build can
+ declare task dependencies on its included builds. The included builds are accessed using
+# Gradle.getIncludedBuilds() or Gradle.includedBuild(java.lang.String), and a task reference is obtained via the IncludedBuild.task(java.lang.String) method.
+#https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html#org.gradle.api.invocation.Gradle:includedBuilds
+#https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html#org.gradle.api.invocation.Gradle:includedBuild(java.lang.String)
+#https://docs.gradle.org/current/dsl/org.gradle.api.initialization.IncludedBuild.html#org.gradle.api.initialization.IncludedBuild:task(java.lang.String)
+Using these APIs, it is possible to declare a dependency on a task in a particular included build:
+<<'build.gradle.kts'
+tasks.register("run") {
+    dependsOn(gradle.includedBuild("my-app").task(":app:run"))
+}
+build.gradle.kts
+Or you can declare a dependency on tasks with a certain path in some or all of the included builds:
+<<'build.gradle.kts'
+tasks.register("publishDeps") {
+    dependsOn(gradle.includedBuilds.map { it.task(":publishMavenPublicationToMavenRepository") })
+}
+build.gradle.kts
+
+Limitations of composite builds
+Limitations of the current implementation include:
+No support for included builds with publications that don’t mirror the project default configuration.
+See Cases where composite builds won’t work.
+#https://docs.gradle.org/current/userguide/composite_builds.html#included_build_substitution_limitations
+Multiple composite builds may conflict when run in parallel if more than one includes the same build.
+Gradle does not share the project lock of a shared composite build between Gradle invocations to prevent concurrent execution.
+
+https://docs.gradle.org/current/userguide/multi_project_configuration_and_execution.html
+
+
 
 
 
