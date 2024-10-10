@@ -122,6 +122,14 @@ git pull #if an upstream branch is defined for the current branch, fetch and int
 git pull shortname branch_name #fetches and integrates changes from the <shortname> remote repository for the specified <branch_name>
 git pull -p #removes remote-tracking branches that correspond to deleted remote branches and fetches and integrates changes from the <shortname> remote repository for the specified <branch_name>
 
+#master is now named main
+#The default branch has been renamed!
+#If you have a local clone, you can update it by running the following commands.
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
+
 # https://git-scm.com/docs/git-init
 #Start a new Git repository for an existing code base
 cd /path/to/my/codebase || exit
