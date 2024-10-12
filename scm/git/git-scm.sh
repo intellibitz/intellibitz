@@ -5,6 +5,13 @@
 # https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
 # https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository
 
+Debian/Ubuntu
+~For the latest stable version for your release of Debian/Ubuntu
+apt-get install git
+~For Ubuntu, this PPA provides the latest stable upstream Git version
+add-apt-repository ppa:git-core/ppa
+apt update; apt install git
+
 git config credential.https://example.com.username myusername
 git config credential.helper "[helper] [options]"
 #If you want to check your configuration settings, you can use the git config --list command to
@@ -26,18 +33,18 @@ $ git config user.name
 #--
 #Start a new Git repository for an existing code base
 $ cd /path/to/my/codebase
-#Initial branch configuration: git init also sets up an initial branch (traditionally main). However, this
+#Initial branch configuration: git init also sets up an initial branch ~traditionally main~. However, this
 # branch doesn't have any commits until you make your first commit.
-$ git init                        #(1) Create a /path/to/my/codebase/.git directory.
-$ git add .                       #(2) Add all existing files to the index.
-$ git commit -m "commit_message"  #(3) Record the pristine state as the first commit in the history.
-git init -b ["main"] #creates or reinitializes local git repository as main branch
+$ git init                        #~1~ Create a /path/to/my/codebase/.git directory.
+$ git add .                       #~2~ Add all existing files to the index.
+$ git commit -m "commit_message"  #~3~ Record the pristine state as the first commit in the history.
+git init -b ["main"] #creates or re-initializes local git repository as main branch
 
 #You clone a repository with git clone <url>. For example, if you want to clone the
-# Git linkable library called libgit2, you can do so like this:
+# Git linkable library called lib-git2, you can do so like this:
 git clone URL #clones remote git repository
 $ git clone https://github.com/libgit2/libgit2
-#If you want to clone the repository into a directory named something other than libgit2, you can
+#If you want to clone the repository into a directory named something other than lib-git2, you can
 # specify the new directory name as an additional argument:
 git clone URL directory_name #clones a remote repository
 $ git clone https://github.com/libgit2/libgit2 mylibgit
@@ -135,9 +142,9 @@ git remote set-head origin -a
 cd /path/to/my/codebase || exit
 
 ## Git commands
-git init      #(1) Create a /path/to/my/codebase/.git directory.
-git add .     #(2) Add all existing files to the index.
-git commit    #(3) Record the pristine state as the first commit in the history.
+git init      #~1~ Create a /path/to/my/codebase/.git directory.
+git add .     #~2~ Add all existing files to the index.
+git commit    #~3~ Record the pristine state as the first commit in the history.
 git clone
 git add
 git commit -m
@@ -168,8 +175,8 @@ refs/:
 hooks/:
 #--
 #This directory contains client-side or server-side scripts that are invoked at different phases of the Git workflow, such as
-# before a commit is finalized (pre-commit) or before pushing to a remote repository (pre-push). By default, Git populates this
-# directory with example scripts. These scripts are not active until renamed (removing the .sample extension).
+# before a commit is finalized ~pre-commit~ or before pushing to a remote repository ~pre-push~. By default, Git populates this
+# directory with example scripts. These scripts are not active until renamed ~removing the .sample extension~.
 info/:
 #--
 #Inside, you'll find the exclude file, which works like a .gitignore file but is specific to this repository. The patterns listed in
@@ -177,14 +184,135 @@ info/:
 description:
 #--
 #This file is only used by the GitWeb program, which is a Git web interface. By default, it contains a placeholder text
-# ("Unnamed repository; edit this file 'description' to name the repository."), which can be changed to provide a
+# ~"Unnamed repository; edit this file 'description' to name the repository."~, which can be changed to provide a
 # meaningful description of your repository for viewers on GitWeb.
 index:
 #--
-#The index file (not present immediately after git init but created upon first adding files to the staging area)
-# acts as the staging area ("index") for Git. It tracks which files will be included in the next commit.
+#The index file ~not present immediately after git init but created upon first adding files to the staging area~
+# acts as the staging area ~"index"~ for Git. It tracks which files will be included in the next commit.
 
 cat .gitignore
 #*.[oa]
 #*~
+
+https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control
+In a DVCS ~such as Git, Mercurial or Darcs~, clients dont just check out the latest snapshot of the files, rather, they
+ fully mirror the repository, including its full history. Thus, if any server dies, and these systems were
+  collaborating via that server, any of the client repositories can be copied back up to the server to
+   restore it. Every clone is really a full backup of all the data.
+
+https://git-scm.com/book/en/v2/Getting-Started-What-is-Git%3F
+The Three States - Pay attention now —  here is the main thing to remember about Git if you want the rest of your
+ learning process to go smoothly. Git has three main states that your files can reside in:
+modified: Modified means that you have changed the file but have not committed it to your database yet.
+staged: Staged means that you have marked a modified file in its current version to go into your next commit snapshot. ,and
+committed: Committed means that the data is safely stored in your local database.
+This leads us to the three main sections of a Git project: the
+ "working tree" ~Working Directory~, the
+"staging area" ~Index~, and the
+"Git directory" ~Repository~.
+The Git directory is where Git stores the metadata and object database for your project. This is the
+ most important part of Git, and it is what is copied when you clone a repository from another computer.
+The basic Git workflow goes something like this:
+ You modify files in your working tree.
+You selectively stage just those changes you want to be part of your next commit, which adds only those changes to the staging area.
+You ~do a commit, which takes the files as they are in the staging area and stores that snapshot permanently to
+ your Git directory. If a particular version of a file is in the Git directory, its considered committed. If it has
+been modified and was added to the staging area, it is staged. And if it was changed since it was checked out but has
+not been staged, it is modified. In Git Basics, you will learn more about these states and how you can
+either take advantage of them or skip the staged part entirely.
+
+https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
+Git comes with a tool called git config that lets you get and set configuration variables that control all aspects of
+ how Git looks and operates. These variables can be stored in three different places:
+/etc/gitconfig file: Contains values applied to every user on the system and all their repositories. If you
+ pass the option --system to git config, it reads and writes from this file specifically. Because this is a
+system configuration file, you would need administrative or superuser privilege to make changes to it.
+~/.gitconfig or ~/.config/git/config file: Values specific personally to you, the user. You can make Git read and write to
+ this file specifically by passing the --global option, and this affects all of the repositories you work with on your system.
+config file in the Git directory ~that is, .git/config~ of whatever repository youre currently using: Specific to
+ that single repository. You can force Git to read from and write to this file with the --local option, but that is in
+fact the default. Unsurprisingly, you need to be located somewhere in a Git repository for this option to work properly.
+Each level overrides values in the previous level, so values in .git/config trump those in [path]/etc/gitconfig.
+On Windows systems, Git looks for the .gitconfig file in the "$HOME" directory ~C:/Users\$USER for most people~. It also
+ still looks for [path]/etc/gitconfig, although its relative to the MSys root, which is wherever you decide to
+install Git on your Windows system when you run the installer. If you are using version 2.x or later of Git for Windows,
+there is also a system-level config file at C:/Documents and Settings/All Users/Application Data/Git/config on Windows XP, and
+in C:/ProgramData/Git/config on Windows Vista and newer. This config ~file can only be changed by git config -f <file> as an admin.
+You can view all of your settings and where they are coming from using:
+$ git config --list --show-origin
+
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+$ git config --global core.editor emacs
+$ git config --global init.defaultBranch main
+
+https://git-scm.com/book/en/v2/Getting-Started-Getting-Help
+$ git help ~verb~
+$ git <verb> --help
+$ man git-~verb~
+~For example, you can get the manpage help for the git config command by running this:
+
+$ git help config
+
+In addition, if you dont need the full-blown manpage help, but just need a quick refresher on the available options for a
+Git command, you can ask for the more concise help output with the -h option, as in:
+$ git add -h
+~If the manpages and this book arent enough and you need in-person help, you can try the
+ #git, #github, or #gitlab channels on the Libera Chat IRC server, which can be found at https://libera.chat/.
+
+https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository
+Getting a Git Repository
+You typically obtain a Git repository in one of two ways:
+You can take a local directory that is currently not under version control, and turn it into a Git repository, or
+You can clone an existing Git repository from elsewhere.
+In either case, you end up with a Git repository on your local machine, ready for work.
+
+Initializing a Repository in an Existing Directory
+~If you have a project directory that is currently not under version control and you want to start controlling it
+ with Git, you first need to go to that projects directory. If youve never ~done this, it looks a
+little different depending on which system youre running:
+~for Linux:
+$ cd /home/user/my_project
+and type:
+
+$ git init
+
+This creates a new subdirectory named .git that contains all of your necessary repository files — a Git repository skeleton.
+ At this point, nothing in your project is tracked yet. See Git Internals for more information about exactly what
+files are contained in the .git directory you just created.
+~If you want to start version-controlling existing files ~as opposed to an empty directory~, you should probably begin
+ tracking those files and ~do an initial commit. You can accomplish that with a few git add commands that specify the
+files you want to track, followed by a git commit:
+$ git add "*.c"
+$ git add LICENSE
+$ git commit -m 'Initial project version'
+We will go over what these commands ~do in just a minute. At this point, you have a Git repository with tracked files and an initial commit.
+
+Cloning an Existing Repository
+~If you want to get a copy of an existing Git repository — for example, a project youd like to
+ contribute to — the command you need is git clone. If youre familiar with other VCSs such as Subversion, youll notice that the
+command is "clone" and not "checkout". This is an important distinction — instead of getting just a working copy, Git receives a
+full copy of nearly all data that the server has. Every version of every file for the history of the project is pulled down
+by default when you run git clone. In fact, if your server disk gets corrupted, you can often use nearly any of the
+clones on any client to set the server back to the state it was in when it was cloned ~you may lose some server-side hooks and such,
+but all the versioned data would be there — see Getting Git on a Server for more details~.
+You clone a repository with git clone <url>. For example, if you want to clone the Git linkable library called libgit2, you can ~do so like this:
+
+$ git clone https://github.com/libgit2/libgit2
+
+That creates a directory named libgit2, initializes a .git directory inside it, pulls down all the data for that repository,
+ and checks out a working copy of the latest version. If you go into the new libgit2 directory that was
+just created, youll see the project files in there, ready to be worked on or used.
+~If you want to clone the repository into a directory named something other than libgit2, you can specify the
+ new directory name as an additional argument:
+
+$ git clone https://github.com/libgit2/libgit2 mylibgit
+
+That command does the same thing as the previous one, but the target directory is called mylibgit.
+Git has a number of different transfer protocols you can use. The previous example uses the https:// protocol, but you may also
+ see git:// or user@server:path/to/repo.git, which uses the SSH transfer protocol. Getting Git on a Server will introduce all of the
+available options the server can set up to access your Git repository and the pros and cons of each.
+
+https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository
 
