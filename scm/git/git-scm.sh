@@ -315,4 +315,23 @@ Git has a number of different transfer protocols you can use. The previous examp
 available options the server can set up to access your Git repository and the pros and cons of each.
 
 https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository
+Recording Changes to the Repository
+At this point, you should have a bona fide Git repository on your local machine, and a checkout or working copy of all of its
+ files in front of you. Typically, youll want to start making changes and committing snapshots of those changes into your
+repository each time the project reaches a state you want to record.
+Remember that each file in your working directory can be in one of two states:
+ tracked or untracked.
+Tracked files are files that were in the last snapshot, as well as any newly staged files;
+ they can be unmodified, modified, or staged.
+In short, tracked files are files that Git knows about.
+Untracked files are everything else — any files in your working directory that were not in
+ your last snapshot and are not in your staging area. When you first clone a repository, all of your files will be
+tracked and unmodified because Git just checked them out and you havent edited anything.
+As you edit files, Git sees them as modified, because youve changed them since your last commit. As you work, you
+ selectively stage these modified files and ~then commit all those staged changes, and the cycle repeats.
+
+Checking the Status of Your Files
+The main tool you use to determine which files are in which state is the git status command. If you run this command
+ directly after a clone, you should see something like this:
+$ git status
 
