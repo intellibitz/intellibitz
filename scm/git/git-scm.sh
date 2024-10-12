@@ -335,3 +335,267 @@ The main tool you use to determine which files are in which state is the git sta
  directly after a clone, you should see something like this:
 $ git status
 
+Tracking New Files
+In order to begin tracking a new file, you use the command git add. To begin tracking the README file, you can run this:
+$ git add README
+
+To stage it, you run the git add command. git add is a multipurpose command — you use it to begin tracking new files,
+ to stage files, and to ~do other things like marking merge-conflicted files as resolved. It may be helpful to think of it
+  more as ~add precisely this content to the next commit~ rather than ~add this file to the project~.
+
+Short Status
+~While the git status output is pretty comprehensive, its also quite wordy. Git also has a short status flag so you can
+ see your changes in a more compact way. If you run git status -s or git status --short you get a far more simplified output from the command:
+$ git status -s
+
+Ignoring Files
+https://github.com/github/gitignore
+youll have a class of files that you dont want Git to automatically add or even show you as being untracked. These are
+ generally automatically generated files such as log files or files produced by your build system. In such cases, you can
+create a file listing patterns to match them named .gitignore. Here is an example .gitignore file:
+$ cat .gitignore
+#*.[oa]
+#*~
+Here is another example
+.gitignore file:
+# ignore all .a files
+#*.a
+# but do track lib.a, even though you're ignoring .a files above
+#!lib.a
+# only ignore the TODO file in the current directory, not subdir/TODO
+#/TODO
+# ignore all files in any directory named build
+#build/
+# ignore doc/notes.txt, but not doc/server/arch.txt
+#doc/*.txt
+# ignore all .pdf files in the doc/ directory and any of its subdirectories
+#doc/**/*.pdf
+In the simple case, a repository might have a single .gitignore file in its root directory, which applies recursively to the
+ entire repository. However, it is also possible to have additional .gitignore files in subdirectories. The rules in these
+nested .gitignore files apply only to the files under the directory where they are located. The Linux kernel source repository has 206 .gitignore files.
+
+Viewing Your Staged and Unstaged Changes
+~If the git status command is too vague for you — you want to know exactly what you changed, not just which files were
+ changed — you can use the git diff command.
+$ git diff
+~If you want to see what youve staged that will go into your next commit, you can use git diff --staged. This command compares your
+ staged changes to your last commit:
+$ git diff --staged
+Its important to note that git diff by itself doesnt show all changes made since your last commit — only changes that
+ are still unstaged. If youve staged all of your changes, git diff will give you no output.
+you can use
+ ~git diff~ to see what is still unstaged and
+ ~git diff --cached~ to see what youve staged so far ~--staged and --cached are synonyms~
+
+Committing Your Changes
+Now that your staging area is set up the way you want it, you can commit your changes. Remember that anything that is
+ still unstaged — any files you have created or modified that you havent run git add on since you edited them — wont go
+into this commit. They will stay as modified files on your disk. In this case, lets say that the last time you ran
+ git status, you saw that everything was staged, so youre ready to commit your changes. The simplest way to commit is to type git commit:
+$ git commit
+Alternatively- you can type your commit message inline with the commit command by specifying it after a -m flag, like this:
+$ git commit -m "Story 182: fix benchmarks for speed"
+
+Skipping the Staging Area
+Although it can be amazingly useful for crafting commits exactly how you want them, the staging area is sometimes a
+ bit more complex than you need in your workflow. If you want to skip the staging area, Git provides a simple shortcut.
+Adding the -a option to the git commit command makes Git automatically stage every file that is already tracked before doing the
+ commit- letting you skip the git add part:
+$ git commit -a -m 'Add new benchmarks'
+
+Removing Files
+To remove a file from Git, you have to remove it from your tracked files ~more accurately, remove it from your staging area~ and ~then commit.
+ The git rm command does that, and also removes the file from your working directory so you dont see it as an
+untracked file the next time around. If you simply remove the file from your working directory, it shows up under the
+ 'Changes not staged for commit' ~that is, unstaged~ area of your git status output:
+$ rm PROJECTS.md
+$ git rm PROJECTS.md
+$ git rm log/\*.log
+$ git rm \*~
+Another useful thing you may want to ~do is to keep the file in your working tree but remove it from your staging area.
+ In other words, you may want to keep the file on your hard drive but not have Git track it anymore. This is
+particularly useful if you forgot to add something to your .gitignore file and accidentally staged it, like a
+large log file or a bunch of .a compiled files. To ~do this, use the --cached option:
+$ git rm --cached README
+
+Moving Files
+Unlike many other VCSs, Git doesnt explicitly track file movement. If you rename a file in Git, no metadata is stored in Git that
+ tells it you renamed the file. However, Git is pretty smart about figuring that out after the fact — well deal with
+detecting file movement a bit later.
+Thus its a bit confusing that Git has a mv command. If you want to rename a file in Git, you can run something like:
+$ git mv file_from file_to
+and it works fine. In fact, if you run something like this and look at the status, youll see that Git considers it a renamed file:
+$ git mv README.md README
+$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+    renamed:    README.md -> README
+However- this is equivalent to running something like this:
+$ mv README.md README
+$ git rm README.md
+$ git add README
+Git figures out that its a rename implicitly, so it doesnt matter if you rename a file that way or with the mv command.
+ The only real difference is that git mv is one command instead of three — its a convenience function.
+More importantly, you can use any tool you like to rename a file, and address the add/rm later, before you commit.
+
+https://git-scm.com/book/en/v2/Git-Basics-Viewing-the-Commit-History
+Viewing the Commit History
+After you have created several commits, or if you have cloned a repository with an existing commit history, youll probably want to
+ look back to see what has happened. The most basic and powerful tool to ~do this is the git log command.
+$ git log
+One of the more helpful options is -p or --patch, which shows the difference ~the patch output~ introduced in each commit.
+ You can also limit the number of log entries displayed, such as using -2 to show only the last two entries.
+$ git log -p -2
+~if you want to see some abbreviated stats for each commit, you can use the --stat option:
+$ git log --stat
+$ git log --pretty=oneline
+$ git log --pretty=format:"%h - %an, %ar : %s"
+$ git log --pretty=format:"%h %s" --graph
+$ git log --since=2.weeks
+$ git log -S function_name
+$ git log -- path/to/file
+Preventing the display of merge commits
+Depending on the workflow used in your repository, its possible that a sizable percentage of the commits in your
+ log history are just merge commits, which typically arent very informative. To prevent the display of merge commits
+cluttering up your log history, simply add the log option --no-merges.
+~For example, if you want to see which commits modifying test files in the Git source code history were committed by
+ Junio Hamano in the month of October 2008 and are not merge commits, you can run something like this:
+$ git log --pretty="%h - %s" --author='Junio C Hamano' --since="2008-10-01" \
+   --before="2008-11-01" --no-merges -- t/
+
+https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things
+One of the common undos takes place when you commit too early and possibly forget to add some files, or you mess up your
+ commit message. If you want to redo that commit, make the additional changes you forgot, stage them, and commit again using the --amend option:
+$ git commit --amend
+As an example, if you commit and ~then realize you forgot to stage the changes in a file you wanted to add to this commit,
+ you can ~do something like this:
+$ git commit -m 'Initial commit'
+$ git add forgotten_file
+$ git commit --amend
+You end up with a single commit — the second commit replaces the results of the first.
+Only amend commits that are still local and have not been pushed somewhere. Amending previously pushed commits and
+ force pushing the branch will cause problems for your collaborators. For more on what happens when you ~do this and
+how to recover if youre on the receiving end read The Perils of Rebasing.
+https://git-scm.com/book/en/v2/ch00/_rebase_peril
+Its important to understand that when youre amending your last commit, youre not so much fixing it as replacing it
+ entirely with a new, improved commit that pushes the old commit out of the way and puts the new commit in its place.
+Effectively- its as if the previous commit never happened, and it wont show up in your repository history.
+The obvious value to amending commits is to make minor improvements to your last commit, without cluttering your
+ repository history with commit messages of the form, 'Oops, forgot to add a file' or 'Darn, fixing a typo in last commit'.
+
+Unstaging a Staged File
+$ git reset HEAD CONTRIBUTING.md
+https://git-scm.com/book/en/v2/ch00/_git_reset
+Its true that git reset can be a dangerous command, especially if you provide the --hard flag. However, in the
+ scenario described above, the file in your working directory is not touched, so its relatively safe.
+
+Unmodifying a Modified File
+$ git checkout -- CONTRIBUTING.md
+Its important to understand that git checkout -- <file> is a dangerous command. Any local changes you made to that
+ file are gone — Git just replaced that file with the last staged or committed version. Dont ever use this command unless you
+absolutely know that you dont want those unsaved local changes
+~If you would like to keep the changes youve made to that file but still need to get it out of the way for now, well go
+ over stashing and branching in Git Branching; these are generally better ways to go.
+https://git-scm.com/book/en/v2/ch00/ch03-git-branching
+Remember- anything that is committed in Git can almost always be recovered. Even commits that were on branches that
+ were deleted or commits that were overwritten with an --amend commit can be recovered ~see Data Recovery for data recovery~.
+https://git-scm.com/book/en/v2/ch00/_data_recovery
+However- anything you lose that was never committed is likely never to be seen again.
+
+Undoing things with git restore
+Git version 2.23.0 introduced a new command: git restore. Its basically an alternative to git reset which we just covered.
+ From Git version 2.23.0 onwards, Git will use git restore instead of git reset for many undo operations.
+Lets retrace our steps, and undo things with git restore instead of git reset.
+Unstaging a Staged File with git restore
+$ git restore --staged CONTRIBUTING.md
+Unmodifying a Modified File with git restore
+$ git restore CONTRIBUTING.md
+Its important to understand that git restore ~file~ is a dangerous command. Any local changes you made to that file are
+ gone — Git just replaced that file with the last staged or committed version. Dont ever use this command unless you
+absolutely know that you dont want those unsaved local changes.
+
+https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes
+Working with Remotes
+To be able to collaborate on any Git project, you need to know how to manage your remote repositories. Remote repositories are
+ versions of your project that are hosted on the Internet or network somewhere. You can have several of them, each of which
+generally is either read-only or read/write for you. Collaborating with others involves managing these remote repositories and
+pushing and pulling data to and from them when you need to share work. Managing remote repositories includes knowing how to
+add remote repositories, remove remotes that are no longer valid, manage various remote branches and define them as
+being tracked or not, and more.
+Remote repositories can be on your local machine.
+It is entirely possible that you can be working with a 'remote' repository that is, in fact, on the same host you are.
+ The word 'remote' does not necessarily imply that the repository is somewhere else on the network or Internet, only that
+it is elsewhere. Working with such a remote repository would still involve all the standard pushing, pulling and
+fetching operations as with any other remote.
+
+Showing Your Remotes
+To see which remote servers you have configured, you can run the git remote command. It lists the shortnames of each
+ remote handle youve specified. If youve cloned your repository, you should at least see origin — that is the
+default name Git gives to the server you cloned from:
+$ git remote
+$ git remote -v
+
+Adding Remote Repositories
+Weve mentioned and given some demonstrations of how the git clone command implicitly adds the origin remote for you.
+ Heres how to add a new remote explicitly. To add a new remote Git repository as a shortname you can reference easily, run
+git remote add ~shortname~ ~url~
+$ git remote
+origin
+$ git remote add pb https://github.com/paulboone/ticgit
+$ git remote -v
+Now you can use the string pb on the command line instead of the whole URL.
+$ git fetch pb
+
+Fetching and Pulling from Your Remotes
+As you just saw, to get data from your remote projects, you can run:
+$ git fetch ~remote~
+The command goes out to that remote project and pulls down all the data from that remote project that you dont have yet.
+ After you ~do this, you should have references to all the branches from that remote, which you can merge in or inspect at any time.
+~If you clone a repository, the command automatically adds that remote repository under the name 'origin'. So,
+ git fetch origin fetches any new work that has been pushed to that server since you cloned ~or last fetched from~ it.
+Its important to note that the git fetch command only downloads the data to your local repository — it doesnt automatically
+ merge it with any of your work or modify what youre currently working on. You have to merge it manually into your work when youre ready.
+~If your current branch is set up to track a remote branch ~see the next section and Git Branching for more information~,
+ you can use the git pull command to automatically fetch and ~then merge that remote branch into your current branch.
+This may be an easier or more comfortable workflow for you; and by default, the git clone command automatically sets up
+ your local master branch to track the remote master branch ~or whatever the default branch is called~ on the
+server you cloned from. Running git pull generally fetches data from the server you originally cloned from and
+automatically tries to merge it into the code youre currently working on.
+Note
+From Git version 2.27 onward, git pull will give a warning if the pull.rebase variable is not set.
+Git will keep warning you until you set the variable.
+~If you want the default behavior of Git ~fast-forward if possible, else create a merge commit~:
+git config --global pull.rebase "false"
+~If you want to rebase when pulling:
+git config --global pull.rebase "true"
+
+Pushing to Your Remotes
+When you have your project at a point that you want to share, you have to push it upstream. The command for this is simple:
+ git push ~remote~ ~branch~. If you want to push your master branch to your origin server ~again, cloning generally sets up
+both of those names for you automatically~, ~then you can run this to push any commits youve ~done back up to the server:
+$ git push origin master
+This command works only if you cloned from a server to which you have write access and if nobody has pushed in the meantime.
+~If you and someone else clone at the same time and they push upstream and ~then you push upstream, your push will
+rightly be rejected. Youll have to fetch their work first and incorporate it into yours before youll be allowed to push.
+ See Git Branching for more detailed information on how to push to remote servers.
+
+Inspecting a Remote
+~If you want to see more information about a particular remote, you can use the git remote show ~remote~ command.
+~If you run this command with a particular shortname, such as origin, you get something like this:
+$ git remote show origin
+
+Renaming and Removing Remotes
+You can run git remote rename to change a remotes shortname. For instance, if you want to rename pb to paul, you can ~do so with git remote rename:
+$ git remote rename pb paul
+$ git remote
+
+~If you want to remove a remote for some reason — youve moved the server or are no longer using a particular mirror, or
+ perhaps a contributor isnt contributing anymore — you can either use git remote remove or git remote rm:
+$ git remote remove paul
+$ git remote
+origin
+Once you delete the reference to a remote this way, all remote-tracking branches and configuration settings associated with that remote are also deleted.
+
+
