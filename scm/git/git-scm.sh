@@ -764,5 +764,156 @@ The -c flag stands for create, you can also use the full flag: --create. Return 
  git switch -.
 
 https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+$ git checkout -b iss53
+Switched to a new branch "iss53"
+This is shorthand for:
+$ git branch iss53
+$ git checkout iss53
+You work on your website and ~do some commits. Doing so moves the iss53 branch forward, because you have it checked out ~that is, your HEAD is pointing to it~:
+$ vim index.html
+$ git commit -a -m 'Create new footer [issue 53]'
+$ git checkout master
+Switched to branch 'master'
+$ git checkout -b hotfix
+Switched to a new branch 'hotfix'
+$ vim index.html
+$ git commit -a -m 'Fix broken email address'
+You can run your tests, make sure the hotfix is what you want, and finally merge the hotfix branch back into your
+master branch to deploy to production. You ~do this with the git merge command:
+$ git checkout master
+$ git merge hotfix
+Updating f42c576..3a0874c
+Fast-forward
+Youll notice the phrase 'fast-forward' in that merge. Because the commit C4 pointed to by the branch hotfix you
+ merged in was directly ahead of the commit C2 youre on, Git simply moves the pointer forward. To phrase that
+another way, when you try to merge one commit with a commit that can be reached by following the first commits history,
+ Git simplifies things by moving the pointer forward because there is no divergent work
+to merge together — this is called a 'fast-forward.'
+After your super-important fix is deployed, youre ready to switch back to the work you were doing before you
+ were interrupted. However, first youll delete the hotfix branch, because you no longer need it — the
+master branch points at the same place. You can delete it with the -d option to git branch:
+$ git branch -d hotfix
+Now you can switch back to your work-in-progress branch on issue #53 and continue working on it.
+$ git checkout iss53
+Switched to branch "iss53"
+$ vim index.html
+$ git commit -a -m 'Finish the new footer [issue 53]'
+$ git checkout master
+Switched to branch 'master'
+$ git merge iss53
+Merge made by the 'recursive' strategy.
+This looks a bit different than the hotfix merge you did earlier. In this case, your development history has diverged from
+ some older point. Because the commit on the branch youre on isnt a direct ancestor of the branch youre merging in,
+Git has to ~do some work. In this case, Git does a simple three-way merge, using the two snapshots pointed to by the
+ branch tips and the common ancestor of the two.
+$ git branch -d iss53
 
+Basic Merge Conflicts
+Occasionally- this process doesnt go smoothly. If you changed the same part of the same file differently in the
+ two branches youre merging, Git wont be able to merge them cleanly.
+$ git merge iss53
+Auto-merging index.html
+#CONFLICT (content): Merge conflict in index.html
+Automatic merge failed; fix conflicts and ~then commit the result.
+Git hasnt automatically created a new merge commit. It has paused the process while you resolve the conflict. If you want to
+ see which files are unmerged at any point after a merge conflict, you can run git status:
+$ git status
+Anything that has merge conflicts and hasnt been resolved is listed as unmerged. Git adds standard conflict-resolution markers to the
+ files that have conflicts, so you can open them manually and resolve those conflicts. Your file contains a section that looks something like this:
+#<<<<<<< HEAD:index.html
+#<div id="footer">contact : email.support@github.com</div>
+#=======
+#<div id="footer">
+# please contact us at support@github.com
+#</div>
+#>>>>>>> iss53:index.html
+This means the version in HEAD ~your master branch, because that was what you had checked out when you ran your merge command~ is the
+ top part of that block ~everything above the =======~, while the version in your iss53 branch looks like everything in the
+bottom part. In order to resolve the conflict, you have to either choose one side or the other or merge the contents yourself.
+This resolution has a little of each section, and the
+# <<<<<<<, =======, and >>>>>>>
+lines have been completely removed. After youve resolved each of these sections in each conflicted file, run git add on
+ each file to mark it as resolved. Staging the file marks it as resolved in Git.
+~If you want to use a graphical tool to resolve these issues, you can run git mergetool, which fires up an
+ appropriate visual merge tool and walks you through the conflicts:
+$ git mergetool
+Note- If you need more advanced tools for resolving tricky merge conflicts, we cover more on merging in Advanced Merging.
+https://git-scm.com/book/en/v2/ch00/_advanced_merging
+After you exit the merge tool, Git asks you if the merge was successful. If you tell the script that it was, it stages the
+ file to mark it as resolved for you. You can run git status again to verify that all conflicts have been resolved:
+$ git status
+~If youre happy with that, and you verify that everything that had conflicts has been staged, you can type git commit to finalize the merge commit.
+
+https://git-scm.com/book/en/v2/Git-Branching-Branch-Management
+The git branch command does more than just create and delete branches. If you run it with no arguments, you get a simple listing of your current branches:
+$ git branch
+Notice the \* character that prefixes the master branch: it indicates the branch that you currently have checked out ~i.e., the
+ branch that HEAD points to~. This means that if you commit at this point, the master branch will be
+moved forward with your new work. To see the last commit on each branch, you can run git branch -v:
+$ git branch -v
+The useful --merged and --no-merged options can filter this list to branches that you have or have not yet merged into the
+ branch youre currently on. To see which branches are already merged into the branch youre on, you can run git branch --merged:
+$ git branch --merged
+Branches on this list without the \* in front of them are generally fine to delete with git branch -d; youve already
+ incorporated their work into another branch, so youre not going to lose anything.
+To see all the branches that contain work you havent yet merged in, you can run git branch --no-merged:
+$ git branch --no-merged
+Tip- The options described above, --merged and --no-merged will, if not given a commit or branch name as an argument,
+ show you what is, respectively, merged or not merged into your current branch.
+You can always provide an additional argument to ask about the merge state with respect to some other branch without checking that
+ other branch out first, as in, what is not merged into the master branch?
+$ git checkout testing
+$ git branch --no-merged master
+
+Changing a branch name
+Caution- Do not rename branches that are still in use by other collaborators. Do not rename a branch like
+ master/main/mainline without having read the section Changing the master branch name.
+Suppose you have a branch that is called bad-branch-name and you want to change it to corrected-branch-name, while keeping
+ all history. You also want to change the branch name on the remote ~GitHub, GitLab, other server~. How ~do you ~do this?
+Rename the branch locally with the git branch --move command:
+$ git branch --move bad-branch-name corrected-branch-name
+This replaces your bad-branch-name with corrected-branch-name, but this change is only local for now.
+ To let others see the corrected branch on the remote, push it:
+$ git push --set-upstream origin corrected-branch-name
+Now well take a brief look at where we are now:
+$ git branch --all
+\* corrected-branch-name
+  main
+  remotes/origin/bad-branch-name
+  remotes/origin/corrected-branch-name
+  remotes/origin/main
+Notice that youre on the branch corrected-branch-name and its available on the remote. However, the branch with the
+ bad name is also still present there but you can delete it by executing the following command:
+$ git push origin --delete bad-branch-name
+Now the bad branch name is fully replaced with the corrected branch name.
+
+Changing the master branch name
+Warning- Changing the name of a branch like master/main/mainline/default will break the integrations, services, helper utilities and
+ build/release scripts that your repository uses. Before you ~do this, make sure you consult with your collaborators.
+Also- make sure you ~do a thorough search through your repo and update any references to the old branch name in your code and scripts.
+Rename your local master branch into main with the following command:
+$ git branch --move master main
+Theres no local master branch anymore, because its renamed to the main branch.
+To let others see the new main branch, you need to push it to the remote. This makes the renamed branch available on the remote.
+$ git push --set-upstream origin main
+Now we end up with the following state:
+$ git branch --all
+\* main
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/main
+  remotes/origin/master
+Your local master branch is gone, as its replaced with the main branch. The main branch is present on the remote.
+ However- the old master branch is still present on the remote. Other collaborators will continue to use the master branch as the
+base of their work, until you make some further changes.
+Now you have a few more tasks in front of you to complete the transition:
+Any projects that depend on this one will need to update their code and/or configuration.
+Update any test-runner configuration files.
+Adjust build and release scripts.
+Redirect settings on your repo host for things like the repos default branch, merge rules, and other things that match branch names.
+Update references to the old branch in documentation.
+Close or merge any pull requests that target the old branch.
+After youve ~done all these tasks, and are certain the main branch performs just as the master branch, you can delete the master branch:
+$ git push origin --delete master
+
+https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows
 
