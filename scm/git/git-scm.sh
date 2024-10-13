@@ -111,6 +111,7 @@ git switch -
 
 #--
 git log --all #shows commit history for all branches in local repository
+git log --oneline --decorate --graph --all
 git branch --all #lists local branches and remote-tracking branches
 git branch -vv #lists the local branches and their upstream branches, if they have any
 git branch -u shortname/branch_name #defines an upstream branch for the current local branch
@@ -128,6 +129,7 @@ git fetch -p #removes remote-tracking branches that correspond to deleted remote
 git pull #if an upstream branch is defined for the current branch, fetch and integrate changes from the defined upstream branch
 git pull shortname branch_name #fetches and integrates changes from the <shortname> remote repository for the specified <branch_name>
 git pull -p #removes remote-tracking branches that correspond to deleted remote branches and fetches and integrates changes from the <shortname> remote repository for the specified <branch_name>
+git pull --allow-unrelated-histories origin main
 
 #master is now named main
 #The default branch has been renamed!
@@ -597,5 +599,170 @@ $ git remote remove paul
 $ git remote
 origin
 Once you delete the reference to a remote this way, all remote-tracking branches and configuration settings associated with that remote are also deleted.
+
+https://git-scm.com/book/en/v2/Git-Basics-Tagging
+Listing Your Tags - Listing the existing tags in Git is straightforward. Just type git tag ~with optional -l or --list~:
+$ git tag
+Listing tag wildcards requires -l or --list option
+~If you want just the entire list of tags, running the command git tag implicitly assumes you want a listing and
+ provides one; the use of -l or --list in this case is optional.
+~If- however, youre supplying a wildcard pattern to match tag names, the use of -l or --list is mandatory.
+
+Creating Tags
+Git supports two types of tags: lightweight and annotated.
+A lightweight tag is very much like a branch that doesnt change — its just a pointer to a specific commit.
+Annotated tags, however, are stored as full objects in the Git database. Theyre checksummed; contain the
+ tagger name, email, and date; have a tagging message; and can be signed and verified with GNU Privacy Guard ~GPG~.
+Its generally recommended that you create annotated tags so you can have all this information; but if you want a
+ temporary tag or for some reason dont want to keep the other information, lightweight tags are available too.
+
+Annotated Tags
+Creating an annotated tag in Git is simple. The easiest way is to specify -a when you run the tag command:
+$ git tag -a v1.4 -m "my version 1.4"
+You can see the tag data along with the commit that was tagged by using the git show command:
+$ git show v1.4
+
+Lightweight Tags
+Another way to tag commits is with a lightweight tag. This is basically the commit checksum stored in a file — no other
+ information is kept. To create a lightweight tag, dont supply any of the -a, -s, or -m options, just provide a tag name:
+$ git tag v1.4-lw
+This time, if you run git show on the tag, you dont see the extra tag information. The command just shows the commit:
+$ git show v1.4-lw
+
+Tagging Later
+You can also tag commits after youve moved past them.
+$ git tag -a v1.2 9fceb02
+
+Sharing Tags
+By default, the git push command doesnt transfer tags to remote servers. You will have to explicitly push tags to a
+ shared server after you have created them. This process is just like sharing remote branches — you can run git push origin <tagname>.
+$ git push origin v1.5
+~If you have a lot of tags that you want to push up at once, you can also use the --tags option to the git push command.
+ This will transfer all of your tags to the remote server that are not already there.
+$ git push origin --tags
+git push pushes both types of tags
+git push ~remote~ --tags will push both lightweight and annotated tags. There is currently no option to push only
+ lightweight tags, but if you use git push <remote> --follow-tags only annotated tags will be pushed to the remote.
+
+Deleting Tags
+To delete a tag on your local repository, you can use git tag -d <tagname>. For example, we could remove our lightweight tag above as follows:
+$ git tag -d v1.4-lw
+Note that this does not remove the tag from any remote servers. There are two common variations for deleting a tag from a remote server.
+The first variation is git push ~remote~ :refs/tags/<tagname>:
+$ git push origin :refs/tags/v1.4-lw
+The way to interpret the above is to read it as the null value before the colon is being pushed to the
+ remote tag name, effectively deleting it.
+The second ~and more intuitive~ way to delete a remote tag is with:
+$ git push origin --delete ~tagname~
+
+Checking out Tags
+~If you want to view the versions of files a tag is pointing to, you can ~do a git checkout of that tag, although this
+ puts your repository in 'detached HEAD' state, which has some ill side effects:
+$ git checkout v2.0.0
+In 'detached HEAD' state, if you make changes and ~then create a commit, the tag will stay the same, but your
+ new commit wont belong to any branch and will be unreachable, except by the exact commit hash. Thus, if you need to
+make changes — say youre fixing a bug on an older version, for instance — you will generally want to create a branch:
+$ git checkout -b version2 v2.0.0
+Switched to a new branch 'version2'
+~If you ~do this and make a commit, your version2 branch will be slightly different than your v2.0.0 tag since it will
+ move forward with your new changes, so ~do be careful.
+
+https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases
+Git doesnt automatically infer your command if you type it in partially. If you dont want to type the entire text of each of the
+ Git commands, you can easily set up an alias for each command using git config. Here are a couple of examples you may want to set up:
+$ git config --global alias.co checkout
+$ git config --global alias.br branch
+$ git config --global alias.ci commit
+$ git config --global alias.st status
+This means that, for example, instead of typing git commit, you just need to type git ci. As you go on using Git, youll probably
+ use other commands frequently as well; dont hesitate to create new aliases.
+This technique can also be very useful in creating commands that you think should exist. For example, to correct the
+ usability problem you encountered with unstaging a file, you can add your own unstage alias to Git:
+$ git config --global alias.unstage 'reset HEAD --'
+This makes the following two commands equivalent:
+$ git unstage fileA
+$ git reset HEAD -- fileA
+This seems a bit clearer. Its also common to add a last command, like this:
+$ git config --global alias.last 'log -1 HEAD'
+This way, you can see the last commit easily:
+$ git last
+As you can tell, Git simply replaces the new command with whatever you alias it for. However, maybe you want to run an
+ external command, rather than a Git subcommand. In that case, you start the command with a ! character. This is useful if you
+write your own tools that work with a Git repository. We can demonstrate by aliasing git visual to run gitk:
+$ git config --global alias.visual '!gitk'
+
+https://git-scm.com/book/en/v2/Git-Branching-Branches-in-a-Nutshell
+Git doesnt store data as a series of changesets or differences, but instead as a series of snapshots.
+When you make a commit, Git stores a commit object that contains a pointer to the snapshot of the content you staged.
+ This object also contains the authors name and email address, the message that you typed, and pointers to the commit or
+commits that directly came before this commit ~its parent or parents~: zero parents for the initial commit, one parent for a
+ normal commit, and multiple parents for a commit that results from a merge of two or more branches.
+To visualize this, lets assume that you have a directory containing three files, and you stage them all and commit.
+ Staging the files computes a checksum for each one, stores that version of the file in the
+Git repository ~Git refers to them as blobs~, and adds that checksum to the staging area:
+$ git add README test.rb LICENSE
+$ git commit -m 'Initial commit'
+When you create the commit by running git commit, Git checksums each subdirectory ~in this case, just the root project directory~ and
+ stores them as a tree object in the Git repository. Git ~then creates a commit object that has the metadata and a
+pointer to the root project tree so it can re-create that snapshot when needed.
+Your Git repository now contains five objects: three blobs ~each representing the contents of one of the three files~,
+ one tree that lists the contents of the directory and specifies which file names are stored as which blobs, and
+one commit with the pointer to that root tree and all the commit metadata.
+~If you make some changes and commit again, the next commit stores a pointer to the commit that came immediately before it.
+A branch in Git is simply a lightweight movable pointer to one of these commits. The default branch name in Git is master.
+ As you start making commits, youre given a master branch that points to the last commit you made. Every time you commit, the
+master branch pointer moves forward automatically.
+Note - The 'master' branch in Git is not a special branch. It is exactly like any other branch. The
+ only reason nearly every repository has one is that the git init command creates it by default and most people dont bother to change it.
+
+Creating a New Branch
+What happens when you create a new branch? Well, doing so creates a new pointer for you to move around. Lets say you want to
+ create a new branch called testing. You ~do this with the 'git branch' command:
+$ git branch testing
+This creates a new pointer to the same commit youre currently on.
+How does Git know what branch youre currently on? It keeps a special pointer called 'HEAD'. Note that this is a
+ lot different than the concept of HEAD in other VCSs you may be used to, such as Subversion or CVS. In Git, this is a
+pointer to the local branch youre currently on. In this case, youre still on master. The git branch command only created a
+ new branch — it didnt switch to that branch.
+
+Switching Branches
+To switch to an existing branch, you run the 'git checkout' command. Lets switch to the new testing branch:
+$ git checkout testing
+This moves HEAD to point to the testing branch.
+Note- git log doesnt show all the branches all the time
+~If you were to run git log right now, you might wonder where the "testing" branch you just created went, as it would not appear in the output.
+The branch hasnt disappeared; Git just doesnt know that youre interested in that branch and it is trying to
+ show you what it thinks youre interested in. In other words, by default, git log will only show commit history below the branch youve checked out.
+To show commit history for the desired branch you have to explicitly specify it:
+ git log testing.
+To show all of the branches, add --all to your git log command.
+$ git checkout master ~HEAD moves when you checkout~
+That command did two things. It moved the HEAD pointer back to point to the master branch, and it reverted the files in
+ your working directory back to the snapshot that master points to. This also means the changes you make from this
+point forward will diverge from an older version of the project. It essentially rewinds the work youve ~done in your
+ testing branch so you can go in a different direction.
+Note- Switching branches changes files in your working directory
+Its important to note that when you switch branches in Git, files in your working directory will change. If you switch to
+ an older branch, your working directory will be reverted to look like it did the last time you committed on that branch.
+~If Git cannot ~do it cleanly, it will not let you switch at all.
+
+Because a branch in Git is actually a simple file that contains the 40 character SHA-1 checksum of the commit it points to,
+ branches are cheap to create and destroy. Creating a new branch is as quick and simple as writing 41 bytes to a file ~40 characters and a newline~.
+This is in sharp contrast to the way most older VCS tools branch, which involves copying all of the projects files into a
+ second directory. This can take several seconds or even minutes, depending on the size of the project, whereas in Git the
+process is always instantaneous. Also, because were recording the parents when we commit, finding a proper merge base for
+ merging is automatically ~done for us and is generally very easy to do. These features help encourage developers to create and use branches often.
+Lets see why you should ~do so.
+Note- Creating a new branch and switching to it at the same time
+Its typical to create a new branch and want to switch to that new branch at the same time — this can be ~done in one operation with
+ git checkout -b <newbranchname>.
+Note- From Git version 2.23 onwards you can use git switch instead of git checkout to: Switch to an existing branch:
+ git switch testing-branch.
+Create a new branch and switch to it:
+ git switch -c new-branch.
+The -c flag stands for create, you can also use the full flag: --create. Return to your previously checked out branch:
+ git switch -.
+
+https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
 
 
