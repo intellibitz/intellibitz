@@ -916,4 +916,243 @@ After youve ~done all these tasks, and are certain the main branch performs just
 $ git push origin --delete master
 
 https://git-scm.com/book/en/v2/Git-Branching-Branching-Workflows
+Long-Running Branches
+Because Git uses a simple three-way merge, merging from one branch into another multiple times over a long period is
+ generally easy to do. This means you can have several branches that are always open and that you use for different stages of
+your development cycle; you can merge regularly from some of them into others.
+Again- having multiple long-running branches isnt necessary, but its often helpful, especially when youre dealing with very large or complex projects.
+
+Topic Branches
+Topic branches, however, are useful in projects of any size. A topic branch is a short-lived branch that you create and
+ use for a single particular feature or related work. This is something youve likely never ~done with a VCS before because its
+generally too expensive to create and merge branches. But in Git its common to create, work on, merge, and delete branches several times a day.
+
+We will go into more detail about the various possible workflows for your Git project in Distributed Git, so before you
+ decide which branching scheme your next project will use, be sure to read that chapter.
+https://git-scm.com/book/en/v2/ch00/ch05-distributed-git
+Its important to remember when youre doing all this that these branches are completely local. When youre branching and
+ merging- everything is being ~done only in your Git repository — there is no communication with the server.
+
+https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches
+Remote Branches
+Remote references are references ~pointers~ in your remote repositories, including branches, tags, and so on. You can get a
+ full list of remote references explicitly with
+git ls-remote ~remote~, or
+git remote show ~remote~ for remote branches as well as more information. Nevertheless, a more common way is to take advantage of remote-tracking branches.
+Remote-tracking branches are references to the state of remote branches. Theyre local references that you cant move;
+ Git moves them for you whenever you ~do any network communication, to make sure they accurately represent the state of the
+remote repository. Think of them as bookmarks, to remind you where the branches in your remote repositories were the last time you connected to them.
+Lets say you have a Git server on your network at git.ourcompany.com. If you clone from this, Git clone command automatically names it
+ 'origin' for you, pulls down all its data, creates a pointer to where its master branch is, and names it origin/master locally.
+Git also gives you your own local master branch starting at the same place as origins master branch, so you have something to work from.
+Note- 'origin' is not special. Just like the branch name 'master' does not have any special meaning in Git, neither does 'origin'. While 'master' is the
+ default name for a starting branch when you run git init which is the only reason its widely used, 'origin' is the default name for a
+remote when you run git clone. If you run git clone -o booyah instead, ~then you will have booyah/master as your default remote branch.
+To synchronize your work with a given remote, you run a
+ git fetch ~remote~ command ~in our case,
+ git fetch origin~. This command looks up which server 'origin' is ~in this case, its git.ourcompany.com~, fetches any
+data from it that you dont yet have, and updates your local database, moving your origin/master pointer to its new, more up-to-date position.
+
+To demonstrate having multiple remote servers and what remote branches for those remote projects look like, lets assume you have
+ another internal Git server that is used only for development by one of your sprint teams. This server is at git.team1.ourcompany.com.
+You can add it as a new remote reference to the project youre currently working on by running the git remote add command as we
+ covered in Git Basics. Name this remote teamone, which will be your shortname for that whole URL.
+https://git-scm.com/book/en/v2/ch00/ch02-git-basics-chapter
+Now- you can run git fetch teamone to fetch everything the remote teamone server has that you dont have yet. Because that
+ server has a subset of the data your origin server has right now, Git fetches no data but sets a remote-tracking branch called
+teamone/master to point to the commit that teamone has as its master branch.
+
+Pushing
+When you want to share a branch with the world, you need to push it up to a remote to which you have write access. Your local
+ branches arent automatically synchronized to the remotes you write to — you have to explicitly push the branches you want to share.
+That way, you can use private branches for work you dont want to share, and push up only the topic branches you want to collaborate on.
+~If you have a branch named serverfix that you want to work on with others, you can push it up the same way you pushed your first branch. Run
+ git push ~remote~ ~branch~:
+$ git push origin serverfix
+This is a bit of a shortcut. Git automatically expands the serverfix branchname out to refs/heads/serverfix:refs/heads/serverfix, which means,
+ ~Take my serverfix local branch and push it to update the remotes serverfix branch.~ Well go over the refs/heads/ part in detail in Git Internals,
+but you can generally leave it off. You can also ~do git push origin serverfix:serverfix, which does the same thing — it says,
+ ~Take my serverfix and make it the remotes serverfix.~ You can use this format to push a local branch into a remote branch that is
+named differently. If you didnt want it to be called serverfix on the remote, you could instead run
+ git push origin serverfix:awesomebranch to push your local serverfix branch to the awesomebranch branch on the remote project.
+Note- Dont type your password every time
+~If youre using an HTTPS URL to push over, the Git server will ask you for your username and password for authentication.
+ By default it will prompt you on the terminal for this information so the server can tell if youre allowed to push.
+~If you dont want to type it every single time you push, you can set up a 'credential cache'. The simplest is just to
+ keep it in memory for a few minutes, which you can easily set up by running
+git config --global credential.helper cache.
+~For more information on the various credential caching options available, see Credential Storage.
+https://git-scm.com/book/en/v2/ch00/_credential_caching
+The next time one of your collaborators fetches from the server, they will get a reference to where the servers version of
+ serverfix is under the remote branch origin/serverfix:
+$ git fetch origin
+From https://github.com/schacon/simplegit
+# * [new branch]      serverfix    -> origin/serverfix
+Its important to note that when you ~do a fetch that brings down new remote-tracking branches, you dont automatically have local,
+ editable copies of them. In other words, in this case, you dont have a new serverfix branch — you have only an
+origin/serverfix pointer that you cant modify.
+To merge this work into your current working branch, you can run
+ git merge origin/serverfix. If you want your own serverfix branch that you can work on, you can base it off your remote-tracking branch:
+$ git checkout -b serverfix origin/serverfix
+ Branch serverfix set up to track remote branch serverfix from origin.
+ Switched to a new branch 'serverfix'
+This gives you a local branch that you can work on that starts where origin/serverfix is.
+
+Tracking Branches
+Checking out a local branch from a remote-tracking branch automatically creates what is called a 'tracking branch'
+ ~and the branch it tracks is called an 'upstream branch'~. Tracking branches are local branches that have a
+direct relationship to a remote branch. If youre on a tracking branch and type
+ git pull, Git automatically knows which server to fetch from and which branch to merge in.
+When you clone a repository, it generally automatically creates a master branch that tracks origin/master.
+ However- you can set up other tracking branches if you wish — ones that track branches on other remotes, or
+dont track the master branch. The simple case is the example you just saw, running
+ git checkout -b ~branch~ ~remote~/~branch~. This is a common enough operation that Git provides the --track shorthand:
+$ git checkout --track origin/serverfix
+In fact, this is so common that theres even a shortcut for that shortcut. If the branch name youre trying to checkout
+ a- doesnt exist and b- exactly matches a name on only one remote, Git will create a tracking branch for you:
+$ git checkout serverfix
+To set up a local branch with a different name than the remote branch, you can easily use the first version with a different local branch name:
+$ git checkout -b sf origin/serverfix
+~If you already have a local branch and want to set it to a remote branch you just pulled down, or want to change the
+ upstream branch youre tracking, you can use the -u or --set-upstream-to option to git branch to explicitly set it at any time.
+$ git branch -u origin/serverfix
+Branch serverfix set up to track remote branch serverfix from origin.
+Note- Upstream shorthand
+When you have a tracking branch set up, you can reference its upstream branch with the
+# @{upstream} or @{u} shorthand.
+ So if youre on the master branch and its tracking origin/master, you can say something like
+#git merge @{u} instead of
+git merge origin/master if you wish.
+~If you want to see what tracking branches you have set up, you can use the -vv option to git branch.
+ This will list out your local branches with more information including what each branch is tracking and if your local branch is ahead, behind or both.
+$ git branch -vv
+Its important to note that these numbers are only since the last time you fetched from each server. This command does not
+ reach out to the servers, its telling you about what it has cached from these servers locally. If you want totally up to date
+ahead and behind numbers, youll need to fetch from all your remotes right before running this. You could ~do that like this:
+$ git fetch --all; git branch -vv
+
+Pulling
+~While the
+ git fetch command will fetch all the changes on the server that you dont have yet, it will not modify your
+working directory at all. It will simply get the data for you and let you merge it yourself. However, there is a command called
+ git pull which is essentially a
+ git fetch immediately followed by a
+ git merge in most cases. If you have a tracking branch set up as demonstrated in the last section, either by
+explicitly setting it or by having it created for you by the clone or checkout commands,
+ git pull will look up what server and branch your current branch is tracking, fetch from that server and ~then try to merge in that remote branch.
+Generally its better to simply use the fetch and merge commands explicitly as the magic of git pull can often be confusing.
+
+Deleting Remote Branches
+Suppose youre ~done with a remote branch — say you and your collaborators are finished with a feature and have
+ merged it into your remotes master branch ~or whatever branch your stable codeline is in~. You can delete a
+remote branch using the --delete option to git push. If you want to delete your serverfix branch from the server, you run the following:
+$ git push origin --delete serverfix
+Basically all this does is to remove the pointer from the server. The Git server will generally keep the data there for a while until a
+ garbage collection runs, so if it was accidentally deleted, its often easy to recover.
+
+https://git-scm.com/book/en/v2/Git-Branching-Rebasing
+Rebasing
+In Git, there are two main ways to integrate changes from one branch into another: the merge and the rebase.
+The Basic Rebase
+~If you go back to an earlier example from Basic Merging, you can see that you diverged your work and made commits on two different branches.
+The easiest way to integrate the branches, as weve already covered, is the merge command. It performs a three-way merge between the
+ two latest branch snapshots ~C3 and C4~ and the most recent common ancestor of the two ~C2~, creating a new snapshot ~and commit~.
+However- there is another way: you can take the patch of the change that was introduced in C4 and reapply it on top of C3.
+ In Git, this is called rebasing. With the rebase command, you can take all the changes that were committed on one branch and replay them on a different branch.
+~For this example, you would check out the experiment branch, and ~then rebase it onto the master branch as follows:
+$ git checkout experiment
+$ git rebase master
+This operation works by going to the common ancestor of the two branches ~the one youre on and the one youre rebasing onto~,
+ getting the diff introduced by each commit of the branch youre on, saving those diffs to temporary files, resetting the
+current branch to the same commit as the branch you are rebasing onto, and finally applying each change in turn.
+At this point, you can go back to the master branch and ~do a fast-forward merge.
+$ git checkout master
+$ git merge experiment
+Now- the snapshot pointed to by C4~ is exactly the same as the one that was pointed to by C5 in the merge example.
+ There is no difference in the end product of the integration, but rebasing makes for a cleaner history. If you examine the
+log of a rebased branch, it looks like a linear history: it appears that all the work happened in series, even when it originally happened in parallel.
+Often- youll ~do this to make sure your commits apply cleanly on a remote branch — perhaps in a project to
+ which youre trying to contribute but that you dont maintain. In this case, youd ~do your work in a branch and ~then
+rebase your work onto origin/master when you were ready to submit your patches to the main project. That way, the
+ maintainer doesnt have to ~do any integration work — just a fast-forward or a clean apply.
+Note that the snapshot pointed to by the final commit you end up with, whether its the last of the rebased commits for a
+ rebase or the final merge commit after a merge, is the same snapshot — its only the history that is different.
+Rebasing replays changes from one line of work onto another in the order they were introduced,
+ whereas merging takes the endpoints and merges them together.
+
+More Interesting Rebases
+You can also have your rebase replay on something other than the rebase target branch. Take a history like A history with a
+ topic branch off another topic branch, for example. You branched a topic branch ~server~ to add some server-side functionality to
+your project, and made a commit. Then, you branched off that to make the client-side changes ~client~ and committed a
+ few times. Finally, you went back to your server branch and did a few more commits.
+Suppose you decide that you want to merge your client-side changes into your mainline for a release, but you want to
+ hold off on the server-side changes until its tested further. You can take the changes on client that arent on server
+~C8 and C9~ and replay them on your master branch by using the --onto option of git rebase:
+$ git rebase --onto master server client
+This basically says, ~Take the client branch, figure out the patches since it diverged from the server branch, and
+ replay these patches in the client branch as if it was based directly off the master branch instead.~ Its a bit complex, but the result is pretty cool.
+Now you can fast-forward your master branch ~see Fast-forwarding your master branch to include the client branch changes~:
+$ git checkout master
+$ git merge client
+Lets say you decide to pull in your server branch as well. You can rebase the server branch onto the master branch without having to
+ check it out first by running
+git rebase ~basebranch~ ~topicbranch~ — which checks out the topic branch ~in this case, server~ for you and replays it
+ onto the base branch ~master~:
+$ git rebase master server
+This replays your server work on top of your master work, as shown in Rebasing your server branch on top of your master branch.
+Then- you can fast-forward the base branch ~master~:
+$ git checkout master
+$ git merge server
+You can remove the client and server branches because all the work is integrated and you dont need them anymore,
+ leaving your history for this entire process looking like Final commit history:
+$ git branch -d client
+$ git branch -d server
+
+The Perils of Rebasing
+Ahh- but the bliss of rebasing isnt without its drawbacks, which can be summed up in a single line:
+~Do not rebase commits that exist outside your repository and that people may have based work on.
+~If you follow that guideline, youll be fine. If you dont, people will hate you, and youll be scorned by friends and family.
+When you rebase stuff, youre abandoning existing commits and creating new ones that are similar but different.
+ ~If you push commits somewhere and others pull them down and base work on them, and ~then you rewrite those commits with
+git rebase and push them up again, your collaborators will have to re-merge their work and things will get messy when
+ you try to pull their work back into yours.
+
+Rebase When You Rebase
+~If you ~do find yourself in a situation like this, Git has some further magic that might help you out. If someone on your
+ team force pushes changes that overwrite work that youve based work on, your challenge is to figure out what is yours and what theyve rewritten.
+It turns out that in addition to the commit SHA-1 checksum, Git also calculates a checksum that is based just on the
+ patch introduced with the commit. This is called a 'patch-id'.
+~If you pull down work that was rewritten and rebase it on top of the new commits from your partner, Git can often
+ successfully figure out what is uniquely yours and apply them back on top of the new branch.
+You can also simplify this by running a
+ git pull --rebase instead of a normal git pull. Or you could ~do it manually with a git fetch followed by a
+ git rebase teamone/master in this case.
+~If you are using git pull and want to make --rebase the default, you can set the pull.rebase config value with something like
+ git config --global pull.rebase true.
+~If you only ever rebase commits that have never left your own computer, youll be just fine. If you rebase commits that
+ have been pushed, but that no one else has based commits from, youll also be fine. If you rebase commits that have
+already been pushed publicly, and people may have based work on those commits, ~then you may be in for some frustrating trouble, and the scorn of your teammates.
+~If you or a partner does find it necessary at some point, make sure everyone knows to run
+ git pull --rebase to try to make the pain after it happens a little bit simpler.
+
+Rebase vs. Merge
+Now that youve seen rebasing and merging in action, you may be wondering which one is better. Before we can answer this,
+ lets step back a bit and talk about what history means.
+One point of view on this is that your repositorys commit history is a record of what actually happened. Its a
+ historical document, valuable in its own right, and shouldnt be tampered with. From this angle, changing the commit history is
+almost blasphemous; youre lying about what actually transpired. So what if there was a messy series of merge commits?
+ Thats how it happened, and the repository should preserve that for posterity.
+The opposing point of view is that the commit history is the story of how your project was made. You wouldnt publish the
+ first draft of a book, so why show your messy work? When youre working on a project, you may need a record of all your
+missteps and dead-end paths, but when its time to show your work to the world, you may want to tell a more coherent story of
+ how to get from A to B. People in this camp use tools like rebase and filter-branch to rewrite their commits before theyre
+merged into the mainline branch. They use tools like rebase and filter-branch, to tell the story in the way thats best for future readers.
+Now- to the question of whether merging or rebasing is better: hopefully youll see that its not that simple. Git is a
+ powerful tool, and allows you to ~do many things to and with your history, but every team and every project is different.
+Now that you know how both of these things work, its up to you to decide which one is best for your particular situation.
+You can get the best of both worlds: rebase local changes before pushing to clean up your work, but never rebase anything that youve pushed somewhere.
+
+https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols
+
+
 
