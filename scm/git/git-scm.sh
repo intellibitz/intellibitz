@@ -1153,6 +1153,41 @@ Now that you know how both of these things work, its up to you to decide which o
 You can get the best of both worlds: rebase local changes before pushing to clean up your work, but never rebase anything that youve pushed somewhere.
 
 https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols
+Git on the Server - The Protocols
+In order to ~do any collaboration in Git, youll need to have a remote Git repository. Although you can technically
+ push changes to and pull changes from individual repositories, doing so is discouraged because you can fairly easily
+confuse what theyre working on if youre not careful. Furthermore, you want your collaborators to be able to access the
+ repository even if your computer is offline — having a more reliable common repository is often useful.
+Therefore- the preferred method for collaborating with someone is to set up an intermediate repository that you both have
+ access to, and push to and pull from that.
+Running a Git server is fairly straightforward. First, you choose which protocols you want your server to support.
+A remote repository is generally a bare repository — a Git repository that has no working directory. Because the repository is
+ only used as a collaboration point, there is no reason to have a snapshot checked out on disk; its just the Git data.
+In the simplest terms, a bare repository is the contents of your projects .git directory and nothing else.
+
+The Protocols
+Git can use four distinct protocols to transfer data:
+ Local~ HTTP, Secure Shell ~SSH~ and Git. Here well discuss what they are and in what basic circumstances you would want ~or not want~ to use them.
+
+https://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server
+In order to initially set up any Git server, you have to export an existing repository into a new bare repository — a repository that
+ doesnt contain a working directory. This is generally straightforward to do. In order to clone your repository to create a
+new bare repository, you run the clone command with the --bare option. By convention, bare repository directory names end with the suffix .git, like so:
+$ git clone --bare my_project my_project.git
+Cloning into bare repository 'my_project.git'...done.
+You should now have a copy of the Git directory data in your my_project.git directory.
+This is roughly equivalent to something like:
+$ cp -Rf my_project/.git my_project.git
+There are a couple of minor differences in the configuration file but, for your purpose, this is close to the same thing.
+ It takes the Git repository by itself, without a working directory, and creates a directory specifically for it alone.
+
+https://git-scm.com/book/en/v2/Distributed-Git-Distributed-Workflows
+Distributed Workflows
+In contrast with Centralized Version Control Systems, the distributed nature of Git allows you to be far more flexible in
+ how developers collaborate on projects. In centralized systems, every developer is a node working more or less equally with a
+central hub. In Git, however, every developer is potentially both a node and a hub; that is, every developer can both contribute code to
+ other repositories and maintain a public repository on which others can base their work and which they can contribute to.
+This presents a vast range of workflow possibilities for your project and/or your team
 
 
 
