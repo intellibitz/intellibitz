@@ -1396,5 +1396,100 @@ Now youre ready to add the contributed work that you received into this topic br
 Checking Out Remote Branches
 ~If your contribution came from a Git user who set up their own repository, pushed a number of changes into it, and ~then
   sent you the URL to the repository and the name of the remote branch the changes are in, you can add them as a remote and ~do merges locally.
+~For instance, if Jessica sends you an email saying that she has a great new feature in the ruby-client branch of her repository,
+ you can test it by adding the remote and checking out that branch locally:
+$ git remote add jessica https://github.com/jessica/myproject.git
+$ git fetch jessica
+$ git checkout -b rubyclient jessica/ruby-client
+~If she emails you again later with another branch containing another great feature, you could directly fetch and
+ checkout because you already have the remote setup.
+~If you arent working with a person consistently but still want to pull from them in this way, you can provide the URL of the
+ remote repository to the git pull command. This does a one-time pull and doesnt save the URL as a remote reference:
+$ git pull https://github.com/onetimeguy/project
 
+Determining What Is Introduced
+Now you have a topic branch that contains contributed work. At this point, you can determine what youd like to ~do with it.
+Its often helpful to get a review of all the commits that are in this branch but that arent in your master branch.
+ You can exclude commits in the master branch by adding the --not option before the branch name. This does the same thing as the
+master..contrib format that we used earlier. For example, if your contributor sends you two patches and you create a
+ branch called contrib and applied those patches there, you can run this:
+$ git log contrib --not master
+To see what changes each commit introduces, remember that you can pass the -p option to git log and it will append the diff introduced to each commit.
+To see a full diff of what would happen if you were to merge this topic branch with another branch, you may have to
+ use a weird trick to get the correct results. You may think to run this:
+$ git diff master
+This command gives you a diff, but it may be misleading. If your master branch has moved forward since you created the
+ topic branch from it, ~then youll get seemingly strange results. This happens because Git directly compares the snapshots of the
+last commit of the topic branch youre on and the snapshot of the last commit on the master branch. For example, if youve added a
+ line in a file on the master branch, a direct comparison of the snapshots will look like the topic branch is going to remove that line.
+~If master is a direct ancestor of your topic branch, this isnt a problem; but if the two histories have diverged, the
+ diff will look like youre adding all the new stuff in your topic branch and removing everything unique to the master branch.
+What you really want to see are the changes added to the topic branch — the work youll introduce if you merge this
+ branch with master. You ~do that by having Git compare the last commit on your topic branch with the first common ancestor it has with the master branch.
+Technically- you can ~do that by explicitly figuring out the common ancestor and ~then running your diff on it:
+$ git merge-base contrib master
+36c7dba2c95e6bbb78dfa822519ecfec6e1ca649
+$ git diff 36c7db
+or- more concisely:
+$ git diff "$(git merge-base contrib master)"
+However- neither of those is particularly convenient, so Git provides another shorthand for doing the same thing:
+ the triple-dot syntax. In the context of the git diff command, you can put three periods after another branch to ~do a
+diff between the last commit of the branch youre on and its common ancestor with another branch:
+$ git diff master...contrib
+This command shows you only the work your current topic branch has introduced since its common ancestor with master.
+
+Rebasing and Cherry-Picking Workflows
+Other maintainers prefer to rebase or cherry-pick contributed work on top of their master branch, rather than merging it in,
+ to keep a mostly linear history. When you have work in a topic branch and have determined that you want to integrate it,
+you move to that branch and run the rebase command to rebuild the changes on top of your current master ~or develop, and so on~ branch. If that
+ works well, you can fast-forward your master branch, and youll end up with a linear project history.
+The other way to move introduced work from one branch to another is to cherry-pick it. A cherry-pick in Git is like a
+ rebase for a single commit. It takes the patch that was introduced in a commit and tries to reapply it on the branch youre currently on.
+This is useful if you have a number of commits on a topic branch and you want to integrate only one of them, or if you
+ only have one commit on a topic branch and youd prefer to cherry-pick it rather than run rebase.
+~If you want to pull commit e43a6 into your master branch, you can run:
+$ git cherry-pick e43a6
+Finished one cherry-pick.
+#[master]: created a0a41a9: "More friendly message when locking the index fails."
+This pulls the same change introduced in e43a6, but you get a new commit SHA-1 value, because the date applied is different.
+
+Rerere
+~If youre doing lots of merging and rebasing, or youre maintaining a long-lived topic branch, Git has a feature called 'rerere' that can help.
+Rerere stands for 'reuse recorded resolution' — its a way of shortcutting manual conflict resolution. When rerere is enabled,
+ Git will keep a set of pre- and post-images from successful merges, and if it notices that theres a conflict that
+looks exactly like one youve already fixed, itll just use the fix from last time, without bothering you with it.
+This feature comes in two parts: a configuration setting and a command. The configuration setting is rerere.enabled,
+ and its handy enough to put in your global config:
+$ git config --global rerere.enabled true
+Now- whenever you ~do a merge that resolves conflicts, the resolution will be recorded in the cache in case you need it in the future.
+
+Tagging Your Releases
+When youve decided to cut a release, youll probably want to assign a tag so you can re-create that release at any
+ point going forward. You can create a new tag as discussed in Git Basics. If you decide to sign the tag as the maintainer,
+the tagging may look something like this:
+$ git tag -s v1.5 -m 'my signed 1.5 tag'
+
+Generating a Build Number
+Because Git doesnt have monotonically increasing numbers like 'v123' or the equivalent to go with each commit, if you want to
+ have a human-readable name to go with a commit, you can run git describe on that commit. In response, Git generates a
+string consisting of the name of the most recent tag earlier than that commit, followed by the number of commits since that tag,
+ followed finally by a partial SHA-1 value of the commit being described ~prefixed with the letter "g" meaning Git~:
+$ git describe master
+v1.6.2-rc1-20-g8c5b85c
+
+Preparing a Release
+Now you want to release a build. One of the things youll want to ~do is create an archive of the latest snapshot of your code for
+ those poor souls who dont use Git. The command to ~do this is git archive:
+#$ git archive master --prefix='project/' | gzip > `git describe master`.tar.gz
+~If someone opens that tarball, they get the latest snapshot of your project under a project directory. You can also
+ create a zip archive in much the same way, but by passing the --format=zip option to git archive:
+#$ git archive master --prefix='project/' --format=zip > `git describe master`.zip
+You now have a nice tarball and a zip archive of your project release that you can upload to your website or email to people.
+
+The Shortlog
+Its time to email your mailing list of people who want to know whats happening in your project. A nice way of quickly
+ getting a sort of changelog of what has been added to your project since your last release or email is to use the
+git shortlog command. It summarizes all the commits in the range you give it, for example, the following gives you a
+ summary of all the commits since your last release, if your last release was named v1.0.1:
+$ git shortlog --no-merges master --not v1.0.1
 
