@@ -1189,5 +1189,212 @@ central hub. In Git, however, every developer is potentially both a node and a h
  other repositories and maintain a public repository on which others can base their work and which they can contribute to.
 This presents a vast range of workflow possibilities for your project and/or your team
 
+Centralized Workflow
+In centralized systems, there is generally a single collaboration model — the centralized workflow. One central hub,
+ or repository, can accept code, and everyone synchronizes their work with it. A number of developers are
+nodes — consumers of that hub — and synchronize with that centralized location.
+This means that if two developers clone from the hub and both make changes, the first developer to push their changes back up can ~do so
+ with no problems. The second developer must merge in the first ones work before pushing changes up, so as not to overwrite the
+first developers changes. This concept is as true in Git as it is in Subversion or any CVCS, and this model works perfectly well in Git.
+~If you are already comfortable with a centralized workflow in your company or team, you can easily continue using that
+ workflow with Git. Simply set up a single repository, and give everyone on your team push access; Git wont let users overwrite each other.
+Say John and Jessica both start working at the same time. John finishes his change and pushes it to the server. Then Jessica tries to
+ push her changes, but the server rejects them. She is told that shes trying to push non-fast-forward changes and that
+she wont be able to ~do so until she fetches and merges. This workflow is attractive to a lot of people because its a
+ paradigm that many are familiar and comfortable with.
+This is also not limited to small teams. With Gits branching model, its possible for hundreds of developers to
+ successfully work on a single project through dozens of branches simultaneously.
+
+Integration-Manager Workflow
+Because Git allows you to have multiple remote repositories, its possible to have a workflow where each developer has
+ write access to their own public repository and read access to everyone elses. This scenario often includes a
+canonical repository that represents the 'official' project. To contribute to that project, you create your own public clone of the
+ project and push your changes to it. Then, you can send a request to the maintainer of the main project to pull in your changes.
+The maintainer can ~then add your repository as a remote, test your changes locally, merge them into their branch, and
+ push back to their repository. The process works as follows:
+The project maintainer pushes to their public repository.
+A contributor clones that repository and makes changes.
+The contributor pushes to their own public copy.
+The contributor sends the maintainer an email asking them to pull changes.
+The maintainer adds the contributors repository as a remote and merges locally.
+The maintainer pushes merged changes to the main repository.
+This is a very common workflow with hub-based tools like GitHub or GitLab, where its easy to fork a project and
+ push your changes into your fork for everyone to see. One of the main advantages of this approach is that you can continue to
+work- and the maintainer of the main repository can pull in your changes at any time. Contributors dont have to wait for the
+ project to incorporate their changes — each party can work at their own pace.
+
+Dictator and Lieutenants Workflow
+This is a variant of a multiple-repository workflow. Its generally used by huge projects with hundreds of collaborators;
+ one famous example is the Linux kernel. Various integration managers are in charge of certain parts of the repository;
+theyre called lieutenants. All the lieutenants have one integration manager known as the benevolent dictator.
+ The benevolent dictator pushes from their directory to a reference repository from which all the collaborators need to pull.
+The process works like this:
+Regular developers work on their topic branch and rebase their work on top of master. The master branch is that of the
+ reference repository to which the dictator pushes.
+Lieutenants merge the developers topic branches into their master branch.
+The dictator merges the lieutenants master branches into the dictators master branch.
+Finally- the dictator pushes that master branch to the reference repository so the other developers can rebase on it.
+This kind of workflow isnt common, but can be useful in very big projects, or in highly hierarchical environments.
+ It allows the project leader ~the dictator~ to delegate much of the work and collect large subsets of code at multiple points before integrating them.
+
+Patterns for Managing Source Code Branches
+Note- Martin Fowler has made a guide 'Patterns for Managing Source Code Branches'. This guide covers all the
+ common Git workflows, and explains how/when to use them. Theres also a section comparing high and low integration frequencies.
+https://martinfowler.com/articles/branching-patterns.html
+
+https://git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project
+ Distributed Git - Contributing to a Project
+Contributing to a Project
+The main difficulty with describing how to contribute to a project are the numerous variations on how to ~do that.
+ Because Git is very flexible, people can and ~do work together in many ways, and its problematic to describe how you
+should contribute — every project is a bit different. Some of the variables involved are active contributor count,
+ chosen workflow, your commit access, and possibly the external contribution method.
+The first variable is active contributor count — how many users are actively contributing code to this project, and
+ how often? In many instances, youll have two or three developers with a few commits a day, or possibly less for somewhat
+dormant projects. For larger companies or projects, the number of developers could be in the thousands, with hundreds or
+ thousands of commits coming in each day. This is important because with more and more developers, you run into more issues with
+making sure your code applies cleanly or can be easily merged. Changes you submit may be rendered obsolete or severely broken by
+ work that is merged in while you were working or while your changes were waiting to be approved or applied. How can you
+keep your code consistently up to date and your commits valid?
+The next variable is the workflow in use for the project. Is it centralized, with each developer having equal write access to the
+ main codeline? Does the project have a maintainer or integration manager who checks all the patches? Are all the patches
+peer-reviewed and approved? Are you involved in that process? Is a lieutenant system in place, and ~do you have to submit your work to them first?
+The next variable is your commit access. The workflow required in order to contribute to a project is much different if you have
+ write access to the project than if you dont. If you dont have write access, how does the project prefer to accept contributed work?
+Does it even have a policy? How much work are you contributing at a time? How often ~do you contribute?
+All these questions can affect how you contribute effectively to a project and what workflows are preferred or available to you.
+
+Commit Guidelines
+First- your submissions should not contain any whitespace errors. Git provides an easy way to check for this — before you commit, run
+ git diff --check, which identifies possible whitespace errors and lists them for you.
+https://git-scm.com/book/en/v2/ch00/_interactive_staging
+https://git-scm.com/book/en/v2/ch00/_rewriting_history
+https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+
+Private Small Team
+The simplest setup youre likely to encounter is a private project with one or two other developers. 'Private,' in this context,
+ means closed-source — not accessible to the outside world. You and the other developers all have push access to the repository.
+In this environment, you can follow a workflow similar to what you might ~do when using Subversion or another centralized system.
+ You still get the advantages of things like offline committing and vastly simpler branching and merging, but the workflow can be
+very similar; the main difference is that merges happen client-side rather than on the server at commit time.
+$ git log --no-merges issue54..origin/master
+The issue54..origin/master syntax is a log filter that asks Git to display only those commits that are on the latter branch
+ ~in this case origin/master~ and that are not on the first branch ~in this case issue54~. Well go over this syntax in detail in Commit Ranges.
+https://git-scm.com/book/en/v2/ch00/_commit_ranges
+
+Private Managed Team
+Youll learn how to work in an environment where small groups collaborate on features, after which those team-based contributions are integrated by another party.
+$ git checkout -b featureA
+$ git push -u origin featureA
+$ git push -u origin featureB:featureBee
+This is called a refspec. See The Refspec for a more detailed discussion of Git refspecs and different things you can ~do with them.
+ Also notice the -u flag; this is short for --set-upstream, which configures the branches for easier pushing and pulling later.
+https://git-scm.com/book/en/v2/ch00/_refspec
+$ git log featureA..origin/featureA
+
+Forked Public Project
+Contributing to public projects is a bit different. Because you dont have the permissions to directly update branches on the
+ project- you have to get the work to the maintainers some other way. This first example describes contributing via forking on
+Git hosts that support easy forking. Many hosting sites support this ~including GitHub, BitBucket, repo.or.cz, and others~, and
+ many project maintainers expect this style of contribution. The next section deals with projects that prefer to accept contributed patches via email.
+First- youll probably want to clone the main repository, create a topic branch for the patch or patch series youre planning to
+ contribute- and ~do your work there. The sequence looks basically like this:
+$ git clone ~url~
+$ cd project
+$ git checkout -b featureA
+#  ... work ...
+$ git commit
+#  ... work ...
+$ git commit
+Note- You may want to use rebase -i to squash your work down to a single commit, or rearrange the work in the commits to
+ make the patch easier for the maintainer to review — see Rewriting History for more information about interactive rebasing.
+https://git-scm.com/book/en/v2/ch00/_rewriting_history
+When your branch work is finished and youre ready to contribute it back to the maintainers, go to the original project page and
+ click the 'Fork' button, creating your own writable fork of the project. You ~then need to add this repository URL as a
+new remote of your local repository; in this example, lets call it myfork:
+$ git remote add myfork ~url~
+You ~then need to push your new work to this repository. Its easiest to push the topic branch youre working on to your
+ forked repository, rather than merging that work into your master branch and pushing that. The reason is that if your
+work isnt accepted or is cherry-picked, you dont have to rewind your master branch ~the Git cherry-pick operation is covered in
+ more detail in Rebasing and Cherry-Picking Workflows~. If the maintainers merge, rebase, or cherry-pick your work,
+youll eventually get it back via pulling from their repository anyhow.
+https://git-scm.com/book/en/v2/ch00/_rebase_cherry_pick
+In any event, you can push your work with:
+$ git push -u myfork featureA
+Once your work has been pushed to your fork of the repository, you need to notify the maintainers of the original project that
+ you have work youd like them to merge. This is often called a pull request, and you typically generate such a request either
+via the website — GitHub has its own 'Pull Request' mechanism that well go over in GitHub — or you can run the
+ git request-pull command and email the subsequent output to the project maintainer manually.
+https://git-scm.com/book/en/v2/ch00/ch06-github
+The git request-pull command takes the base branch into which you want your topic branch pulled and the Git repository URL you
+ want them to pull from, and produces a summary of all the changes youre asking to be pulled. For instance, if Jessica wants to
+send John a pull request, and shes ~done two commits on the topic branch she just pushed, she can run this:
+$ git request-pull origin/master myfork
+This output can be sent to the maintainer — it tells them where the work was branched from, summarizes the commits,
+ and identifies from where the new work is to be pulled.
+On a project for which youre not the maintainer, its generally easier to have a branch like master always track origin/master and
+ to ~do your work in topic branches that you can easily discard if theyre rejected. Having work themes isolated into
+topic branches also makes it easier for you to rebase your work if the tip of the main repository has moved in the
+ meantime and your commits no longer apply cleanly.
+~if you want to submit a second topic of work to the project, dont continue working on the topic branch you just
+ pushed up — start over from the main repositorys master branch:
+$ git checkout -b featureB origin/master
+#  ... work ...
+$ git commit
+$ git push myfork featureB
+$ git request-pull origin/master myfork
+#  ... email generated request pull to maintainer ...
+$ git fetch origin
+Now- each of your topics is contained within a silo — similar to a patch queue — that you can rewrite, rebase, and
+ modify without the topics interfering or interdepending on each other
+Lets say the project maintainer has pulled in a bunch of other patches and tried your first branch, but it no longer cleanly merges.
+ In this case, you can try to rebase that branch on top of origin/master, resolve the conflicts for the maintainer, and ~then resubmit your changes:
+$ git checkout featureA
+$ git rebase origin/master
+$ git push -f myfork featureA
+This rewrites your history to now look like Commit history after featureA work.
+Because you rebased the branch, you have to specify the -f to your push command in order to be able to replace the
+ featureA branch on the server with a commit that isnt a descendant of it. An alternative would be to push this new work to a
+different branch on the server ~perhaps called featureAv2~.
+Lets look at one more possible scenario: the maintainer has looked at work in your second branch and likes the concept but
+ would like you to change an implementation detail. Youll also take this opportunity to move the work to be based off the
+projects current master branch. You start a new branch based off the current origin/master branch, squash the
+ featureB changes there, resolve any conflicts, make the implementation change, and ~then push that as a new branch:
+$ git checkout -b featureBv2 origin/master
+$ git merge --squash featureB
+#  ... change implementation ...
+$ git commit
+$ git push myfork featureBv2
+The --squash option takes all the work on the merged branch and squashes it into one changeset producing the
+ repository state as if a real merge happened, without actually making a merge commit. This means your future commit will
+have one parent only and allows you to introduce all the changes from another branch and ~then make more changes before
+ recording the new commit. Also the --no-commit option can be useful to delay the merge commit in case of the default merge process.
+At this point, you can notify the maintainer that youve made the requested changes, and that they can find those changes in your featureBv2 branch.
+
+https://git-scm.com/book/en/v2/Distributed-Git-Maintaining-a-Project
+Maintaining a Project
+In addition to knowing how to contribute effectively to a project, youll likely need to know how to maintain one.
+ This can consist of accepting and applying patches generated via format-patch and emailed to you, or integrating changes in
+remote branches for repositories youve added as remotes to your project. Whether you maintain a canonical repository or
+ want to help by verifying or approving patches, you need to know how to accept work in a way that is clearest for other
+contributors and sustainable by you over the long run.
+
+Working in Topic Branches
+When youre thinking of integrating new work, its generally a good idea to try it out in a topic branch — a
+ temporary branch specifically made to try out that new work. This way, its easy to tweak a patch individually and
+leave it if its not working until you have time to come back to it. If you create a simple branch name based on the
+ theme of the work youre going to try, such as ruby_client or something similarly descriptive, you can easily remember it if
+you have to abandon it for a while and come back later. The maintainer of the Git project tends to namespace these
+ branches as well — such as sc/ruby_client, where sc is short for the person who contributed the work.
+As youll remember, you can create the branch based off your master branch like this:
+$ git branch sc/ruby_client master
+Or- if you want to also switch to it immediately, you can use the checkout -b option:
+$ git checkout -b sc/ruby_client master
+Now youre ready to add the contributed work that you received into this topic branch and determine if you want to
+ merge it into your longer-term branches.
+
+Checking Out Remote Branches
+~If your contribution came from a Git user who set up their own repository, pushed a number of changes into it, and ~then
+  sent you the URL to the repository and the name of the remote branch the changes are in, you can add them as a remote and ~do merges locally.
 
 
