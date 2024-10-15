@@ -1493,3 +1493,233 @@ git shortlog command. It summarizes all the commits in the range you give it, fo
  summary of all the commits since your last release, if your last release was named v1.0.1:
 $ git shortlog --no-merges master --not v1.0.1
 
+The GitHub Flow
+GitHub is designed around a particular collaboration workflow, centered on Pull Requests. This flow works whether youre
+ collaborating with a tightly-knit team in a single shared repository, or a globally-distributed company or network of
+strangers contributing to a project through dozens of forks. It is centered on the Topic Branches workflow covered in Git Branching.
+Heres how it generally works:
+Fork the project.
+Create a topic branch from master.
+Make some commits to improve the project.
+Push this branch to your GitHub project.
+Open a Pull Request on GitHub.
+Discuss- and optionally continue committing.
+The project owner merges or closes the Pull Request.
+Sync the updated master back to your fork.
+This is basically the Integration Manager workflow covered in Integration-Manager Workflow, but instead of using email to
+ communicate and review changes, teams use GitHubs web based tools.
+Lets walk through an example of proposing a change to an open source project hosted on GitHub using this flow.
+Tip - You can use the official GitHub CLI tool instead of the GitHub web interface for most things. The tool can be
+ used on Windows, macOS, and Linux systems. Go to the GitHub CLI homepage for installation instructions and the manual.
+https://cli.github.com
+
+https://git-scm.com/book/en/v2/Git-Tools-Revision-Selection
+Revision Selection
+Git allows you to refer to a single commit, set of commits, or range of commits in a number of ways.
+ They arent necessarily obvious but are helpful to know.
+
+Single Revisions
+You can obviously refer to any single commit by its full, 40-character SHA-1 hash, but there are more human-friendly ways to
+ refer to commits as well. This section outlines the various ways you can refer to any commit.
+Short SHA-1
+Git is smart enough to figure out what commit youre referring to if you provide the first few characters of the SHA-1 hash,
+ as long as that partial hash is at least four characters long and unambiguous; that is, no other object in the object database can
+have a hash that begins with the same prefix.
+~For example, to examine a specific commit where you know you added certain functionality, you might first run the git log command to locate the commit:
+$ git log
+In this case, say youre interested in the commit whose hash begins with 1c002dd…​. You can inspect that commit with any of the
+ following variations of git show ~assuming the shorter versions are unambiguous~:
+$ git show 1c002dd4b536e7479fe34593e72e6c6c1819e53b
+$ git show 1c002dd4b536e7479f
+$ git show 1c002d
+Git can figure out a short, unique abbreviation for your SHA-1 values. If you pass --abbrev-commit to the git log command,
+ the output will use shorter values but keep them unique; it defaults to using seven characters but makes them longer if necessary to keep the SHA-1 unambiguous:
+$ git log --abbrev-commit --pretty=oneline
+ca82a6d Change the version number
+085bb3b Remove unnecessary test code
+a11bef0 Initial commit
+
+Branch References
+One straightforward way to refer to a particular commit is if its the commit at the tip of a branch; in that case,
+ you can simply use the branch name in any Git command that expects a reference to a commit. For instance, if you want to
+examine the last commit object on a branch, the following commands are equivalent, assuming that the topic1 branch points to commit ca82a6d…​:
+$ git show ca82a6dff817ec66f44342007202690a93763949
+$ git show topic1
+~If you want to see which specific SHA-1 a branch points to, or if you want to see what any of these examples boils down to in terms of SHA-1s,
+ you can use a Git plumbing tool called rev-parse. You can see Git Internals for more information about plumbing tools;
+basically- rev-parse exists for lower-level operations and isnt designed to be used in day-to-day operations. However, it can be
+ helpful sometimes when you need to see whats really going on. Here you can run rev-parse on your branch.
+$ git rev-parse topic1
+ca82a6dff817ec66f44342007202690a93763949
+
+RefLog Shortnames
+One of the things Git does in the background while youre working away is keep a 'reflog' — a log of where your HEAD and
+ branch references have been for the last few months.
+You can see your reflog by using git reflog:
+$ git reflog
+Every time your branch tip is updated for any reason, Git stores that information for you in this temporary history.
+ You can use your reflog data to refer to older commits as well. For example, if you want to see the fifth prior value of the
+HEAD of your repository, you can use the "@{5}" reference that you see in the reflog output:
+$ "git show HEAD@{5}"
+You can also use this syntax to see where a branch was some specific amount of time ago. For instance, to see where
+ your master branch was yesterday, you can type:
+$ "git show master@{yesterday}"
+That would show you where the tip of your master branch was yesterday. This technique only works for data thats still in
+ your reflog, so you cant use it to look for commits older than a few months.
+To see reflog information formatted like the git log output, you can run git log -g:
+$ git log -g master
+Its important to note that reflog information is strictly local — its a log only of what youve ~done in your repository.
+ The references wont be the same on someone elses copy of the repository; also- right after you initially clone a repository,
+youll have an empty reflog, as no activity has occurred yet in your repository.
+
+Ancestry References
+The other main way to specify a commit is via its ancestry. If you place a ^ ~caret~ at the end of a reference, Git resolves it to
+ mean the parent of that commit. Suppose you look at the history of your project:
+$ git log --pretty=format:'%h %s' --graph
+Then- you can see the previous commit by specifying HEAD^, which means 'the parent of HEAD':
+$ git show HEAD^
+You can also specify a number after the ^ to identify which parent you want;
+ ~for example, d921970^2 means 'the second parent of d921970.' This syntax is useful only for merge commits, which have
+more than one parent — the first parent of a merge commit is from the branch you were on when
+ you merged ~frequently master~, while the second parent of a merge commit is from the branch that was merged ~say, topic~:
+The other main ancestry specification is the ~ tilde. This also refers to the first parent, so HEAD~ and HEAD^ are equivalent.
+ The difference becomes apparent when you specify a number. HEAD~2 means 'the first parent of the first parent,' or
+'the grandparent' — it traverses the first parents the number of times you specify. For example, in the history listed earlier, HEAD~3 would be:
+$ git show HEAD~3
+This can also be written HEAD~~~, which again is the first parent of the first parent of the first parent:
+$ git show HEAD~~~
+You can also combine these syntaxes — you can get the second parent of the
+ previous reference ~assuming it was a merge commit~ by using HEAD~3^2, and so on.
+
+Commit Ranges
+Now that you can specify individual commits, lets see how to specify ranges of commits. This is particularly useful for
+ managing your branches — if you have a lot of branches, you can use range specifications to answer questions such as,
+'What work is on this branch that I havent yet merged into my main branch?'
+
+Double Dot
+The most common range specification is the double-dot syntax. This basically asks Git to resolve a range of commits that
+ are reachable from one commit but arent reachable from another.
+You can ask Git to show you a log of just those commits with master..experiment — that means 'all commits reachable from experiment that arent reachable from master.'
+$ 'git log master..experiment'
+If- on the other hand, you want to see the opposite — all commits in master that arent in experiment — you can reverse the
+ branch names. experiment..master shows you everything in master not reachable from experiment:
+$ 'git log experiment..master'
+Another frequent use of this syntax is to see what youre about to push to a remote:
+$ git log origin/master..HEAD
+This command shows you any commits in your current branch that arent in the master branch on your origin remote. If you run a
+ git push and your current branch is tracking origin/master, the commits listed by git log origin/master..HEAD are the
+commits that will be transferred to the server. You can also leave off one side of the syntax to have Git assume HEAD. For example,
+ you can get the same results as in the previous example by typing git log origin/master.. — Git substitutes HEAD if one side is missing.
+
+Multiple Points
+The double-dot syntax is useful as a shorthand, but perhaps you want to specify more than two branches to indicate your revision,
+ such as seeing what commits are in any of several branches that arent in the branch youre currently on. Git allows you to do-
+this by using either the ^ character or --not before any reference from which you dont want to see reachable commits. Thus, the
+ following three commands are equivalent:
+$ git log refA..refB
+$ git log ^refA refB
+$ git log refB --not refA
+This is nice because with this syntax you can specify more than two references in your query, which you cannot do- with the
+ double-dot syntax. For instance, if you want to see all commits that are reachable from refA or refB but not from refC, you can use either of:
+$ git log refA refB ^refC
+$ git log refA refB --not refC
+
+Triple Dot
+The last major range-selection syntax is the triple-dot syntax, which specifies all the commits that are reachable by either of
+ two references but not by both of them. If you want to see what is in master or experiment but not any common references, you can run:
+$ git log master...experiment
+A common switch to use with the log command in this case is --left-right, which shows you which side of the
+ range each commit is in. This helps make the output more useful:
+$ git log --left-right master...experiment
+
+https://git-scm.com/book/en/v2/Git-Tools-Interactive-Staging
+Interactive Staging
+Interactive Git commands that can help you craft your commits to include only certain combinations and parts of files.
+ These tools are helpful if you modify a number of files extensively, then- decide that you want those changes to be
+partitioned into several focused commits rather than one big messy commit. This way, you can make sure your commits are
+ logically separate changesets and can be reviewed easily by the developers working with you.
+~If you run git add with the -i or --interactive option, Git enters an interactive shell mode, displaying something like this:
+$ git add -i
+
+Staging Patches
+Its also possible for Git to stage certain parts of files and not the rest.
+You also dont need to be in interactive add mode to do- the partial-file staging — you can start the same script by using
+ git add -p or git add --patch on the command line. Furthermore, you can use patch mode for partially resetting files with the
+ git reset --patch command, for checking out parts of files with the
+ git checkout --patch command and for stashing parts of files with the
+ git stash save --patch command.
+Well go into more details on each of these as we get to more advanced usages of these commands.
+
+https://git-scm.com/book/en/v2/Git-Tools-Stashing-and-Cleaning
+Stashing and Cleaning
+Often- when youve been working on part of your project, things are in a messy state and you want to switch branches for a
+ bit to work on something else. The problem is, you dont want to do- a commit of half-done work just so you can get back to
+this point later. The answer to this issue is the git stash command.
+Stashing takes the dirty state of your working directory — that is, your modified tracked files and
+ staged changes — and saves it on a stack of unfinished changes that you can reapply at any time ~even on a different branch~.
+Note- Migrating to git stash push
+As of late October 2017, there has been extensive discussion on the Git mailing list, wherein the command
+ git stash save is being deprecated in favour of the existing alternative git stash push. The main reason for this is that
+git stash push introduces the option of stashing selected pathspecs, something git stash save does not support.
+git stash save is not going away any time soon, so dont worry about it suddenly disappearing. But you might want to
+ start migrating over to the push alternative for the new functionality.
+
+Stashing Your Work
+To push a new stash onto your stack, run git stash or git stash push:
+$ git stash
+$ git stash list
+$ git stash apply
+$ git stash apply --index
+$ git stash pop
+$ "git stash drop stash@{0}"
+
+Creative Stashing
+There are a few stash variants that may also be helpful. The first option that is quite popular is the --keep-index option to the
+ git stash command. This tells Git to not only include all staged content in the stash being created, but simultaneously leave it in the index.
+$ git stash --keep-index
+By default, git stash will stash only modified and staged tracked files. If you specify --include-untracked or -u, Git will
+ include untracked files in the stash being created. However, including untracked files in the stash will still not
+include explicitly ignored files; to additionally include ignored files, use --all , or just -a.
+$ git stash -u
+Finally- if you specify the --patch flag, Git will not stash everything that is modified but will instead prompt you
+ interactively which of the changes you would like to stash and which you would like to keep in your working directory.
+$ git stash --patch
+
+Creating a Branch from a Stash
+~If you stash some work, leave it there for a while, and continue on the branch from which you stashed the work, you may
+ have a problem reapplying the work. If the apply tries to modify a file that youve since modified, youll get a
+merge conflict and will have to try to resolve it. If you want an easier way to test the stashed changes again, you can run
+ git stash branch new_branchname, which creates a new branch for you with your selected branch name, checks out the
+commit you were on when you stashed your work, reapplies your work there, and then- drops the stash if it applies successfully:
+$ git stash branch testchanges
+
+Cleaning your Working Directory
+Finally- you may not want to stash some work or files in your working directory, but simply get rid of them; thats what the
+ git clean command is for.
+Youll want to be pretty careful with this command, since its designed to remove files from your working directory that are
+ not tracked. If you change your mind, there is often no retrieving the content of those files. A safer option is to run
+git stash --all to remove everything but save it in a stash.
+Assuming you do- want to remove cruft files or clean your working directory, you can do- so with git clean. To remove all the
+ untracked files in your working directory, you can run
+git clean -f -d, which removes any files and also any subdirectories that become empty as a result.
+ The -f means 'force' or 'really do this,' and is required if the Git configuration variable clean.requireForce is not explicitly set to false.
+~If you ever want to see what it would do, you can run the command with the --dry-run or -n option, which means 'do a dry run and tell me what you would have removed'.
+$ git clean -d -n
+By default, the git clean command will only remove untracked files that are not ignored. Any file that matches a pattern in your
+ .gitignore or other ignore files will not be removed. If you want to remove those files too, such as to remove all .o files generated from a
+build so you can do- a fully clean build, you can add a -x to the clean command.
+$ git clean -n -d
+$ git clean -n -d -x
+~If you dont know what the git clean command is going to do, always run it with a -n first to double check before
+ changing the -n to a -f and doing it for real. The other way you can be careful about the process is to run it with the -i or 'interactive' flag.
+This will run the clean command in an interactive mode.
+$ git clean -x -i
+Note- There is a quirky situation where you might need to be extra forceful in asking Git to clean your working directory.
+ ~If you happen to be in a working directory under which youve copied or cloned other Git repositories , perhaps as submodules, even
+git clean -fd will refuse to delete those directories. In cases like that, you need to add a second -f option for emphasis.
+
+https://git-scm.com/book/en/v2/Git-Tools-Signing-Your-Work
+Signing Your Work
+Git is cryptographically secure, but its not foolproof. If youre taking work from others on the internet and want to verify that
+ commits are actually from a trusted source, Git has a few ways to sign and verify work using GPG.
+
