@@ -2235,3 +2235,390 @@ Advanced Merging
 Merging in Git is typically fairly easy. Since Git makes it easy to merge another branch multiple times, it means that
  you can have a very long lived branch but you can keep it up to date as you go, solving small conflicts often, rather than
 be surprised by one enormous conflict at the end of the series.
+However- sometimes tricky conflicts do- occur. Unlike some other version control systems, Git does not try to be
+ overly clever about merge conflict resolution. Gits philosophy is to be smart about determining when a
+merge resolution is unambiguous, but if there is a conflict, it does not try to be clever about automatically resolving it.
+ Therefore- if you wait too long to merge two branches that diverge quickly, you can run into some issues.
+
+Merge Conflicts
+First of all, if at all possible, try to make sure your working directory is clean before doing a merge that may have conflicts. If
+ you have work in progress, either commit it to a temporary branch or stash it. This makes it so that you can undo
+anything you try here. If you have unsaved changes in your working directory when you try a merge, some of these tips may help you preserve that work.
+$ git checkout -b whitespace
+Switched to a new branch 'whitespace'
+$ unix2dos hello.rb
+unix2dos: converting file hello.rb to DOS format ...
+$ git commit -am 'Convert hello.rb to DOS'
+$ vim hello.rb
+$ git diff -b
+diff --git a/hello.rb b/hello.rb
+index ac51efd..e85207e 100755
+#--- a/hello.rb
+#+++ b/hello.rb
+@@ -1,7 +1,7 @@
+ #! /usr/bin/env ruby
+ def hello
+#-  puts 'hello world'
+#+  puts 'hello mundo'^M
+ end
+$ git commit -am 'Use Spanish instead of English'
+Now we switch back to our master branch and add some documentation for the function.
+$ git checkout master
+Switched to branch 'master'
+$ vim hello.rb
+$ git diff
+diff --git a/hello.rb b/hello.rb
+index ac51efd..36c06c8 100755
+#--- a/hello.rb
+#+++ b/hello.rb
+@@ -1,5 +1,6 @@
+ #! /usr/bin/env ruby
+#+# prints out a greeting
+ def hello
+   puts 'hello world'
+ end
+$ git commit -am 'Add comment documenting the function'
+Now we try to merge in our whitespace branch and well get conflicts because of the whitespace changes.
+$ git merge whitespace
+Auto-merging hello.rb
+Automatic merge failed; fix conflicts and then- commit the result.
+
+Aborting a Merge
+We now have a few options. First, lets cover how to get out of this situation. If you perhaps werent expecting conflicts and
+ dont want to quite deal with the situation yet, you can simply back out of the merge with
+'git merge --abort'
+$ git status -sb
+## master
+UU hello.rb
+$ git merge --abort
+$ git status -sb
+## master
+The git merge --abort option tries to revert back to your state before you ran the merge. The only cases where it may not be
+ able to do- this perfectly would be if you had unstashed, uncommitted changes in your working directory when you ran it,
+otherwise it should work fine. If- for some reason you just want to start over, you can also run
+ 'git reset --hard HEAD' and your repository will be back to the last committed state. Remember that any uncommitted work
+will be lost, so make sure you dont want any of your changes.
+
+$ git merge -Xignore-space-change whitespace
+
+Manual File Re-merging
+Though Git handles whitespace pre-processing pretty well, there are other types of changes that perhaps Git cant handle automatically,
+ but are scriptable fixes. As an example, lets pretend that Git could not handle the whitespace change and we needed to do- it by hand.
+What we really need to do- is run the file were trying to merge in through a dos2unix program before trying the actual file merge. So how would we do- that?
+First- we get into the merge conflict state. Then we want to get copies of our version of the file, their version =from the
+ branch were merging in= and the common version =from where both sides branched off=. Then we want to
+fix up either their side or our side and re-try the merge again for just this single file.
+Getting the three file versions is actually pretty easy. Git stores all of these versions in the index under 'stages' which
+ each have numbers associated with them. Stage 1 is the common ancestor, stage 2 is your version and stage 3 is from the MERGE_HEAD,
+the version youre merging in =theirs=.
+You can extract a copy of each of these versions of the conflicted file with the git show command and a special syntax.
+$ 'git show :1:hello.rb' > hello.common.rb
+$ git show :2:hello.rb > hello.ours.rb
+$ git show :3:hello.rb > hello.theirs.rb
+If- you want to get a little more hard core, you can also use the ls-files -u plumbing command to get the
+ actual SHA-1s of the Git blobs for each of these files.
+$ git ls-files -u
+100755 ac51efdc3df4f4fd328d1a02ad05331d8e2c9111 1	hello.rb
+100755 36c06c8752c78d2aff89571132f3bf7841a7b5c3 2	hello.rb
+100755 e85207e04dfdd5eb0a1e9febbc67fd837c44a1cd 3	hello.rb
+The :1:hello.rb is just a shorthand for looking up that blob SHA-1.
+Now that we have the content of all three stages in our working directory, we can manually fix up theirs to fix the
+ whitespace issue and re-merge the file with the little-known git merge-file command which does just that.
+$ dos2unix hello.theirs.rb
+dos2unix: converting file hello.theirs.rb to Unix format ...
+$ 'git merge-file -p' \
+    hello.ours.rb hello.common.rb hello.theirs.rb > hello.rb
+$ 'git diff -b'
+diff --cc hello.rb
+index 36c06c8,e85207e..0000000
+#--- a/hello.rb
++++ b/hello.rb
+@@@ -1,8 -1,7 +1,8 @@@
+  #! /usr/bin/env ruby
+# +# prints out a greeting
+  def hello
+#-   puts 'hello world'
++   puts 'hello mundo'
+  end
+At this point we have nicely merged the file. In fact, this actually works better than the ignore-space-change option because this
+ actually fixes the whitespace changes before merge instead of simply ignoring them. In the ignore-space-change merge, we
+actually ended up with a few lines with DOS line endings, making things mixed.
+If- you want to get an idea before finalizing this commit about what was actually changed between one side or the other,
+ you can ask git diff to compare what is in your working directory that youre about to commit as the result of the merge to
+any of these stages. Lets go through them all.
+To compare your result to what you had in your branch before the merge, in other words, to see what the merge introduced, you can run git diff --ours:
+ 'git diff --ours'
+#* Unmerged path hello.rb
+diff --git a/hello.rb b/hello.rb
+index 36c06c8..44d0a25 100755
+#--- a/hello.rb
++++ b/hello.rb
+@@ -2,7 +2,7 @@
+ # prints out a greeting
+ def hello
+#-  puts 'hello world'
++  puts 'hello mundo'
+ end
+So here we can easily see that what happened in our branch, what were actually introducing to this file with this merge, is changing that single line.
+If- we want to see how the result of the merge differed from what was on their side, you can run 'git diff --theirs'.
+ In this and the following example, we have to use -b to strip out the whitespace because were comparing it to
+what is in Git, not our cleaned up hello.theirs.rb file.
+$ 'git diff --theirs -b'
+#* Unmerged path hello.rb
+diff --git a/hello.rb b/hello.rb
+index e85207e..44d0a25 100755
+#--- a/hello.rb
++++ b/hello.rb
+@@ -1,5 +1,6 @@
+ #! /usr/bin/env ruby
+#+# prints out a greeting
+ def hello
+   puts 'hello mundo'
+ end
+Finally- you can see how the file has changed from both sides with 'git diff --base'.
+$ 'git diff --base -b'
+#* Unmerged path hello.rb
+diff --git a/hello.rb b/hello.rb
+index ac51efd..44d0a25 100755
+#--- a/hello.rb
++++ b/hello.rb
+@@ -1,7 +1,8 @@
+ #! /usr/bin/env ruby
+#+# prints out a greeting
+ def hello
+#-  puts 'hello world'
++  puts 'hello mundo'
+ end
+At this point we can use the 'git clean' command to clear out the extra files we created to do- the manual merge but no longer need.
+$ 'git clean -f'
+Removing hello.common.rb
+Removing hello.ours.rb
+Removing hello.theirs.rb
+
+Checking Out Conflicts
+Perhaps were not happy with the resolution at this point for some reason, or maybe manually editing one or both sides
+ still didnt work well and we need more context.
+One helpful tool is git checkout with the --conflict option. This will re-checkout the file again and replace the
+ merge conflict markers. This can be useful if you want to reset the markers and try to resolve them again.
+You can pass --conflict either diff3 or merge =which is the default=. If you pass it diff3, Git will use a
+ slightly different version of conflict markers, not only giving you the =ours= and =theirs= versions, but also the =base=
+version inline to give you more context.
+$ 'git checkout --conflict=diff3 hello.rb'
+If- you like this format, you can set it as the default for future merge conflicts by setting the merge.conflictstyle setting to diff3.
+$ 'git config --global merge.conflictstyle diff3'
+The git checkout command can also take --ours and --theirs options, which can be a really fast way of just choosing either
+ one side or the other without merging things at all.
+This can be particularly useful for conflicts of binary files where you can simply choose one side, or where you only want to
+ merge certain files in from another branch — you can do- the merge and then- checkout certain files from one side or the other before committing.
+
+Merge Log
+To get a full list of all of the unique commits that were included in either branch involved in this merge,
+ we can use the =triple dot= syntax that we learned in Triple Dot.
+$ 'git log --oneline --left-right HEAD...MERGE_HEAD'
+< f1270f7 Update README
+< 9af9d3b Create README
+< 694971d Update phrase to 'hola world'
+> e3eb223 Add more tests
+> 7cff591 Create initial testing script
+> c3ffff1 Change text to 'hello mundo'
+Thats a nice list of the six total commits involved, as well as which line of development each commit was on.
+We can further simplify this though to give us much more specific context. If we add the --merge option to git log,
+ it will only show the commits in either side of the merge that touch a file thats currently conflicted.
+$ 'git log --oneline --left-right --merge'
+< 694971d Update phrase to 'hola world'
+> c3ffff1 Change text to 'hello mundo'
+If- you run that with the -p option instead, you get just the diffs to the file that ended up in conflict. This can be
+ really helpful in quickly giving you the context you need to help understand why something conflicts and how to more intelligently resolve it.
+
+Combined Diff Format
+Since Git stages any merge results that are successful, when you run git diff while in a conflicted merge state,
+ you only get what is currently still in conflict. This can be helpful to see what you still have to resolve.
+When you run git diff directly after a merge conflict, it will give you information in a rather unique diff output format.
+You can also get this from the git log for any merge to see how something was resolved after the fact.
+ Git will output this format if you run git show on a merge commit, or if you add a --cc option to a
+git log -p =which by default only shows patches for non-merge commits=.
+$ git log --cc -p -1
+
+Undoing Merges
+Now that you know how to create a merge commit, youll probably make some by mistake. One of the great things about
+ working with Git is that its okay to make mistakes, because its possible =and in many cases easy= to fix them.
+
+Fix the references
+If- the unwanted merge commit only exists on your local repository, the easiest and best solution is to move the branches so that
+ they point where you want them to. In most cases, if you follow the errant git merge with 'git reset --hard HEAD~', this will
+reset the branch pointers: 'reset --hard' usually goes through three steps:
+Move the branch HEAD points to. In this case, we want to move master to where it was before the merge commit =C6=.
+Make the index look like HEAD.
+Make the working directory look like the index.
+The downside of this approach is that its rewriting history, which can be problematic with a shared repository.
+
+Reverse the commit
+If- moving the branch pointers around isnt going to work for you, Git gives you the option of making a new commit which
+ undoes all the changes from an existing one. Git calls this operation a 'revert', and in this particular scenario, youd invoke it like this:
+$ git revert -m 1 HEAD
+The -m 1 flag indicates which parent is the =mainline= and should be kept. When you invoke a merge into HEAD 'git merge topic', the
+ new commit has two parents: the first one is HEAD =C6=, and the second is the tip of the branch being merged in =C4=.
+In this case, we want to undo all the changes introduced by merging in parent #2 (C4), while keeping all the content from parent #1 (C6).
+The new commit ^M has exactly the same contents as C6, so starting from here its as if the merge never happened, except that
+ the now-unmerged commits are still in HEADs history. Git will get confused if you try to merge topic into master again:
+$ git merge topic
+Already up-to-date.
+Theres nothing in topic that isnt already reachable from master. Whats worse, if you add work to topic and merge again,
+ Git will only bring in the changes since the reverted merge:
+The best way around this is to un-revert the original merge, since now you want to bring in the changes that
+ were reverted out, then- create a new merge commit:
+$ git revert ^M
+#[master 09f0126] Revert "Revert "Merge branch 'topic'""
+$ git merge topic
+In this example, M and ^M cancel out. ^^M effectively merges in the changes from C3 and C4, and C8 merges in the
+ changes from C7, so now topic is fully merged.
+
+Our or Theirs Preference
+$ git merge -Xours mundo
+This option can also be passed to the git merge-file command we saw earlier by running something like git merge-file --ours for individual file merges.
+If- you want to do- something like this but not have Git even try to merge changes from the other side in, there is a
+ more draconian option, which is the =ours= merge strategy. This is different from the =ours= recursive merge option.
+This will basically do- a fake merge. It will record a new merge commit with both branches as parents, but it will not
+ even look at the branch youre merging in. It will simply record as the result of the merge the exact code in your current branch.
+$ git merge -s ours mundo
+Merge made by the 'ours' strategy.
+$ git diff HEAD HEAD~
+$
+You can see that there is no difference between the branch we were on and the result of the merge.
+This can often be useful to basically trick Git into thinking that a branch is already merged when doing a
+ merge later on. For example, say you branched off a release branch and have done- some work on it that you will want to
+merge back into your master branch at some point. In the meantime some bugfix on master needs to be backported into your
+ release branch. You can merge the bugfix branch into the release branch and also merge -s ours the same branch into your
+master branch =even though the fix is already there= so when you later merge the release branch again, there are no conflicts from the bugfix.
+
+Subtree Merging
+The idea of the subtree merge is that you have two projects, and one of the projects maps to a subdirectory of the
+ other one. When you specify a subtree merge, Git is often smart enough to figure out that one is a subtree of the other and merge appropriately.
+First- well add the Rack application to our project. Well add the Rack project as a
+ remote reference in our own project and then- check it out into its own branch:
+$ 'git remote add rack_remote https://github.com/rack/rack'
+$ 'git fetch rack_remote --no-tags'
+$ 'git checkout -b rack_branch rack_remote/master'
+Now we have the root of the Rack project in our rack_branch branch and our own project in the master branch. If you
+ check out one and then- the other, you can see that they have different project roots:
+This is sort of a strange concept. Not all the branches in your repository actually have to be branches of the same project.
+ Its not common, because its rarely helpful, but its fairly easy to have branches contain completely different histories.
+In this case, we want to pull the Rack project into our master project as a subdirectory. We can do- that in Git with
+ git read-tree. Youll learn more about read-tree and its friends in Git Internals, but for now know that it reads the
+root tree of one branch into your current staging area and working directory. We just switched back to your master branch,
+ and we pull the rack_branch branch into the rack subdirectory of our master branch of our main project:
+$ 'git read-tree --prefix=rack/ -u rack_branch'
+When we commit, it looks like we have all the Rack files under that subdirectory — as though we copied them in from a tarball.
+ What gets interesting is that we can fairly easily merge changes from one of the branches to the other. So, if the
+Rack project updates, we can pull in upstream changes by switching to that branch and pulling:
+$ git checkout rack_branch
+$ git pull
+Then- we can merge those changes back into our master branch. To pull in the changes and prepopulate the commit message,
+ use the --squash option, as well as the recursive merge strategys -Xsubtree option.
+The recursive strategy is the default here, but we include it for clarity.
+$ git checkout master
+$ 'git merge --squash -s recursive -Xsubtree=rack rack_branch'
+Squash commit -- not updating HEAD
+Automatic merge went well; stopped before committing as requested
+All the changes from the Rack project are merged in and ready to be committed locally. You can also do- the
+ opposite — make changes in the rack subdirectory of your master branch and then- merge them into your rack_branch branch later to
+submit them to the maintainers or push them upstream.
+This gives us a way to have a workflow somewhat similar to the submodule workflow without using submodules.
+ We can keep branches with other related projects in our repository and subtree merge them into our project occasionally.
+It is nice in some ways, for example all the code is committed to a single place. However, it has other drawbacks in that its a
+ bit more complex and easier to make mistakes in reintegrating changes or accidentally pushing a branch into an unrelated repository.
+Another slightly weird thing is that to get a diff between what you have in your rack subdirectory and the code in
+ your rack_branch branch — to see if you need to merge them — you cant use the normal diff command. Instead, you
+must run git diff-tree with the branch you want to compare to:
+$ 'git diff-tree -p rack_branch'
+Or- to compare what is in your rack subdirectory with what the master branch on the server was the last time you fetched, you can run:
+$ 'git diff-tree -p rack_remote/master'
+
+https://git-scm.com/book/en/v2/Git-Tools-Rerere
+Rerere
+The git rerere functionality is a bit of a hidden feature. The name stands for 'reuse recorded resolution' and, as the
+ name implies, it allows you to ask Git to remember how youve resolved a hunk conflict so that the next time it sees the
+same conflict, Git can resolve it for you automatically.
+With rerere enabled, you can attempt the occasional merge, resolve the conflicts, then- back out of the merge.
+ If- you do- this continuously, then- the final merge should be easy because rerere can just do- everything for you automatically.
+This same tactic can be used if you want to keep a branch rebased so you dont have to deal with the same rebasing conflicts each time you do- it.
+ Or if you want to take a branch that you merged and fixed a bunch of conflicts and then- decide to rebase it
+instead — you likely wont have to do- all the same conflicts again.
+Another application of rerere is where you merge a bunch of evolving topic branches together into a testable head occasionally, as the
+ Git project itself often does. If the tests fail, you can rewind the merges and re-do them without the topic branch that made the
+tests fail without having to re-resolve the conflicts again.
+To enable rerere functionality, you simply have to run this config setting:
+$ 'git config --global rerere.enabled true'
+You can also turn it on by creating the '.git/rr-cache' directory in a specific repository, but the config setting is
+ clearer and enables that feature globally for you.
+$ 'git rerere status'
+$ 'git rerere diff'
+Also /and this isnt really related to rerere/, you can use git ls-files -u to see the conflicted files and the before, left and right versions:
+$ git ls-files -u
+$ 'git rerere'
+So- if you do- a lot of re-merges, or want to keep a topic branch up to date with your master branch without a ton of merges,
+ or you rebase often, you can turn on rerere to help your life out a bit.
+
+https://git-scm.com/book/en/v2/Git-Tools-Debugging-with-Git
+Debugging with Git
+In addition to being primarily for version control, Git also provides a couple commands to help you debug your source code projects.
+ Because Git is designed to handle nearly any type of content, these tools are pretty generic, but they can often help you hunt for a
+bug or culprit when things go wrong.
+
+File Annotation
+If- you track down a bug in your code and want to know when it was introduced and why, file annotation is often your best tool.
+ It shows you what commit was the last to modify each line of any file. So if you see that a method in your code is buggy,
+you can annotate the file with git blame to determine which commit was responsible for the introduction of that line
+$ git blame -L 69,82 Makefile
+Another cool thing about Git is that it doesnt track file renames explicitly. It records the snapshots and then- tries to
+ figure out what was renamed implicitly, after the fact. One of the interesting features of this is that you can ask it to
+figure out all sorts of code movement as well. If you pass -C to git blame, Git analyzes the file youre annotating and
+ tries to figure out where snippets of code within it originally came from if they were copied from elsewhere
+$ git blame -C -L 141,153 GITPackUpload.m
+
+Binary Search
+Annotating a file helps if you know where the issue is to begin with. If you dont know what is breaking, and there have
+ been dozens or hundreds of commits since the last state where you know the code worked, youll likely turn to
+git bisect for help. The bisect command does a binary search through your commit history to help you identify as quickly as
+ possible which commit introduced an issue.
+Lets say you just pushed out a release of your code to a production environment, youre getting bug reports about something that
+ wasnt happening in your development environment, and you cant imagine why the code is doing that. You go back to your code, and
+it turns out you can reproduce the issue, but you cant figure out what is going wrong. You can bisect the code to find out.
+ First you run git bisect start to get things going, and then- you use git bisect bad to tell the system that the
+current commit youre on is broken. Then, you must tell bisect when the last known good state was, using git bisect good <good_commit>:
+$ 'git bisect start'
+$ 'git bisect bad'
+$ 'git bisect good v1.0'
+Bisecting: 6 revisions left to test after this
+Git figured out that about 12 commits came between the commit you marked as the last good commit /v1.0/ and the current bad version,
+ and it checked out the middle one for you. At this point, you can run your test to see if the issue exists as of this commit. If it does,
+then- it was introduced sometime before this middle commit. if it doesnt, then- the problem was introduced sometime after the
+ middle commit. It turns out there is no issue here, and you tell Git that by typing git bisect good and continue your journey:
+$ git bisect good
+Bisecting: 3 revisions left to test after this
+Now youre on another commit, halfway between the one you just tested and your bad commit. You run your test again and
+ find that this commit is broken, so you tell Git that with git bisect bad:
+$ git bisect bad
+Bisecting: 1 revisions left to test after this
+This commit is fine, and now Git has all the information it needs to determine where the issue was introduced. It tells you the
+ SHA-1 of the first bad commit and show some of the commit information and which files were modified in that commit so you can
+figure out what happened that may have introduced this bug:
+$ git bisect good
+b047b02ea83310a70fd603dc8cd7a6cd13d15c04 is first bad commit
+When youre finished, you should run git bisect reset to reset your HEAD to where you were before you started, or youll end up in a weird state:
+$ 'git bisect reset'
+This is a powerful tool that can help you check hundreds of commits for an introduced bug in minutes. In fact, if you have a
+ script that will exit 0 if the project is good or non-0 if the project is bad, you can fully automate git bisect. First,
+you again tell it the scope of the bisect by providing the known bad and good commits. You can do- this by listing them with the
+ bisect start command if you want, listing the known bad commit first and the known good commit second:
+$ 'git bisect start HEAD v1.0'
+$ 'git bisect run test-error.sh'
+Doing so automatically runs test-error.sh on each checked-out commit until Git finds the first broken commit.
+ You can also run something like make or make tests or whatever you have that runs automated tests for you.
+
+https://git-scm.com/book/en/v2/Git-Tools-Submodules
+Submodules
+It often happens that while working on one project, you need to use another project from within it. Perhaps its a
+ library that a third party developed or that youre developing separately and using in multiple parent projects.
+A common issue arises in these scenarios: you want to be able to treat the two projects as separate yet
+ still be able to use one from within the other.
