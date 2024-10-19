@@ -2554,7 +2554,7 @@ You can also turn it on by creating the '.git/rr-cache' directory in a specific 
 $ 'git rerere status'
 $ 'git rerere diff'
 Also /and this isnt really related to rerere/, you can use git ls-files -u to see the conflicted files and the before, left and right versions:
-$ git ls-files -u
+$ 'git ls-files -u'
 $ 'git rerere'
 So- if you do- a lot of re-merges, or want to keep a topic branch up to date with your master branch without a ton of merges,
  or you rebase often, you can turn on rerere to help your life out a bit.
@@ -2569,12 +2569,12 @@ File Annotation
 If- you track down a bug in your code and want to know when it was introduced and why, file annotation is often your best tool.
  It shows you what commit was the last to modify each line of any file. So if you see that a method in your code is buggy,
 you can annotate the file with git blame to determine which commit was responsible for the introduction of that line
-$ git blame -L 69,82 Makefile
+$ 'git blame -L' 69,82 Makefile
 Another cool thing about Git is that it doesnt track file renames explicitly. It records the snapshots and then- tries to
  figure out what was renamed implicitly, after the fact. One of the interesting features of this is that you can ask it to
 figure out all sorts of code movement as well. If you pass -C to git blame, Git analyzes the file youre annotating and
  tries to figure out where snippets of code within it originally came from if they were copied from elsewhere
-$ git blame -C -L 141,153 GITPackUpload.m
+$ 'git blame -C -L' 141,153 GITPackUpload.m
 
 Binary Search
 Annotating a file helps if you know where the issue is to begin with. If you dont know what is breaking, and there have
@@ -2589,22 +2589,22 @@ current commit youre on is broken. Then, you must tell bisect when the last know
 $ 'git bisect start'
 $ 'git bisect bad'
 $ 'git bisect good v1.0'
-Bisecting: 6 revisions left to test after this
+#Bisecting: 6 revisions left to test after this
 Git figured out that about 12 commits came between the commit you marked as the last good commit /v1.0/ and the current bad version,
  and it checked out the middle one for you. At this point, you can run your test to see if the issue exists as of this commit. If it does,
 then- it was introduced sometime before this middle commit. if it doesnt, then- the problem was introduced sometime after the
  middle commit. It turns out there is no issue here, and you tell Git that by typing git bisect good and continue your journey:
 $ git bisect good
-Bisecting: 3 revisions left to test after this
+#Bisecting: 3 revisions left to test after this
 Now youre on another commit, halfway between the one you just tested and your bad commit. You run your test again and
  find that this commit is broken, so you tell Git that with git bisect bad:
 $ git bisect bad
-Bisecting: 1 revisions left to test after this
+#Bisecting: 1 revisions left to test after this
 This commit is fine, and now Git has all the information it needs to determine where the issue was introduced. It tells you the
  SHA-1 of the first bad commit and show some of the commit information and which files were modified in that commit so you can
 figure out what happened that may have introduced this bug:
 $ git bisect good
-b047b02ea83310a70fd603dc8cd7a6cd13d15c04 is first bad commit
+#b047b02ea83310a70fd603dc8cd7a6cd13d15c04 is first bad commit
 When youre finished, you should run git bisect reset to reset your HEAD to where you were before you started, or youll end up in a weird state:
 $ 'git bisect reset'
 This is a powerful tool that can help you check hundreds of commits for an introduced bug in minutes. In fact, if you have a
@@ -2650,12 +2650,12 @@ $ 'git diff --cached --submodule'
 +[submodule "DbConnector"]
 +       path = DbConnector
 +       url = https://github.com/chaconinc/DbConnector
-Submodule DbConnector 0000000...c3f01dc /new submodule/
+#Submodule DbConnector 0000000...c3f01dc /new submodule/
 When you commit, you see something like this:
 $ 'git commit -am' Add DbConnector module
 #[master fb9093c] Add DbConnector module
- create mode 100644 .gitmodules
- create mode 160000 DbConnector
+# create mode 100644 .gitmodules
+# create mode 160000 DbConnector
 Notice the 160000 mode for the DbConnector entry. That is a special mode in Git that basically means youre recording a
  commit as a directory entry rather than a subdirectory or a file.
 Lastly- push these changes:
@@ -2667,10 +2667,10 @@ Here well clone a project with a submodule in it. When you clone such a project,
 $ 'git clone' https://github.com/chaconinc/MainProject
 $ cd MainProject
 $ ls -la
-total 16
+#total 16
 $ cd DbConnector/
 $ ls
-$
+#$
 The DbConnector directory is there, but empty. You must run two commands:
  'git submodule init' to initialize your local configuration file, and
   'git submodule update' to fetch all the data from that project and check out the appropriate commit listed in your superproject:
@@ -2760,8 +2760,8 @@ git submodule update --remote pulls in new work from upstream. The options are t
  or you can try to rebase your local work on top of the new changes.
 First of all, lets go into our submodule directory and check out a branch.
 $ cd DbConnector/
-$ git checkout stable
-Switched to branch 'stable'
+$ 'git checkout' stable
+#Switched to branch 'stable'
 Lets try updating our submodule with the =merge= option. To specify it manually, we can just add the --merge option to
  our update call. Here well see that there was a change on the server for this submodule and it gets merged in.
 $ cd ..
@@ -2770,28 +2770,28 @@ If- we go into the DbConnector directory, we have the new changes already merged
  Now lets see what happens when we make our own local change to the library and someone else pushes another change to the upstream at the same time.
 $ cd DbConnector/
 $ vim src/db.c
-$ git commit -am 'Unicode support'
+$ 'git commit -am' 'Unicode support'
 Now if we update our submodule we can see what happens when we have made a local change and upstream also has a change we need to incorporate.
 $ cd ..
 $ 'git submodule update --remote --rebase'
-First- rewinding head to replay your work on top of it...
-Applying: Unicode support
-Submodule path 'DbConnector': rebased into '5d60ef9bbebf5a0c1c1050f242ceeb54ad58da94'
+#First- rewinding head to replay your work on top of it...
+#Applying: Unicode support
+#Submodule path 'DbConnector': rebased into '5d60ef9bbebf5a0c1c1050f242ceeb54ad58da94'
 If- you forget the --rebase or --merge, Git will just update the submodule to whatever is on the server and reset your project to a detached HEAD state.
-$ git submodule update --remote
-Submodule path 'DbConnector': checked out '5d60ef9bbebf5a0c1c1050f242ceeb54ad58da94'
+$ 'git submodule update --remote'
+#Submodule path 'DbConnector': checked out '5d60ef9bbebf5a0c1c1050f242ceeb54ad58da94'
 If- this happens, dont worry, you can simply go back into the directory and check out your branch again =which will still contain your work= and
  merge or rebase origin/stable =or whatever remote branch you want= manually.
 If- you havent committed your changes in your submodule and you run a submodule update that would cause issues,
  Git will fetch the changes but not overwrite unsaved work in your submodule directory.
 $ git submodule update --remote
 If- you made changes that conflict with something changed upstream, Git will let you know when you run the update.
-$ git submodule update --remote --merge
-Auto-merging scripts/setup.sh
+$ 'git submodule update --remote --merge'
+#Auto-merging scripts/setup.sh
 #CONFLICT (content): Merge conflict in scripts/setup.sh
-Recorded preimage for 'scripts/setup.sh'
-Automatic merge failed; fix conflicts and then- commit the result.
-Unable to merge 'c75e92a2b3855c9e5b66f915308390d9db204aca' in submodule path 'DbConnector'
+#Recorded preimage for 'scripts/setup.sh'
+#Automatic merge failed; fix conflicts and then- commit the result.
+#Unable to merge 'c75e92a2b3855c9e5b66f915308390d9db204aca' in submodule path 'DbConnector'
 You can go into the submodule directory and fix the conflict just as you normally would.
 
 Publishing Submodule Changes
@@ -2819,23 +2819,23 @@ If- you change a submodule reference at the same time as someone else, you may r
 If- one of the commits is a direct ancestor of the other =a fast-forward merge=, then- Git will simply choose the
  latter for the merge, so that works fine.
 Git will not attempt even a trivial merge for you.
-$ git pull
-From https://github.com/chaconinc/MainProject
-   9a377d1..eb974f8  master     -> origin/master
-Fetching submodule DbConnector
-warning: Failed to merge submodule DbConnector /merge following commits not found/
-Auto-merging DbConnector
+$ 'git pull'
+#From https://github.com/chaconinc/MainProject
+#   9a377d1..eb974f8  master     -> origin/master
+#Fetching submodule DbConnector
+#warning: Failed to merge submodule DbConnector /merge following commits not found/
+#Auto-merging DbConnector
 #CONFLICT (submodule): Merge conflict in DbConnector
-Automatic merge failed; fix conflicts and then- commit the result.
+#Automatic merge failed; fix conflicts and then- commit the result.
 So basically what has happened here is that Git has figured out that the two branches record points in the
  submodules history that are divergent and need to be merged. It explains it as =merge following commits not found=, which is
 confusing but well explain why that is in a bit.
 To solve the problem, you need to figure out what state the submodule should be in. Strangely, Git doesnt really give you
  much information to help out here, not even the SHA-1s of the commits of both sides of the history. Fortunately, its simple to
 figure out. If you run git diff you can get the SHA-1s of the commits recorded in both branches you were trying to merge.
-$ git diff
-diff --cc DbConnector
-index eb41d76,c771610..0000000
+$ 'git diff'
+#diff --cc DbConnector
+#index eb41d76,c771610..0000000
 So- in this case, eb41d76 is the commit in our submodule that we had and c771610 is the commit that upstream had. If we go into
  our submodule directory, it should already be on eb41d76 as the merge would not have touched it. If for whatever reason its not,
 you can simply create and checkout a branch pointing to it.
@@ -2845,26 +2845,26 @@ We would suggest the latter, even if only to make a nicer merge commit message.
 So- we will go into our submodule directory, create a branch named =try-merge= based on that second SHA-1 from git diff, and manually merge.
 $ cd DbConnector
 $ 'git rev-parse HEAD'
-eb41d764bccf88be77aced643c13a7fa86714135
+#eb41d764bccf88be77aced643c13a7fa86714135
 $ 'git branch' try-merge c771610
 $ 'git merge' try-merge
-Auto-merging src/main.c
-Automatic merge failed; fix conflicts and then- commit the result.
+#Auto-merging src/main.c
+#Automatic merge failed; fix conflicts and then- commit the result.
 We got an actual merge conflict here, so if we resolve that and commit it, then- we can simply update the main project with the result.
-#$ vim src/main.c (1)
-$ git add src/main.c
-$ git commit -am 'merged our changes'
-#$ cd .. (2)
-#$ git diff (3)
-diff --cc DbConnector
-index eb41d76,c771610..0000000
-#$ git add DbConnector (4)
-#$ git commit -m "Merge Tom's Changes" (5)
 1 First we resolve the conflict.
+#$ vim src/main.c
+#$ git add src/main.c
+#$ git commit -am 'merged our changes'
 2 Then we go back to the main project directory.
+#$ cd ..
 3 We can check the SHA-1s again.
+$ 'git diff'
+#diff --cc DbConnector
+#index eb41d76,c771610..0000000
 4 Resolve the conflicted submodule entry.
+$ 'git add' DbConnector
 5 Commit our merge.
+$ 'git commit -m' "Merge Tom's Changes"
 It can be a bit confusing, but its really not very hard.
 Interestingly- there is another case that Git handles. If a merge commit exists in the submodule directory that
  contains both commits in its history, Git will suggest it to you as a possible solution. It sees that at some point in the
@@ -2874,22 +2874,22 @@ This is why the error message from before was =merge following commits not found
 If- it does find a single acceptable merge commit, youll see something like this:
 $ git merge origin/master
 #warning: Failed to merge submodule DbConnector (not fast-forward)
-Found a possible merge resolution for the submodule:
- 9fd905e5d7f45a0d4cbc43d1ee550f16a30e825a: > merged our changes
+#Found a possible merge resolution for the submodule:
+# 9fd905e5d7f45a0d4cbc43d1ee550f16a30e825a: > merged our changes
 If- this is correct simply add it to the index for example
 by using:
-  git update-index --cacheinfo 160000 9fd905e5d7f45a0d4cbc43d1ee550f16a30e825a "DbConnector"
+  'git update-index --cacheinfo' 160000 9fd905e5d7f45a0d4cbc43d1ee550f16a30e825a "DbConnector"
 which will accept this suggestion.
 Auto-merging DbConnector
 #CONFLICT (submodule): Merge conflict in DbConnector
-Automatic merge failed; fix conflicts and then- commit the result.
+#Automatic merge failed; fix conflicts and then- commit the result.
 The suggested command Git is providing will update the index as though you had run git add =which clears the conflict=, then- commit.
  You probably shouldnt do- this though. You can just as easily go into the submodule directory, see what the difference is,
 fast-forward to this commit, test it properly, and then- commit it.
 # cd DbConnector/
 $ 'git merge' 9fd905e
-Updating eb41d76..9fd905e
-Fast-forward
+#Updating eb41d76..9fd905e
+#Fast-forward
 $ cd ..
 $ 'git add' DbConnector
 $ 'git commit -am' 'Fast forward to a common submodule child'
@@ -2904,12 +2904,12 @@ For- example, lets say we want to start a new feature or do- a bugfix and we hav
 $ 'git submodule foreach' 'git stash'
 Then- we can create a new branch and switch to it in all our submodules.
 $ git submodule foreach 'git checkout -b featureA'
-Entering 'CryptoLibrary'
-Switched to a new branch 'featureA'
-Entering 'DbConnector'
-Switched to a new branch 'featureA'
+#Entering 'CryptoLibrary'
+#Switched to a new branch 'featureA'
+#Entering 'DbConnector'
+#Switched to a new branch 'featureA'
 You get the idea. One really useful thing you can do- is produce a nice unified diff of what is changed in your main project and all your subprojects as well.
-$ git diff; git submodule foreach 'git diff'
+$ 'git diff'; 'git submodule foreach' 'git diff'
 
 Useful Aliases
 You may want to set up some aliases for some of these commands as they can be quite long and you cant set configuration options for
@@ -2924,56 +2924,56 @@ Switching branches
 For- instance, switching branches with submodules in them can also be tricky with Git versions older than Git 2.13.
  If- you create a new branch, add a submodule there, and then- switch back to a branch without that submodule, you still have the
 submodule directory as an untracked directory:
-$ git --version
-git version 2.12.2
-$ git checkout -b add-crypto
-Switched to a new branch 'add-crypto'
-$ git submodule add https://github.com/chaconinc/CryptoLibrary
-Cloning into 'CryptoLibrary'...
+$ 'git --version'
+#git version 2.12.2
+$ 'git checkout -b' add-crypto
+#Switched to a new branch 'add-crypto'
+$ 'git submodule add' https://github.com/chaconinc/CryptoLibrary
+#Cloning into 'CryptoLibrary'...
 $ git commit -am 'Add crypto library'
 #[add-crypto 4445836] Add crypto library
- create mode 160000 CryptoLibrary
-$ git checkout master
-warning: unable to rmdir CryptoLibrary: Directory not empty
-Switched to branch 'master'
-Your branch is up-to-date with 'origin/master'.
-$ git status
-On branch master
-Your branch is up-to-date with 'origin/master'.
-Untracked files:
+# create mode 160000 CryptoLibrary
+$ 'git checkout' master
+#warning: unable to rmdir CryptoLibrary: Directory not empty
+#Switched to branch 'master'
+#Your branch is up-to-date with 'origin/master'.
+$ 'git status'
+#On branch master
+#Your branch is up-to-date with 'origin/master'.
+#Untracked files:
 #  (use "git add <file>..." to include in what will be committed)
 #	CryptoLibrary/
 #nothing added to commit but untracked files present (use "git add" to track)
 Removing the directory isnt difficult, but it can be a bit confusing to have that in there. If you do- remove it
  and then- switch back to the branch that has that submodule, you will need to run submodule update --init to repopulate it.
 $ 'git clean -ffdx'
-Removing CryptoLibrary/
-$ git checkout add-crypto
-Switched to branch 'add-crypto'
+#Removing CryptoLibrary/
+$ 'git checkout' add-crypto
+#Switched to branch 'add-crypto'
 $ ls CryptoLibrary/
-$ git submodule update --init
-Submodule path 'CryptoLibrary': checked out 'b8dda6aa182ea4464f3f3264b11e0268545172af'
+$ 'git submodule update --init'
+#Submodule path 'CryptoLibrary': checked out 'b8dda6aa182ea4464f3f3264b11e0268545172af'
 $ ls CryptoLibrary/
-Makefile	includes	scripts		src
+#Makefile	includes	scripts		src
 Again- not really very difficult, but it can be a little confusing.
 Newer Git versions /Git >= 2.13/ simplify all this by adding the --recurse-submodules flag to the git checkout command,
  which takes care of placing the submodules in the right state for the branch we are switching to.
-$ git --version
-git version 2.13.3
+$ 'git --version'
+#git version 2.13.3
 $ 'git checkout -b' add-crypto
-Switched to a new branch 'add-crypto'
+#Switched to a new branch 'add-crypto'
 $ 'git submodule add' https://github.com/chaconinc/CryptoLibrary
-Cloning into 'CryptoLibrary'...
+#Cloning into 'CryptoLibrary'...
 $ 'git commit -am' 'Add crypto library'
 #[add-crypto 4445836] Add crypto library
- create mode 160000 CryptoLibrary
+# create mode 160000 CryptoLibrary
 $ 'git checkout --recurse-submodules' master
-Switched to branch 'master'
-Your branch is up-to-date with 'origin/master'.
+#Switched to branch 'master'
+#Your branch is up-to-date with 'origin/master'.
 $ 'git status'
-On branch master
-Your branch is up-to-date with 'origin/master'.
-nothing to commit, working tree clean
+#On branch master
+#Your branch is up-to-date with 'origin/master'.
+#nothing to commit, working tree clean
 Using the --recurse-submodules flag of git checkout can also be useful when you work on several branches in the superproject,
  each having your submodule pointing at different commits. Indeed, if you switch between branches that record the submodule at
 different commits, upon executing git status the submodule will appear as =modified=, and indicate =new commits=. That is
@@ -2992,23 +2992,23 @@ Assume that you have files in a subdirectory of your project, and you want to sw
  subdirectory and then- run submodule add, Git yells at you:
 $ rm -Rf CryptoLibrary/
 $ 'git submodule add' https://github.com/chaconinc/CryptoLibrary
-'CryptoLibrary' already exists in the index
+#'CryptoLibrary' already exists in the index
 You have to unstage the CryptoLibrary directory first. Then you can add the submodule:
 $ 'git rm -r' CryptoLibrary
-$ git submodule add https://github.com/chaconinc/CryptoLibrary
-Cloning into 'CryptoLibrary'...
-Checking connectivity... done.
+$ 'git submodule add' https://github.com/chaconinc/CryptoLibrary
+#Cloning into 'CryptoLibrary'...
+#Checking connectivity... done.
 Now suppose you did that in a branch. If you try to switch back to a branch where those files are still in the
  actual tree rather than a submodule — you get this error:
 $ 'git checkout' master
-error: The following untracked working tree files would be overwritten by checkout:
-  CryptoLibrary/includes/crypto.h
-Please move or remove them before you can switch branches.
-Aborting
+#error: The following untracked working tree files would be overwritten by checkout:
+#  CryptoLibrary/includes/crypto.h
+#Please move or remove them before you can switch branches.
+#Aborting
 You can force it to switch with checkout -f, but be careful that you dont have unsaved changes in there as they could be overwritten with that command.
 $ 'git checkout -f' master
-warning: unable to rmdir CryptoLibrary: Directory not empty
-Switched to branch 'master'
+#warning: unable to rmdir CryptoLibrary: Directory not empty
+#Switched to branch 'master'
 Then- when you switch back, you get an empty CryptoLibrary directory for some reason and git submodule update may not fix it either.
  You may need to go into your submodule directory and run a git checkout . to get all your files back. You could
 run this in a submodule foreach script to run it for multiple submodules.
@@ -3028,10 +3028,10 @@ This is where the git bundle command can be helpful. The bundle command will pac
  pushed over the wire with a git push command into a binary file that you can email to someone or put on a flash drive, then- unbundle into another repository.
 Lets see a simple example. Lets say you have a repository with two commits:
 $ git log
-commit 9a466c572fe88b195efd356c3f2bbeccdb504102
-    Second commit
-commit b1ec3248f39900d2a406049d762aa68e9641be25
-    First commit
+#commit 9a466c572fe88b195efd356c3f2bbeccdb504102
+#    Second commit
+#commit b1ec3248f39900d2a406049d762aa68e9641be25
+#    First commit
 If- you want to send that repository to someone and you dont have access to a repository to push to,
  or simply dont want to set one up, you can bundle it with git bundle create.
 $ 'git bundle create' repo.bundle HEAD master
@@ -3042,3 +3042,296 @@ You can email this repo.bundle file to someone else, or put it on a USB drive an
 On the other side, say you are sent this repo.bundle file and want to work on the project. You can clone from the
  binary file into a directory, much like you would from a URL.
 $ 'git clone' repo.bundle repo
+If- you dont include HEAD in the references, you have to also specify -b master or whatever branch is included because otherwise it
+ wont know what branch to check out.
+Now lets say you do- three commits on it and want to send the new commits back via a bundle on a USB stick or email.
+$ git log --oneline
+#71b84da Last commit - second repo
+#c99cf5b Fourth commit - second repo
+#7011d3d Third commit - second repo
+#9a466c5 Second commit
+#b1ec324 First commit
+First we need to determine the range of commits we want to include in the bundle. Unlike the network protocols which figure out the
+ minimum set of data to transfer over the network for us, well have to figure this out manually. Now, you could just do- the
+same thing and bundle the entire repository, which will work, but its better to just bundle up the difference - just the three commits we just made locally.
+In order to do- that, youll have to calculate the difference. As we described in Commit Ranges, you can specify a range of commits in a
+ number of ways. To get the three commits that we have in our master branch that werent in the branch we originally cloned,
+we can use something like origin/master..master or master ^origin/master. You can test that with the log command.
+$ 'git log --oneline master ^origin/master'
+#71b84da Last commit - second repo
+#c99cf5b Fourth commit - second repo
+#7011d3d Third commit - second repo
+So now that we have the list of commits we want to include in the bundle, lets bundle them up. We do- that with the
+ git bundle create command, giving it a filename we want our bundle to be and the range of commits we want to go into it.
+$ 'git bundle create' commits.bundle 'master ^9a466c5'
+Now we have a commits.bundle file in our directory. If we take that and send it to our partner, she can then- import it into the
+ original repository, even if more work has been done- there in the meantime.
+When she gets the bundle, she can inspect it to see what it contains before she imports it into her repository. The first command is the
+ bundle verify command that will make sure the file is actually a valid Git bundle and that you have all the necessary ancestors to reconstitute it properly.
+$ 'git bundle verify' ../commits.bundle
+#The bundle contains 1 ref
+#71b84daaf49abed142a373b6e5c59a22dc6560dc refs/heads/master
+#The bundle requires these 1 ref
+#9a466c572fe88b195efd356c3f2bbeccdb504102 second commit
+../commits.bundle is 'okay'
+If- the bundler had created a bundle of just the last two commits they had done, rather than all three, the
+ original repository would not be able to import it, since it is missing requisite history. The verify command would have looked like this instead:
+$ 'git bundle verify' ../commits-bad.bundle
+'error': Repository lacks these prerequisite commits:
+#error: 7011d3d8fc200abe0ad561c011c3852a4b7bbe95 Third commit - second repo
+However- our first bundle is valid, so we can fetch in commits from it. If you want to see what branches are in the
+ bundle that can be imported, there is also a command to just list the heads:
+$ 'git bundle list-heads' ../commits.bundle
+#71b84daaf49abed142a373b6e5c59a22dc6560dc refs/heads/master
+The verify sub-command will tell you the heads as well. The point is to see what can be pulled in, so you can use the
+ fetch or pull commands to import commits from this bundle. Here well fetch the master branch of the bundle to a
+branch named other-master in our repository:
+$ 'git fetch' ../commits.bundle 'master:other-master'
+#From ../commits.bundle
+# * [new branch]      master     -> other-master
+Now we can see that we have the imported commits on the other-master branch as well as any commits weve done- in the meantime in our own master branch.
+$ 'git log --oneline --decorate --graph --all'
+#* 8255d41 (HEAD, master) Third commit - first repo
+#| * 71b84da (other-master) Last commit - second repo
+#| * c99cf5b Fourth commit - second repo
+#| * 7011d3d Third commit - second repo
+#|/
+#* 9a466c5 Second commit
+#* b1ec324 First commit
+So- git bundle can be really useful for sharing or doing network-type operations when you dont have the proper network or shared repository to do- so.
+
+https://git-scm.com/book/en/v2/Git-Tools-Replace
+Replace
+As weve emphasized before, the objects in Gits object database are unchangeable, but Git does provide an interesting way to
+ pretend to replace objects in its database with other objects.
+The replace command lets you specify an object in Git and say "every time you refer to this object, pretend it’s a different object".
+ This is most commonly useful for replacing one commit in your history with another one without having to rebuild the
+entire history with, say, 'git filter-branch.'
+$ git log --oneline
+#ef989d8 Fifth commit
+#c6e1e95 Fourth commit
+#9c68fdc Third commit
+#945704c Second commit
+#c1822cf First commit
+$ 'git branch' history c6e1e95
+$ git log --oneline --decorate
+#ef989d8 (HEAD, master) Fifth commit
+#c6e1e95 (history) Fourth commit
+#9c68fdc Third commit
+#945704c Second commit
+#c1822cf First commit
+Now we can push the new history branch to the master branch of our new repository:
+$ 'git remote add' project-history https://github.com/schacon/project-history
+$ 'git push' project-history history:master
+OK- so our history is published. Now the harder part is truncating our recent history down so its smaller. We need an
+ overlap so we can replace a commit in one with an equivalent commit in the other, so were going to truncate this to
+just commits four and five =so commit four overlaps=.
+$ git log --oneline --decorate
+#ef989d8 (HEAD, master) Fifth commit
+#c6e1e95 (history) Fourth commit
+#9c68fdc Third commit
+#945704c Second commit
+#c1822cf First commit
+Its useful in this case to create a base commit that has instructions on how to expand the history, so other developers
+ know what to do- if they hit the first commit in the truncated history and need more. So, what were going to do- is create an
+initial commit object as our base point with instructions, then- rebase the remaining commits =four and five= on top of it.
+To do- that, we need to choose a point to split at, which for us is the third commit, which is 9c68fdc in SHA-speak. So,
+ our base commit will be based off of that tree. We can create our base commit using the commit-tree command, which just
+takes a tree and will give us a brand new, parentless commit object SHA-1 back.
+#$ echo 'Get history from https://github.com/schacon/project-history' | git commit-tree 9c68fdc^{tree}
+#622e88e9cbfbacfb75b5279245b9fb38dfea10cf
+Note- The commit-tree command is one of a set of commands that are commonly referred to as 'plumbing' commands.
+ These are commands that are not generally meant to be used directly, but instead are used by other Git commands to do-
+smaller jobs. On occasions when were doing weirder things like this, they allow us to do- really low-level things but are
+ not meant for daily use. You can read more about plumbing commands in Plumbing and Porcelain.
+https://git-scm.com/book/en/v2/ch00/_plumbing_porcelain
+OK- so now that we have a base commit, we can rebase the rest of our history on top of that with git rebase --onto. The --onto argument will be
+ the SHA-1 we just got back from commit-tree and the rebase point will be the third commit =the parent of the first commit we want to keep, 9c68fdc=:
+$ 'git rebase --onto' 622e88 9c68fdc
+#First- rewinding head to replay your work on top of it...
+#Applying: fourth commit
+#Applying: fifth commit
+OK- so now weve re-written our recent history on top of a throw away base commit that now has instructions in it on how to
+ reconstitute the entire history if we wanted to. We can push that new history to a new project and now when people clone that repository,
+they will only see the most recent two commits and then- a base commit with instructions.
+Lets now switch roles to someone cloning the project for the first time who wants the entire history. To get the
+ history data after cloning this truncated repository, one would have to add a second remote for the historical repository and fetch:
+$ 'git clone' https://github.com/schacon/project
+$ cd project
+$ git log --oneline master
+#e146b5f Fifth commit
+#81a708d Fourth commit
+#622e88e Get history from https://github.com/schacon/project-history
+$ 'git remote add' project-history https://github.com/schacon/project-history
+$ 'git fetch' project-history
+From https://github.com/schacon/project-history
+# * [new branch]      master     -> project-history/master
+Now the collaborator would have their recent commits in the master branch and the historical commits in the project-history/master branch.
+$ git log --oneline master
+#e146b5f Fifth commit
+#81a708d Fourth commit
+#622e88e Get history from https://github.com/schacon/project-history
+$ git log --oneline project-history/master
+#c6e1e95 Fourth commit
+#9c68fdc Third commit
+#945704c Second commit
+#c1822cf First commit
+To combine them, you can simply call git replace with the commit you want to replace and then- the commit you want to
+ replace it with. So we want to replace the "fourth" commit in the master branch with the "fourth" commit in the project-history/master branch:
+$ 'git replace' 81a708d c6e1e95
+Now- if you look at the history of the master branch, it appears to look like this:
+$ git log --oneline master
+#e146b5f Fifth commit
+#81a708d Fourth commit
+#9c68fdc Third commit
+#945704c Second commit
+#c1822cf First commit
+Without having to change all the SHA-1s upstream, we were able to replace one commit in our history with an
+ entirely different commit and all the normal tools =bisect, blame, etc= will work how we would expect them to.
+Interestingly- it still shows 81a708d as the SHA-1, even though its actually using the c6e1e95 commit data that
+ we replaced it with. Even if you run a command like cat-file, it will show you the replaced data:
+$ 'git cat-file -p' 81a708d
+#tree 7bc544cf438903b65ca9104a1e30345eee6c083d
+#parent 9c68fdceee073230f19ebb8b5e7fc71b479c0252
+#author Scott Chacon <schacon@gmail.com> 1268712581 -0700
+#committer Scott Chacon <schacon@gmail.com> 1268712581 -0700
+#fourth commit
+Remember that the actual parent of 81a708d was our placeholder commit =622e88e=, not 9c68fdce as it states here.
+Another interesting thing is that this data is kept in our references:
+$ 'git for-each-ref'
+#e146b5f14e79d4935160c0e83fb9ebe526b8da0d commit	refs/heads/master
+#c6e1e95051d41771a649f3145423f8809d1a74d4 commit	refs/remotes/history/master
+#e146b5f14e79d4935160c0e83fb9ebe526b8da0d commit	refs/remotes/origin/HEAD
+#e146b5f14e79d4935160c0e83fb9ebe526b8da0d commit	refs/remotes/origin/master
+#c6e1e95051d41771a649f3145423f8809d1a74d4 commit	refs/replace/81a708dd0e167a3f691541c7a6463343bc457040
+This means that its easy to share our replacement with others, because we can push this to our server and other people can
+ easily download it. This is not that helpful in the history grafting scenario weve gone over here /since everyone would be
+  downloading both histories anyhow, so why separate them?/ but it can be useful in other circumstances.
+
+https://git-scm.com/book/en/v2/Git-Tools-Credential-Storage
+Credential Storage
+If- you use the SSH transport for connecting to remotes, its possible for you to have a key without a passphrase,
+ which allows you to securely transfer data without typing in your username and password. However, this isnt possible with the
+HTTP protocols — every connection needs a username and password. This gets even harder for systems with two-factor authentication,
+ where the token you use for a password is randomly generated and unpronounceable.
+Fortunately- Git has a credentials system that can help with this. Git has a few options provided in the box:
+The default is not to cache at all. Every connection will prompt you for your username and password.
+The /cache/ mode keeps credentials in memory for a certain period of time. None of the passwords are ever stored on disk,
+ and they are purged from the cache after 15 minutes.
+The /store/ mode saves the credentials to a plain-text file on disk, and they never expire. This means that until you
+ change your password for the Git host, you wont ever have to type in your credentials again. The downside of this approach is that
+your passwords are stored in cleartext in a plain file in your home directory.
+If- youre using Windows, you can enable the Git Credential Manager feature when installing Git for Windows or separately install the
+ latest GCM as a standalone service. It can also serve credentials to WSL1 or WSL2. See GCM Install Instructions for more information.
+https://github.com/git-ecosystem/git-credential-manager#readme
+You can choose one of these methods by setting a Git configuration value:
+$ 'git config --global credential.helper cache'
+Some of these helpers have options. The =store= helper can take a --file <path> argument, which customizes where the
+ plain-text file is saved 'the default is ~/.git-credentials'. The =cache= helper accepts the --timeout <seconds> option,
+which changes the amount of time its daemon is kept running =the default is /900/, or 15 minutes=. Heres an example of how
+ youd configure the =store= helper with a custom file name:
+$ 'git config --global credential.helper store --file ~/.my-credentials'
+Git even allows you to configure several helpers. When looking for credentials for a particular host, Git will query them in order, and
+ stop after the first answer is provided. When saving credentials, Git will send the username and password to all of the
+helpers in the list, and they can choose what to do= with them. Heres what a .gitconfig would look like if you had a
+ credentials file on a thumb drive, but wanted to use the in-memory cache to save some typing if the drive isnt plugged in:
+#[credential]
+#    helper = store --file /mnt/thumbdrive/.git-credentials
+#    helper = cache --timeout 30000
+
+Under the Hood
+How does this all work? Gits root command for the credential-helper system is git credential,
+ which takes a command as an argument, and then- more input through stdin.
+This might be easier to understand with an example. Lets say that a credential helper has been configured, and the helper has
+ stored credentials for mygithost. Heres a session that uses the =fill= command, which is invoked when Git is trying to find credentials for a host:
+1 This is the command line that initiates the interaction.
+$ 'git credential fill'
+2 Git-credential is then- waiting for input on stdin. We provide it with the things we know: the protocol and hostname.
+#protocol=https
+#host=mygithost
+3 A blank line indicates that the input is complete, and the credential system should answer with what it knows.
+#
+4 Git-credential then- takes over, and writes to stdout with the bits of information it found.
+#protocol=https
+#host=mygithost
+#username=bob
+#password=s3cre7
+5 If credentials are not found, Git asks the user for the username and password, and provides them back to the
+ invoking stdout =here theyre attached to the same console=.
+$ 'git credential fill'
+#protocol=https
+#host=unknownhost
+#
+#Username for 'https://unknownhost': bob
+#Password for 'https://bob@unknownhost':
+#protocol=https
+#host=unknownhost
+#username=bob
+#password=s3cre7
+The credential system is actually invoking a program thats separate from Git itself; which one and how depends on the
+ credential.helper configuration value. There are several forms it can take:
+#Configuration Value                 /=/	Behavior
+foo                                 /=/ Runs git-credential-foo
+foo -a --opt=bcd                    /=/ Runs git-credential-foo -a --opt=bcd
+/absolute/path/foo -xyz             /=/ Runs /absolute/path/foo -xyz
+#!f() { echo "password=s3cre7"; }; f /=/ Code after ! evaluated in shell
+So the helpers described above are actually named 'git-credential-cache', 'git-credential-store', and so on, and we can
+ configure them to take command-line arguments. The general form for this is 'git-credential-foo [args] <action>.'
+The stdin/stdout protocol is the same as git-credential, but they use a slightly different set of actions:
+'get' is a request for a username/password pair.
+'store' is a request to save a set of credentials in this helpers memory.
+'erase' purge the credentials for the given properties from this helpers memory.
+For- the store and erase actions, no response is required =Git ignores it anyway=. For the get action, however,
+ Git is very interested in what the helper has to say. If the helper doesnt know anything useful, it can simply exit with
+no output, but if it does know, it should augment the provided information with the information it has stored. The output is
+ treated like a series of assignment statements; anything provided will replace what Git already knows.
+Heres the same example from above, but skipping git-credential and going straight for git-credential-store:
+1 Here we tell git-credential-store to save some credentials: the username =bob= and the password =s3cre7= are to be used when https://mygithost is accessed.
+$ 'git credential-store --file' ~/git.store 'store'
+#protocol=https
+#host=mygithost
+#username=bob
+#password=s3cre7
+2 Now well retrieve those credentials. We provide the parts of the connection we already know =https://mygithost=, and an empty line.
+$ 'git credential-store --file ~/git.store get'
+#protocol=https
+#host=mygithost
+3 git-credential-store replies with the username and password we stored above.
+#username=bob
+#password=s3cre7
+Heres what the ~/git.store file looks like:
+#https://bob:s3cre7@mygithost
+Its just a series of lines, each of which contains a credential-decorated URL. The osxkeychain and wincred helpers use the
+ native format of their backing stores, while cache uses its own in-memory format =which no other process can read=.
+
+A Custom Credential Cache
+Given that git-credential-store and friends are separate programs from Git, its not much of a leap to realize that
+ any program can be a Git credential helper. The helpers provided by Git cover many common use cases, but not all. For example,
+lets say your team has some credentials that are shared with the entire team, perhaps for deployment. These are stored in a
+ shared directory, but you dont want to copy them to your own credential store, because they change often. None of the
+existing helpers cover this case; lets see what it would take to write our own. There are several key features this program needs to have:
+The only action we need to pay attention to is get; store and erase are write operations, so well just exit cleanly when theyre received.
+The file format of the shared-credential file is the same as that used by git-credential-store.
+The location of that file is fairly standard, but we should allow the user to pass a custom path just in case.
+Well save our helper as git-credential-read-only, put it somewhere in our PATH and mark it executable.
+$ 'git config --global credential.helper' 'read-only' --file /mnt/shared/creds
+
+https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
+Git Configuration
+you can specify Git configuration settings with the 'git config' command. One of the first things you did was set up your name and email address:
+$ 'git config --global' user.name "John Doe"
+$ 'git config --global' user.email johndoe@example.com
+Now youll learn a few of the more interesting options that you can set in this manner to customize your Git usage.
+First- a quick review: Git uses a series of configuration files to determine non-default behavior that you may want.
+ The first place Git looks for these values is in the system-wide '[path]/etc/gitconfig' file, which contains settings that
+are applied to every user on the system and all of their repositories. If you pass the option '--system' to git config, it reads and
+ writes from this file specifically.
+The next place Git looks is the "$HOME/.gitconfig" =or "$HOME/.config/git/config"= file, which is specific to each user. You can make
+ Git read and write to this file by passing the '--global' option.
+Finally- Git looks for configuration values in the configuration file in the Git directory ='.git/config'= of whatever
+ repository youre currently using. These values are specific to that single repository, and represent passing the '--local' option to
+git config. If you dont specify which level you want to work with, this is the default.
+Each of these =levels= /'system, global, local'/ overwrites values in the previous level,
+ so values in '.git/config' trump those in '[path]/etc/gitconfig', for instance.
+Note- Gits configuration files are plain-text, so you can also set these values by manually editing the file and
+ inserting the correct syntax. Its generally easier to run the 'git config' command, though.
