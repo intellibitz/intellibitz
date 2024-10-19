@@ -2622,3 +2622,423 @@ It often happens that while working on one project, you need to use another proj
  library that a third party developed or that youre developing separately and using in multiple parent projects.
 A common issue arises in these scenarios: you want to be able to treat the two projects as separate yet
  still be able to use one from within the other.
+Submodules allow you to keep a Git repository as a subdirectory of another Git repository. This lets you
+ clone another repository into your project and keep your commits separate.
+
+$ git submodule add https://github.com/chaconinc/DbConnector
+By default, submodules will add the subproject into a directory named the same as the repository, in this case =DbConnector=.
+ You can add a different path at the end of the command if you want it to go elsewhere.
+$ git status
+First you should notice the new '.gitmodules' file. This is a configuration file that stores the mapping between the
+ projects URL and the local subdirectory youve pulled it into:
+#[submodule "DbConnector"]
+#	path = DbConnector
+#	url = https://github.com/chaconinc/DbConnector
+If- you have multiple submodules, youll have multiple entries in this file. Its important to note that this file is
+ version-controlled with your other files, like your '.gitignore' file. Its pushed and pulled with the rest of your project.
+This is how other people who clone this project know where to get the submodule projects from.
+Note- Since the URL in the '.gitmodules' file is what other people will first try to clone/fetch from, make sure to use a
+ URL that they can access if possible. For example, if you use a different URL to push to than others would to pull from,
+use the one that others have access to. You can overwrite this value locally with
+ 'git config submodule.DbConnector.url PRIVATE_URL' for your own use. When applicable, a relative URL can be helpful.
+The other listing in the git status output is the project folder entry. If you run git diff on that, you see something interesting:
+$ 'git diff --cached' DbConnector
+Although DbConnector is a subdirectory in your working directory, Git sees it as a submodule and doesnt track its
+ contents when youre not in that directory. Instead, Git sees it as a particular commit from that repository.
+If- you want a little nicer diff output, you can pass the --submodule option to git diff.
+$ 'git diff --cached --submodule'
++[submodule "DbConnector"]
++       path = DbConnector
++       url = https://github.com/chaconinc/DbConnector
+Submodule DbConnector 0000000...c3f01dc /new submodule/
+When you commit, you see something like this:
+$ 'git commit -am' Add DbConnector module
+#[master fb9093c] Add DbConnector module
+ create mode 100644 .gitmodules
+ create mode 160000 DbConnector
+Notice the 160000 mode for the DbConnector entry. That is a special mode in Git that basically means youre recording a
+ commit as a directory entry rather than a subdirectory or a file.
+Lastly- push these changes:
+$ 'git push origin master'
+
+Cloning a Project with Submodules
+Here well clone a project with a submodule in it. When you clone such a project, by default you get the directories that
+ contain submodules, but none of the files within them yet:
+$ 'git clone' https://github.com/chaconinc/MainProject
+$ cd MainProject
+$ ls -la
+total 16
+$ cd DbConnector/
+$ ls
+$
+The DbConnector directory is there, but empty. You must run two commands:
+ 'git submodule init' to initialize your local configuration file, and
+  'git submodule update' to fetch all the data from that project and check out the appropriate commit listed in your superproject:
+$ git submodule init
+#Submodule 'DbConnector' (https://github.com/chaconinc/DbConnector) registered for path 'DbConnector'
+$ git submodule update
+Cloning into 'DbConnector'...
+Now your DbConnector subdirectory is at the exact state it was in when you committed earlier.
+There is another way to do- this which is a little simpler, however. If you pass --recurse-submodules to the git clone command,
+ it will automatically initialize and update each submodule in the repository, including nested submodules if any of the
+submodules in the repository have submodules themselves.
+$ 'git clone --recurse-submodules' https://github.com/chaconinc/MainProject
+If- you already cloned the project and forgot --recurse-submodules, you can combine the
+ git submodule init and git submodule update steps by running 'git submodule update --init'. To also initialize,
+fetch and checkout any nested submodules, you can use the foolproof 'git submodule update --init --recursive'.
+
+Pulling in Upstream Changes from the Submodule Remote
+The simplest model of using submodules in a project would be if you were simply consuming a subproject and wanted to
+ get updates from it from time to time but were not actually modifying anything in your checkout.
+If- you want to check for new work in a submodule, you can go into the directory and run git fetch and git merge the upstream branch to update the local code.
+$ git fetch
+Now if you go back into the main project and run git diff --submodule you can see that the submodule was updated and get a
+ list of commits that were added to it. If you dont want to type --submodule every time you run git diff, you can set it as the
+default format by setting the diff.submodule config value to =log=.
+$ 'git config --global diff.submodule log'
+$ git diff
+There is an easier way to do- this as well, if you prefer to not manually fetch and merge in the subdirectory. If you run
+ git submodule update --remote, Git will go into your submodules and fetch and update for you.
+$ 'git submodule update --remote' DbConnector
+This command will by default assume that you want to update the checkout to the default branch of the
+ remote submodule repository =the one pointed to by HEAD on the remote=. You can, however, set this to something
+different if you want. For example, if you want to have the DbConnector submodule track that repositorys =stable= branch,
+ you can set it in either your .gitmodules file =so everyone else also tracks it=, or just in your local .git/config file.
+Lets set it in the .gitmodules file:
+$ 'git config -f .gitmodules submodule.DbConnector.branch stable'
+If- you leave off the -f .gitmodules it will only make the change for you.
+$ git submodule update --remote
+If- you set the configuration setting status.submodulesummary, Git will also show you a short summary of changes to your submodules:
+$ 'git config status.submodulesummary 1'
+$ git status
+At this point if you run git diff we can see both that we have modified our .gitmodules file and also that there are a
+ number of commits that weve pulled down and are ready to commit to our submodule project.
+$ git diff
+Once committed, you can see this information after the fact as well when you run git log -p.
+$ 'git log -p --submodule'
+Git will by default try to update all of your submodules when you run git submodule update --remote. If you have a lot of them,
+ you may want to pass the name of just the submodule you want to try to update.
+
+Pulling Upstream Changes from the Project Remote
+Lets now step into the shoes of your collaborator, who has their own local clone of the MainProject repository.
+ Simply executing git pull to get your newly committed changes is not enough:
+$ git pull
+By default, the git pull command recursively fetches submodules changes, as we can see in the output of the first command above.
+ However- it does not update the submodules. This is shown by the output of the git status command, which shows the
+submodule is =modified=, and has =new commits=.
+ To finalize the update, you need to run git submodule update:
+$ 'git submodule update --init --recursive'
+Note that to be on the safe side, you should run git submodule update with the --init flag in case the MainProject commits you
+ just pulled added new submodules, and with the --recursive flag if any submodules have nested submodules.
+If- you want to automate this process, you can add the --recurse-submodules flag to the git pull command =since Git 2.14=.
+ This will make Git run git submodule update right after the pull, putting the submodules in the correct state.
+Moreover- if you want to make Git always pull with --recurse-submodules, you can set the configuration option
+ submodule.recurse to true =this works for git pull since Git 2.15=. This option will make Git use the --recurse-submodules
+flag for all commands that support it =except clone=. There is a special situation that can happen when pulling superproject updates:
+ it could be that the upstream repository has changed the URL of the submodule in the .gitmodules file in one of the
+commits you pull. This can happen for example if the submodule project changes its hosting platform. In that case,
+ it is possible for git pull --recurse-submodules, or git submodule update, to fail if the superproject references a
+submodule commit that is not found in the submodule remote locally configured in your repository.
+In order to remedy this situation, the git submodule sync command is required:
+# copy the new URL to your local config
+$ 'git submodule sync --recursive'
+# update the submodule from the new URL
+$ git submodule update --init --recursive
+
+Working on a Submodule
+Its quite likely that if youre using submodules, youre doing so because you really want to work on the code in the
+ submodule at the same time as youre working on the code in the main project =or across several submodules=.
+Otherwise you would probably instead be using a simpler dependency management system =such as Maven or Rubygems=.
+So far, when weve run the git submodule update command to fetch changes from the submodule repositories, Git would get the
+ changes and update the files in the subdirectory but will leave the sub-repository in whats called a =detached HEAD= state.
+This means that there is no local working branch =like master, for example= tracking changes. With no working branch tracking changes,
+ that means even if you commit changes to the submodule, those changes will quite possibly be lost the next time you run
+git submodule update. You have to do- some extra steps if you want changes in a submodule to be tracked.
+In order to set up your submodule to be easier to go in and hack on, you need to do- two things. You need to go into each submodule and
+ check out a branch to work on. Then you need to tell Git what to do- if you have made changes and later
+git submodule update --remote pulls in new work from upstream. The options are that you can merge them into your local work,
+ or you can try to rebase your local work on top of the new changes.
+First of all, lets go into our submodule directory and check out a branch.
+$ cd DbConnector/
+$ git checkout stable
+Switched to branch 'stable'
+Lets try updating our submodule with the =merge= option. To specify it manually, we can just add the --merge option to
+ our update call. Here well see that there was a change on the server for this submodule and it gets merged in.
+$ cd ..
+$ 'git submodule update --remote --merge'
+If- we go into the DbConnector directory, we have the new changes already merged into our local stable branch.
+ Now lets see what happens when we make our own local change to the library and someone else pushes another change to the upstream at the same time.
+$ cd DbConnector/
+$ vim src/db.c
+$ git commit -am 'Unicode support'
+Now if we update our submodule we can see what happens when we have made a local change and upstream also has a change we need to incorporate.
+$ cd ..
+$ 'git submodule update --remote --rebase'
+First- rewinding head to replay your work on top of it...
+Applying: Unicode support
+Submodule path 'DbConnector': rebased into '5d60ef9bbebf5a0c1c1050f242ceeb54ad58da94'
+If- you forget the --rebase or --merge, Git will just update the submodule to whatever is on the server and reset your project to a detached HEAD state.
+$ git submodule update --remote
+Submodule path 'DbConnector': checked out '5d60ef9bbebf5a0c1c1050f242ceeb54ad58da94'
+If- this happens, dont worry, you can simply go back into the directory and check out your branch again =which will still contain your work= and
+ merge or rebase origin/stable =or whatever remote branch you want= manually.
+If- you havent committed your changes in your submodule and you run a submodule update that would cause issues,
+ Git will fetch the changes but not overwrite unsaved work in your submodule directory.
+$ git submodule update --remote
+If- you made changes that conflict with something changed upstream, Git will let you know when you run the update.
+$ git submodule update --remote --merge
+Auto-merging scripts/setup.sh
+#CONFLICT (content): Merge conflict in scripts/setup.sh
+Recorded preimage for 'scripts/setup.sh'
+Automatic merge failed; fix conflicts and then- commit the result.
+Unable to merge 'c75e92a2b3855c9e5b66f915308390d9db204aca' in submodule path 'DbConnector'
+You can go into the submodule directory and fix the conflict just as you normally would.
+
+Publishing Submodule Changes
+Now we have some changes in our submodule directory. Some of these were brought in from upstream by our updates and
+ others were made locally and arent available to anyone else yet as we havent pushed them yet.
+If- we commit in the main project and push it up without pushing the submodule changes up as well, other people who try to
+ check out our changes are going to be in trouble since they will have no way to get the submodule changes that are depended on.
+Those changes will only exist on our local copy.
+In order to make sure this doesnt happen, you can ask Git to check that all your submodules have been pushed properly before
+ pushing the main project. The git push command takes the --recurse-submodules argument which can be set to either =check= or =on-demand=.
+The /check/ option will make push simply fail if any of the committed submodule changes havent been pushed.
+$ 'git push --recurse-submodules=check'
+As you can see, it also gives us some helpful advice on what we might want to do- next. The simple option is to go into
+ each submodule and manually push to the remotes to make sure theyre externally available and then- try this push again.
+If- you want the =check= behavior to happen for all pushes, you can make this behavior the default by doing git config push.recurseSubmodules check.
+The other option is to use the =on-demand= value, which will try to do- this for you.
+$ 'git push --recurse-submodules=on-demand'
+As you can see there, Git went into the DbConnector module and pushed it before pushing the main project. If that
+ submodule push fails for some reason, the main project push will also fail. You can make this behavior the default by
+doing git config push.recurseSubmodules on-demand.
+
+Merging Submodule Changes
+If- you change a submodule reference at the same time as someone else, you may run into some problems. That is, if the
+ submodule histories have diverged and are committed to diverging branches in a superproject, it may take a bit of work for you to fix.
+If- one of the commits is a direct ancestor of the other =a fast-forward merge=, then- Git will simply choose the
+ latter for the merge, so that works fine.
+Git will not attempt even a trivial merge for you.
+$ git pull
+From https://github.com/chaconinc/MainProject
+   9a377d1..eb974f8  master     -> origin/master
+Fetching submodule DbConnector
+warning: Failed to merge submodule DbConnector /merge following commits not found/
+Auto-merging DbConnector
+#CONFLICT (submodule): Merge conflict in DbConnector
+Automatic merge failed; fix conflicts and then- commit the result.
+So basically what has happened here is that Git has figured out that the two branches record points in the
+ submodules history that are divergent and need to be merged. It explains it as =merge following commits not found=, which is
+confusing but well explain why that is in a bit.
+To solve the problem, you need to figure out what state the submodule should be in. Strangely, Git doesnt really give you
+ much information to help out here, not even the SHA-1s of the commits of both sides of the history. Fortunately, its simple to
+figure out. If you run git diff you can get the SHA-1s of the commits recorded in both branches you were trying to merge.
+$ git diff
+diff --cc DbConnector
+index eb41d76,c771610..0000000
+So- in this case, eb41d76 is the commit in our submodule that we had and c771610 is the commit that upstream had. If we go into
+ our submodule directory, it should already be on eb41d76 as the merge would not have touched it. If for whatever reason its not,
+you can simply create and checkout a branch pointing to it.
+What is important is the SHA-1 of the commit from the other side. This is what youll have to merge in and resolve.
+ You can either just try the merge with the SHA-1 directly, or you can create a branch for it and then- try to merge that in.
+We would suggest the latter, even if only to make a nicer merge commit message.
+So- we will go into our submodule directory, create a branch named =try-merge= based on that second SHA-1 from git diff, and manually merge.
+$ cd DbConnector
+$ 'git rev-parse HEAD'
+eb41d764bccf88be77aced643c13a7fa86714135
+$ 'git branch' try-merge c771610
+$ 'git merge' try-merge
+Auto-merging src/main.c
+Automatic merge failed; fix conflicts and then- commit the result.
+We got an actual merge conflict here, so if we resolve that and commit it, then- we can simply update the main project with the result.
+#$ vim src/main.c (1)
+$ git add src/main.c
+$ git commit -am 'merged our changes'
+#$ cd .. (2)
+#$ git diff (3)
+diff --cc DbConnector
+index eb41d76,c771610..0000000
+#$ git add DbConnector (4)
+#$ git commit -m "Merge Tom's Changes" (5)
+1 First we resolve the conflict.
+2 Then we go back to the main project directory.
+3 We can check the SHA-1s again.
+4 Resolve the conflicted submodule entry.
+5 Commit our merge.
+It can be a bit confusing, but its really not very hard.
+Interestingly- there is another case that Git handles. If a merge commit exists in the submodule directory that
+ contains both commits in its history, Git will suggest it to you as a possible solution. It sees that at some point in the
+submodule project, someone merged branches containing these two commits, so maybe youll want that one.
+This is why the error message from before was =merge following commits not found=, because it could not do- this.
+ Its confusing because who would expect it to try to do- this?
+If- it does find a single acceptable merge commit, youll see something like this:
+$ git merge origin/master
+#warning: Failed to merge submodule DbConnector (not fast-forward)
+Found a possible merge resolution for the submodule:
+ 9fd905e5d7f45a0d4cbc43d1ee550f16a30e825a: > merged our changes
+If- this is correct simply add it to the index for example
+by using:
+  git update-index --cacheinfo 160000 9fd905e5d7f45a0d4cbc43d1ee550f16a30e825a "DbConnector"
+which will accept this suggestion.
+Auto-merging DbConnector
+#CONFLICT (submodule): Merge conflict in DbConnector
+Automatic merge failed; fix conflicts and then- commit the result.
+The suggested command Git is providing will update the index as though you had run git add =which clears the conflict=, then- commit.
+ You probably shouldnt do- this though. You can just as easily go into the submodule directory, see what the difference is,
+fast-forward to this commit, test it properly, and then- commit it.
+# cd DbConnector/
+$ 'git merge' 9fd905e
+Updating eb41d76..9fd905e
+Fast-forward
+$ cd ..
+$ 'git add' DbConnector
+$ 'git commit -am' 'Fast forward to a common submodule child'
+This accomplishes the same thing, but at least this way you can verify that it works and
+ you have the code in your submodule directory when youre done.
+
+Submodule Foreach
+There is a foreach submodule command to run some arbitrary command in each submodule. This can be really helpful if you have a
+ number of submodules in the same project.
+For- example, lets say we want to start a new feature or do- a bugfix and we have work going on in several submodules.
+ We can easily stash all the work in all our submodules.
+$ 'git submodule foreach' 'git stash'
+Then- we can create a new branch and switch to it in all our submodules.
+$ git submodule foreach 'git checkout -b featureA'
+Entering 'CryptoLibrary'
+Switched to a new branch 'featureA'
+Entering 'DbConnector'
+Switched to a new branch 'featureA'
+You get the idea. One really useful thing you can do- is produce a nice unified diff of what is changed in your main project and all your subprojects as well.
+$ git diff; git submodule foreach 'git diff'
+
+Useful Aliases
+You may want to set up some aliases for some of these commands as they can be quite long and you cant set configuration options for
+ most of them to make them defaults. We covered setting up Git aliases in Git Aliases, but here is an example of what
+you may want to set up if you plan on working with submodules in Git a lot.
+$ git config alias.sdiff '!'"git diff && git submodule foreach 'git diff'"
+$ git config alias.spush 'push --recurse-submodules=on-demand'
+$ 'git config alias.supdate' 'submodule update --remote --merge'
+This way you can simply run git supdate when you want to update your submodules, or git spush to push with submodule dependency checking.
+
+Switching branches
+For- instance, switching branches with submodules in them can also be tricky with Git versions older than Git 2.13.
+ If- you create a new branch, add a submodule there, and then- switch back to a branch without that submodule, you still have the
+submodule directory as an untracked directory:
+$ git --version
+git version 2.12.2
+$ git checkout -b add-crypto
+Switched to a new branch 'add-crypto'
+$ git submodule add https://github.com/chaconinc/CryptoLibrary
+Cloning into 'CryptoLibrary'...
+$ git commit -am 'Add crypto library'
+#[add-crypto 4445836] Add crypto library
+ create mode 160000 CryptoLibrary
+$ git checkout master
+warning: unable to rmdir CryptoLibrary: Directory not empty
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Untracked files:
+#  (use "git add <file>..." to include in what will be committed)
+#	CryptoLibrary/
+#nothing added to commit but untracked files present (use "git add" to track)
+Removing the directory isnt difficult, but it can be a bit confusing to have that in there. If you do- remove it
+ and then- switch back to the branch that has that submodule, you will need to run submodule update --init to repopulate it.
+$ 'git clean -ffdx'
+Removing CryptoLibrary/
+$ git checkout add-crypto
+Switched to branch 'add-crypto'
+$ ls CryptoLibrary/
+$ git submodule update --init
+Submodule path 'CryptoLibrary': checked out 'b8dda6aa182ea4464f3f3264b11e0268545172af'
+$ ls CryptoLibrary/
+Makefile	includes	scripts		src
+Again- not really very difficult, but it can be a little confusing.
+Newer Git versions /Git >= 2.13/ simplify all this by adding the --recurse-submodules flag to the git checkout command,
+ which takes care of placing the submodules in the right state for the branch we are switching to.
+$ git --version
+git version 2.13.3
+$ 'git checkout -b' add-crypto
+Switched to a new branch 'add-crypto'
+$ 'git submodule add' https://github.com/chaconinc/CryptoLibrary
+Cloning into 'CryptoLibrary'...
+$ 'git commit -am' 'Add crypto library'
+#[add-crypto 4445836] Add crypto library
+ create mode 160000 CryptoLibrary
+$ 'git checkout --recurse-submodules' master
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+$ 'git status'
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working tree clean
+Using the --recurse-submodules flag of git checkout can also be useful when you work on several branches in the superproject,
+ each having your submodule pointing at different commits. Indeed, if you switch between branches that record the submodule at
+different commits, upon executing git status the submodule will appear as =modified=, and indicate =new commits=. That is
+ because the submodule state is by default not carried over when switching branches.
+This can be really confusing, so its a good idea to always git checkout --recurse-submodules when your project has submodules.
+ For- older Git versions that do- not have the --recurse-submodules flag, after the checkout you can use
+git submodule update --init --recursive to put the submodules in the right state.
+Luckily- you can tell Git />=2.14/ to always use the --recurse-submodules flag by setting the configuration option submodule.recurse:
+ git config submodule.recurse true. As noted above, this will also make Git recurse into submodules for every command that
+has a --recurse-submodules option =except git clone=.
+
+Switching from subdirectories to submodules
+The other main caveat that many people run into involves switching from subdirectories to submodules. If youve been
+ tracking files in your project and you want to move them out into a submodule, you must be careful or Git will get angry at you.
+Assume that you have files in a subdirectory of your project, and you want to switch it to a submodule. If you delete the
+ subdirectory and then- run submodule add, Git yells at you:
+$ rm -Rf CryptoLibrary/
+$ 'git submodule add' https://github.com/chaconinc/CryptoLibrary
+'CryptoLibrary' already exists in the index
+You have to unstage the CryptoLibrary directory first. Then you can add the submodule:
+$ 'git rm -r' CryptoLibrary
+$ git submodule add https://github.com/chaconinc/CryptoLibrary
+Cloning into 'CryptoLibrary'...
+Checking connectivity... done.
+Now suppose you did that in a branch. If you try to switch back to a branch where those files are still in the
+ actual tree rather than a submodule — you get this error:
+$ 'git checkout' master
+error: The following untracked working tree files would be overwritten by checkout:
+  CryptoLibrary/includes/crypto.h
+Please move or remove them before you can switch branches.
+Aborting
+You can force it to switch with checkout -f, but be careful that you dont have unsaved changes in there as they could be overwritten with that command.
+$ 'git checkout -f' master
+warning: unable to rmdir CryptoLibrary: Directory not empty
+Switched to branch 'master'
+Then- when you switch back, you get an empty CryptoLibrary directory for some reason and git submodule update may not fix it either.
+ You may need to go into your submodule directory and run a git checkout . to get all your files back. You could
+run this in a submodule foreach script to run it for multiple submodules.
+Its important to note that submodules these days keep all their Git data in the top projects .git directory, so unlike
+ much older versions of Git, destroying a submodule directory wont lose any commits or branches that you had.
+With these tools, submodules can be a fairly simple and effective method for developing on several related but still separate projects simultaneously.
+
+https://git-scm.com/book/en/v2/Git-Tools-Bundling
+Bundling
+Though weve covered the common ways to transfer Git data over a network /HTTP, SSH, etc/, there is actually one more way to do- so that
+ is not commonly used but can actually be quite useful.
+Git is capable of =bundling= its data into a single file. This can be useful in various scenarios. Maybe your network is
+ down and you want to send changes to your co-workers. Perhaps youre working somewhere offsite and dont have
+access to the local network for security reasons. Maybe your wireless/ethernet card just broke. Maybe you dont have access to a
+ shared server for the moment, you want to email someone updates and you dont want to transfer 40 commits via format-patch.
+This is where the git bundle command can be helpful. The bundle command will package up everything that would normally be
+ pushed over the wire with a git push command into a binary file that you can email to someone or put on a flash drive, then- unbundle into another repository.
+Lets see a simple example. Lets say you have a repository with two commits:
+$ git log
+commit 9a466c572fe88b195efd356c3f2bbeccdb504102
+    Second commit
+commit b1ec3248f39900d2a406049d762aa68e9641be25
+    First commit
+If- you want to send that repository to someone and you dont have access to a repository to push to,
+ or simply dont want to set one up, you can bundle it with git bundle create.
+$ 'git bundle create' repo.bundle HEAD master
+Now you have a file named repo.bundle that has all the data needed to re-create the repositorys master branch.
+ With the bundle command you need to list out every reference or specific range of commits that you want to be included.
+If- you intend for this to be cloned somewhere else, you should add HEAD as a reference as well as weve done- here.
+You can email this repo.bundle file to someone else, or put it on a USB drive and walk it over.
+On the other side, say you are sent this repo.bundle file and want to work on the project. You can clone from the
+ binary file into a directory, much like you would from a URL.
+$ 'git clone' repo.bundle repo
