@@ -3316,7 +3316,7 @@ The location of that file is fairly standard, but we should allow the user to pa
 Well save our helper as git-credential-read-only, put it somewhere in our PATH and mark it executable.
 $ 'git config --global credential.helper' 'read-only' --file /mnt/shared/creds
 
-https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
+'https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration';
 Git Configuration
 you can specify Git configuration settings with the 'git config' command. One of the first things you did was set up your name and email address:
 $ 'git config --global' user.name "John Doe"
@@ -3335,3 +3335,328 @@ Each of these =levels= /'system, global, local'/ overwrites values in the previo
  so values in '.git/config' trump those in '[path]/etc/gitconfig', for instance.
 Note- Gits configuration files are plain-text, so you can also set these values by manually editing the file and
  inserting the correct syntax. Its generally easier to run the 'git config' command, though.
+
+'man git-config'
+https://git-scm.com/docs/git-config
+$ 'git config --global core.editor' emacs
+$ 'git config --global commit.template' ~/.gitmessage.txt
+'core.pager'
+This setting determines which pager is used when Git pages output such as log and diff. You can set it to more or to
+ your favorite pager =by default, its less=, or you can turn it off by setting it to a blank string:
+$ git config --global core.pager ''
+If- you run that, Git will print the entire output of all commands, no matter how long they are.
+'user.signingkey'
+If- youre making signed annotated tags =as discussed in Signing Your Work=, setting your GPG signing key as a
+ configuration setting makes things easier. Set your key ID like so:
+$ git config --global user.signingkey /gpg-key-id/
+Now- you can sign tags without having to specify your key every time with the git tag command:
+$ git tag -s /tag-name/
+'core.excludesfile'
+You can put patterns in your projects .gitignore file to have Git not see them as untracked files or try to stage them when you
+ run git add on them, as discussed in Ignoring Files.
+But sometimes you want to ignore certain files for all repositories that you work with. If your computer is running macOS, youre
+ probably familiar with .DS_Store files. If your preferred editor is Emacs or Vim, you know about filenames that end with a ~ or .swp.
+This setting lets you write a kind of global '.gitignore' file. If you create a "$HOME/.gitignore_global" file with these contents:
+#*~
+#.*.swp
+#.DS_Store
+and you run 'git config --global core.excludesfile ~/.gitignore_global', Git will never again bother you about those files.
+
+'External Merge and Diff Tools';
+Although Git has an internal implementation of diff, which is what weve been showing in this book, you can set up an
+ external tool instead. You can also set up a graphical merge-conflict-resolution tool instead of having to resolve conflicts manually.
+Set up a merge wrapper script named extMerge that calls your binary with all the arguments provided:
+$ cat /usr/local/bin/'extMerge'
+#!/bin/sh
+#/Applications/p4merge.app/Contents/MacOS/p4merge $*
+The diff wrapper checks to make sure seven arguments are provided and passes two of them to your merge script. By default,
+ Git passes the following arguments to the diff program:
+'path old-file old-hex old-mode new-file new-hex new-mode'
+Because you only want the old-file and new-file arguments, you use the wrapper script to pass the ones you need.
+$ cat /usr/local/bin/'extDiff'
+#!/bin/sh
+#[ $# -eq 7 ] && /usr/local/bin/extMerge "$2" "$5"
+You also need to make sure these tools are executable:
+#$ sudo chmod +x /usr/local/bin/extMerge
+#$ sudo chmod +x /usr/local/bin/extDiff
+Now you can set up your config file to use your custom merge resolution and diff tools. This takes a
+ number of custom settings: 'merge.tool' to tell Git what strategy to use, 'mergetool./tool/.cmd' to specify how to
+run the command, 'mergetool./tool/.trustExitCode' to tell Git if the exit code of that program indicates a
+ successful merge resolution or not, and 'diff.external' to tell Git what command to run for diffs. So, you can either run four config commands:
+$ 'git config --global merge.tool' extMerge
+$ 'git config --global mergetool.extMerge.cmd' \
+#  'extMerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"'
+$ 'git config --global mergetool.extMerge.trustExitCode' false
+$ 'git config --global diff.external' extDiff
+or you can edit your ~/.gitconfig file to add these lines:
+#[merge]
+#  tool = extMerge
+#[mergetool "extMerge"]
+#  cmd = extMerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+#  trustExitCode = false
+#[diff]
+#  external = extDiff
+After all this is set, if you run diff commands such as this:
+$ 'git diff' 32d1776b1^ 32d1776b1
+Instead of getting the diff output on the command line, Git fires up P4Merge:
+If- you try to merge two branches and subsequently have merge conflicts, you can run the command 'git mergetool';
+ it starts P4Merge to let you resolve the conflicts through that GUI tool.
+The nice thing about this wrapper setup is that you can change your diff and merge tools easily. For example, to
+ change your extDiff and extMerge tools to run the KDiff3 tool instead, all you have to do- is edit your extMerge file:
+$ cat /usr/local/bin/extMerge
+#!/bin/sh
+#/Applications/kdiff3.app/Contents/MacOS/kdiff3 $*
+Now- Git will use the KDiff3 tool for diff viewing and merge conflict resolution.
+Git comes preset to use a number of other merge-resolution tools without your having to set up the cmd configuration.
+ To see a list of the tools it supports, try this:
+$ 'git mergetool --tool-help'
+If- youre not interested in using KDiff3 for diff but rather want to use it just for merge resolution, and the
+ kdiff3 command is in your path, then- you can run:
+$ git config --global merge.tool kdiff3
+If- you run this instead of setting up the extMerge and extDiff files, Git will use KDiff3 for merge resolution and the normal Git diff tool for diffs.
+
+'core.autocrlf'
+If- youre on a Windows machine, set it to true — this converts LF endings into CRLF when you check out code:
+$ 'git config --global core.autocrlf true'
+If- youre on a Linux or macOS system that uses LF line endings, then- you dont want Git to automatically convert them when you
+ check out files; however- if a file with CRLF endings accidentally gets introduced, then- you may want Git to fix it.
+You can tell Git to convert CRLF to LF on commit but not the other way around by setting core.autocrlf to input:
+$ 'git config --global core.autocrlf input'
+This setup should leave you with CRLF endings in Windows checkouts, but LF endings on macOS and Linux systems and in the repository.
+
+'core.whitespace'
+Git comes preset to detect and fix some whitespace issues. It can look for six primary whitespace issues — three are
+ enabled by default and can be turned off, and three are disabled by default but can be activated.
+The three that are turned on by default are
+ 'blank-at-eol' which looks for spaces at the end of a line;
+ 'blank-at-eof' which notices blank lines at the end of a file; and
+ 'space-before-tab' which looks for spaces before tabs at the beginning of a line.
+The three that are disabled by default but can be turned on are
+ 'indent-with-non-tab' which looks for lines that begin with spaces instead of tabs =and is controlled by the tabwidth option=;
+ 'tab-in-indent' which watches for tabs in the indentation portion of a line; and
+ 'cr-at-eol' which tells Git that carriage returns at the end of lines are OK.
+You can tell Git which of these you want enabled by setting core.whitespace to the values you want on or off, separated by commas.
+ You can disable an option by prepending a - in front of its name, or use the default value by leaving it out of the
+setting string entirely. For example, if you want all but space-before-tab to be set, you can do- this =with trailing-space being a
+ short-hand to cover both blank-at-eol and blank-at-eof=:
+$ 'git config --global core.whitespace' \
+    trailing-space,-space-before-tab,indent-with-non-tab,tab-in-indent,cr-at-eol
+Or you can specify the customizing part only:
+$ 'git config --global core.whitespace' \
+    -space-before-tab,indent-with-non-tab,tab-in-indent,cr-at-eol
+Git will detect these issues when you run a git diff command and try to color them so you can possibly fix them before you commit.
+ It will also use these values to help you when you apply patches with git apply. When youre applying patches, you can ask Git to
+warn you if its applying patches with the specified whitespace issues:
+$ 'git apply --whitespace=warn' /patch/
+Or you can have Git try to automatically fix the issue before applying the patch:
+$ 'git apply --whitespace=fix' /patch/
+These options apply to the 'git rebase' command as well. If youve committed whitespace issues but havent yet pushed upstream,
+ you can run 'git rebase --whitespace=fix' to have Git automatically fix whitespace issues as its rewriting the patches.
+
+'Server Configuration';
+Not nearly as many configuration options are available for the server side of Git, but there are a few interesting ones you may want to take note of.
+'receive.fsckObjects'
+Git is capable of making sure every object received during a push still matches its SHA-1 checksum and points to
+ valid objects. However, it doesnt do- this by default; its a fairly expensive operation, and might slow down the operation,
+especially on large repositories or pushes. If you want Git to check object consistency on every push, you can force it to do- so by
+ setting receive.fsckObjects to true:
+$ 'git config --system receive.fsckObjects true'
+Now- Git will check the integrity of your repository before each push is accepted to make sure faulty =or malicious= clients arent introducing corrupt data.
+'receive.denyNonFastForwards'
+If- you rebase commits that youve already pushed and then- try to push again, or otherwise try to push a commit to a
+ remote branch that doesnt contain the commit that the remote branch currently points to, youll be denied.
+This is generally good policy; but in the case of the rebase, you may determine that you know what youre doing and
+ can force-update the remote branch with a -f flag to your push command.
+To tell Git to refuse force-pushes, set receive.denyNonFastForwards:
+$ 'git config --system receive.denyNonFastForwards true'
+The other way you can do- this is via server-side receive hooks, which well cover in a bit. That approach lets you do- more
+ complex things like deny non-fast-forwards to a certain subset of users.
+'receive.denyDeletes'
+One of the workarounds to the denyNonFastForwards policy is for the user to delete the branch and then- push it back up with the
+ new reference. To avoid this, set receive.denyDeletes to true:
+$ 'git config --system receive.denyDeletes true'
+This denies any deletion of branches or tags — no user can do- it. To remove remote branches, you must remove the
+ ref files from the server manually. There are also more interesting ways to do- this on a per-user basis via ACLs,
+as youll learn in An Example Git-Enforced Policy.
+https://git-scm.com/book/en/v2/ch00/_an_example_git_enforced_policy
+
+'https://git-scm.com/book/en/v2/Customizing-Git-Git-Attributes';
+Git Attributes
+Some of these settings can also be specified for a path, so that Git applies those settings only for a subdirectory or
+ subset of files. These path-specific settings are called Git attributes and are set either in a '.gitattributes' file in one of
+your directories =normally the root of your project= or in the '.git/info/attributes' file if you dont want the
+ attributes file committed with your project.
+Using attributes, you can do- things like specify separate merge strategies for individual files or directories in your project,
+ tell Git how to diff non-text files, or have Git filter content before you check it into or out of Git.
+
+'Binary Files';
+One cool trick for which you can use Git attributes is telling Git which files are binary =in cases it otherwise may not be able to figure out= and
+ giving Git special instructions about how to handle those files. For instance, some text files may be machine generated and
+not diffable, whereas some binary files can be diffed. Youll see how to tell Git which is which.
+
+'Identifying Binary Files';
+Some files look like text files but for all intents and purposes are to be treated as binary data. For instance,
+ Xcode projects on macOS contain a file that ends in .pbxproj, which is basically a JSON =plain-text JavaScript data format= dataset
+written out to disk by the IDE, which records your build settings and so on. Although its technically a text file =because its all UTF-8=,
+ you dont want to treat it as such because its really a lightweight database – you cant merge the contents if two people change it,
+and diffs generally arent helpful. The file is meant to be consumed by a machine. In essence, you want to treat it like a binary file.
+To tell Git to treat all pbxproj files as binary data, add the following line to your '.gitattributes' file:
+#*.pbxproj binary
+Now- Git wont try to convert or fix CRLF issues; nor will it try to compute or print a diff for changes in this file when
+ you run git show or git diff on your project
+
+'Diffing Binary Files';
+You can also use the Git attributes functionality to effectively diff binary files. You do- this by telling Git how to
+ convert your binary data to a text format that can be compared via the normal diff.
+First- youll use this technique to solve one of the most annoying problems known to humanity: version-controlling Microsoft Word documents.
+ If- you want to version-control Word documents, you can stick them in a Git repository and commit every once in a while;
+but what good does that do? If you run git diff normally, you only see something like this:
+$ git diff
+diff --git a/chapter1.docx b/chapter1.docx
+index 88839c4..4afcb7c 100644
+Binary files a/chapter1.docx and b/chapter1.docx differ
+You cant directly compare two versions unless you check them out and scan them manually, right? It turns out you can do- this
+ fairly well using Git attributes. Put the following line in your '.gitattributes' file:
+#*.docx diff=word
+This tells Git that any file that matches this pattern =.docx= should use the =word= filter when you try to view a diff that
+ contains changes. What is the =word= filter? You have to set it up. Here youll configure Git to use the docx2txt program to
+convert Word documents into readable text files, which it will then- diff properly.
+First- youll need to install docx2txt; you can download it from https://sourceforge.net/projects/docx2txt. Follow the
+ instructions in the INSTALL file to put it somewhere your shell can find it. Next, youll write a wrapper script to
+convert output to the format Git expects. Create a file thats somewhere in your path called docx2txt, and add these contents:
+#!/bin/bash
+docx2txt.pl "$1" -
+Dont forget to chmod a+x that file. Finally, you can configure Git to use this script:
+$ git config diff.word.textconv docx2txt
+Now Git knows that if it tries to do- a diff between two snapshots, and any of the files end in .docx, it should run those
+ files through the =word= filter, which is defined as the docx2txt program. This effectively makes nice text-based versions of
+your Word files before attempting to diff them.
+$ git diff
+Another interesting problem you can solve this way involves diffing image files. One way to do- this is to run image files through a
+ filter that extracts their EXIF information – metadata that is recorded with most image formats. If you download and
+install the exiftool program, you can use it to convert your images into text about the metadata, so at least the
+ diff will show you a textual representation of any changes that happened. Put the following line in your '.gitattributes' file:
+#*.png diff=exif
+Configure Git to use this tool:
+$ git config diff.exif.textconv exiftool
+$ git diff
+
+'Keyword Expansion';
+SVN- or CVS-style keyword expansion is often requested by developers used to those systems. The main problem with this in Git is that
+ you cant modify a file with information about the commit after youve committed, because Git checksums the file first. However,
+you can inject text into a file when its checked out and remove it again before its added to a commit. Git attributes offers you two ways to do- this.
+First- you can inject the SHA-1 checksum of a blob into an \$Id$ field in the file automatically. If you set this attribute on a
+ file or set of files, then- the next time you check out that branch, Git will replace that field with the SHA-1 of the blob.
+Its important to notice that it isnt the SHA-1 of the commit, but of the blob itself. Put the following line in your '.gitattributes' file:
+#*.txt ident
+Add an \$Id$ reference to a test file:
+$ echo \$Id$ > test.txt
+The next time you check out this file, Git injects the SHA-1 of the blob:
+$ rm test.txt
+$ git checkout -- test.txt
+$ cat test.txt
+#$Id: 42812b7653c7b88933f8a9d6cad0ca16714b9bb3 $
+However- that result is of limited use. If youve used keyword substitution in CVS or Subversion, you can include a
+ datestamp – the SHA-1 isnt all that helpful, because its fairly random and you cant tell if one SHA-1 is older or newer than
+another just by looking at them.
+It turns out that you can write your own filters for doing substitutions in files on commit/checkout. These are
+ called /clean/ and /smudge/ filters. In the '.gitattributes' file, you can set a filter for particular paths and then- set up scripts that
+will process files just before theyre checked out /=smudge=, see The =smudge= filter is run on checkout/ and
+ just before theyre staged /=clean=, see The =clean= filter is run when files are staged/.
+The original commit message for this feature gives a simple example of running all your C source code through the
+ indent program before committing. You can set it up by setting the filter attribute in your '.gitattributes' file to
+filter \*.c files with the =indent= filter:
+#*.c filter=indent
+Then- tell Git what the =indent= filter does on smudge and clean:
+$ 'git config --global filter.indent.clean' indent
+$ 'git config --global filter.indent.smudge' cat
+In this case, when you commit files that match \*.c, Git will run them through the indent program before it stages them and then-
+ run them through the cat program before it checks them back out onto disk. The cat program does essentially nothing:
+it spits out the same data that it comes in. This combination effectively filters all C source code files through indent before committing.
+Another interesting example gets \$Date$ keyword expansion, RCS style. To do- this properly, you need a small script that
+ takes a filename, figures out the last commit date for this project, and inserts the date into the file. Here is a small Ruby script that does that:
+#! /usr/bin/env ruby
+#data = STDIN.read
+#last_date = `git log --pretty=format:"%ad" -1`
+#puts data.gsub('$Date$', '$Date: ' + last_date.to_s + '$')
+All the script does is get the latest commit date from the git log command, stick that into any \$Date$ strings it sees in stdin, and
+ print the results – it should be simple to do- in whatever language youre most comfortable in. You can name this file expand_date and
+put it in your path. Now, you need to set up a filter in Git =call it dater= and tell it to use your expand_date filter to
+ smudge the files on checkout. Youll use a Perl expression to clean that up on commit:
+$ 'git config filter.dater.smudge' expand_date
+$ 'git config filter.dater.clean'
+# \'perl -pe "s/\\\$Date[^\\\$]*\\\$/\\\$Date\\\$/"'
+This Perl snippet strips out anything it sees in a \$Date$ string, to get back to where you started. Now that
+ your filter is ready, you can test it by setting up a Git attribute for that file that engages the new filter and
+creating a file with your \$Date$ keyword:
+#date*.txt filter=dater
+#$ echo '# $Date$' > date_test.txt
+If- you commit those changes and check out the file again, you see the keyword properly substituted:
+$ 'git add' date_test.txt .gitattributes
+$ 'git commit -m' "Test date expansion in Git"
+#$ rm date_test.txt
+$ 'git checkout' date_test.txt
+#$ cat date_test.txt
+# $Date: Tue Apr 21 07:26:52 2009 -0700$
+You can see how powerful this technique can be for customized applications. You have to be careful, though, because the
+ '.gitattributes' file is committed and passed around with the project, but the driver =in this case, dater= isnt, so it
+wont work everywhere. When you design these filters, they should be able to fail gracefully and have the project still work properly.
+
+'Exporting Your Repository';
+Git attribute data also allows you to do- some interesting things when exporting an archive of your project.
+'export-ignore'
+You can tell Git not to export certain files or directories when generating an archive. If there is a subdirectory or file that
+ you dont want to include in your archive file but that you do- want checked into your project, you can determine those files via the export-ignore attribute.
+For- example, say you have some test files in a test/ subdirectory, and it doesnt make sense to include them in the
+ tarball export of your project. You can add the following line to your Git attributes file:
+#test/ export-ignore
+Now- when you run git archive to create a tarball of your project, that directory wont be included in the archive.
+'export-subst'
+When exporting files for deployment you can apply git logs formatting and keyword-expansion processing to
+ selected portions of files marked with the export-subst attribute.
+For- instance, if you want to include a file named LAST_COMMIT in your project, and have metadata about the
+ last commit automatically injected into it when git archive runs, you can for example set up your '.gitattributes' and LAST_COMMIT files like this:
+LAST_COMMIT export-subst
+#$ echo 'Last commit date: $Format:%cd by %aN$' > LAST_COMMIT
+$ 'git add' LAST_COMMIT .gitattributes
+$ 'git commit' -am 'adding LAST_COMMIT file for archives'
+When you run git archive, the contents of the archived file will look like this:
+$ 'git archive' HEAD | tar xCf ../deployment-testing -
+$ cat ../deployment-testing/LAST_COMMIT
+#Last commit date: Tue Apr 21 08:38:48 2009 -0700 by Scott Chacon
+The substitutions can include for example the commit message and any git notes, and git log can do- simple word wrapping:
+#$ echo '$Format:Last commit: %h by %aN at %cd%n%+w(76,6,9)%B$' > LAST_COMMIT
+$ 'git commit -am'
+#\'export-subst uses git log'\''s custom formatter
+#git archive uses git log'\''s `pretty=format:` processor
+#directly, and strips the surrounding `$Format:` and `$`
+#markup from the output.'
+$ 'git archive' @ | tar xfO - LAST_COMMIT
+#Last commit: 312ccc8 by Jim Hill at Fri May 8 09:14:04 2015 -0700
+#       export-subst uses git log's custom formatter
+#         git archive uses git log's `pretty=format:` processor directly, and
+#         strips the surrounding `$Format:` and `$` markup from the output.
+The resulting archive is suitable for deployment work, but like any exported archive it isnt suitable for further development work.
+
+'Merge Strategies';
+You can also use Git attributes to tell Git to use different merge strategies for specific files in your project.
+ One very useful option is to tell Git to not try to merge specific files when they have conflicts, but rather to
+use your side of the merge over someone elses.
+This is helpful if a branch in your project has diverged or is specialized, but you want to be able to
+ merge changes back in from it, and you want to ignore certain files. Say you have a database settings file called database.xml that
+is different in two branches, and you want to merge in your other branch without messing up the database file.
+ You can set up an attribute like this:
+#database.xml merge=ours
+And then- define a dummy ours merge strategy with:
+$ 'git config --global merge.ours.driver true'
+If- you merge in the other branch, instead of having merge conflicts with the database.xml file, you see something like this:
+$ 'git merge' topic
+#Auto-merging database.xml
+#Merge made by recursive.
+In this case, database.xml stays at whatever version you originally had.
+
+'https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks';
+Git Hooks
+Like many other Version Control Systems, Git has a way to fire off custom scripts when certain important actions occur.
+ There are two groups of these hooks: 'client-side' and 'server-side'. Client-side hooks are triggered by operations such as
+committing and merging, while server-side hooks run on network operations such as receiving pushed commits.
