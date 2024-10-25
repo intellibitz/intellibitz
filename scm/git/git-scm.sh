@@ -3660,3 +3660,59 @@ Git Hooks
 Like many other Version Control Systems, Git has a way to fire off custom scripts when certain important actions occur.
  There are two groups of these hooks: 'client-side' and 'server-side'. Client-side hooks are triggered by operations such as
 committing and merging, while server-side hooks run on network operations such as receiving pushed commits.
+
+'Installing a Hook';
+The hooks are all stored in the hooks subdirectory of the Git directory. In most projects, thats '.git/hooks'. When you initialize a
+ new repository with 'git init', Git populates the hooks directory with a bunch of example scripts, many of which are
+useful by themselves; but they also document the input values of each script. All the examples are written as shell scripts,
+ with some Perl thrown in, but any properly named executable scripts will work fine – you can write them in Ruby or Python or
+whatever language you are familiar with. If you want to use the bundled hook scripts, youll have to rename them; their file names all end with .sample.
+To enable a hook script, put a file in the hooks subdirectory of your '.git' directory that is named appropriately =without any extension= and
+ is executable. From that point forward, it should be called.
+
+'Client-Side Hooks';
+There are a lot of client-side hooks. This section splits them into committing-workflow hooks, email-workflow scripts, and everything else.
+Note- Its important to note that client-side hooks are not copied when you clone a repository. If your intent with these
+ scripts is to enforce a policy, youll probably want to do- that on the server side; see the example in An Example Git-Enforced Policy.
+
+'Committing-Workflow Hooks';
+The first four hooks have to do- with the committing process.
+pre-commit
+prepare-commit-msg
+commit-msg
+post-commit
+
+'Email Workflow Hooks';
+git format-patch
+applypatch-msg
+pre-applypatch
+post-applypatch
+
+'Other Client Hooks';
+pre-rebase
+post-rewrite
+post-checkout
+post-merge
+pre-push
+pre-auto-gc
+
+'Server-Side Hooks';
+In addition to the client-side hooks, you can use a couple of important server-side hooks as a system administrator to
+ enforce nearly any kind of policy for your project. These scripts run before and after pushes to the server.
+The pre hooks can exit non-zero at any time to reject the push as well as print an error message back to the client;
+ you can set up a push policy thats as complex as you wish.
+pre-receive
+update
+post-receive
+Tip- If youre writing a script/hook that others will need to read, prefer the long versions of command-line flags;
+
+'https://git-scm.com/book/en/v2/Customizing-Git-An-Example-Git-Enforced-Policy';
+Server-Side Hook
+All the server-side work will go into the update file in your hooks directory.
+  The update hook runs once per branch being pushed and takes three arguments:
+The name of the reference being pushed to
+The old revision where that branch was
+The new revision being pushed
+You also have access to the user doing the pushing if the push is being run over SSH. If youve allowed everyone to
+ connect with a single user =like 'git'= via public-key authentication, you may have to give that user a shell wrapper that
+determines which user is connecting based on the public key, and set an environment variable accordingly.
