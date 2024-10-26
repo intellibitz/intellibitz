@@ -3818,4 +3818,41 @@ But those are the only two differences – otherwise, the script works the same 
 'https://git-scm.com/book/en/v2/Git-and-Other-Systems-Migrating-to-Git';
 
 'https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain';
+First- if it isnt yet clear, Git is fundamentally a content-addressable filesystem with a VCS user interface written on top of it.
+ Youll learn more about what this means in a bit.
+'Plumbing and Porcelain';
+This book covers primarily how to use Git with 30 or so subcommands such as checkout, branch, remote, and so on. But because
+ Git was initially a toolkit for a version control system rather than a full user-friendly VCS, it has a number of subcommands that
+do- low-level work and were designed to be chained together UNIX-style or called from scripts. These commands are
+ generally referred to as Gits =plumbing= commands, while the more user-friendly commands are called =porcelain= commands.
+Many of the plumbing commands arent meant to be used manually on the command line,
+ but rather to be used as building blocks for new tools and custom scripts.
+When you run 'git init' in a new or existing directory, Git creates the '.git' directory, which is where almost everything that
+ Git stores and manipulates is located. If you want to back up or clone your repository, copying this single directory elsewhere gives you
+nearly everything you need. This entire chapter basically deals with what you can see in this directory. Heres what a
+ newly-initialized '.git' directory typically looks like:
+$ ls -F1
+#config
+#description
+#HEAD
+#hooks/
+#info/
+#objects/
+#refs/
+Depending on your version of Git, you may see some additional content there, but this is a
+ fresh 'git init' repository — its what you see by default. The description file is used only by the GitWeb program,
+so dont worry about it. The config file contains your project-specific configuration options, and the info directory keeps a
+ global exclude file for ignored patterns that you dont want to track in a '.gitignore' file. The hooks directory contains
+your client- or server-side hook scripts, which are discussed in detail in Git Hooks.
+This leaves four important entries: the HEAD and =yet to be created= index files, and the objects and refs directories.
+ These are the core parts of Git. The objects directory stores all the content for your database, the refs directory stores
+pointers into commit objects in that data =branches, tags, remotes and more=, the HEAD file points to the
+ branch you currently have checked out, and the index file is where Git stores your staging area information.
 
+'https://git-scm.com/book/en/v2/Git-Internals-Git-Objects';
+Git Objects
+Git is a content-addressable filesystem. Great. What does that mean? It means that at the core of Git is a simple key-value data store.
+ What this means is that you can insert any kind of content into a Git repository, for which Git will hand you back a
+unique key you can use later to retrieve that content.
+As a demonstration, lets look at the plumbing command 'git hash-object', which takes some data, stores it in your
+ '.git/objects' directory =the object database=, and gives you back the unique key that now refers to that data object.
