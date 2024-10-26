@@ -3707,12 +3707,115 @@ post-receive
 Tip- If youre writing a script/hook that others will need to read, prefer the long versions of command-line flags;
 
 'https://git-scm.com/book/en/v2/Customizing-Git-An-Example-Git-Enforced-Policy';
+An Example Git-Enforced Policy
 Server-Side Hook
-All the server-side work will go into the update file in your hooks directory.
-  The update hook runs once per branch being pushed and takes three arguments:
+For- this example, all the server-side work will go into the 'update' file in your 'hooks' directory.
+  The '.git/hooks/update' hook runs once per branch being pushed and takes three arguments:
 The name of the reference being pushed to
 The old revision where that branch was
 The new revision being pushed
 You also have access to the user doing the pushing if the push is being run over SSH. If youve allowed everyone to
  connect with a single user =like 'git'= via public-key authentication, you may have to give that user a shell wrapper that
 determines which user is connecting based on the public key, and set an environment variable accordingly.
+
+'Enforcing a Specific Commit-Message Format';
+'.git/hooks/update'
+#$regex = /\[ref: (\d+)\]/
+# enforced custom commit message format
+#def check_message_format
+#  missed_revs = `git rev-list #{$oldrev}..#{$newrev}`.split("\n")
+#  missed_revs.each do |rev|
+#    message = `git cat-file commit #{rev} | sed '1,/^$/d'`
+#    if !$regex.match(message)
+#      puts "[POLICY] Your message is not formatted correctly"
+#      exit 1
+#    end
+#  end
+#end
+#check_message_format
+Putting that in your '.git/hooks/update' script, will reject updates that contain commits that have messages that dont adhere to your rule.
+
+'Enforcing a User-Based ACL System';
+To enforce this, youll write those rules to a file named 'acl' that lives in your bare Git repository on the server.
+ Youll have the update hook look at those rules, see what files are being introduced for all the commits being pushed, and
+determine whether the user doing the push has access to update all those files.
+'acl' file uses a series of lines, where the first field is avail or unavail, the next field is a comma-delimited list of the
+ users to which the rule applies, and the last field is the path to which the rule applies =blank meaning open access=.
+All of these fields are delimited by a pipe '|' character.
+avail|nickh,pjhyett,defunkt,tpw
+avail|usinclair,cdickens,ebronte|doc
+avail|schacon|lib
+avail|schacon|tests
+'.git/hooks/update'
+#def get_acl_access_data(acl_file)
+#  # read in ACL data
+#  acl_file = File.read(acl_file).split("\n").reject { |line| line == '' }
+#  access = {}
+#  acl_file.each do |line|
+#    avail, users, path = line.split('|')
+#    next unless avail == 'avail'
+#    users.split(',').each do |user|
+#      access[user] ||= []
+#      access[user] << path
+#    end
+#  end
+#  access
+#end
+## only allows certain users to modify certain subdirectories in a project
+#def check_directory_perms
+#  access = get_acl_access_data('acl')
+#  # see if anyone is trying to push something they can't
+#  new_commits = `git rev-list #{$oldrev}..#{$newrev}`.split("\n")
+#  new_commits.each do |rev|
+#    files_modified = `git log -1 --name-only --pretty=format:'' #{rev}`.split("\n")
+#    files_modified.each do |path|
+#      next if path.size == 0
+#      has_file_access = false
+#      access[$user].each do |access_path|
+#        if !access_path  # user has access to everything
+#           || (path.start_with? access_path) # access to this path
+#          has_file_access = true
+#        end
+#      end
+#      if !has_file_access
+#        puts "[POLICY] You do not have access to push to #{path}"
+#        exit 1
+#      end
+#    end
+#  end
+#end
+#check_directory_perms
+Now your users cant push any commits with badly formed messages or with modified files outside of their designated paths.
+From now on, as long as that '.git/hooks/update' script is there and executable, your repository will never have a
+ commit message without your pattern in it, and your users will be sandboxed.
+
+'Client-Side Hooks';
+The downside to the server side hooks approach is the whining that will inevitably result when your users commit pushes are rejected.
+ Having their carefully crafted work rejected at the last minute can be extremely frustrating and confusing;
+and furthermore, they will have to edit their history to correct it, which isnt always for the faint of heart.
+The answer to this dilemma is to provide some client-side hooks that users can run to notify them when theyre doing something that
+ the server is likely to reject. That way, they can correct any problems before committing and before those issues become
+more difficult to fix. Because hooks arent transferred with a clone of a project, you must distribute these scripts some
+ other way and then- have your users copy them to their '.git/hooks' directory and make them executable.
+You can distribute these hooks within the project or in a separate project, but Git wont set them up automatically.
+First- the ACL file is in a different place, because this script runs from your working directory, not from your '.git' directory.
+ You have to change the path to the ACL file from this:
+#access = get_acl_access_data('acl')
+to this:
+#access = get_acl_access_data('.git/acl')
+The other important difference is the way you get a listing of the files that have been changed. Because the
+ server-side method looks at the log of commits, and, at this point, the commit hasnt been recorded yet, you must get your
+file listing from the staging area instead. Instead of:
+#files_modified = `git log -1 --name-only --pretty=format:'' #{ref}`
+you have to use:
+#files_modified = `git diff-index --cached --name-only HEAD`
+But those are the only two differences – otherwise, the script works the same way. One caveat is that it expects you to
+ be running locally as the same user you push as to the remote machine. If that is different, you must set the
+#$user variable manually.
+
+'https://git-scm.com/book/en/v2/Git-and-Other-Systems-Git-as-a-Client';
+
+'https://git-scm.com/book/en/v2/Git-and-Other-Systems-Migrating-to-Git';
+
+'https://git-scm.com/book/en/v2/Git-Internals-Plumbing-and-Porcelain';
+
