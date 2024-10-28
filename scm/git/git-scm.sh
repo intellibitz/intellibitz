@@ -4140,3 +4140,270 @@ Your branch will contain only work from that commit down:
 $ 'git log --pretty=oneline' test
 #cac0cab538b970a37ea1e769cbbde608743bc96d Second commit
 #fdf4fc3344e67ab068f836878b6c4951e3b15f3d First commit
+When you run commands like 'git branch' =branch=, Git basically runs that update-ref command to add the SHA-1 of the
+ last commit of the branch youre on into whatever new reference you want to create.
+
+'The HEAD';
+The question now is, when you run 'git branch' =branch=, how does Git know the SHA-1 of the last commit? The answer is the HEAD file.
+Usually the HEAD file is a symbolic reference to the branch youre currently on. By symbolic reference, we mean that
+ unlike a normal reference, it contains a pointer to another reference.
+However in some rare cases the HEAD file may contain the SHA-1 value of a Git object. This happens when you
+ checkout a tag, commit, or remote branch, which puts your repository in "detached HEAD" state.
+If- you look at the file, youll normally see something like this:
+$ cat .git/HEAD
+#ref: refs/heads/master
+If- you run 'git checkout' test, Git updates the file to look like this:
+$ cat .git/HEAD
+#ref: refs/heads/test
+When you run 'git commit', it creates the commit object, specifying the parent of that commit object to be
+ whatever SHA-1 value the reference in HEAD points to.
+You can also manually edit this file, but again a safer command exists to do- so:
+ git symbolic-ref. You can read the value of your HEAD via this command:
+$ 'git symbolic-ref HEAD'
+#refs/heads/master
+You can also set the value of HEAD using the same command:
+$ 'git symbolic-ref HEAD' refs/heads/test
+$ cat .git/HEAD
+#ref: refs/heads/test
+You cant set a symbolic reference outside of the refs style:
+$ 'git symbolic-ref HEAD' test
+#fatal: Refusing to point HEAD outside of refs/
+
+'Tags';
+We just finished discussing Gits three main object types =blobs, trees and commits=, but there is a fourth.
+ The tag object is very much like a commit object — it contains a tagger, a date, a message, and a pointer.
+The main difference is that a tag object generally points to a commit rather than a tree. Its like a branch reference, but
+ it never moves — it always points to the same commit but gives it a friendlier name.
+As discussed in Git Basics, there are two types of tags: annotated and lightweight.
+ You can make a 'lightweight' tag by running something like this:
+$ 'git update-ref' refs/tags/v1.0 cac0cab538b970a37ea1e769cbbde608743bc96d
+That is all a lightweight tag is — a reference that never moves. An annotated tag is more complex, however. If
+ you create an 'annotated' tag, Git creates a tag object and then- writes a reference to point to it rather than
+directly to the commit. You can see this by creating an annotated tag =using the -a option=:
+$ 'git tag -a' v1.1 1a410efbd13591db07496601ebc7a059dd55cfe9 -m 'Test tag'
+Heres the object SHA-1 value it created:
+$ cat .git/refs/tags/v1.1
+#9585191f37f7b0fb9444f35a9bf50de191beadc2
+Now- run git cat-file -p on that SHA-1 value:
+$ 'git cat-file -p' 9585191f37f7b0fb9444f35a9bf50de191beadc2
+#object 1a410efbd13591db07496601ebc7a059dd55cfe9
+#type commit
+#tag v1.1
+#tagger Scott Chacon <schacon@gmail.com> Sat May 23 16:48:58 2009 -0700
+#Test tag
+Notice that the object entry points to the commit SHA-1 value that you tagged. Also notice that it doesnt need to
+ point to a commit; you can tag any Git object. In the Git source code, for example, the maintainer has added their
+GPG public key as a blob object and then- tagged it. You can view the public key by running this in a clone of the Git repository:
+$ 'git cat-file blob' junio-gpg-pub
+The Linux kernel repository also has a non-commit-pointing tag object — the
+ first tag created points to the initial tree of the import of the source code.
+
+'Remotes';
+The third type of reference that youll see is a remote reference. If you add a remote and push to it, Git stores the
+ value you last pushed to that remote for each branch in the 'refs/remotes' directory. For instance, you can add a
+remote called origin and push your master branch to it:
+$ 'git remote add' origin git@github.com:schacon/simplegit-progit.git
+$ 'git push' origin master
+#Counting objects: 11, done.
+#Compressing objects: 100% (5/5), done.
+#Writing objects: 100% (7/7), 716 bytes, done.
+#Total 7 (delta 2), reused 4 (delta 1)
+#To git@github.com:schacon/simplegit-progit.git
+#  a11bef0..ca82a6d  master -> master
+Then- you can see what the master branch on the origin remote was the last time you communicated with the server,
+ by checking the refs/remotes/origin/master file:
+$ cat .git/refs/remotes/origin/master
+#ca82a6dff817ec66f44342007202690a93763949
+Remote references differ from branches ='refs/heads' references= mainly in that theyre considered read-only.
+ You can 'git checkout' to one, but Git wont symbolically reference HEAD to one, so youll never update it with a
+commit command. Git manages them as bookmarks to the last known state of where those branches were on those servers.
+
+'https://git-scm.com/book/en/v2/Git-Internals-Packfiles';
+'Packfiles';
+If- you followed all of the instructions in the example from the previous section, you should now have a
+ test Git repository with 11 objects — four blobs, three trees, three commits, and one tag:
+$ find .git/objects -type f
+#.git/objects/01/55eb4229851634a0f03eb265b69f5a2d56f341 # tree 2
+#.git/objects/1a/410efbd13591db07496601ebc7a059dd55cfe9 # commit 3
+#.git/objects/1f/7a7a472abf3dd9643fd615f6da379c4acb3e3a # test.txt v2
+#.git/objects/3c/4e9cd789d88d8d89c1073707c3585e41b0e614 # tree 3
+#.git/objects/83/baae61804e65cc73a7201a7252750c76066a30 # test.txt v1
+#.git/objects/95/85191f37f7b0fb9444f35a9bf50de191beadc2 # tag
+#.git/objects/ca/c0cab538b970a37ea1e769cbbde608743bc96d # commit 2
+#.git/objects/d6/70460b4b4aece5915caf5c68d12f560a9fe3e4 # 'test content'
+#.git/objects/d8/329fc1cc938780ffdd9f94e0d364e0ea74f579 # tree 1
+#.git/objects/fa/49b077972391ad58037050f2a75f74e3671e92 # new.txt
+#.git/objects/fd/f4fc3344e67ab068f836878b6c4951e3b15f3d # commit 1
+Git compresses the contents of these files with zlib, and youre not storing much, so all these files collectively take up
+ only 925 bytes. Now youll add some more sizable content to the repository to demonstrate an interesting feature of Git.
+To demonstrate, well add the repo.rb file from the Grit library — this is about a 22K source code file:
+$ curl https://raw.githubusercontent.com/mojombo/grit/master/lib/grit/repo.rb > repo.rb
+$ 'git checkout' master
+$ 'git add' repo.rb
+$ 'git commit -m' 'Create repo.rb'
+#[master 484a592] Create repo.rb
+# 3 files changed, 709 insertions(+), 2 deletions(-)
+# delete mode 100644 bak/test.txt
+# create mode 100644 repo.rb
+# rewrite test.txt (100%)
+If- you look at the resulting tree, you can see the SHA-1 value that was calculated for your new repo.rb blob object:
+$ 'git cat-file -p' #master^{tree}
+#100644 blob fa49b077972391ad58037050f2a75f74e3671e92      new.txt
+#100644 blob 033b4468fa6b2a9547a70d88d1bbe8bf3f9ed0d5      repo.rb
+#100644 blob e3f094f522629ae358806b17daf78246c27c007b      test.txt
+You can then- use git cat-file to see how large that object is:
+$ 'git cat-file -s' 033b4468fa6b2a9547a70d88d1bbe8bf3f9ed0d5
+#22044
+At this point, modify that file a little, and see what happens:
+$ echo '# testing' >> repo.rb
+$ 'git commit -am' 'Modify repo.rb a bit'
+#[master 2431da6] Modify repo.rb a bit
+# 1 file changed, 1 insertion(+)
+Check the tree created by that last commit, and you see something interesting:
+$ 'git cat-file -p' #master^{tree}
+#100644 blob fa49b077972391ad58037050f2a75f74e3671e92      new.txt
+#100644 blob b042a60ef7dff760008df33cee372b945b6e884e      repo.rb
+#100644 blob e3f094f522629ae358806b17daf78246c27c007b      test.txt
+The blob is now a different blob, which means that although you added only a single line to the end of a 400-line file,
+ Git stored that new content as a completely new object:
+$ 'git cat-file -s' b042a60ef7dff760008df33cee372b945b6e884e
+#22054
+You have two nearly identical 22K objects on your disk =each compressed to approximately 7K=. Wouldnt it be nice if
+ Git could store one of them in full but then- the second object only as the delta between it and the first?
+It turns out that it can. The initial format in which Git saves objects on disk is called a =loose= object format. However,
+ occasionally Git packs up several of these objects into a single binary file called a =packfile= in order to save space and
+be more efficient. Git does this if you have too many loose objects around, if you run the git gc command manually, or if
+ you push to a remote server. To see what happens, you can manually ask Git to pack up the objects by calling the git gc command:
+$ git gc
+#Counting objects: 18, done.
+#Delta compression using up to 8 threads.
+#Compressing objects: 100% (14/14), done.
+#Writing objects: 100% (18/18), done.
+#Total 18 (delta 3), reused 0 (delta 0)
+If- you look in your objects directory, youll find that most of your objects are gone, and a new pair of files has appeared:
+$ find .git/objects -type f
+#.git/objects/bd/9dbf5aae1a3862dd1526723246b20206e5fc37
+#.git/objects/d6/70460b4b4aece5915caf5c68d12f560a9fe3e4
+#.git/objects/info/packs
+#.git/objects/pack/pack-978e03944f5c581011e6998cd0e9e30000905586.idx
+#.git/objects/pack/pack-978e03944f5c581011e6998cd0e9e30000905586.pack
+The objects that remain are the blobs that arent pointed to by any commit — in this case,
+ the "what is up, doc?" example and the =test content= example blobs you created earlier. Because you never added them to
+any commits, theyre considered dangling and arent packed up in your new packfile.
+The other files are your new packfile and an index. The packfile is a single file containing the contents of all the
+ objects that were removed from your filesystem. The index is a file that contains offsets into that packfile so you can
+quickly seek to a specific object. What is cool is that although the objects on disk before you ran the gc command were
+ collectively about 15K in size, the new packfile is only 7K. Youve cut your disk usage by half by packing your objects.
+How does Git do- this? When Git packs objects, it looks for files that are named and sized similarly, and stores just the
+ deltas from one version of the file to the next. You can look into the packfile and see what Git did to save space.
+The git verify-pack plumbing command allows you to see what was packed up:
+$ 'git verify-pack -v' .git/objects/pack/pack-978e03944f5c581011e6998cd0e9e30000905586.idx
+#2431da676938450a4d72e260db3bf7b0f587bbc1 commit 223 155 12
+#69bcdaff5328278ab1c0812ce0e07fa7d26a96d7 commit 214 152 167
+#80d02664cb23ed55b226516648c7ad5d0a3deb90 commit 214 145 319
+#43168a18b7613d1281e5560855a83eb8fde3d687 commit 213 146 464
+#092917823486a802e94d727c820a9024e14a1fc2 commit 214 146 610
+#702470739ce72005e2edff522fde85d52a65df9b commit 165 118 756
+#d368d0ac0678cbe6cce505be58126d3526706e54 tag    130 122 874
+#fe879577cb8cffcdf25441725141e310dd7d239b tree   136 136 996
+#d8329fc1cc938780ffdd9f94e0d364e0ea74f579 tree   36 46 1132
+#deef2e1b793907545e50a2ea2ddb5ba6c58c4506 tree   136 136 1178
+#d982c7cb2c2a972ee391a85da481fc1f9127a01d tree   6 17 1314 1 \
+#  deef2e1b793907545e50a2ea2ddb5ba6c58c4506
+#3c4e9cd789d88d8d89c1073707c3585e41b0e614 tree   8 19 1331 1 \
+#  deef2e1b793907545e50a2ea2ddb5ba6c58c4506
+#0155eb4229851634a0f03eb265b69f5a2d56f341 tree   71 76 1350
+#83baae61804e65cc73a7201a7252750c76066a30 blob   10 19 1426
+#fa49b077972391ad58037050f2a75f74e3671e92 blob   9 18 1445
+#b042a60ef7dff760008df33cee372b945b6e884e blob   22054 5799 1463
+#033b4468fa6b2a9547a70d88d1bbe8bf3f9ed0d5 blob   9 20 7262 1 \
+#  b042a60ef7dff760008df33cee372b945b6e884e
+#1f7a7a472abf3dd9643fd615f6da379c4acb3e3a blob   10 19 7282
+#non delta: 15 objects
+#chain length = 1: 3 objects
+#.git/objects/pack/pack-978e03944f5c581011e6998cd0e9e30000905586.pack: ok
+Here- the 033b4 blob, which if you remember was the first version of your repo.rb file, is referencing the b042a blob,
+ which was the second version of the file. The third column in the output is the size of the object in the pack, so you
+can see that b042a takes up 22K of the file, but that 033b4 only takes up 9 bytes. What is also interesting is that the
+ second version of the file is the one that is stored intact, whereas the original version is stored as a delta — this is
+because youre most likely to need faster access to the most recent version of the file.
+The really nice thing about this is that it can be repacked at any time. Git will occasionally repack your database automatically,
+ always trying to save more space, but you can also manually repack at any time by running git gc by hand.
+
+'https://git-scm.com/book/en/v2/Git-Internals-The-Refspec';
+'The Refspec';
+Throughout this book, weve used simple mappings from remote branches to local references, but they can be more complex.
+ Suppose you were following along with the last couple sections and had created a
+small local Git repository, and now wanted to add a remote to it:
+$ 'git remote add' origin https://github.com/schacon/simplegit-progit
+Running the command above adds a section to your repositorys '.git/config' file, specifying the name of the remote =origin=,
+ the URL of the remote repository, and the refspec to be used for fetching:
+#[remote "origin"]
+#	url = https://github.com/schacon/simplegit-progit
+#	fetch = +refs/heads/*:refs/remotes/origin/*
+The format of the refspec is, first, an optional +, followed by 'src:dst', where =src= is the pattern for references on the
+ remote side and =dst= is where those references will be tracked locally. The + tells Git to update the reference even if it isnt a fast-forward.
+In the default case that is automatically written by a git remote add origin command, Git fetches all the
+ references under 'refs/heads/' on the server and writes them to 'refs/remotes/origin/' locally. So, if there is a
+master branch on the server, you can access the log of that branch locally via any of the following:
+$ 'git log' origin/master
+$ 'git log' remotes/origin/master
+$ 'git log' refs/remotes/origin/master
+Theyre all equivalent, because Git expands each of them to refs/remotes/origin/master.
+If- you want Git instead to pull down only the master branch each time, and not every other branch on the remote server,
+ you can change the fetch line to refer to that branch only:
+#fetch = +refs/heads/master:refs/remotes/origin/master
+This is just the default refspec for git fetch for that remote. If you want to do- a one-time only fetch, you can specify the
+ specific refspec on the command line, too. To pull the master branch on the remote down to origin/mymaster locally, you can run:
+$ 'git fetch' origin master:refs/remotes/origin/mymaster
+You can also specify multiple refspecs. On the command line, you can pull down several branches like so:
+$ 'git fetch' origin master:refs/remotes/origin/mymaster topic:refs/remotes/origin/topic
+#From git@github.com:schacon/simplegit
+# ! [rejected]        master     -> origin/mymaster  (non fast forward)
+# * [new branch]      topic      -> origin/topic
+In this case, the master branch pull was rejected because it wasnt listed as a fast-forward reference.
+ You can override that by specifying the + in front of the refspec.
+You can also specify multiple refspecs for fetching in your configuration file. If you want to always fetch the master and
+ experiment branches from the origin remote, add two lines:
+#[remote "origin"]
+#	url = https://github.com/schacon/simplegit-progit
+#	fetch = +refs/heads/master:refs/remotes/origin/master
+#	fetch = +refs/heads/experiment:refs/remotes/origin/experiment
+Since Git 2.6.0 you can use partial globs in the pattern to match multiple branches, so this works:
+#fetch = +refs/heads/qa*:refs/remotes/origin/qa*
+Even better, you can use namespaces =or directories= to accomplish the same with more structure. If you have a QA team that
+ pushes a series of branches, and you want to get the master branch and any of the QA teams branches but nothing else,
+you can use a config section like this:
+#[remote "origin"]
+#	url = https://github.com/schacon/simplegit-progit
+#	fetch = +refs/heads/master:refs/remotes/origin/master
+#	fetch = +refs/heads/qa/*:refs/remotes/origin/qa/*
+If- you have a complex workflow process that has a QA team pushing branches, developers pushing branches, and
+ integration teams pushing and collaborating on remote branches, you can namespace them easily this way.
+
+'Pushing Refspecs';
+Its nice that you can fetch namespaced references that way, but how does the QA team get their branches into
+ a qa/ namespace in the first place? You accomplish that by using refspecs to push.
+If- the QA team wants to push their master branch to qa/master on the remote server, they can run:
+$ 'git push' origin master:refs/heads/qa/master
+If- they want Git to do- that automatically each time they run git push origin, they can add a push value to their config file:
+#[remote "origin"]
+#	url = https://github.com/schacon/simplegit-progit
+#	fetch = +refs/heads/*:refs/remotes/origin/*
+#	push = refs/heads/master:refs/heads/qa/master
+Again- this will cause a git push origin to push the local master branch to the remote qa/master branch by default.
+Note- You cannot use the refspec to fetch from one repository and push to another one. For an example to do- so, refer to
+ Keep your GitHub public repository up-to-date.
+https://git-scm.com/book/en/v2/ch00/_fetch_and_push_on_different_repositories
+
+'Deleting References';
+You can also use the refspec to delete references from the remote server by running something like this:
+$ 'git push' origin :topic
+Because the refspec is 'src:dst', by leaving off the =src= part, this basically says to
+ make the topic branch on the remote nothing, which deletes it.
+Or you can use the newer syntax =available since Git v1.7.0=:
+$ 'git push' origin '--delete' topic
+
+'https://git-scm.com/book/en/v2/Git-Internals-Transfer-Protocols';
+'Transfer Protocols';
+Git can transfer data between two repositories in two major ways: the =dumb= protocol and the =smart= protocol.
