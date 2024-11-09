@@ -154,8 +154,8 @@ public class MainApplicationSingleton {
     public static final String API_KEY = "86e3be35b73888f648c337e46c6dad35";
     public static final String KEY_PARAM = "key";
 
-    public static final String AWS_ACCESS_KEY = "AKIAI3BW4AX3PWCKENCA";
-    public static final String AWS_SECRET_KEY = "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";
+    public static final String AWS_ACCESS_KEY = "INSERT_VALID_KEY_HERE";
+    public static final String AWS_SECRET_KEY = "INSERT_VALID_KEY_HERE";
     public static final String AWS_S3_BUCKET = "intellibitz-uploads";
     public static final String UID_USER_LOGGED_IN_PARAM = "uid_user_logged_in";
     public static final String DEVICE_ID = "android";

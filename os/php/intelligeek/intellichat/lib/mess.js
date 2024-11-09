@@ -812,12 +812,12 @@ function ValidateColor(string) {                // return valid color code
 												data = SelGroup.responseText.split("|#|");
 												document.forms[0].group.value = data[0];
 												document.forms[0].sendto.value = "";
-												var _alertMsg ="You 're In Group : " + data[0] + " Already";
-												alert($.find(_alertMsg));
-												// alert("You 're In Group : " + data[0] + " Already");
+												alert("You 're In Group : " + data[0] + " Already");
 
-												document.getElementById("sendtoshow").innerHTML = "<strong>Message To</strong><br><img src=\"./images/buttons/groupchat.gif\"> " + document.forms[0].group.value + " ( <u><a target=\"_parent\" onClick=\"SetSendTo('all')\" onMouseOver=\"this.style.cursor='hand';this.style.color='#000000'\" onMouseOut=\"this.style.color='#154062'\" title=\"Click Here To Back To Public Mode\">Cancel</a></u> )";
-												
+												var _sendtoshow ="<strong>Message To</strong><br><img src=\"./images/buttons/groupchat.gif\"> " + document.forms[0].group.value + " ( <u><a target=\"_parent\" onClick=\"SetSendTo('all')\" onMouseOver=\"this.style.cursor='hand';this.style.color='#000000'\" onMouseOut=\"this.style.color='#154062'\" title=\"Click Here To Back To Public Mode\">Cancel</a></u> )";
+												document.getElementById("sendtoshow").innerHTML = $.find(_sendtoshow);
+												// document.getElementById("sendtoshow").innerHTML = "<strong>Message To</strong><br><img src=\"./images/buttons/groupchat.gif\"> " + document.forms[0].group.value + " ( <u><a target=\"_parent\" onClick=\"SetSendTo('all')\" onMouseOver=\"this.style.cursor='hand';this.style.color='#000000'\" onMouseOut=\"this.style.color='#154062'\" title=\"Click Here To Back To Public Mode\">Cancel</a></u> )";
+
 												groupchat.style.visibility="hidden";
 												
 										}
