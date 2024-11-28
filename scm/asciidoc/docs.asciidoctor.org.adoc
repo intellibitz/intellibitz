@@ -1,0 +1,11 @@
+//docs.asciidoctor.org.adoc
+= Title
+
+== Section
+
+:name: value
+
+----
+block
+----
+
