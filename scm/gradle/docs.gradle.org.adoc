@@ -11,3 +11,25 @@ org.gradle.daemon=true
 org.gradle.configuration-cache=true
 org.gradle.caching=true
 org.gradle.jvmargs=-Xmx2048M
+----
+
+== Configuring Gradle
+https://docs.gradle.org/current/userguide/config_gradle.html
+
+=== Configuring JVM memory
+The org.gradle.jvmargs Gradle property controls the VM running the build. It defaults to  #_-Xmx512m "-XX:MaxMetaspaceSize=384m"_#
+
+You can adjust JVM options for Gradle in the following ways.
+
+Option 1: Changing JVM settings for the build VM:
+[, properties]
+----
+org.gradle.jvmargs=-Xmx2g -XX:MaxMetaspaceSize=512m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8
+----
+The JAVA_OPTS environment variable controls the command line client, which is only used to display console output. It defaults to -Xmx64m
+
+Option 2: Changing JVM settings for the client VM:
+[, properties]
+----
+JAVA_OPTS="-Xmx64m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-8"
+----
