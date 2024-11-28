@@ -1,0 +1,13 @@
+// docs.gradle.org.adoc
+== Improve the Performance of Gradle Builds
+https://docs.gradle.org/current/userguide/performance.html
+
+=== Enable parallel execution
+==== gradle.properties
+[, properties]
+----
+org.gradle.parallel=true
+org.gradle.daemon=true
+org.gradle.configuration-cache=true
+org.gradle.caching=true
+org.gradle.jvmargs=-Xmx2048M
