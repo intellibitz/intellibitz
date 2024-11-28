@@ -3,9 +3,71 @@
 
 == Section
 
-:name: value
+:name-attribute: value
 
+.title
 ----
-block
+literal block
 ----
+
+.nested
+[caption="Example Block: "]
+====
+example block
+----
+nested literal block
+----
+====
+
+.another nested
+[caption="Block {counter:number:1}: "]
+====
+example block
+
+.title
+[caption="Nested Block {counter:number:2}: "]
+=====
+nested example block, same structural block as parent, varied length of delimiter lines in child
+=====
+====
+
+.title
+[sidebar]
+text
+
+.title
+****
+content
+****
+
+.title
+[listing]
+text
+
+////
+this is a comment
+////
+
+.title
+....
+literal
+....
+
+.title
+[source, shell]
+ls -l
+
+.title
+[quote]
+quote
+
+.title
+[verse]
+verse
+
+.title
+[cols="1"]
+|===
+| text
+|===
 
