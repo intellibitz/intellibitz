@@ -245,7 +245,7 @@ $ ./gradlew :app:publishToMavenLocal
 #Plugin authors can either keep their plugins private or distribute them to the public. As such, plugins are distributed three ways:
 
 Core plugins - Gradle develops and maintains a set of Core Plugins.
-Community plugins - Gradle’s community shares plugins via the Gradle Plugin Portal.
+Community plugins - Gradles community shares plugins via the Gradle Plugin Portal.
 Custom plugins - Gradle enables user to create custom plugins using APIs.
 Convention plugins are plugins used to share build logic between subprojects /modules .
 
@@ -260,7 +260,7 @@ $ ./gradlew :app:build
 
 #There are four labels that developers can use to view task outcomes when verbose mode is turned on:
 #OutcomeLabel	Description
-UP-TO-DATE    Task that has been already executed and hasn’t changed ~incremental build feature
+UP-TO-DATE    Task that has been already executed and hasnt changed ~incremental build feature
 SKIPPED       Task was explicitly prevented from running
 FROM-CACHE    Task output has been copied to local directory from previous builds in the build cache ~caching feature
 NO-SOURCE     Task was not executed because its required inputs were not available
