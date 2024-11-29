@@ -1,4 +1,5 @@
 //git-scm.org.adoc
+:hardbreaks-option:
 ----
 https://git-scm.com
 https://git-scm.com/docs/gitcredentials

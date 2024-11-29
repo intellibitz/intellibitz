@@ -3,6 +3,13 @@
 
 == Section
 
+:sectnums:
+=== Section
+:sectnums!:
+
+==== Section
+
+
 :name-attribute: value
 
 .title
@@ -68,6 +75,19 @@ verse
 .title
 [cols="1"]
 |===
-| text
+| column
 |===
 
+paragraph with hard line +
+break
+
+[%hardbreaks]
+paragraph with hardbreaks line
+break
+
+:hardbreaks-option:
+line breaks
+ are preserved
+
+through
+entire document
