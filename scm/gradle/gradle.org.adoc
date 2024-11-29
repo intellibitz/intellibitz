@@ -9,37 +9,43 @@
 https://docs.gradle.org/current/userguide/userguide.html
 https://docs.gradle.org/current/userguide/quick_start.html
 
-[source, gradle]
+NOTE: Gradle supports Android, Java, Kotlin Multiplatform, Groovy, Scala, Javascript, and C/C++.
+The presence of the gradlew and gradlew.bat files in the root directory of a project is a clear indicator that Gradle is used.
+
+----
+$ gradle build #Gradle can be invoked in the command line
 ----
 
-#Gradle supports Android, Java, Kotlin Multiplatform, Groovy, Scala, Javascript, and C/C++.
-#The presence of the gradlew and gradlew.bat files in the root directory of a
-# project is a clear indicator that Gradle is used.
+The Wrapper is a script that invokes a declared version of Gradle and is the recommended way to execute a
+ Gradle build. It is found in the project root directory as a gradlew or gradlew.bat file:
 
-$ gradle build #Gradle can be invoked in the command line
-
-#The Wrapper is a script that invokes a declared version of Gradle and is the recommended way to execute a
-# Gradle build. It is found in the project root directory as a gradlew or gradlew.bat file:
+----
 $ gradlew build     // Linux or OSX
 $ gradlew.bat build  // Windows
+----
 
-#If you want to view or update the Gradle version of your project, use the
-# command line. Do not edit the wrapper files manually:
+If you want to view or update the Gradle version of your project, use the
+ command line. Do not edit the wrapper files manually:
+
+----
 $ ./gradlew --version
 $ ./gradlew wrapper --gradle-version 8.10.2
 $ ./gradlew --status
 
 gradlew --help
 gradlew -h
+----
 
 https://docs.gradle.org/current/userguide/getting_started_eng.html
-#To execute a task called taskName on the root project, type:
+To execute a task called taskName on the root project, type:
+----
+
 $ gradle :taskName
 
-#To pass an option to a task, prefix the option name with -- after the task name:
+To pass an option to a task, prefix the option name with -- after the task name:
 $ gradle taskName --exampleOption=exampleValue
 
-#The primary purpose of the settings file is to add subprojects to your build.
+The primary purpose of the settings file is to add subprojects to your build.
 << 'settings.gradle.kts'
 rootProject.name = "root-project"
 
@@ -47,13 +53,13 @@ include("sub-project-a")
 include("sub-project-b")
 include("sub-project-c")
 settings.gradle.kts
-#The settings file is a script. It is either a settings.gradle file written in Groovy or a
-# settings.gradle.kts file in Kotlin.
-#There is only one root project per build.
+The settings file is a script. It is either a settings.gradle file written in Groovy or a
+ settings.gradle.kts file in Kotlin.
+There is only one root project per build.
 
-#In the build file, two types of dependencies can be added:
-#The libraries and/or plugins on which Gradle and the build script depend.
-#The libraries on which the project sources (i.e., source code) depend.
+In the build file, two types of dependencies can be added:
+The libraries and/or plugins on which Gradle and the build script depend.
+The libraries on which the project sources (i.e., source code) depend.
 << 'build.gradle.kts'
 plugins {
     id("application")
@@ -63,17 +69,17 @@ application {
     mainClass = "com.example.Main"
 }
 build.gradle.kts
-#Every Gradle build comprises at least one build script.
+Every Gradle build comprises at least one build script.
 
-#Version catalogs provide a way to centralize your dependency declarations in a libs.versions.toml file.
-#The version catalog typically contains four sections:
-#[versions] to declare the version numbers that plugins and libraries will reference.
-#[libraries] to define the libraries used in the build files.
-#[bundles] to define a set of dependencies.
-#[plugins] to define plugins.
+Version catalogs provide a way to centralize your dependency declarations in a libs.versions.toml file.
+The version catalog typically contains four sections:
+[versions] to declare the version numbers that plugins and libraries will reference.
+[libraries] to define the libraries used in the build files.
+[bundles] to define a set of dependencies.
+[plugins] to define plugins.
 
-#The file is located in the gradle directory so that it can be used by Gradle and IDEs automatically. The
-# version catalog should be checked into source control: gradle/libs.versions.toml.
+The file is located in the gradle directory so that it can be used by Gradle and IDEs automatically. The
+ version catalog should be checked into source control: gradle/libs.versions.toml.
 << 'libs.versions.toml'
 [versions]
 androidGradlePlugin = "7.4.1"
@@ -87,7 +93,7 @@ mockitoCore = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 androidApplication = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 libs.versions.toml
 
-#The following build.gradle.kts file adds a plugin and two dependencies to the project using the version catalog above:
+The following build.gradle.kts file adds a plugin and two dependencies to the project using the version catalog above:
 << 'build.gradle.kts'
 plugins {
    alias(libs.plugins.androidApplication)
@@ -102,70 +108,70 @@ dependencies {
 }
 build.gradle.kts
 
-#You can view your dependency tree in the terminal using the ./gradlew :app:dependencies command:
+You can view your dependency tree in the terminal using the ./gradlew :app:dependencies command:
 $ ./gradlew :app:dependencies
 
-#You run a Gradle build task using the gradle command or by invoking the Gradle Wrapper (./gradlew or gradlew.bat) in your project directory:
+You run a Gradle build task using the gradle command or by invoking the Gradle Wrapper (./gradlew or gradlew.bat) in your project directory:
 $ ./gradlew build
 
-#All available tasks in your project come from Gradle plugins and build scripts.
-#You can list all the available tasks in the project by running the following command in the terminal:
+All available tasks in your project come from Gradle plugins and build scripts.
+You can list all the available tasks in the project by running the following command in the terminal:
 $ ./gradlew tasks
-#You can also list the tasks only available in the app subproject by running
+You can also list the tasks only available in the app subproject by running
 $ ./gradlew :app:tasks.
-#You can obtain more information in the task listing using the --all option:
+You can obtain more information in the task listing using the --all option:
 $ ./gradlew tasks --all
 
-#The run task is executed with ./gradlew run:
+The run task is executed with ./gradlew run:
 $ ./gradlew run
 
-#Many times, a task requires another task to run first.
+Many times, a task requires another task to run first.
 $ ./gradlew build
 
-#Plugins can be applied to a Gradle build script to add new tasks, configurations, or other build-related capabilities:
+Plugins can be applied to a Gradle build script to add new tasks, configurations, or other build-related capabilities:
 The Java Library Plugin - java-library
-#Used to define and build Java libraries. It compiles Java source code with the compileJava task, generates Javadoc with the
-# javadoc task, and packages the compiled classes into a JAR file with the jar task.
+Used to define and build Java libraries. It compiles Java source code with the compileJava task, generates Javadoc with the
+ javadoc task, and packages the compiled classes into a JAR file with the jar task.
 
 The Google Services Gradle Plugin - com.google.gms:google-services
-#Enables Google APIs and Firebase services in your Android application with a configuration block called
-# googleServices{} and a task called generateReleaseAssets.
+Enables Google APIs and Firebase services in your Android application with a configuration block called
+ googleServices{} and a task called generateReleaseAssets.
 
 The Gradle Bintray Plugin - com.jfrog.bintray
-#Allows you to publish artifacts to Bintray by configuring the plugin using the bintray{} block.
+Allows you to publish artifacts to Bintray by configuring the plugin using the bintray{} block.
 
-#You apply plugins in the build script using a plugin id (a globally unique identifier / name) and a version:
+You apply plugins in the build script using a plugin id (a globally unique identifier / name) and a version:
 << 'build.gradle.kts'
 plugins {
     id «plugin id» version «plugin version»
 }
 build.gradle.kts
 
-#Core plugins are unique in that they provide short names, such as java for the core JavaPlugin, when applied in
-# build scripts. They also do not require versions. To apply the java plugin to a project:
+Core plugins are unique in that they provide short names, such as java for the core JavaPlugin, when applied in
+ build scripts. They also do not require versions. To apply the java plugin to a project:
 << 'build.gradle.kts'
 plugins {
     id("java")
 }
 build.gradle.kts
 
-#Community plugins can be published at the Gradle Plugin Portal, where other Gradle users can easily discover and use them.
+Community plugins can be published at the Gradle Plugin Portal, where other Gradle users can easily discover and use them.
 << 'build.gradle.kts'
 plugins {
     id("org.springframework.boot") version "3.1.5"
 }
 build.gradle.kts
 
-#Incremental builds are always enabled, and the best way to see them in action is to turn on verbose mode.
-# With verbose mode, each task state is labeled during a build:
+Incremental builds are always enabled, and the best way to see them in action is to turn on verbose mode.
+ With verbose mode, each task state is labeled during a build:
 $ ./gradlew compileJava --console=verbose
 
-#When the build cache has been used to repopulate the local directory, the tasks are marked as FROM-CACHE:
+When the build cache has been used to repopulate the local directory, the tasks are marked as FROM-CACHE:
 $ ./gradlew compileJava --build-cache
 
-#A build scan is a representation of metadata captured as you run your build.
-#A Build Scan is a shareable and centralized record of a build and is available as a free service from Gradle.
-#To enable build scans on a gradle command, add --scan to the command line option:
+A build scan is a representation of metadata captured as you run your build.
+A Build Scan is a shareable and centralized record of a build and is available as a free service from Gradle.
+To enable build scans on a gradle command, add --scan to the command line option:
 $ ./gradlew build --scan
 
 https://docs.gradle.org/current/userguide/part1_gradle_init.html
@@ -227,8 +233,8 @@ Version / version # to import           32.1.2-jre , 5.9.1
 build.gradle.kts
 
 https://docs.gradle.org/current/userguide/part4_gradle_plugins.html#part4_begin
-#The Maven Publish Plugin provides the ability to publish build artifacts to an Apache Maven repository. It can also
-# publish to Maven local which is a repository located on your machine.
+The Maven Publish Plugin provides the ability to publish build artifacts to an Apache Maven repository. It can also
+ publish to Maven local which is a repository located on your machine.
 << 'build.gradle.kts'
 plugins {
     // Apply the application plugin to add support for building a CLI application in Java.
@@ -249,19 +255,19 @@ publishing {
 }
 build.gradle.kts
 
-#The publishToMavenLocal task builds the POM file and the artifacts to be published. It then installs them into the local Maven repository.
+The publishToMavenLocal task builds the POM file and the artifacts to be published. It then installs them into the local Maven repository.
 $ ./gradlew :app:publishToMavenLocal
 
-#Plugins are used to extend build capability and customize Gradle. Using plugins is the primary mechanism for organizing build logic.
-#Plugin authors can either keep their plugins private or distribute them to the public. As such, plugins are distributed three ways:
+Plugins are used to extend build capability and customize Gradle. Using plugins is the primary mechanism for organizing build logic.
+Plugin authors can either keep their plugins private or distribute them to the public. As such, plugins are distributed three ways:
 
 Core plugins - Gradle develops and maintains a set of Core Plugins.
 Community plugins - Gradles community shares plugins via the Gradle Plugin Portal.
 Custom plugins - Gradle enables user to create custom plugins using APIs.
 Convention plugins are plugins used to share build logic between subprojects /modules .
 
-#Users can wrap common logic in a convention plugin. For example, a code coverage plugin used as a convention plugin can
-# survey code coverage for the entire project and not just a specific subproject.
+Users can wrap common logic in a convention plugin. For example, a code coverage plugin used as a convention plugin can
+ survey code coverage for the entire project and not just a specific subproject.
 
 Gradle highly recommends the use of Convention plugins.
 
@@ -269,17 +275,17 @@ https://docs.gradle.org/current/userguide/part5_gradle_inc_builds.html#part5_beg
 $ ./gradlew :app:clean :app:build
 $ ./gradlew :app:build
 
-#There are four labels that developers can use to view task outcomes when verbose mode is turned on:
-#OutcomeLabel	Description
+There are four labels that developers can use to view task outcomes when verbose mode is turned on:
+OutcomeLabel	Description
 UP-TO-DATE    Task that has been already executed and hasnt changed ~incremental build feature
 SKIPPED       Task was explicitly prevented from running
 FROM-CACHE    Task output has been copied to local directory from previous builds in the build cache ~caching feature
 NO-SOURCE     Task was not executed because its required inputs were not available
-#If there is no label, the task was newly executed by Gradle ~locally.
+If there is no label, the task was newly executed by Gradle ~locally.
 
 https://docs.gradle.org/current/userguide/part6_gradle_caching.html#part6_begin
 https://docs.gradle.org/current/userguide/gradle_directories.html
-#Add org.gradle.caching=true to the gradle.properties file:
+Add org.gradle.caching=true to the gradle.properties file:
 << 'gradle.properties'
 org.gradle.console=verbose
 org.gradle.caching=true
@@ -288,11 +294,11 @@ gradle.properties
 $ ./gradlew :app:clean :app:build
 $ ./gradlew :app:build
 
-#Gradle lets us know the outcome of each task in the console output:
+Gradle lets us know the outcome of each task in the console output:
 FROM-CACHE - tasks have been fetched from the local build cache.
 UP-TO-DATE - tasks that used incremental build and were not re-run.
 
-#To summarize:
+To summarize:
 First, we used the build task to populate our local cache with task inputs and outputs, we can imagine this was done a week ago.
 Then, we used the clean task to mimic switching branches, overriding previous outputs.
 Finally, we used the build task, unlike incremental builds, the previous outputs were stored in the local cache and could be reused.
@@ -303,20 +309,20 @@ Gradle is efficient, especially with the local build cache turned on. Gradle wil
 The outcome label FROM-CACHE lets the user know that Gradle has fetched the task results from the local build cache.
 
 https://docs.gradle.org/current/userguide/part7_gradle_refs.html#part7_begin
-#http://gradle.org/docs/current/javadoc/
+http://gradle.org/docs/current/javadoc/
 https://docs.gradle.org/current/dsl/index.html
 https://docs.gradle.org/current/kotlin-dsl/index.html
 https://docs.gradle.org/current/userguide/plugin_reference.html#plugin_reference
-#https://plugins.gradle.org/
-#https://gradle.org/releases/
+https://plugins.gradle.org/
+https://gradle.org/releases/
 http://gradle.org/docs/current/release-notes
-#https://discuss.gradle.org/
-#https://gradle-community.slack.com/
-#https://gradle.org/courses/
+https://discuss.gradle.org/
+https://gradle-community.slack.com/
+https://gradle.org/courses/
 
 https://docs.gradle.org/current/userguide/command_line_interface.html#command_line_interface
 
-#Authoring Gradle Builds
+Authoring Gradle Builds
 https://docs.gradle.org/current/userguide/getting_started_dev.html
 Gradle User Home directory
 By default, the Gradle User Home ~~/.gradle or C:\Users\<USERNAME>\.gradle~ stores global configuration properties,
@@ -396,7 +402,7 @@ Consult the Gradle Directories reference to learn more.
 https://docs.gradle.org/current/userguide/directory_layout.html#dir:project_root
 
 https://docs.gradle.org/current/userguide/intro_multi_project_builds.html
-#A multi-project build consists of one root project and one or more subprojects.
+A multi-project build consists of one root project and one or more subprojects.
 The following represents the structure of a multi-project build that contains two subprojects:
 The directory structure should look as follows:
 
@@ -417,7 +423,7 @@ The directory structure should look as follows:
 
 The settings.gradle.kts file should include all subprojects.
 Each subproject should have its own build.gradle.kts file.
-#The Gradle community has two standards for multi-project build structures:
+The Gradle community has two standards for multi-project build structures:
 Multi-Project Builds using buildSrc - where buildSrc is a subproject-like directory at the Gradle project root containing all the build logic.
 ~For example, a build that has many modules called mobile-app, web-app, api, lib, and documentation could be structured as follows:
 
@@ -450,7 +456,7 @@ settings.gradle.kts
 The order in which the subprojects ~modules~ are included does not matter.
 
 Composite Builds - a build that includes other builds where build-logic is a build directory at the Gradle project root containing reusable build logic.
-#Multi-Project Builds using buildSrc
+Multi-Project Builds using buildSrc
 Multi-project builds allow you to organize projects with many modules, wire dependencies between those modules, and
 easily share common build logic amongst themi-project builds allow you to organize projects with many modules,
 wire dependencies between those modules, and easily share common build logic amongst them
@@ -507,8 +513,8 @@ The rest of a project path is a colon-separated sequence of project names, where
 gradlew -q projects
 
 https://docs.gradle.org/current/userguide/multi_project_builds.html#multi_project_builds
-#Multi-project builds are collections of tasks you can run. The difference is that you may want to control which project’s tasks get executed.
-#Executing tasks by name
+Multi-project builds are collections of tasks you can run. The difference is that you may want to control which project’s tasks get executed.
+Executing tasks by name
 The command gradle test will execute the test task in any subprojects relative to the current working directory that has that task.
 ~If you run the command from the root project directory, you will run test in api, shared, services:shared and services:webservice.
 ~If you run the command from the services project directory, you will only execute the task in services:shared and services:webservice.
@@ -516,7 +522,7 @@ The basic rule behind Gradle’s behavior is to execute all tasks down the hiera
  is no such task found in any of the subprojects traversed.
 Some task selectors, like help or dependencies, will only run the task on the project they are invoked on and not on all the
  subprojects to reduce the amount of information printed on the screen.
-#Executing tasks by fully qualified name
+Executing tasks by fully qualified name
 You can use a task’s fully qualified name to execute a specific task in a particular subproject.
 ~For example: gradle :services:webservice:build will run the build task of the webservice subproject.
 The fully qualified name of a task is its project path plus the task name.
@@ -537,7 +543,7 @@ $ gradle build
 https://docs.gradle.org/current/userguide/build_lifecycle.html#build_lifecycle
 https://docs.gradle.org/current/userguide/tutorial_using_tasks.html#sec:task_dependencies
 https://docs.gradle.org/current/userguide/incremental_build.html#sec:task_inputs_outputs
-#A Gradle build has three distinct phases. Gradle runs these phases in order:
+A Gradle build has three distinct phases. Gradle runs these phases in order:
 Phase 1. Initialization
 In the initialization phase, Gradle detects the set of projects ~root and subprojects~ and
  included builds participating in the build.
@@ -616,11 +622,11 @@ Many top-level properties and blocks in a settings script are part of the Settin
 ~For example, we can set the root project name in the settings script using the Settings.rootProject property:
 << 'settings.gradle.kts'
 settings.rootProject.name = "root"
-#Which is usually shortened to:
+Which is usually shortened to:
 rootProject.name = "root"
 settings.gradle.kts
 
-#The Settings object exposes a standard set of properties in your settings script.
+The Settings object exposes a standard set of properties in your settings script.
 The following table lists a few commonly used properties:
 Name	Description
 buildCache
@@ -739,7 +745,7 @@ It’s important to remember that while many Gradle scripts are typically writte
 
 << 'settings.gradle.kts'
 include("app")
-#Is actually:
+Is actually:
 settings.include("app")
 settings.gradle.kts
 Additionally, the full power of the Groovy and Kotlin languages is available to you.
@@ -781,15 +787,15 @@ https://docs.gradle.org/current/dsl/org.gradle.api.Project.html#org.gradle.api.P
 << 'build.gradle.kts'
 println(name)
 println(project.name)
-#The first uses the top-level reference to the name property of the Project object. The second statement uses the
-# project property available to any build script, which returns the associated Project object.
+The first uses the top-level reference to the name property of the Project object. The second statement uses the
+ project property available to any build script, which returns the associated Project object.
 build.gradle.kts
 
 $ gradle -q check
 
-#The Project object exposes a standard set of properties in your build script.
+The Project object exposes a standard set of properties in your build script.
 The following table lists a few commonly used properties:
-#Name	Type	Description
+Name	Type	Description
 name String
 The name of the project directory.
 path String
@@ -808,7 +814,7 @@ version Object
 The version of this project.
 
 The following table lists a few commonly used methods:
-#Name	Description
+Name	Description
 uri~~
 Resolves a file path to a URI, relative to the project directory of this project.
 task~~
@@ -909,7 +915,7 @@ tasks.create<Zip>("zip-reports") {
     archiveName 'Reports.zip'
     destinationDir(file('/dir'))
 }
-#register(), which enables task configuration avoidance, is preferred over create().
+register(), which enables task configuration avoidance, is preferred over create().
 build.gradle.kts
 You can locate a task to configure it using the TaskCollection.named~java.lang.String~ method:
 << 'build.gradle.kts'
@@ -929,12 +935,12 @@ build.gradle.kts
 A build script is made up of zero or more statements and script blocks:
 << 'build.gradle.kts'
 println(project.layout.projectDirectory);
-#Statements can include method calls, property assignments, and local variable definitions:
+Statements can include method calls, property assignments, and local variable definitions:
 version = '1.0.0.GA'
-#A script block is a method call which takes a closure/lambda as a parameter:
+A script block is a method call which takes a closure/lambda as a parameter:
 configurations {
 }
-#The closure/lambda configures some delegate object as it executes:
+The closure/lambda configures some delegate object as it executes:
 repositories {
     google()
 }
@@ -1040,7 +1046,7 @@ https://docs.gradle.org/current/dsl/org.gradle.api.plugins.ExtraPropertiesExtens
 
 Configure Arbitrary Objects
 << 'build.gradle.kts'
-#The example greet() task shows an example of arbitrary object configuration:
+The example greet() task shows an example of arbitrary object configuration:
 class UserInfo(
     var name: String? = null,
     var email: String? = null
@@ -1076,9 +1082,9 @@ To make build scripts more concise, Gradle automatically adds a set of import st
 As a result, instead of writing
 << 'build.gradle.kts'
 throw new org.gradle.api.tasks.StopExecutionException()
-#, you can write
+, you can write
 throw new StopExecutionException()
-#instead.
+instead.
 build.gradle.kts
 
 https://docs.gradle.org/current/userguide/tutorial_using_tasks.html#tutorial_using_tasks
@@ -1115,7 +1121,7 @@ tasks.register("hello") {
 build.gradle.kts
 In the example, the build script registers a single task called hello using the TaskContainer API, and adds an action to it.
 https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/TaskContainer.html
-#If the tasks in the project are listed, the hello task is available to Gradle:
+If the tasks in the project are listed, the hello task is available to Gradle:
 $ ./gradlew app:tasks --all
 You can execute the task in the build script with ./gradlew hello:
 $ ./gradlew hello
@@ -1172,7 +1178,7 @@ Task configuration
 Once registered, tasks can be accessed via the TaskProvider API for further configuration.
 https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/TaskProvider.html
 << 'build.gradle.kts'
-#For instance, you can use this to add dependencies to a task at runtime dynamically:
+For instance, you can use this to add dependencies to a task at runtime dynamically:
 repeat(4) { counter ->
     tasks.register("task$counter") {
         doLast {
@@ -1206,8 +1212,8 @@ tasks.named("hello") {
         println("Hello Jupiter")
     }
 }
-#The calls doFirst and doLast can be executed multiple times. They add an action to the beginning or the end of the
-# task’s actions list. When the task executes, the actions in the action list are executed in order.
+The calls doFirst and doLast can be executed multiple times. They add an action to the beginning or the end of the
+ task’s actions list. When the task executes, the actions in the action list are executed in order.
 build.gradle.kts
 $ gradle -q hello
 
@@ -1234,7 +1240,7 @@ tasks.register<HelloTask>("hello") {
     group = "Custom tasks"
     description = "A lovely greeting task."
 }
-#The hello task is registered with the type HelloTask. Executing our new hello task:
+The hello task is registered with the type HelloTask. Executing our new hello task:
 build.gradle.kts
 $ ./gradlew hello
 Now the hello task is of type HelloTask instead of type Task. The Gradle help task reveals the change:
@@ -1280,8 +1286,8 @@ The CreateFileTask implements a simple set of actions. First, a file called "myf
 
 Register a task
 << 'build.gradle.kts'
-#A task is registered in the build script using the TaskContainer.register() method, which allows it
-# to be then used in the build logic.
+A task is registered in the build script using the TaskContainer.register() method, which allows it
+ to be then used in the build logic.
 abstract class CreateFileTask : DefaultTask() {
     @TaskAction
     fun action() {
@@ -1308,7 +1314,7 @@ tasks.register<CreateFileTask>("createFileTask", ) {
     group = "custom"
     description = "Create myfile.txt in the current directory"
 }
-#Once a task is added to a group, it is visible when listing tasks.
+Once a task is added to a group, it is visible when listing tasks.
 build.gradle.kts
 
 Task input and outputs
@@ -1363,11 +1369,11 @@ tasks.register<CreateFileTask>("createFileTask") {
     fileText.convention("HELLO FROM THE CREATE FILE TASK METHOD") // Set convention
 }
 
-#A task is optionally configured in a build script using the TaskCollection.named() method.
+A task is optionally configured in a build script using the TaskCollection.named() method.
 tasks.named<CreateFileTask>("createFileTask") {
     fileText.set("HELLO FROM THE NAMED METHOD") // Override with custom message
 }
-#In the named() method, we find the createFileTask task and set the text that will be written to the file.
+In the named() method, we find the createFileTask task and set the text that will be written to the file.
 build.gradle.kts
 When the task is executed:
 $ ./gradlew createFileTask
@@ -1397,21 +1403,21 @@ Plugins are available in three ways:
 Core plugins - Gradle develops and maintains a set of Core Plugins.
 https://docs.gradle.org/current/userguide/plugin_reference.html#plugin_reference
 Community plugins - Gradle plugins shared in a remote repository such as Maven or the Gradle Plugin Portal.
-#https://plugins.gradle.org/
+https://plugins.gradle.org/
 Local plugins - Gradle enables users to create custom plugins using APIs.
 https://docs.gradle.org/current/javadoc/org/gradle/api/Plugin.html
 
 Types of plugins
 Plugins can be implemented as binary plugins, precompiled script plugins, or script plugins:
-#Binary Plugins
+Binary Plugins
 Binary plugins are compiled plugins typically written in Java or Kotlin DSL that are packaged as JAR files. They are
  applied to a project using the plugins {} block. They offer better performance and maintainability compared to
   script plugins or precompiled script plugins.
-#Precompiled Script Plugins
+Precompiled Script Plugins
 Precompiled script plugins are Groovy DSL or Kotlin DSL scripts compiled and distributed as Java class files packaged in a
  library. They are applied to a project using the plugins {} block. They provide a way to reuse complex logic across
   projects and allow for better organization of build logic.
-#Script Plugins
+Script Plugins
 Script plugins are Groovy DSL or Kotlin DSL scripts that are applied directly to a Gradle build script using the
 apply from: syntax. They are applied inline within a build script to add functionality or
  customize the build process. They are simple to use.
@@ -1463,7 +1469,7 @@ pluginManagement {
 settings.gradle.kts
 There are additional considerations for resolving and applying plugins:
 
-#To	Use	For example:
+To	Use	For example:
 1 Apply a core, community or local plugin to a specific project.
 The plugins block in the build file
 https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_block
@@ -1510,7 +1516,7 @@ build.gradle.kts
 4 Apply a local script plugins.
 https://docs.gradle.org/current/userguide/plugins.html#sec:script_plugins
 << 'build.gradle.kts'
-#The legacy apply() method in the build file
+The legacy apply() method in the build file
 apply(plugin = "org.barfuin.gradle.taskinfo")
 apply<MyPlugin>()
 build.gradle.kts
@@ -1538,7 +1544,7 @@ plugins {
 build.gradle.kts
 All other binary plugins must use the fully qualified form of the plugin id ~e.g., com.github.foo.bar~.
 To apply a community plugin from Gradle plugin portal, the fully qualified plugin id, a globally unique identifier, must be used:
-#http://plugins.gradle.org/
+http://plugins.gradle.org/
 << 'build.gradle.kts'
 plugins {
     id("org.springframework.boot") version "3.3.1"
@@ -1552,12 +1558,12 @@ It is constrained to be idempotent ~produce the same result every time~ and side
  Gradle to execute at any time~.
 << 'build.gradle.kts'
 plugins {
-#for core Gradle plugins or plugins already available to the build script
+for core Gradle plugins or plugins already available to the build script
     id(«plugin id»)
-#for binary Gradle plugins that need to be resolved
+for binary Gradle plugins that need to be resolved
     id(«plugin id») version «plugin version»
 }
-#Where «plugin id» and «plugin version» are a string.
+Where «plugin id» and «plugin version» are a string.
 build.gradle.kts
 The plugins{} block must also be a top-level statement in the build script. It cannot be nested inside another
 construct ~e.g., an if-statement or for-loop~.
@@ -1703,7 +1709,7 @@ other.gradle.kts
 First, import the external file using:
 << 'build.gradle.kts'
 apply from: 'other.gradle'
-#Then you can apply it:
+Then you can apply it:
 apply plugin: Other
 build.gradle.kts
 Script plugins are automatically resolved and can be applied from a script on the local filesystem or remotely:
@@ -1744,7 +1750,7 @@ init.gradle.kts
 
 Custom Plugin Repositories
 By default, the plugins{} DSL resolves plugins from the public Gradle Plugin Portal.
-#https://plugins.gradle.org/
+https://plugins.gradle.org/
 Many build authors would also like to resolve plugins from private Maven or Ivy repositories because they contain
 proprietary implementation details or to have more control over what plugins are available to their builds.
 To specify custom plugin repositories, use the repositories{} block inside pluginManagement{}:
@@ -1882,7 +1888,7 @@ libs.versions.toml
 plugins {
     alias(libs.plugins.kotlin.jvm)
 }
-#kotlin-jvm is available as the Gradle generated safe accessor: kotlin.jvm
+kotlin-jvm is available as the Gradle generated safe accessor: kotlin.jvm
 build.gradle.kts
 
 https://docs.gradle.org/current/userguide/writing_plugins.html#writing_plugins
@@ -2093,9 +2099,9 @@ The ~settings.gradle.kts file has two interesting lines:
 << 'settings.gradle.kts'
 rootProject.name = "authoring-tutorial"
 include("app")
-#rootProject.name assigns a name to the build, overriding the default behavior of naming the build after its directory name.
-#include("app") defines that the build consists of one subproject called app that contains its own source code and build logic.
-#More subprojects can be added by additional include() statements.
+rootProject.name assigns a name to the build, overriding the default behavior of naming the build after its directory name.
+include("app") defines that the build consists of one subproject called app that contains its own source code and build logic.
+More subprojects can be added by additional include() statements.
 settings.gradle.kts
 
 Our build contains one subproject called app representing the Java application we are building. It is configured in the
@@ -2103,18 +2109,18 @@ Our build contains one subproject called app representing the Java application w
 
 << 'build.gradle.kts'
 plugins {
-#Apply the application plugin to add support for building a CLI application in Java.
+Apply the application plugin to add support for building a CLI application in Java.
     id("application")
 }
 
 repositories {
-#Use Maven Central for resolving dependencies.
+Use Maven Central for resolving dependencies.
     mavenCentral()
 }
 
 dependencies {
-#Use JUnit Jupiter for testing (using the version catalog).
-#This dependency is used by the application (referred using the version catalog).
+Use JUnit Jupiter for testing (using the version catalog).
+This dependency is used by the application (referred using the version catalog).
     testImplementation(libs.junit.jupiter)
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation(libs.guava)
@@ -2122,21 +2128,21 @@ dependencies {
 
 java {
     toolchain {
-#Define the toolchain version.
+Define the toolchain version.
         languageVersion = JavaLanguageVersion.of(11)
     }
 }
 
 application {
-#Define the main class for the application.
+Define the main class for the application.
     mainClass = "org.example.App"
 }
 
 tasks.named<Test>("test") {
-#Use JUnit Platform for unit tests.
+Use JUnit Platform for unit tests.
     useJUnitPlatform()
 }
-#The build script in the app subproject directory declares the dependencies the app code will need to be assembled and tested.
+The build script in the app subproject directory declares the dependencies the app code will need to be assembled and tested.
 build.gradle.kts
 
 $ ./gradlew run
@@ -2228,7 +2234,7 @@ Step 1. About Multi-Project Builds
 Typically, builds contain multiple projects, such as shared libraries or separate applications that will be deployed in your ecosystem.
 In Gradle, a multi-project build consists of:
 ~settings.gradle.kts file representing your Gradle build including required subprojects
-#e.g. include("app", "model", "service")
+e.g. include("app", "model", "service")
 ~build.gradle.kts and source code for each subproject in corresponding subdirectories
 Our build currently consists of a root project called authoring-tutorial, which has a single app subproject:
 
@@ -2448,7 +2454,7 @@ When in the project root, running:
 There are many ways to design a project’s architecture with Gradle.
 Multi-project builds are great for organizing projects with many modules such as mobile-app, web-app, api, lib, and
  documentation that have dependencies between them.
-#Composite (include) builds are great for separating build logic (i.e., convention plugins) or testing systems (i.e., patching a library)
+Composite (include) builds are great for separating build logic (i.e., convention plugins) or testing systems (i.e., patching a library)
 
 https://docs.gradle.org/current/userguide/partr4_settings_file.html
 Step 1. Gradle scripts
@@ -2478,23 +2484,23 @@ settings.gradle.kts
 Step 3. The Settings file
 Let’s break down the settings file in our project root directory:
 << 'settings.gradle.kts'
-#plugins({}) from the PluginDependenciesSpec API
-#https://docs.gradle.org/current/dsl/org.gradle.plugin.use.PluginDependenciesSpec.html
+plugins({}) from the PluginDependenciesSpec API
+https://docs.gradle.org/current/dsl/org.gradle.plugin.use.PluginDependenciesSpec.html
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
-#id() method from the PluginDependenciesSpec API
+id() method from the PluginDependenciesSpec API
 }
 
 rootProject.name = "authoring-tutorial"
-#getRootProject() method from the Settings API
-#https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html
+getRootProject() method from the Settings API
+https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html
 
 include("app")
 include("lib")
-#include() method from the Settings API
+include() method from the Settings API
 
 includeBuild("gradle/license-plugin")
-#includeBuild() method from the Settings API
+includeBuild() method from the Settings API
 settings.gradle.kts
 
 https://docs.gradle.org/current/userguide/partr5_build_scripts.html#partr5_build_scripts
@@ -2515,32 +2521,32 @@ reportsDir = file("reports")   // Delegates to Project.file() and the Java Plugi
 Step 2. The Build script
 Let’s break down the build script for the plugin:
 << 'gradle/license-plugin/plugin/build.gradle.kts'
-#Use the plugins{} block from KotlinSettingsScript in the Kotlin DSL
-#https://docs.gradle.org/current/kotlin-dsl/gradle/org.gradle.kotlin.dsl/-kotlin-settings-script/index.html
-#Apply the Java Gradle plugin development plugin to add support for developing Gradle plugins
-#Apply the Kotlin JVM plugin to add support for Kotlin
+Use the plugins{} block from KotlinSettingsScript in the Kotlin DSL
+https://docs.gradle.org/current/kotlin-dsl/gradle/org.gradle.kotlin.dsl/-kotlin-settings-script/index.html
+Apply the Java Gradle plugin development plugin to add support for developing Gradle plugins
+Apply the Kotlin JVM plugin to add support for Kotlin
 plugins {
     `java-gradle-plugin`
     id("org.jetbrains.kotlin.jvm") version "2.0.20"
 }
 
-#Use Project.repositories() to configure the repositories for this project
-#Use Maven Central for resolving dependencies
-#https://repo.maven.apache.org/maven2/
+Use Project.repositories() to configure the repositories for this project
+Use Maven Central for resolving dependencies
+https://repo.maven.apache.org/maven2/
 repositories {
     mavenCentral()
 }
 
-#Use Project.dependencies() to configure the dependencies for this project
-#Use the Kotlin JUnit 5 integration
+Use Project.dependencies() to configure the dependencies for this project
+Use the Kotlin JUnit 5 integration
 dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
-#Use the gradlePlugin{} block from GradlePluginDevelopmentExtension in the Kotlin DSL
-#https://docs.gradle.org/current/kotlin-dsl/gradle/org.gradle.plugin.devel/-gradle-plugin-development-extension/index.html
-#Define the plugin id and implementationClass
+Use the gradlePlugin{} block from GradlePluginDevelopmentExtension in the Kotlin DSL
+https://docs.gradle.org/current/kotlin-dsl/gradle/org.gradle.plugin.devel/-gradle-plugin-development-extension/index.html
+Define the plugin id and implementationClass
 gradlePlugin {
     val greeting by plugins.creating {
         id = "license.greeting"
@@ -2548,28 +2554,28 @@ gradlePlugin {
     }
 }
 
-#Plugins, which enhance your build capabilities, are included like this:
+Plugins, which enhance your build capabilities, are included like this:
 plugins {
     id("java")                          // core plugin, no version required
     id("org.some.plugin") version "2.8" // community plugin, version required
 }
 
-#The repositories section lets Gradle know where to pull dependencies from:
+The repositories section lets Gradle know where to pull dependencies from:
 repositories {
     mavenCentral()  // get dependencies from the Maven central repository
 }
 
-#Dependencies are requirements for building your application or library:
+Dependencies are requirements for building your application or library:
 dependencies {
     // group: 'org.apache.commons', name: 'commons-lang3', version: '3.13.0'
     implementation("org.apache.commons:commons-lang3:3.13.0")
 }
 
-#In this example, implementation() means that the commons-lang3 library must be added to the Java classpath.
-#Every dependency declared for a Gradle project must apply to a scope. That is, the dependency is either needed at
-# compile time, runtime, or both. This is called a configuration and the implementation configuration is used when the
-#  dependency is only needed in the runtime classpath.
-#Configuration blocks (not to be confused with dependency configurations above) are typically used to configure an applied plugin:
+In this example, implementation() means that the commons-lang3 library must be added to the Java classpath.
+Every dependency declared for a Gradle project must apply to a scope. That is, the dependency is either needed at
+ compile time, runtime, or both. This is called a configuration and the implementation configuration is used when the
+  dependency is only needed in the runtime classpath.
+Configuration blocks (not to be confused with dependency configurations above) are typically used to configure an applied plugin:
 gradlePlugin {  // Define a custom plugin
     val greeting by plugins.creating {  // Define `greeting` plugin using the `plugins.creating` method
         id = "license.greeting" // Create plugin with the specified ID
@@ -2577,8 +2583,8 @@ gradlePlugin {  // Define a custom plugin
     }
 }
 
-#When the java-gradle-plugin is applied, users must configure the plugin they are developing using the gradlePlugin{} configuration block.
-#Tasks are units of work executed during your build. They can be defined by plugins or inline:
+When the java-gradle-plugin is applied, users must configure the plugin they are developing using the gradlePlugin{} configuration block.
+Tasks are units of work executed during your build. They can be defined by plugins or inline:
 val functionalTest by tasks.registering(Test::class) {
     testClassesDirs = functionalTestSourceSet.output.classesDirs
     classpath = functionalTestSourceSet.runtimeClasspath
@@ -2590,9 +2596,9 @@ tasks.named<Test>("test") {
     useJUnitPlatform()
 }
 
-#In the example generated by Gradle init, we define two tasks:
-#functionalTest: This task is registered using tasks.register(). It configures the test task for functional tests.
-#test: This task is configured using tasks.named() for the existing test task. It also configures the task to use JUnit Jupiter for unit tests.
+In the example generated by Gradle init, we define two tasks:
+functionalTest: This task is registered using tasks.register(). It configures the test task for functional tests.
+test: This task is configured using tasks.named() for the existing test task. It also configures the task to use JUnit Jupiter for unit tests.
 gradle/license-plugin/plugin/build.gradle.kts
 
 Step 3. Apply the Plugin
@@ -2637,12 +2643,12 @@ A Task can depend on other tasks.
 Step 2. Register and Configure Tasks
 Early on in the tutorial, we registered and configured task1 in the app build script:
 << 'app/build.gradle.kts'
-#You can use the register() method to create new tasks.
+You can use the register() method to create new tasks.
 tasks.register("task1"){
     println("REGISTER TASK1: This is executed during the configuration phase")
 }
 
-#You can use the named() method to configure existing tasks.
+You can use the named() method to configure existing tasks.
 tasks.named("task1"){
     println("NAMED TASK1: This is executed during the configuration phase")
     doFirst {
@@ -2713,7 +2719,7 @@ https://docs.gradle.org/current/userguide/partr7_writing_plugins.html#partr7_wri
 Step 1. Develop the Plugin
 Let’s tie our custom LicenseTask to our plugin.
 << 'gradle/license-plugin/plugin/src/main/kotlin/license/LicensePlugin.kt'
-#Update the LicensePlugin with the code for the Plugin below (don’t change anything else in the file):
+Update the LicensePlugin with the code for the Plugin below (don’t change anything else in the file):
 class LicensePlugin: Plugin<Project> {
     override fun apply(project: Project) {
         project.tasks.register("license", LicenseTask::class.java) { task ->
@@ -2744,7 +2750,7 @@ license.txt
 
 Step 3. Apply the Plugin
 << 'app/build.gradle.kts'
-#Apply the plugin to the app subproject (if not done already):
+Apply the plugin to the app subproject (if not done already):
 plugins {
     application
     id("com.tutorial.license") // Apply custom plugin
@@ -2756,7 +2762,7 @@ $ ./gradlew :app:tasks
 Next, let’s run the task with
 $ ./gradlew :app:license:
 
-#https://docs.gradle.org/current/userguide/multi_project_builds.html#multi_project_builds
+https://docs.gradle.org/current/userguide/multi_project_builds.html#multi_project_builds
 It is important to structure your Gradle project to optimize build performance.
 A multi-project build is the standard in Gradle.
 A multi-project build consists of one root project and one or more subprojects.
@@ -2765,7 +2771,7 @@ Gradle can build the root project and any number of the subprojects in a single 
 Project locations
 Multi-project builds contain a single root project in a directory that Gradle views as the root path: ..
 Subprojects are located physically under the root path: ./subproject.
-#https://docs.gradle.org/current/userguide/intro_multi_project_builds.html#sec:project_path
+https://docs.gradle.org/current/userguide/intro_multi_project_builds.html#sec:project_path
 A subproject has a path, which denotes the position of that subproject in the multi-project build. In most cases,
  the project path is consistent with its location in the file system.
 The project structure is created in the ~settings.gradle.kts file. The settings file must be present in the root directory.
@@ -2784,19 +2790,19 @@ The project contains a single subproject called ./app:
 
 This is the recommended project structure for starting any Gradle project. The build init plugin also
 generates skeleton projects that follow this structure - a root project with a single subproject:
-#https://docs.gradle.org/current/userguide/build_init_plugin.html#build_init_plugin
+https://docs.gradle.org/current/userguide/build_init_plugin.html#build_init_plugin
 The ~settings.gradle.kts file describes the project structure to Gradle:
 << 'settings.gradle.kts'
 rootProject.name = "basic-multiproject"
 include("app")
-#In this case, Gradle will look for a build file for the app subproject in the ./app directory.
+In this case, Gradle will look for a build file for the app subproject in the ./app directory.
 settings.gradle.kts
 You can view the structure of a multi-project build by running the projects command:
 $ ./gradlew -q projects
 
 In this example, the app subproject is a Java application that applies the application plugin and configures the
  main class. The application prints Hello World to the console:
-#https://docs.gradle.org/current/userguide/application_plugin.html#application_plugin
+https://docs.gradle.org/current/userguide/application_plugin.html#application_plugin
 << 'app/build.gradle.kts'
 plugins {
     id("application")
@@ -2826,10 +2832,10 @@ include("project1", "project2:child1", "project3:child1")
 settings.gradle.kts
 The include method takes project paths as arguments. The project path is assumed to be equal to the
 relative physical file system path. For example, a path services:api is mapped by default to a folder
-#./services/api (relative to the project root .).
+./services/api (relative to the project root .).
 https://docs.gradle.org/current/userguide/intro_multi_project_builds.html#sec:project_path
 More examples of how to work with the project path can be found in the DSL documentation of Settings.include~java.lang.String[]~.
-#https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html#org.gradle.api.initialization.Settings:include(java.lang.String[])
+https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html#org.gradle.api.initialization.Settings:include(java.lang.String[])
 Let’s add another subproject called lib to the previously created project.
 All we need to do is add another include statement in the root settings file:
 << 'settings.gradle.kts'
@@ -2864,7 +2870,7 @@ include("project-a")
 project(":project-a").projectDir = file("custom/my-project-a")
 project(":project-a").buildFileName = "project-a.gradle.kts"
 settings.gradle.kts
-#https://docs.gradle.org/current/javadoc/org/gradle/api/initialization/ProjectDescriptor.html
+https://docs.gradle.org/current/javadoc/org/gradle/api/initialization/ProjectDescriptor.html
 Consult the ProjectDescriptor class in the API documentation for more information.
 
 Modifying a subproject path
@@ -2881,7 +2887,7 @@ Let’s take a hypothetical project with the following structure:
 │           └── build.gradle.kts
 └── settings.gradle.kts
 
-#If your ~settings.gradle.kts looks like this:
+If your ~settings.gradle.kts looks like this:
 << 'settings.gradle.kts'
 include(':subs:web:my-web-module')
 settings.gradle.kts
@@ -2904,8 +2910,8 @@ As your project grows, naming and consistency get increasingly more important.
 3. Define the root project name in the settings file: The rootProject.name effectively assigns a name to the
  build, used in reports like Build Scans. If the root project name is not set, the name will be the
   container directory name, which can be unstable
-#  (i.e., you can check out your project in any directory). The name will be generated randomly if the
-#   root project name is not set and checked out to a file system’s root (e.g., / or C:~.
+  (i.e., you can check out your project in any directory). The name will be generated randomly if the
+   root project name is not set and checked out to a file system’s root (e.g., / or C:~.
 
 https://docs.gradle.org/current/userguide/declaring_dependencies_between_subprojects.html
 What if one subproject depends on another subproject? What if one project needs the artifact produced by another project?
@@ -2935,9 +2941,9 @@ In this example, there are three subprojects called shared, api, and person-serv
 The person-service subproject depends on the other two subprojects, shared and api.
 The api subproject depends on the shared subproject.
 We use the : separator to define a project path such as services:person-service or :shared.
-#https://docs.gradle.org/current/userguide/intro_multi_project_builds.html#sec:project_path
-# Consult the DSL documentation of Settings.include(java.lang.String[]) for more information about defining project paths.
-#https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html#org.gradle.api.initialization.Settings:include(java.lang.String[])
+https://docs.gradle.org/current/userguide/intro_multi_project_builds.html#sec:project_path
+ Consult the DSL documentation of Settings.include(java.lang.String[]) for more information about defining project paths.
+https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html#org.gradle.api.initialization.Settings:include(java.lang.String[])
 
 << 'settings.gradle.kts'
 rootProject.name = "dependencies-java"
@@ -2998,7 +3004,7 @@ Sometimes, you might want to depend on the output of a specific task within anot
 The recommended way to model dependencies, where a task in one project depends on the output of another, is to
  produce the output and mark it as an "outgoing" artifact. Gradle’s dependency management engine allows you to
   share arbitrary artifacts between projects and build them on demand.
-#https://docs.gradle.org/current/userguide/cross_project_publications.html#cross_project_publications
+https://docs.gradle.org/current/userguide/cross_project_publications.html#cross_project_publications
 
 https://docs.gradle.org/current/userguide/sharing_build_logic_between_subprojects.html
 Subprojects in a multi-project build typically share some common dependencies.
@@ -3023,11 +3029,11 @@ Gradle Plugin Development:
 ~If you are developing custom Gradle plugins for your project, buildSrc is a convenient place to house the
  plugin code. This makes the plugins easily accessible within your project.
 The buildSrc directory is treated as an included build.
-#https://docs.gradle.org/current/userguide/composite_builds.html#composite_build_intro
+https://docs.gradle.org/current/userguide/composite_builds.html#composite_build_intro
 ~For multi-project builds, there can be only one buildSrc directory, which must be in the root project directory.
 The downside of using buildSrc is that any change to it will invalidate every task in your project and require a rerun.
 buildSrc uses the same source code conventions applicable to Java, Groovy, and Kotlin projects. It also provides direct access to the Gradle API.
-#https://docs.gradle.org/current/userguide/java_plugin.html#javalayout
+https://docs.gradle.org/current/userguide/java_plugin.html#javalayout
 A typical project including buildSrc has the following layout:
 
 .
@@ -3207,7 +3213,7 @@ Often, the cross-configuration logic is if subproject is of type X, then configu
  applying X-conventions plugin directly to a subproject.
 Extracting information from subprojects of a certain type.
 This use case can be modeled using outgoing configuration variants.
-#https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
+https://docs.gradle.org/current/userguide/cross_project_publications.html#sec:simple-sharing-artifacts-between-projects
 
 https://docs.gradle.org/current/userguide/composite_builds.html
 A composite build is a build that includes other builds.
@@ -3268,7 +3274,7 @@ $ ./gradlew --include-build ../my-utils run
 Defining a composite build via the settings file
 It’s possible to make the above arrangement persistent by using Settings.includeBuild~java.lang.Object~ to declare the
  included build in the ~settings.gradle.kts file.
-#https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html#org.gradle.api.initialization.Settings:includeBuild(java.lang.Object)
+https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html#org.gradle.api.initialization.Settings:includeBuild(java.lang.Object)
 The settings file can be used to add subprojects and included builds simultaneously.
 Included builds are added by location:
 << 'settings.gradle.kts'
@@ -3331,16 +3337,16 @@ Tasks from an included build can be executed from the command-line or IDE in the
   tasks required to build dependency artifacts from other included builds.
 You can call a task in an included build using a fully qualified path, for example,
  :included-build-name:project-name:taskName. Project and task names can be abbreviated.
-#https://docs.gradle.org/current/userguide/command_line_interface.html#sec:name_abbreviation
+https://docs.gradle.org/current/userguide/command_line_interface.html#sec:name_abbreviation
 $ ./gradlew :included-build:subproject-a:compileJava
 > Task :included-build:subproject-a:compileJava
 $ ./gradlew :i-b:sA:cJ
 > Task :included-build:subproject-a:compileJava
 To exclude a task from the command line, you need to provide the fully qualified path to the task.
-#https://docs.gradle.org/current/userguide/command_line_interface.html#sec:excluding_tasks_from_the_command_line
+https://docs.gradle.org/current/userguide/command_line_interface.html#sec:excluding_tasks_from_the_command_line
 Included build tasks are automatically executed to generate required dependency artifacts, or the including build can
  declare a dependency on a task from an included build.
-#https://docs.gradle.org/current/userguide/composite_builds.html#included_build_task_dependencies
+https://docs.gradle.org/current/userguide/composite_builds.html#included_build_task_dependencies
 
 Declaring dependencies substituted by an included build
 By default, Gradle will configure each included build to determine the dependencies it can provide. The algorithm for
@@ -3360,8 +3366,8 @@ There are cases when the default substitutions determined by Gradle are insuffic
 plugins {
     java
 }
-#When this build is included in a composite, it will attempt to substitute for the dependency module
-# undefined:anonymous-library (undefined being the default value for project.group, and anonymous-library being the root project name).
+When this build is included in a composite, it will attempt to substitute for the dependency module
+ undefined:anonymous-library (undefined being the default value for project.group, and anonymous-library being the root project name).
 build.gradle.kts
   Clearly, this isn’t useful in a composite build.
 To use the unpublished library in a composite build, you can explicitly declare the substitutions that it provides:
@@ -3379,8 +3385,8 @@ Deactivate included build substitutions for a configuration
 ~If you need to resolve a published version of a module that is also available as part of an included build, you can
  deactivate the included build substitution rules on the ResolutionStrategy of the Configuration that is resolved.
   This is necessary because the rules are globally applied in the build, and Gradle does not consider published versions during resolution by default.
-#https://docs.gradle.org/current/userguide/declaring_dependencies_adv.html#sec:resolvable-consumable-configs
-#https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.ResolutionStrategy.html
+https://docs.gradle.org/current/userguide/declaring_dependencies_adv.html#sec:resolvable-consumable-configs
+https://docs.gradle.org/current/dsl/org.gradle.api.artifacts.ResolutionStrategy.html
 ~For example, we create a separate publishedRuntimeClasspath configuration that gets resolved to the published versions of
 modules that also exist in one of the local builds. This is done by deactivating global dependency substitution rules:
 <<'build.gradle.kts'
@@ -3397,10 +3403,10 @@ A use-case would be to compare published and locally built JAR files.
 Depending on tasks in an included build
 ~While included builds are isolated from one another and cannot declare direct dependencies, a composite build can
  declare task dependencies on its included builds. The included builds are accessed using
-# Gradle.getIncludedBuilds() or Gradle.includedBuild(java.lang.String), and a task reference is obtained via the IncludedBuild.task(java.lang.String) method.
-#https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html#org.gradle.api.invocation.Gradle:includedBuilds
-#https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html#org.gradle.api.invocation.Gradle:includedBuild(java.lang.String)
-#https://docs.gradle.org/current/dsl/org.gradle.api.initialization.IncludedBuild.html#org.gradle.api.initialization.IncludedBuild:task(java.lang.String)
+ Gradle.getIncludedBuilds() or Gradle.includedBuild(java.lang.String), and a task reference is obtained via the IncludedBuild.task(java.lang.String) method.
+https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html#org.gradle.api.invocation.Gradle:includedBuilds
+https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html#org.gradle.api.invocation.Gradle:includedBuild(java.lang.String)
+https://docs.gradle.org/current/dsl/org.gradle.api.initialization.IncludedBuild.html#org.gradle.api.initialization.IncludedBuild:task(java.lang.String)
 Using these APIs, it is possible to declare a dependency on a task in a particular included build:
 <<'build.gradle.kts'
 tasks.register("run") {
@@ -3418,7 +3424,7 @@ Limitations of composite builds
 Limitations of the current implementation include:
 No support for included builds with publications that don’t mirror the project default configuration.
 See Cases where composite builds won’t work.
-#https://docs.gradle.org/current/userguide/composite_builds.html#included_build_substitution_limitations
+https://docs.gradle.org/current/userguide/composite_builds.html#included_build_substitution_limitations
 Multiple composite builds may conflict when run in parallel if more than one includes the same build.
 Gradle does not share the project lock of a shared composite build between Gradle invocations to prevent concurrent execution.
 

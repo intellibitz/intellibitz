@@ -170,6 +170,9 @@ quote
 [verse, a nice poem]
 verse
 
+`single curved quotes`'
+"`double curved quotes`"
+
 ++++
 <p>
 Content in a passthrough block is passed to the output unprocessed.
@@ -274,9 +277,6 @@ TIP: Look for the warp zone under the bridge.
 CAUTION: Slippery when wet.
 
 WARNING: The software you're about to use is untested.
-
-IMPORTANT: Sign off before stepping away from your computer.
-
 
 paragraph with hard line +
 break

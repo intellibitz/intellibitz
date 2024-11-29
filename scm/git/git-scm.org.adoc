@@ -17,76 +17,76 @@ https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository
 [source, gradle]
 ----
 
-#For- the latest stable version for your release of Debian-Ubuntu
+For- the latest stable version for your release of Debian-Ubuntu
 apt-get install git
 
-#For- Ubuntu, this PPA provides the latest stable upstream Git version
+For- Ubuntu, this PPA provides the latest stable upstream Git version
 add-apt-repository ppa:git-core/ppa
 apt update; apt install git
 
 git config credential.https://example.com.username myusername
 git config credential.helper "[helper] [options]"
-#If you want to check your configuration settings, you can use the git config --list command to
-# list all the settings Git can find at that point:
+If you want to check your configuration settings, you can use the git config --list command to
+ list all the settings Git can find at that point:
 $ git config --list
-#You can view all of your settings and where they are coming from using:
+You can view all of your settings and where they are coming from using:
 $ git config --list --show-origin
 git config --global --list
 git config --global user.name=["name"]
 git config --global user.email=["email"]
 git config --global --add safe.directory dir-path
-#If you want to use a different text editor, such as Emacs, you can do the following:
+If you want to use a different text editor, such as Emacs, you can do the following:
 $ git config --global core.editor emacs
-#To set main as the default branch name do:
+To set main as the default branch name do:
 $ git config --global init.defaultBranch main
-#You can also check what Git thinks a specific key’s value is by typing git config <key>:
+You can also check what Git thinks a specific key’s value is by typing git config <key>:
 $ git config user.name
 
-#--
-#Start a new Git repository for an existing code base
+--
+Start a new Git repository for an existing code base
 $ cd /path/to/my/codebase
-#Initial branch configuration: git init also sets up an initial branch /traditionally main/. However, this
-# branch doesn't have any commits until you make your first commit.
+Initial branch configuration: git init also sets up an initial branch /traditionally main/. However, this
+ branch doesn't have any commits until you make your first commit.
 $ git init                        #/1/ Create a /path/to/my/codebase/.git directory.
 $ git add .                       #/2/ Add all existing files to the index.
 $ git commit -m "commit_message"  #/3/ Record the pristine state as the first commit in the history.
 git init -b ["main"] #creates or re-initializes local git repository as main branch
 
-#You clone a repository with git clone <url>. For example, if you want to clone the
-# Git linkable library called lib-git2, you can do so like this:
+You clone a repository with git clone <url>. For example, if you want to clone the
+ Git linkable library called lib-git2, you can do so like this:
 git clone URL #clones remote git repository
 $ git clone https://github.com/libgit2/libgit2
-#If you want to clone the repository into a directory named something other than lib-git2, you can
-# specify the new directory name as an additional argument:
+If you want to clone the repository into a directory named something other than lib-git2, you can
+ specify the new directory name as an additional argument:
 git clone URL directory_name #clones a remote repository
 $ git clone https://github.com/libgit2/libgit2 mylibgit
-#Git has a number of different transfer protocols you can use. The previous example uses the https:// protocol, but
-# you may also see git:// or user@server:path/to/repo.git, which uses the SSH transfer protocol.
-#The .git folder manages your project's repo. Git doesn't run as a server*. Instead the .git folder acts as your
-# local 'server' that all the git commands communicate with. Basically, running a git command edits the contents of the .git folder.
+Git has a number of different transfer protocols you can use. The previous example uses the https:// protocol, but
+ you may also see git:// or user@server:path/to/repo.git, which uses the SSH transfer protocol.
+The .git folder manages your project's repo. Git doesn't run as a server*. Instead the .git folder acts as your
+ local 'server' that all the git commands communicate with. Basically, running a git command edits the contents of the .git folder.
 
 git clone vs. git init
-#--
-#While git init is used to create a new repository, git clone is used to copy an existing repository. If you're
-# starting a new project from scratch use git init. If you're contributing to an existing project or want to create a
-# local copy of a project, you'll use git clone followed by the repository's URL.
+--
+While git init is used to create a new repository, git clone is used to copy an existing repository. If you're
+ starting a new project from scratch use git init. If you're contributing to an existing project or want to create a
+ local copy of a project, you'll use git clone followed by the repository's URL.
 
-#The git clone command automatically sets up the necessary config for your repo to connect back to a remote.
-# But you can also manually configure a repo set up with git init to connect to a remote.
+The git clone command automatically sets up the necessary config for your repo to connect back to a remote.
+ But you can also manually configure a repo set up with git init to connect to a remote.
 
 Best practices for Using git init
-#--
-#One project per repository: It's a best practice to keep each Git repository limited to a single project or
-# logical grouping of files to maintain clarity and organization.
-#Immediate .gitignore creation: After initializing your repository, create a .gitignore file to specify
-# intentionally untracked files that Git should ignore. Common examples include compiled code, system files, and editor configuration.
+--
+One project per repository: It's a best practice to keep each Git repository limited to a single project or
+ logical grouping of files to maintain clarity and organization.
+Immediate .gitignore creation: After initializing your repository, create a .gitignore file to specify
+ intentionally untracked files that Git should ignore. Common examples include compiled code, system files, and editor configuration.
 
 git status #shows modified, unmodified files
 
 git remote #List the remote repository connections stored in the local repository by shortname
 git remote -v #List the remote repository connections in the local repository with shortnames and URLs
 git remote add shortname URL #adds a connection to a remote repository named <shortname> at <URL>
-#remove the old 'origin' remote and add new origin remote
+remove the old 'origin' remote and add new origin remote
 git remote remove origin
 git remote add origin new_repo_path.git
 
@@ -120,7 +120,7 @@ git rebase --abort #stops the rebase process and go back to the state before the
 git reset --hard HEAD~1
 git switch -
 
-#--
+--
 git log --all #shows commit history for all branches in local repository
 git log --oneline --decorate --graph --all
 git branch --all #lists local branches and remote-tracking branches
@@ -135,26 +135,26 @@ git fetch shortname #downloads data from the <shortname> remote repository
 git fetch #downloads data from the remote repository with shortname origin
 git fetch -p #removes remote-tracking branches that correspond to deleted remote branches and download data from the remote repository
 
-#git fetch + [git merge OR git rebase] = git pull
-#--
+git fetch + [git merge OR git rebase] = git pull
+--
 git pull #if an upstream branch is defined for the current branch, fetch and integrate changes from the defined upstream branch
 git pull shortname branch_name #fetches and integrates changes from the <shortname> remote repository for the specified <branch_name>
 git pull -p #removes remote-tracking branches that correspond to deleted remote branches and fetches and integrates changes from the <shortname> remote repository for the specified <branch_name>
 git pull --allow-unrelated-histories origin main
 
-#master is now named main
-#The default branch has been renamed!
-#If you have a local clone, you can update it by running the following commands.
+master is now named main
+The default branch has been renamed!
+If you have a local clone, you can update it by running the following commands.
 git branch -m master main
 git fetch origin
 git branch -u origin/main main
 git remote set-head origin -a
 
 https://git-scm.com/docs/git-init
-#Start a new Git repository for an existing code base
+Start a new Git repository for an existing code base
 cd /path/to/my/codebase || exit
 
-## Git commands
+ Git commands
 git init      #/1/ Create a /path/to/my/codebase/.git directory.
 git add .     #/2/ Add all existing files to the index.
 git commit    #/3/ Record the pristine state as the first commit in the history.
@@ -166,47 +166,47 @@ git pull
 git push
 git branch -a
 
-#The .git directory structure
+The .git directory structure
 HEAD:
-#--
-#The HEAD file is a reference to the current branch that's checked out. By default, it points to the master or
-# main branch, but it won't actually refer to a valid branch until you make your first commit. It can also point to a
-# commit if you're in a 'detached HEAD' state.
+--
+The HEAD file is a reference to the current branch that's checked out. By default, it points to the master or
+ main branch, but it won't actually refer to a valid branch until you make your first commit. It can also point to a
+ commit if you're in a 'detached HEAD' state.
 config:
-#--
-#This file contains repository-specific configuration settings. These settings can include user information, remote
-# repository URLs, and branch configurations. The settings here override the global Git configuration settings for
-# this specific repository.
+--
+This file contains repository-specific configuration settings. These settings can include user information, remote
+ repository URLs, and branch configurations. The settings here override the global Git configuration settings for
+ this specific repository.
 objects/:
-#--
-#The objects directory stores all the data for your commits, including files and the structure of the commit tree. This
-# data is stored in a compressed format, making Git very efficient. The objects are identified by a SHA-1 hash of their content.
+--
+The objects directory stores all the data for your commits, including files and the structure of the commit tree. This
+ data is stored in a compressed format, making Git very efficient. The objects are identified by a SHA-1 hash of their content.
 refs/:
-#--
-#The refs directory contains references to commit objects in the repository, organized into subdirectories such as
-# heads/ for branch heads and tags/ for tag objects. These references are updated as you commit and branch within your repository.
+--
+The refs directory contains references to commit objects in the repository, organized into subdirectories such as
+ heads/ for branch heads and tags/ for tag objects. These references are updated as you commit and branch within your repository.
 hooks/:
-#--
-#This directory contains client-side or server-side scripts that are invoked at different phases of the Git workflow, such as
-# before a commit is finalized /pre-commit/ or before pushing to a remote repository /pre-push/. By default, Git populates this
-# directory with example scripts. These scripts are not active until renamed /removing the .sample extension/.
+--
+This directory contains client-side or server-side scripts that are invoked at different phases of the Git workflow, such as
+ before a commit is finalized /pre-commit/ or before pushing to a remote repository /pre-push/. By default, Git populates this
+ directory with example scripts. These scripts are not active until renamed /removing the .sample extension/.
 info/:
-#--
-#Inside, you'll find the exclude file, which works like a .gitignore file but is specific to this repository. The patterns listed in
-# the exclude file will be ignored by Git, similar to how .gitignore works, but without the need to commit this file into the repository.
+--
+Inside, you'll find the exclude file, which works like a .gitignore file but is specific to this repository. The patterns listed in
+ the exclude file will be ignored by Git, similar to how .gitignore works, but without the need to commit this file into the repository.
 description:
-#--
-#This file is only used by the GitWeb program, which is a Git web interface. By default, it contains a placeholder text
-# /"Unnamed repository; edit this file 'description' to name the repository."/, which can be changed to provide a
-# meaningful description of your repository for viewers on GitWeb.
+--
+This file is only used by the GitWeb program, which is a Git web interface. By default, it contains a placeholder text
+ /"Unnamed repository; edit this file 'description' to name the repository."/, which can be changed to provide a
+ meaningful description of your repository for viewers on GitWeb.
 index:
-#--
-#The index file /not present immediately after git init but created upon first adding files to the staging area/
-# acts as the staging area /"index"/ for Git. It tracks which files will be included in the next commit.
+--
+The index file /not present immediately after git init but created upon first adding files to the staging area/
+ acts as the staging area /"index"/ for Git. It tracks which files will be included in the next commit.
 
 cat .gitignore
-#*.[oa]
-#*/
+*.[oa]
+*/
 
 https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control
 In a DVCS /such as Git, Mercurial or Darcs/, clients dont just check out the latest snapshot of the files, rather, they
@@ -367,22 +367,22 @@ youll have a class of files that you dont want Git to automatically add or even 
  generally automatically generated files such as log files or files produced by your build system. In such cases, you can
 create a file listing patterns to match them named .gitignore. Here is an example .gitignore file:
 $ cat .gitignore
-#*.[oa]
-#*/
+*.[oa]
+*/
 Here is another example
 .gitignore file:
-# ignore all .a files
-#*.a
-# but do track lib.a, even though you're ignoring .a files above
-#!lib.a
-# only ignore the TODO file in the current directory, not subdir/TODO
-#/TODO
-# ignore all files in any directory named build
-#build/
-# ignore doc/notes.txt, but not doc/server/arch.txt
-#doc/*.txt
-# ignore all .pdf files in the doc/ directory and any of its subdirectories
-#doc/**/*.pdf
+ ignore all .a files
+*.a
+ but do track lib.a, even though you're ignoring .a files above
+!lib.a
+ only ignore the TODO file in the current directory, not subdir/TODO
+/TODO
+ ignore all files in any directory named build
+build/
+ ignore doc/notes.txt, but not doc/server/arch.txt
+doc/*.txt
+ ignore all .pdf files in the doc/ directory and any of its subdirectories
+doc/**/*.pdf
 In the simple case, a repository might have a single .gitignore file in its root directory, which applies recursively to the
  entire repository. However, it is also possible to have additional .gitignore files in subdirectories. The rules in these
 nested .gitignore files apply only to the files under the directory where they are located. The Linux kernel source repository has 206 .gitignore files.
@@ -824,25 +824,25 @@ Occasionally- this process doesnt go smoothly. If you changed the same part of t
  two branches youre merging, Git wont be able to merge them cleanly.
 $ git merge iss53
 Auto-merging index.html
-#CONFLICT (content): Merge conflict in index.html
+CONFLICT (content): Merge conflict in index.html
 Automatic merge failed; fix conflicts and /then commit the result.
 Git hasnt automatically created a new merge commit. It has paused the process while you resolve the conflict. If you want to
  see which files are unmerged at any point after a merge conflict, you can run git status:
 $ git status
 Anything that has merge conflicts and hasnt been resolved is listed as unmerged. Git adds standard conflict-resolution markers to the
  files that have conflicts, so you can open them manually and resolve those conflicts. Your file contains a section that looks something like this:
-#<<<<<<< HEAD:index.html
-#<div id="footer">contact : email.support@github.com</div>
-#=======
-#<div id="footer">
-# please contact us at support@github.com
-#</div>
-#>>>>>>> iss53:index.html
+<<<<<<< HEAD:index.html
+<div id="footer">contact : email.support@github.com</div>
+=======
+<div id="footer">
+ please contact us at support@github.com
+</div>
+>>>>>>> iss53:index.html
 This means the version in HEAD /your master branch, because that was what you had checked out when you ran your merge command/ is the
  top part of that block /everything above the =======/, while the version in your iss53 branch looks like everything in the
 bottom part. In order to resolve the conflict, you have to either choose one side or the other or merge the contents yourself.
 This resolution has a little of each section, and the
-# <<<<<<<, =======, and >>>>>>>
+ <<<<<<<, =======, and >>>>>>>
 lines have been completely removed. After youve resolved each of these sections in each conflicted file, run git add on
  each file to mark it as resolved. Staging the file marks it as resolved in Git.
 /If you want to use a graphical tool to resolve these issues, you can run git mergetool, which fires up an
@@ -998,7 +998,7 @@ The next time one of your collaborators fetches from the server, they will get a
  serverfix is under the remote branch origin/serverfix:
 $ git fetch origin
 From https://github.com/schacon/simplegit
-# * [new branch]      serverfix    -> origin/serverfix
+ * [new branch]      serverfix    -> origin/serverfix
 Its important to note that when you /do a fetch that brings down new remote-tracking branches, you dont automatically have local,
  editable copies of them. In other words, in this case, you dont have a new serverfix branch — you have only an
 origin/serverfix pointer that you cant modify.
@@ -1030,9 +1030,9 @@ $ git branch -u origin/serverfix
 Branch serverfix set up to track remote branch serverfix from origin.
 Note- Upstream shorthand
 When you have a tracking branch set up, you can reference its upstream branch with the
-# @{upstream} or @{u} shorthand.
+ @{upstream} or @{u} shorthand.
  So if youre on the master branch and its tracking origin/master, you can say something like
-#git merge @{u} instead of
+git merge @{u} instead of
 git merge origin/master if you wish.
 /If you want to see what tracking branches you have set up, you can use the -vv option to git branch.
  This will list out your local branches with more information including what each branch is tracking and if your local branch is ahead, behind or both.
@@ -1313,9 +1313,9 @@ First- youll probably want to clone the main repository, create a topic branch f
 $ git clone /url/
 $ cd project
 $ git checkout -b featureA
-#  ... work ...
+  ... work ...
 $ git commit
-#  ... work ...
+  ... work ...
 $ git commit
 Note- You may want to use rebase -i to squash your work down to a single commit, or rearrange the work in the commits to
  make the patch easier for the maintainer to review — see Rewriting History for more information about interactive rebasing.
@@ -1350,11 +1350,11 @@ topic branches also makes it easier for you to rebase your work if the tip of th
 /if you want to submit a second topic of work to the project, dont continue working on the topic branch you just
  pushed up — start over from the main repositorys master branch:
 $ git checkout -b featureB origin/master
-#  ... work ...
+  ... work ...
 $ git commit
 $ git push myfork featureB
 $ git request-pull origin/master myfork
-#  ... email generated request pull to maintainer ...
+  ... email generated request pull to maintainer ...
 $ git fetch origin
 Now- each of your topics is contained within a silo — similar to a patch queue — that you can rewrite, rebase, and
  modify without the topics interfering or interdepending on each other
@@ -1373,7 +1373,7 @@ projects current master branch. You start a new branch based off the current ori
  featureB changes there, resolve any conflicts, make the implementation change, and /then push that as a new branch:
 $ git checkout -b featureBv2 origin/master
 $ git merge --squash featureB
-#  ... change implementation ...
+  ... change implementation ...
 $ git commit
 $ git push myfork featureBv2
 The --squash option takes all the work on the merged branch and squashes it into one changeset producing the
@@ -1461,7 +1461,7 @@ This is useful if you have a number of commits on a topic branch and you want to
 /If you want to pull commit e43a6 into your master branch, you can run:
 $ git cherry-pick e43a6
 Finished one cherry-pick.
-#[master]: created a0a41a9: "More friendly message when locking the index fails."
+[master]: created a0a41a9: "More friendly message when locking the index fails."
 This pulls the same change introduced in e43a6, but you get a new commit SHA-1 value, because the date applied is different.
 
 Rerere
@@ -1491,10 +1491,10 @@ v1.6.2-rc1-20-g8c5b85c
 Preparing a Release
 Now you want to release a build. One of the things youll want to /do is create an archive of the latest snapshot of your code for
  those poor souls who dont use Git. The command to /do this is git archive:
-#$ git archive master --prefix='project/' | gzip > `git describe master`.tar.gz
+$ git archive master --prefix='project/' | gzip > `git describe master`.tar.gz
 /If someone opens that tarball, they get the latest snapshot of your project under a project directory. You can also
  create a zip archive in much the same way, but by passing the --format=zip option to git archive:
-#$ git archive master --prefix='project/' --format=zip > `git describe master`.zip
+$ git archive master --prefix='project/' --format=zip > `git describe master`.zip
 You now have a nice tarball and a zip archive of your project release that you can upload to your website or email to people.
 
 The Shortlog
@@ -2014,14 +2014,14 @@ Another common case is that you forgot to run git config to set your name and em
 you can change email addresses in multiple commits in a batch with filter-branch as well. You need to be careful to
  change only the email addresses that are yours, so you use --commit-filter:
 $ git filter-branch --commit-filter
-#       'if [ "$GIT_AUTHOR_EMAIL" = "schacon@localhost" ];
-#        then
-#                GIT_AUTHOR_NAME="Scott Chacon";
-#                GIT_AUTHOR_EMAIL="schacon@example.com";
-#                git commit-tree "$@";
-#        else
-#                git commit-tree "$@";
-#        fi'
+       'if [ "$GIT_AUTHOR_EMAIL" = "schacon@localhost" ];
+        then
+                GIT_AUTHOR_NAME="Scott Chacon";
+                GIT_AUTHOR_EMAIL="schacon@example.com";
+                git commit-tree "$@";
+        else
+                git commit-tree "$@";
+        fi'
          HEAD
 This goes through and rewrites every commit to have your new address. Because commits contain the SHA-1 values of their parents,
  this command changes every commit SHA-1 in your history, not just those that have the matching email address.
@@ -2175,7 +2175,7 @@ Its also interesting to note that like git add, the reset command will accept a 
 
 Squashing
 Lets look at how to do- something interesting with this newfound power — squashing commits.
-#Say you have a series of commits with messages like “oops.”, “WIP” and “forgot this file”.
+Say you have a series of commits with messages like “oops.”, “WIP” and “forgot this file”.
 You can use reset to quickly and easily squash them into a single commit that makes you look really smart.
  Squashing Commits shows another way to do- this, but in this example its simpler to use reset.
 Lets say you have a project where the first commit has one file, the second commit added a new file and changed the first, and
@@ -2264,13 +2264,13 @@ $ vim hello.rb
 $ git diff -b
 diff --git a/hello.rb b/hello.rb
 index ac51efd..e85207e 100755
-#--- a/hello.rb
-#+++ b/hello.rb
+--- a/hello.rb
++++ b/hello.rb
 @@ -1,7 +1,7 @@
  #! /usr/bin/env ruby
  def hello
-#-  puts 'hello world'
-#+  puts 'hello mundo'^M
+-  puts 'hello world'
++  puts 'hello mundo'^M
  end
 $ git commit -am 'Use Spanish instead of English'
 Now we switch back to our master branch and add some documentation for the function.
@@ -2280,11 +2280,11 @@ $ vim hello.rb
 $ git diff
 diff --git a/hello.rb b/hello.rb
 index ac51efd..36c06c8 100755
-#--- a/hello.rb
-#+++ b/hello.rb
+--- a/hello.rb
++++ b/hello.rb
 @@ -1,5 +1,6 @@
  #! /usr/bin/env ruby
-#+# prints out a greeting
++# prints out a greeting
  def hello
    puts 'hello world'
  end
@@ -2299,11 +2299,11 @@ We now have a few options. First, lets cover how to get out of this situation. I
  dont want to quite deal with the situation yet, you can simply back out of the merge with
 'git merge --abort'
 $ git status -sb
-## master
+# master
 UU hello.rb
 $ git merge --abort
 $ git status -sb
-## master
+# master
 The git merge --abort option tries to revert back to your state before you ran the merge. The only cases where it may not be
  able to do- this perfectly would be if you had unstashed, uncommitted changes in your working directory when you ran it,
 otherwise it should work fine. If- for some reason you just want to start over, you can also run
@@ -2342,13 +2342,13 @@ $ 'git merge-file -p' \
 $ 'git diff -b'
 diff --cc hello.rb
 index 36c06c8,e85207e..0000000
-#--- a/hello.rb
+--- a/hello.rb
 +++ b/hello.rb
 @@@ -1,8 -1,7 +1,8 @@@
   #! /usr/bin/env ruby
-# +# prints out a greeting
+ +# prints out a greeting
   def hello
-#-   puts 'hello world'
+-   puts 'hello world'
 +   puts 'hello mundo'
   end
 At this point we have nicely merged the file. In fact, this actually works better than the ignore-space-change option because this
@@ -2359,15 +2359,15 @@ If- you want to get an idea before finalizing this commit about what was actuall
 any of these stages. Lets go through them all.
 To compare your result to what you had in your branch before the merge, in other words, to see what the merge introduced, you can run git diff --ours:
  'git diff --ours'
-#* Unmerged path hello.rb
+* Unmerged path hello.rb
 diff --git a/hello.rb b/hello.rb
 index 36c06c8..44d0a25 100755
-#--- a/hello.rb
+--- a/hello.rb
 +++ b/hello.rb
 @@ -2,7 +2,7 @@
  # prints out a greeting
  def hello
-#-  puts 'hello world'
+-  puts 'hello world'
 +  puts 'hello mundo'
  end
 So here we can easily see that what happened in our branch, what were actually introducing to this file with this merge, is changing that single line.
@@ -2375,29 +2375,29 @@ If- we want to see how the result of the merge differed from what was on their s
  In this and the following example, we have to use -b to strip out the whitespace because were comparing it to
 what is in Git, not our cleaned up hello.theirs.rb file.
 $ 'git diff --theirs -b'
-#* Unmerged path hello.rb
+* Unmerged path hello.rb
 diff --git a/hello.rb b/hello.rb
 index e85207e..44d0a25 100755
-#--- a/hello.rb
+--- a/hello.rb
 +++ b/hello.rb
 @@ -1,5 +1,6 @@
  #! /usr/bin/env ruby
-#+# prints out a greeting
++# prints out a greeting
  def hello
    puts 'hello mundo'
  end
 Finally- you can see how the file has changed from both sides with 'git diff --base'.
 $ 'git diff --base -b'
-#* Unmerged path hello.rb
+* Unmerged path hello.rb
 diff --git a/hello.rb b/hello.rb
 index ac51efd..44d0a25 100755
-#--- a/hello.rb
+--- a/hello.rb
 +++ b/hello.rb
 @@ -1,7 +1,8 @@
  #! /usr/bin/env ruby
-#+# prints out a greeting
++# prints out a greeting
  def hello
-#-  puts 'hello world'
+-  puts 'hello world'
 +  puts 'hello mundo'
  end
 At this point we can use the 'git clean' command to clear out the extra files we created to do- the manual merge but no longer need.
@@ -2479,7 +2479,7 @@ Theres nothing in topic that isnt already reachable from master. Whats worse, if
 The best way around this is to un-revert the original merge, since now you want to bring in the changes that
  were reverted out, then- create a new merge commit:
 $ git revert ^M
-#[master 09f0126] Revert "Revert "Merge branch 'topic'""
+[master 09f0126] Revert "Revert "Merge branch 'topic'""
 $ git merge topic
 In this example, M and ^M cancel out. ^^M effectively merges in the changes from C3 and C4, and C8 merges in the
  changes from C7, so now topic is fully merged.
@@ -2600,22 +2600,22 @@ current commit youre on is broken. Then, you must tell bisect when the last know
 $ 'git bisect start'
 $ 'git bisect bad'
 $ 'git bisect good v1.0'
-#Bisecting: 6 revisions left to test after this
+Bisecting: 6 revisions left to test after this
 Git figured out that about 12 commits came between the commit you marked as the last good commit /v1.0/ and the current bad version,
  and it checked out the middle one for you. At this point, you can run your test to see if the issue exists as of this commit. If it does,
 then- it was introduced sometime before this middle commit. if it doesnt, then- the problem was introduced sometime after the
  middle commit. It turns out there is no issue here, and you tell Git that by typing git bisect good and continue your journey:
 $ git bisect good
-#Bisecting: 3 revisions left to test after this
+Bisecting: 3 revisions left to test after this
 Now youre on another commit, halfway between the one you just tested and your bad commit. You run your test again and
  find that this commit is broken, so you tell Git that with git bisect bad:
 $ git bisect bad
-#Bisecting: 1 revisions left to test after this
+Bisecting: 1 revisions left to test after this
 This commit is fine, and now Git has all the information it needs to determine where the issue was introduced. It tells you the
  SHA-1 of the first bad commit and show some of the commit information and which files were modified in that commit so you can
 figure out what happened that may have introduced this bug:
 $ git bisect good
-#b047b02ea83310a70fd603dc8cd7a6cd13d15c04 is first bad commit
+b047b02ea83310a70fd603dc8cd7a6cd13d15c04 is first bad commit
 When youre finished, you should run git bisect reset to reset your HEAD to where you were before you started, or youll end up in a weird state:
 $ 'git bisect reset'
 This is a powerful tool that can help you check hundreds of commits for an introduced bug in minutes. In fact, if you have a
@@ -2642,9 +2642,9 @@ By default, submodules will add the subproject into a directory named the same a
 $ git status
 First you should notice the new '.gitmodules' file. This is a configuration file that stores the mapping between the
  projects URL and the local subdirectory youve pulled it into:
-#[submodule "DbConnector"]
-#	path = DbConnector
-#	url = https://github.com/chaconinc/DbConnector
+[submodule "DbConnector"]
+	path = DbConnector
+	url = https://github.com/chaconinc/DbConnector
 If- you have multiple submodules, youll have multiple entries in this file. Its important to note that this file is
  version-controlled with your other files, like your '.gitignore' file. Its pushed and pulled with the rest of your project.
 This is how other people who clone this project know where to get the submodule projects from.
@@ -2661,12 +2661,12 @@ $ 'git diff --cached --submodule'
 +[submodule "DbConnector"]
 +       path = DbConnector
 +       url = https://github.com/chaconinc/DbConnector
-#Submodule DbConnector 0000000...c3f01dc /new submodule/
+Submodule DbConnector 0000000...c3f01dc /new submodule/
 When you commit, you see something like this:
 $ 'git commit -am' Add DbConnector module
-#[master fb9093c] Add DbConnector module
-# create mode 100644 .gitmodules
-# create mode 160000 DbConnector
+[master fb9093c] Add DbConnector module
+ create mode 100644 .gitmodules
+ create mode 160000 DbConnector
 Notice the 160000 mode for the DbConnector entry. That is a special mode in Git that basically means youre recording a
  commit as a directory entry rather than a subdirectory or a file.
 Lastly- push these changes:
@@ -2678,15 +2678,15 @@ Here well clone a project with a submodule in it. When you clone such a project,
 $ 'git clone' https://github.com/chaconinc/MainProject
 $ cd MainProject
 $ ls -la
-#total 16
+total 16
 $ cd DbConnector/
 $ ls
-#$
+$
 The DbConnector directory is there, but empty. You must run two commands:
  'git submodule init' to initialize your local configuration file, and
   'git submodule update' to fetch all the data from that project and check out the appropriate commit listed in your superproject:
 $ git submodule init
-#Submodule 'DbConnector' (https://github.com/chaconinc/DbConnector) registered for path 'DbConnector'
+Submodule 'DbConnector' (https://github.com/chaconinc/DbConnector) registered for path 'DbConnector'
 $ git submodule update
 Cloning into 'DbConnector'...
 Now your DbConnector subdirectory is at the exact state it was in when you committed earlier.
@@ -2751,9 +2751,9 @@ commits you pull. This can happen for example if the submodule project changes i
  it is possible for git pull --recurse-submodules, or git submodule update, to fail if the superproject references a
 submodule commit that is not found in the submodule remote locally configured in your repository.
 In order to remedy this situation, the git submodule sync command is required:
-# copy the new URL to your local config
+ copy the new URL to your local config
 $ 'git submodule sync --recursive'
-# update the submodule from the new URL
+ update the submodule from the new URL
 $ git submodule update --init --recursive
 
 Working on a Submodule
@@ -2772,7 +2772,7 @@ git submodule update --remote pulls in new work from upstream. The options are t
 First of all, lets go into our submodule directory and check out a branch.
 $ cd DbConnector/
 $ 'git checkout' stable
-#Switched to branch 'stable'
+Switched to branch 'stable'
 Lets try updating our submodule with the =merge= option. To specify it manually, we can just add the --merge option to
  our update call. Here well see that there was a change on the server for this submodule and it gets merged in.
 $ cd ..
@@ -2785,12 +2785,12 @@ $ 'git commit -am' 'Unicode support'
 Now if we update our submodule we can see what happens when we have made a local change and upstream also has a change we need to incorporate.
 $ cd ..
 $ 'git submodule update --remote --rebase'
-#First- rewinding head to replay your work on top of it...
-#Applying: Unicode support
-#Submodule path 'DbConnector': rebased into '5d60ef9bbebf5a0c1c1050f242ceeb54ad58da94'
+First- rewinding head to replay your work on top of it...
+Applying: Unicode support
+Submodule path 'DbConnector': rebased into '5d60ef9bbebf5a0c1c1050f242ceeb54ad58da94'
 If- you forget the --rebase or --merge, Git will just update the submodule to whatever is on the server and reset your project to a detached HEAD state.
 $ 'git submodule update --remote'
-#Submodule path 'DbConnector': checked out '5d60ef9bbebf5a0c1c1050f242ceeb54ad58da94'
+Submodule path 'DbConnector': checked out '5d60ef9bbebf5a0c1c1050f242ceeb54ad58da94'
 If- this happens, dont worry, you can simply go back into the directory and check out your branch again =which will still contain your work= and
  merge or rebase origin/stable =or whatever remote branch you want= manually.
 If- you havent committed your changes in your submodule and you run a submodule update that would cause issues,
@@ -2798,11 +2798,11 @@ If- you havent committed your changes in your submodule and you run a submodule 
 $ git submodule update --remote
 If- you made changes that conflict with something changed upstream, Git will let you know when you run the update.
 $ 'git submodule update --remote --merge'
-#Auto-merging scripts/setup.sh
-#CONFLICT (content): Merge conflict in scripts/setup.sh
-#Recorded preimage for 'scripts/setup.sh'
-#Automatic merge failed; fix conflicts and then- commit the result.
-#Unable to merge 'c75e92a2b3855c9e5b66f915308390d9db204aca' in submodule path 'DbConnector'
+Auto-merging scripts/setup.sh
+CONFLICT (content): Merge conflict in scripts/setup.sh
+Recorded preimage for 'scripts/setup.sh'
+Automatic merge failed; fix conflicts and then- commit the result.
+Unable to merge 'c75e92a2b3855c9e5b66f915308390d9db204aca' in submodule path 'DbConnector'
 You can go into the submodule directory and fix the conflict just as you normally would.
 
 Publishing Submodule Changes
@@ -2831,13 +2831,13 @@ If- one of the commits is a direct ancestor of the other =a fast-forward merge=,
  latter for the merge, so that works fine.
 Git will not attempt even a trivial merge for you.
 $ 'git pull'
-#From https://github.com/chaconinc/MainProject
-#   9a377d1..eb974f8  master     -> origin/master
-#Fetching submodule DbConnector
-#warning: Failed to merge submodule DbConnector /merge following commits not found/
-#Auto-merging DbConnector
-#CONFLICT (submodule): Merge conflict in DbConnector
-#Automatic merge failed; fix conflicts and then- commit the result.
+From https://github.com/chaconinc/MainProject
+   9a377d1..eb974f8  master     -> origin/master
+Fetching submodule DbConnector
+warning: Failed to merge submodule DbConnector /merge following commits not found/
+Auto-merging DbConnector
+CONFLICT (submodule): Merge conflict in DbConnector
+Automatic merge failed; fix conflicts and then- commit the result.
 So basically what has happened here is that Git has figured out that the two branches record points in the
  submodules history that are divergent and need to be merged. It explains it as =merge following commits not found=, which is
 confusing but well explain why that is in a bit.
@@ -2845,8 +2845,8 @@ To solve the problem, you need to figure out what state the submodule should be 
  much information to help out here, not even the SHA-1s of the commits of both sides of the history. Fortunately, its simple to
 figure out. If you run git diff you can get the SHA-1s of the commits recorded in both branches you were trying to merge.
 $ 'git diff'
-#diff --cc DbConnector
-#index eb41d76,c771610..0000000
+diff --cc DbConnector
+index eb41d76,c771610..0000000
 So- in this case, eb41d76 is the commit in our submodule that we had and c771610 is the commit that upstream had. If we go into
  our submodule directory, it should already be on eb41d76 as the merge would not have touched it. If for whatever reason its not,
 you can simply create and checkout a branch pointing to it.
@@ -2856,22 +2856,22 @@ We would suggest the latter, even if only to make a nicer merge commit message.
 So- we will go into our submodule directory, create a branch named =try-merge= based on that second SHA-1 from git diff, and manually merge.
 $ cd DbConnector
 $ 'git rev-parse HEAD'
-#eb41d764bccf88be77aced643c13a7fa86714135
+eb41d764bccf88be77aced643c13a7fa86714135
 $ 'git branch' try-merge c771610
 $ 'git merge' try-merge
-#Auto-merging src/main.c
-#Automatic merge failed; fix conflicts and then- commit the result.
+Auto-merging src/main.c
+Automatic merge failed; fix conflicts and then- commit the result.
 We got an actual merge conflict here, so if we resolve that and commit it, then- we can simply update the main project with the result.
 1 First we resolve the conflict.
-#$ vim src/main.c
-#$ git add src/main.c
-#$ git commit -am 'merged our changes'
+$ vim src/main.c
+$ git add src/main.c
+$ git commit -am 'merged our changes'
 2 Then we go back to the main project directory.
-#$ cd ..
+$ cd ..
 3 We can check the SHA-1s again.
 $ 'git diff'
-#diff --cc DbConnector
-#index eb41d76,c771610..0000000
+diff --cc DbConnector
+index eb41d76,c771610..0000000
 4 Resolve the conflicted submodule entry.
 $ 'git add' DbConnector
 5 Commit our merge.
@@ -2884,23 +2884,23 @@ This is why the error message from before was =merge following commits not found
  Its confusing because who would expect it to try to do- this?
 If- it does find a single acceptable merge commit, youll see something like this:
 $ git merge origin/master
-#warning: Failed to merge submodule DbConnector (not fast-forward)
-#Found a possible merge resolution for the submodule:
-# 9fd905e5d7f45a0d4cbc43d1ee550f16a30e825a: > merged our changes
+warning: Failed to merge submodule DbConnector (not fast-forward)
+Found a possible merge resolution for the submodule:
+ 9fd905e5d7f45a0d4cbc43d1ee550f16a30e825a: > merged our changes
 If- this is correct simply add it to the index for example
 by using:
   'git update-index --cacheinfo' 160000 9fd905e5d7f45a0d4cbc43d1ee550f16a30e825a "DbConnector"
 which will accept this suggestion.
 Auto-merging DbConnector
-#CONFLICT (submodule): Merge conflict in DbConnector
-#Automatic merge failed; fix conflicts and then- commit the result.
+CONFLICT (submodule): Merge conflict in DbConnector
+Automatic merge failed; fix conflicts and then- commit the result.
 The suggested command Git is providing will update the index as though you had run git add =which clears the conflict=, then- commit.
  You probably shouldnt do- this though. You can just as easily go into the submodule directory, see what the difference is,
 fast-forward to this commit, test it properly, and then- commit it.
-# cd DbConnector/
+ cd DbConnector/
 $ 'git merge' 9fd905e
-#Updating eb41d76..9fd905e
-#Fast-forward
+Updating eb41d76..9fd905e
+Fast-forward
 $ cd ..
 $ 'git add' DbConnector
 $ 'git commit -am' 'Fast forward to a common submodule child'
@@ -2915,10 +2915,10 @@ For- example, lets say we want to start a new feature or do- a bugfix and we hav
 $ 'git submodule foreach' 'git stash'
 Then- we can create a new branch and switch to it in all our submodules.
 $ git submodule foreach 'git checkout -b featureA'
-#Entering 'CryptoLibrary'
-#Switched to a new branch 'featureA'
-#Entering 'DbConnector'
-#Switched to a new branch 'featureA'
+Entering 'CryptoLibrary'
+Switched to a new branch 'featureA'
+Entering 'DbConnector'
+Switched to a new branch 'featureA'
 You get the idea. One really useful thing you can do- is produce a nice unified diff of what is changed in your main project and all your subprojects as well.
 $ 'git diff'; 'git submodule foreach' 'git diff'
 
@@ -2936,55 +2936,55 @@ For- instance, switching branches with submodules in them can also be tricky wit
  If- you create a new branch, add a submodule there, and then- switch back to a branch without that submodule, you still have the
 submodule directory as an untracked directory:
 $ 'git --version'
-#git version 2.12.2
+git version 2.12.2
 $ 'git checkout -b' add-crypto
-#Switched to a new branch 'add-crypto'
+Switched to a new branch 'add-crypto'
 $ 'git submodule add' https://github.com/chaconinc/CryptoLibrary
-#Cloning into 'CryptoLibrary'...
+Cloning into 'CryptoLibrary'...
 $ git commit -am 'Add crypto library'
-#[add-crypto 4445836] Add crypto library
-# create mode 160000 CryptoLibrary
+[add-crypto 4445836] Add crypto library
+ create mode 160000 CryptoLibrary
 $ 'git checkout' master
-#warning: unable to rmdir CryptoLibrary: Directory not empty
-#Switched to branch 'master'
-#Your branch is up-to-date with 'origin/master'.
+warning: unable to rmdir CryptoLibrary: Directory not empty
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
 $ 'git status'
-#On branch master
-#Your branch is up-to-date with 'origin/master'.
-#Untracked files:
-#  (use "git add <file>..." to include in what will be committed)
-#	CryptoLibrary/
-#nothing added to commit but untracked files present (use "git add" to track)
+On branch master
+Your branch is up-to-date with 'origin/master'.
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	CryptoLibrary/
+nothing added to commit but untracked files present (use "git add" to track)
 Removing the directory isnt difficult, but it can be a bit confusing to have that in there. If you do- remove it
  and then- switch back to the branch that has that submodule, you will need to run submodule update --init to repopulate it.
 $ 'git clean -ffdx'
-#Removing CryptoLibrary/
+Removing CryptoLibrary/
 $ 'git checkout' add-crypto
-#Switched to branch 'add-crypto'
+Switched to branch 'add-crypto'
 $ ls CryptoLibrary/
 $ 'git submodule update --init'
-#Submodule path 'CryptoLibrary': checked out 'b8dda6aa182ea4464f3f3264b11e0268545172af'
+Submodule path 'CryptoLibrary': checked out 'b8dda6aa182ea4464f3f3264b11e0268545172af'
 $ ls CryptoLibrary/
-#Makefile	includes	scripts		src
+Makefile	includes	scripts		src
 Again- not really very difficult, but it can be a little confusing.
 Newer Git versions /Git >= 2.13/ simplify all this by adding the --recurse-submodules flag to the git checkout command,
  which takes care of placing the submodules in the right state for the branch we are switching to.
 $ 'git --version'
-#git version 2.13.3
+git version 2.13.3
 $ 'git checkout -b' add-crypto
-#Switched to a new branch 'add-crypto'
+Switched to a new branch 'add-crypto'
 $ 'git submodule add' https://github.com/chaconinc/CryptoLibrary
-#Cloning into 'CryptoLibrary'...
+Cloning into 'CryptoLibrary'...
 $ 'git commit -am' 'Add crypto library'
-#[add-crypto 4445836] Add crypto library
-# create mode 160000 CryptoLibrary
+[add-crypto 4445836] Add crypto library
+ create mode 160000 CryptoLibrary
 $ 'git checkout --recurse-submodules' master
-#Switched to branch 'master'
-#Your branch is up-to-date with 'origin/master'.
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
 $ 'git status'
-#On branch master
-#Your branch is up-to-date with 'origin/master'.
-#nothing to commit, working tree clean
+On branch master
+Your branch is up-to-date with 'origin/master'.
+nothing to commit, working tree clean
 Using the --recurse-submodules flag of git checkout can also be useful when you work on several branches in the superproject,
  each having your submodule pointing at different commits. Indeed, if you switch between branches that record the submodule at
 different commits, upon executing git status the submodule will appear as =modified=, and indicate =new commits=. That is
@@ -3003,23 +3003,23 @@ Assume that you have files in a subdirectory of your project, and you want to sw
  subdirectory and then- run submodule add, Git yells at you:
 $ rm -Rf CryptoLibrary/
 $ 'git submodule add' https://github.com/chaconinc/CryptoLibrary
-#'CryptoLibrary' already exists in the index
+'CryptoLibrary' already exists in the index
 You have to unstage the CryptoLibrary directory first. Then you can add the submodule:
 $ 'git rm -r' CryptoLibrary
 $ 'git submodule add' https://github.com/chaconinc/CryptoLibrary
-#Cloning into 'CryptoLibrary'...
-#Checking connectivity... done.
+Cloning into 'CryptoLibrary'...
+Checking connectivity... done.
 Now suppose you did that in a branch. If you try to switch back to a branch where those files are still in the
  actual tree rather than a submodule — you get this error:
 $ 'git checkout' master
-#error: The following untracked working tree files would be overwritten by checkout:
-#  CryptoLibrary/includes/crypto.h
-#Please move or remove them before you can switch branches.
-#Aborting
+error: The following untracked working tree files would be overwritten by checkout:
+  CryptoLibrary/includes/crypto.h
+Please move or remove them before you can switch branches.
+Aborting
 You can force it to switch with checkout -f, but be careful that you dont have unsaved changes in there as they could be overwritten with that command.
 $ 'git checkout -f' master
-#warning: unable to rmdir CryptoLibrary: Directory not empty
-#Switched to branch 'master'
+warning: unable to rmdir CryptoLibrary: Directory not empty
+Switched to branch 'master'
 Then- when you switch back, you get an empty CryptoLibrary directory for some reason and git submodule update may not fix it either.
  You may need to go into your submodule directory and run a git checkout . to get all your files back. You could
 run this in a submodule foreach script to run it for multiple submodules.
@@ -3039,10 +3039,10 @@ This is where the git bundle command can be helpful. The bundle command will pac
  pushed over the wire with a git push command into a binary file that you can email to someone or put on a flash drive, then- unbundle into another repository.
 Lets see a simple example. Lets say you have a repository with two commits:
 $ git log
-#commit 9a466c572fe88b195efd356c3f2bbeccdb504102
-#    Second commit
-#commit b1ec3248f39900d2a406049d762aa68e9641be25
-#    First commit
+commit 9a466c572fe88b195efd356c3f2bbeccdb504102
+    Second commit
+commit b1ec3248f39900d2a406049d762aa68e9641be25
+    First commit
 If- you want to send that repository to someone and you dont have access to a repository to push to,
  or simply dont want to set one up, you can bundle it with git bundle create.
 $ 'git bundle create' repo.bundle HEAD master
@@ -3057,11 +3057,11 @@ If- you dont include HEAD in the references, you have to also specify -b master 
  wont know what branch to check out.
 Now lets say you do- three commits on it and want to send the new commits back via a bundle on a USB stick or email.
 $ git log --oneline
-#71b84da Last commit - second repo
-#c99cf5b Fourth commit - second repo
-#7011d3d Third commit - second repo
-#9a466c5 Second commit
-#b1ec324 First commit
+71b84da Last commit - second repo
+c99cf5b Fourth commit - second repo
+7011d3d Third commit - second repo
+9a466c5 Second commit
+b1ec324 First commit
 First we need to determine the range of commits we want to include in the bundle. Unlike the network protocols which figure out the
  minimum set of data to transfer over the network for us, well have to figure this out manually. Now, you could just do- the
 same thing and bundle the entire repository, which will work, but its better to just bundle up the difference - just the three commits we just made locally.
@@ -3069,9 +3069,9 @@ In order to do- that, youll have to calculate the difference. As we described in
  number of ways. To get the three commits that we have in our master branch that werent in the branch we originally cloned,
 we can use something like origin/master..master or master ^origin/master. You can test that with the log command.
 $ 'git log --oneline master ^origin/master'
-#71b84da Last commit - second repo
-#c99cf5b Fourth commit - second repo
-#7011d3d Third commit - second repo
+71b84da Last commit - second repo
+c99cf5b Fourth commit - second repo
+7011d3d Third commit - second repo
 So now that we have the list of commits we want to include in the bundle, lets bundle them up. We do- that with the
  git bundle create command, giving it a filename we want our bundle to be and the range of commits we want to go into it.
 $ 'git bundle create' commits.bundle 'master ^9a466c5'
@@ -3080,35 +3080,35 @@ Now we have a commits.bundle file in our directory. If we take that and send it 
 When she gets the bundle, she can inspect it to see what it contains before she imports it into her repository. The first command is the
  bundle verify command that will make sure the file is actually a valid Git bundle and that you have all the necessary ancestors to reconstitute it properly.
 $ 'git bundle verify' ../commits.bundle
-#The bundle contains 1 ref
-#71b84daaf49abed142a373b6e5c59a22dc6560dc refs/heads/master
-#The bundle requires these 1 ref
-#9a466c572fe88b195efd356c3f2bbeccdb504102 second commit
+The bundle contains 1 ref
+71b84daaf49abed142a373b6e5c59a22dc6560dc refs/heads/master
+The bundle requires these 1 ref
+9a466c572fe88b195efd356c3f2bbeccdb504102 second commit
 ../commits.bundle is 'okay'
 If- the bundler had created a bundle of just the last two commits they had done, rather than all three, the
  original repository would not be able to import it, since it is missing requisite history. The verify command would have looked like this instead:
 $ 'git bundle verify' ../commits-bad.bundle
 'error': Repository lacks these prerequisite commits:
-#error: 7011d3d8fc200abe0ad561c011c3852a4b7bbe95 Third commit - second repo
+error: 7011d3d8fc200abe0ad561c011c3852a4b7bbe95 Third commit - second repo
 However- our first bundle is valid, so we can fetch in commits from it. If you want to see what branches are in the
  bundle that can be imported, there is also a command to just list the heads:
 $ 'git bundle list-heads' ../commits.bundle
-#71b84daaf49abed142a373b6e5c59a22dc6560dc refs/heads/master
+71b84daaf49abed142a373b6e5c59a22dc6560dc refs/heads/master
 The verify sub-command will tell you the heads as well. The point is to see what can be pulled in, so you can use the
  fetch or pull commands to import commits from this bundle. Here well fetch the master branch of the bundle to a
 branch named other-master in our repository:
 $ 'git fetch' ../commits.bundle 'master:other-master'
-#From ../commits.bundle
-# * [new branch]      master     -> other-master
+From ../commits.bundle
+ * [new branch]      master     -> other-master
 Now we can see that we have the imported commits on the other-master branch as well as any commits weve done- in the meantime in our own master branch.
 $ 'git log --oneline --decorate --graph --all'
-#* 8255d41 (HEAD, master) Third commit - first repo
-#| * 71b84da (other-master) Last commit - second repo
-#| * c99cf5b Fourth commit - second repo
-#| * 7011d3d Third commit - second repo
-#|/
-#* 9a466c5 Second commit
-#* b1ec324 First commit
+* 8255d41 (HEAD, master) Third commit - first repo
+| * 71b84da (other-master) Last commit - second repo
+| * c99cf5b Fourth commit - second repo
+| * 7011d3d Third commit - second repo
+|/
+* 9a466c5 Second commit
+* b1ec324 First commit
 So- git bundle can be really useful for sharing or doing network-type operations when you dont have the proper network or shared repository to do- so.
 
 https://git-scm.com/book/en/v2/Git-Tools-Replace
@@ -3119,18 +3119,18 @@ The replace command lets you specify an object in Git and say "every time you re
  This is most commonly useful for replacing one commit in your history with another one without having to rebuild the
 entire history with, say, 'git filter-branch.'
 $ git log --oneline
-#ef989d8 Fifth commit
-#c6e1e95 Fourth commit
-#9c68fdc Third commit
-#945704c Second commit
-#c1822cf First commit
+ef989d8 Fifth commit
+c6e1e95 Fourth commit
+9c68fdc Third commit
+945704c Second commit
+c1822cf First commit
 $ 'git branch' history c6e1e95
 $ git log --oneline --decorate
-#ef989d8 (HEAD, master) Fifth commit
-#c6e1e95 (history) Fourth commit
-#9c68fdc Third commit
-#945704c Second commit
-#c1822cf First commit
+ef989d8 (HEAD, master) Fifth commit
+c6e1e95 (history) Fourth commit
+9c68fdc Third commit
+945704c Second commit
+c1822cf First commit
 Now we can push the new history branch to the master branch of our new repository:
 $ 'git remote add' project-history https://github.com/schacon/project-history
 $ 'git push' project-history history:master
@@ -3138,19 +3138,19 @@ OK- so our history is published. Now the harder part is truncating our recent hi
  overlap so we can replace a commit in one with an equivalent commit in the other, so were going to truncate this to
 just commits four and five =so commit four overlaps=.
 $ git log --oneline --decorate
-#ef989d8 (HEAD, master) Fifth commit
-#c6e1e95 (history) Fourth commit
-#9c68fdc Third commit
-#945704c Second commit
-#c1822cf First commit
+ef989d8 (HEAD, master) Fifth commit
+c6e1e95 (history) Fourth commit
+9c68fdc Third commit
+945704c Second commit
+c1822cf First commit
 Its useful in this case to create a base commit that has instructions on how to expand the history, so other developers
  know what to do- if they hit the first commit in the truncated history and need more. So, what were going to do- is create an
 initial commit object as our base point with instructions, then- rebase the remaining commits =four and five= on top of it.
 To do- that, we need to choose a point to split at, which for us is the third commit, which is 9c68fdc in SHA-speak. So,
  our base commit will be based off of that tree. We can create our base commit using the commit-tree command, which just
 takes a tree and will give us a brand new, parentless commit object SHA-1 back.
-#$ echo 'Get history from https://github.com/schacon/project-history' | git commit-tree 9c68fdc^{tree}
-#622e88e9cbfbacfb75b5279245b9fb38dfea10cf
+$ echo 'Get history from https://github.com/schacon/project-history' | git commit-tree 9c68fdc^{tree}
+622e88e9cbfbacfb75b5279245b9fb38dfea10cf
 Note- The commit-tree command is one of a set of commands that are commonly referred to as 'plumbing' commands.
  These are commands that are not generally meant to be used directly, but instead are used by other Git commands to do-
 smaller jobs. On occasions when were doing weirder things like this, they allow us to do- really low-level things but are
@@ -3159,9 +3159,9 @@ https://git-scm.com/book/en/v2/ch00/_plumbing_porcelain
 OK- so now that we have a base commit, we can rebase the rest of our history on top of that with git rebase --onto. The --onto argument will be
  the SHA-1 we just got back from commit-tree and the rebase point will be the third commit =the parent of the first commit we want to keep, 9c68fdc=:
 $ 'git rebase --onto' 622e88 9c68fdc
-#First- rewinding head to replay your work on top of it...
-#Applying: fourth commit
-#Applying: fifth commit
+First- rewinding head to replay your work on top of it...
+Applying: fourth commit
+Applying: fifth commit
 OK- so now weve re-written our recent history on top of a throw away base commit that now has instructions in it on how to
  reconstitute the entire history if we wanted to. We can push that new history to a new project and now when people clone that repository,
 they will only see the most recent two commits and then- a base commit with instructions.
@@ -3170,51 +3170,51 @@ Lets now switch roles to someone cloning the project for the first time who want
 $ 'git clone' https://github.com/schacon/project
 $ cd project
 $ git log --oneline master
-#e146b5f Fifth commit
-#81a708d Fourth commit
-#622e88e Get history from https://github.com/schacon/project-history
+e146b5f Fifth commit
+81a708d Fourth commit
+622e88e Get history from https://github.com/schacon/project-history
 $ 'git remote add' project-history https://github.com/schacon/project-history
 $ 'git fetch' project-history
 From https://github.com/schacon/project-history
-# * [new branch]      master     -> project-history/master
+ * [new branch]      master     -> project-history/master
 Now the collaborator would have their recent commits in the master branch and the historical commits in the project-history/master branch.
 $ git log --oneline master
-#e146b5f Fifth commit
-#81a708d Fourth commit
-#622e88e Get history from https://github.com/schacon/project-history
+e146b5f Fifth commit
+81a708d Fourth commit
+622e88e Get history from https://github.com/schacon/project-history
 $ git log --oneline project-history/master
-#c6e1e95 Fourth commit
-#9c68fdc Third commit
-#945704c Second commit
-#c1822cf First commit
+c6e1e95 Fourth commit
+9c68fdc Third commit
+945704c Second commit
+c1822cf First commit
 To combine them, you can simply call git replace with the commit you want to replace and then- the commit you want to
  replace it with. So we want to replace the "fourth" commit in the master branch with the "fourth" commit in the project-history/master branch:
 $ 'git replace' 81a708d c6e1e95
 Now- if you look at the history of the master branch, it appears to look like this:
 $ git log --oneline master
-#e146b5f Fifth commit
-#81a708d Fourth commit
-#9c68fdc Third commit
-#945704c Second commit
-#c1822cf First commit
+e146b5f Fifth commit
+81a708d Fourth commit
+9c68fdc Third commit
+945704c Second commit
+c1822cf First commit
 Without having to change all the SHA-1s upstream, we were able to replace one commit in our history with an
  entirely different commit and all the normal tools =bisect, blame, etc= will work how we would expect them to.
 Interestingly- it still shows 81a708d as the SHA-1, even though its actually using the c6e1e95 commit data that
  we replaced it with. Even if you run a command like cat-file, it will show you the replaced data:
 $ 'git cat-file -p' 81a708d
-#tree 7bc544cf438903b65ca9104a1e30345eee6c083d
-#parent 9c68fdceee073230f19ebb8b5e7fc71b479c0252
-#author Scott Chacon <schacon@gmail.com> 1268712581 -0700
-#committer Scott Chacon <schacon@gmail.com> 1268712581 -0700
-#fourth commit
+tree 7bc544cf438903b65ca9104a1e30345eee6c083d
+parent 9c68fdceee073230f19ebb8b5e7fc71b479c0252
+author Scott Chacon <schacon@gmail.com> 1268712581 -0700
+committer Scott Chacon <schacon@gmail.com> 1268712581 -0700
+fourth commit
 Remember that the actual parent of 81a708d was our placeholder commit =622e88e=, not 9c68fdce as it states here.
 Another interesting thing is that this data is kept in our references:
 $ 'git for-each-ref'
-#e146b5f14e79d4935160c0e83fb9ebe526b8da0d commit	refs/heads/master
-#c6e1e95051d41771a649f3145423f8809d1a74d4 commit	refs/remotes/history/master
-#e146b5f14e79d4935160c0e83fb9ebe526b8da0d commit	refs/remotes/origin/HEAD
-#e146b5f14e79d4935160c0e83fb9ebe526b8da0d commit	refs/remotes/origin/master
-#c6e1e95051d41771a649f3145423f8809d1a74d4 commit	refs/replace/81a708dd0e167a3f691541c7a6463343bc457040
+e146b5f14e79d4935160c0e83fb9ebe526b8da0d commit	refs/heads/master
+c6e1e95051d41771a649f3145423f8809d1a74d4 commit	refs/remotes/history/master
+e146b5f14e79d4935160c0e83fb9ebe526b8da0d commit	refs/remotes/origin/HEAD
+e146b5f14e79d4935160c0e83fb9ebe526b8da0d commit	refs/remotes/origin/master
+c6e1e95051d41771a649f3145423f8809d1a74d4 commit	refs/replace/81a708dd0e167a3f691541c7a6463343bc457040
 This means that its easy to share our replacement with others, because we can push this to our server and other people can
  easily download it. This is not that helpful in the history grafting scenario weve gone over here /since everyone would be
   downloading both histories anyhow, so why separate them?/ but it can be useful in other circumstances.
@@ -3246,9 +3246,9 @@ Git even allows you to configure several helpers. When looking for credentials f
  stop after the first answer is provided. When saving credentials, Git will send the username and password to all of the
 helpers in the list, and they can choose what to do= with them. Heres what a .gitconfig would look like if you had a
  credentials file on a thumb drive, but wanted to use the in-memory cache to save some typing if the drive isnt plugged in:
-#[credential]
-#    helper = store --file /mnt/thumbdrive/.git-credentials
-#    helper = cache --timeout 30000
+[credential]
+    helper = store --file /mnt/thumbdrive/.git-credentials
+    helper = cache --timeout 30000
 
 Under the Hood
 How does this all work? Gits root command for the credential-helper system is git credential,
@@ -3258,34 +3258,34 @@ This might be easier to understand with an example. Lets say that a credential h
 1 This is the command line that initiates the interaction.
 $ 'git credential fill'
 2 Git-credential is then- waiting for input on stdin. We provide it with the things we know: the protocol and hostname.
-#protocol=https
-#host=mygithost
+protocol=https
+host=mygithost
 3 A blank line indicates that the input is complete, and the credential system should answer with what it knows.
-#
+
 4 Git-credential then- takes over, and writes to stdout with the bits of information it found.
-#protocol=https
-#host=mygithost
-#username=bob
-#password=s3cre7
+protocol=https
+host=mygithost
+username=bob
+password=s3cre7
 5 If credentials are not found, Git asks the user for the username and password, and provides them back to the
  invoking stdout =here theyre attached to the same console=.
 $ 'git credential fill'
-#protocol=https
-#host=unknownhost
-#
-#Username for 'https://unknownhost': bob
-#Password for 'https://bob@unknownhost':
-#protocol=https
-#host=unknownhost
-#username=bob
-#password=s3cre7
+protocol=https
+host=unknownhost
+
+Username for 'https://unknownhost': bob
+Password for 'https://bob@unknownhost':
+protocol=https
+host=unknownhost
+username=bob
+password=s3cre7
 The credential system is actually invoking a program thats separate from Git itself; which one and how depends on the
  credential.helper configuration value. There are several forms it can take:
-#Configuration Value                 /=/	Behavior
+Configuration Value                 /=/	Behavior
 foo                                 /=/ Runs git-credential-foo
 foo -a --opt=bcd                    /=/ Runs git-credential-foo -a --opt=bcd
 /absolute/path/foo -xyz             /=/ Runs /absolute/path/foo -xyz
-#!f() { echo "password=s3cre7"; }; f /=/ Code after ! evaluated in shell
+!f() { echo "password=s3cre7"; }; f /=/ Code after ! evaluated in shell
 So the helpers described above are actually named 'git-credential-cache', 'git-credential-store', and so on, and we can
  configure them to take command-line arguments. The general form for this is 'git-credential-foo [args] <action>.'
 The stdin/stdout protocol is the same as git-credential, but they use a slightly different set of actions:
@@ -3299,19 +3299,19 @@ no output, but if it does know, it should augment the provided information with 
 Heres the same example from above, but skipping git-credential and going straight for git-credential-store:
 1 Here we tell git-credential-store to save some credentials: the username =bob= and the password =s3cre7= are to be used when https://mygithost is accessed.
 $ 'git credential-store --file' ~/git.store 'store'
-#protocol=https
-#host=mygithost
-#username=bob
-#password=s3cre7
+protocol=https
+host=mygithost
+username=bob
+password=s3cre7
 2 Now well retrieve those credentials. We provide the parts of the connection we already know =https://mygithost=, and an empty line.
 $ 'git credential-store --file ~/git.store get'
-#protocol=https
-#host=mygithost
+protocol=https
+host=mygithost
 3 git-credential-store replies with the username and password we stored above.
-#username=bob
-#password=s3cre7
+username=bob
+password=s3cre7
 Heres what the ~/git.store file looks like:
-#https://bob:s3cre7@mygithost
+https://bob:s3cre7@mygithost
 Its just a series of lines, each of which contains a credential-decorated URL. The osxkeychain and wincred helpers use the
  native format of their backing stores, while cache uses its own in-memory format =which no other process can read=.
 
@@ -3368,9 +3368,9 @@ You can put patterns in your projects .gitignore file to have Git not see them a
 But sometimes you want to ignore certain files for all repositories that you work with. If your computer is running macOS, youre
  probably familiar with .DS_Store files. If your preferred editor is Emacs or Vim, you know about filenames that end with a ~ or .swp.
 This setting lets you write a kind of global '.gitignore' file. If you create a "$HOME/.gitignore_global" file with these contents:
-#*~
-#.*.swp
-#.DS_Store
+*~
+.*.swp
+.DS_Store
 and you run 'git config --global core.excludesfile ~/.gitignore_global', Git will never again bother you about those files.
 
 'External Merge and Diff Tools';
@@ -3378,35 +3378,35 @@ Although Git has an internal implementation of diff, which is what weve been sho
  external tool instead. You can also set up a graphical merge-conflict-resolution tool instead of having to resolve conflicts manually.
 Set up a merge wrapper script named extMerge that calls your binary with all the arguments provided:
 $ cat /usr/local/bin/'extMerge'
-#!/bin/sh
-#/Applications/p4merge.app/Contents/MacOS/p4merge $*
+!/bin/sh
+/Applications/p4merge.app/Contents/MacOS/p4merge $*
 The diff wrapper checks to make sure seven arguments are provided and passes two of them to your merge script. By default,
  Git passes the following arguments to the diff program:
 'path old-file old-hex old-mode new-file new-hex new-mode'
 Because you only want the old-file and new-file arguments, you use the wrapper script to pass the ones you need.
 $ cat /usr/local/bin/'extDiff'
-#!/bin/sh
-#[ $# -eq 7 ] && /usr/local/bin/extMerge "$2" "$5"
+!/bin/sh
+[ $# -eq 7 ] && /usr/local/bin/extMerge "$2" "$5"
 You also need to make sure these tools are executable:
-#$ sudo chmod +x /usr/local/bin/extMerge
-#$ sudo chmod +x /usr/local/bin/extDiff
+$ sudo chmod +x /usr/local/bin/extMerge
+$ sudo chmod +x /usr/local/bin/extDiff
 Now you can set up your config file to use your custom merge resolution and diff tools. This takes a
  number of custom settings: 'merge.tool' to tell Git what strategy to use, 'mergetool./tool/.cmd' to specify how to
 run the command, 'mergetool./tool/.trustExitCode' to tell Git if the exit code of that program indicates a
  successful merge resolution or not, and 'diff.external' to tell Git what command to run for diffs. So, you can either run four config commands:
 $ 'git config --global merge.tool' extMerge
 $ 'git config --global mergetool.extMerge.cmd' \
-#  'extMerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"'
+  'extMerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"'
 $ 'git config --global mergetool.extMerge.trustExitCode' false
 $ 'git config --global diff.external' extDiff
 or you can edit your ~/.gitconfig file to add these lines:
-#[merge]
-#  tool = extMerge
-#[mergetool "extMerge"]
-#  cmd = extMerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
-#  trustExitCode = false
-#[diff]
-#  external = extDiff
+[merge]
+  tool = extMerge
+[mergetool "extMerge"]
+  cmd = extMerge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+  trustExitCode = false
+[diff]
+  external = extDiff
 After all this is set, if you run diff commands such as this:
 $ 'git diff' 32d1776b1^ 32d1776b1
 Instead of getting the diff output on the command line, Git fires up P4Merge:
@@ -3415,8 +3415,8 @@ If- you try to merge two branches and subsequently have merge conflicts, you can
 The nice thing about this wrapper setup is that you can change your diff and merge tools easily. For example, to
  change your extDiff and extMerge tools to run the KDiff3 tool instead, all you have to do- is edit your extMerge file:
 $ cat /usr/local/bin/extMerge
-#!/bin/sh
-#/Applications/kdiff3.app/Contents/MacOS/kdiff3 $*
+!/bin/sh
+/Applications/kdiff3.app/Contents/MacOS/kdiff3 $*
 Now- Git will use the KDiff3 tool for diff viewing and merge conflict resolution.
 Git comes preset to use a number of other merge-resolution tools without your having to set up the cmd configuration.
  To see a list of the tools it supports, try this:
@@ -3512,7 +3512,7 @@ written out to disk by the IDE, which records your build settings and so on. Alt
  you dont want to treat it as such because its really a lightweight database – you cant merge the contents if two people change it,
 and diffs generally arent helpful. The file is meant to be consumed by a machine. In essence, you want to treat it like a binary file.
 To tell Git to treat all pbxproj files as binary data, add the following line to your '.gitattributes' file:
-#*.pbxproj binary
+*.pbxproj binary
 Now- Git wont try to convert or fix CRLF issues; nor will it try to compute or print a diff for changes in this file when
  you run git show or git diff on your project
 
@@ -3528,14 +3528,14 @@ index 88839c4..4afcb7c 100644
 Binary files a/chapter1.docx and b/chapter1.docx differ
 You cant directly compare two versions unless you check them out and scan them manually, right? It turns out you can do- this
  fairly well using Git attributes. Put the following line in your '.gitattributes' file:
-#*.docx diff=word
+*.docx diff=word
 This tells Git that any file that matches this pattern =.docx= should use the =word= filter when you try to view a diff that
  contains changes. What is the =word= filter? You have to set it up. Here youll configure Git to use the docx2txt program to
 convert Word documents into readable text files, which it will then- diff properly.
 First- youll need to install docx2txt; you can download it from https://sourceforge.net/projects/docx2txt. Follow the
  instructions in the INSTALL file to put it somewhere your shell can find it. Next, youll write a wrapper script to
 convert output to the format Git expects. Create a file thats somewhere in your path called docx2txt, and add these contents:
-#!/bin/bash
+!/bin/bash
 docx2txt.pl "$1" -
 Dont forget to chmod a+x that file. Finally, you can configure Git to use this script:
 $ git config diff.word.textconv docx2txt
@@ -3547,7 +3547,7 @@ Another interesting problem you can solve this way involves diffing image files.
  filter that extracts their EXIF information – metadata that is recorded with most image formats. If you download and
 install the exiftool program, you can use it to convert your images into text about the metadata, so at least the
  diff will show you a textual representation of any changes that happened. Put the following line in your '.gitattributes' file:
-#*.png diff=exif
+*.png diff=exif
 Configure Git to use this tool:
 $ git config diff.exif.textconv exiftool
 $ git diff
@@ -3559,14 +3559,14 @@ you can inject text into a file when its checked out and remove it again before 
 First- you can inject the SHA-1 checksum of a blob into an \$Id$ field in the file automatically. If you set this attribute on a
  file or set of files, then- the next time you check out that branch, Git will replace that field with the SHA-1 of the blob.
 Its important to notice that it isnt the SHA-1 of the commit, but of the blob itself. Put the following line in your '.gitattributes' file:
-#*.txt ident
+*.txt ident
 Add an \$Id$ reference to a test file:
 $ echo \$Id$ > test.txt
 The next time you check out this file, Git injects the SHA-1 of the blob:
 $ rm test.txt
 $ git checkout -- test.txt
 $ cat test.txt
-#$Id: 42812b7653c7b88933f8a9d6cad0ca16714b9bb3 $
+$Id: 42812b7653c7b88933f8a9d6cad0ca16714b9bb3 $
 However- that result is of limited use. If youve used keyword substitution in CVS or Subversion, you can include a
  datestamp – the SHA-1 isnt all that helpful, because its fairly random and you cant tell if one SHA-1 is older or newer than
 another just by looking at them.
@@ -3577,7 +3577,7 @@ will process files just before theyre checked out /=smudge=, see The =smudge= fi
 The original commit message for this feature gives a simple example of running all your C source code through the
  indent program before committing. You can set it up by setting the filter attribute in your '.gitattributes' file to
 filter \*.c files with the =indent= filter:
-#*.c filter=indent
+*.c filter=indent
 Then- tell Git what the =indent= filter does on smudge and clean:
 $ 'git config --global filter.indent.clean' indent
 $ 'git config --global filter.indent.smudge' cat
@@ -3586,29 +3586,29 @@ In this case, when you commit files that match \*.c, Git will run them through t
 it spits out the same data that it comes in. This combination effectively filters all C source code files through indent before committing.
 Another interesting example gets \$Date$ keyword expansion, RCS style. To do- this properly, you need a small script that
  takes a filename, figures out the last commit date for this project, and inserts the date into the file. Here is a small Ruby script that does that:
-#! /usr/bin/env ruby
-#data = STDIN.read
-#last_date = `git log --pretty=format:"%ad" -1`
-#puts data.gsub('$Date$', '$Date: ' + last_date.to_s + '$')
+! /usr/bin/env ruby
+data = STDIN.read
+last_date = `git log --pretty=format:"%ad" -1`
+puts data.gsub('$Date$', '$Date: ' + last_date.to_s + '$')
 All the script does is get the latest commit date from the git log command, stick that into any \$Date$ strings it sees in stdin, and
  print the results – it should be simple to do- in whatever language youre most comfortable in. You can name this file expand_date and
 put it in your path. Now, you need to set up a filter in Git =call it dater= and tell it to use your expand_date filter to
  smudge the files on checkout. Youll use a Perl expression to clean that up on commit:
 $ 'git config filter.dater.smudge' expand_date
 $ 'git config filter.dater.clean'
-# \'perl -pe "s/\\\$Date[^\\\$]*\\\$/\\\$Date\\\$/"'
+ \'perl -pe "s/\\\$Date[^\\\$]*\\\$/\\\$Date\\\$/"'
 This Perl snippet strips out anything it sees in a \$Date$ string, to get back to where you started. Now that
  your filter is ready, you can test it by setting up a Git attribute for that file that engages the new filter and
 creating a file with your \$Date$ keyword:
-#date*.txt filter=dater
-#$ echo '# $Date$' > date_test.txt
+date*.txt filter=dater
+$ echo '# $Date$' > date_test.txt
 If- you commit those changes and check out the file again, you see the keyword properly substituted:
 $ 'git add' date_test.txt .gitattributes
 $ 'git commit -m' "Test date expansion in Git"
-#$ rm date_test.txt
+$ rm date_test.txt
 $ 'git checkout' date_test.txt
-#$ cat date_test.txt
-# $Date: Tue Apr 21 07:26:52 2009 -0700$
+$ cat date_test.txt
+ $Date: Tue Apr 21 07:26:52 2009 -0700$
 You can see how powerful this technique can be for customized applications. You have to be careful, though, because the
  '.gitattributes' file is committed and passed around with the project, but the driver =in this case, dater= isnt, so it
 wont work everywhere. When you design these filters, they should be able to fail gracefully and have the project still work properly.
@@ -3620,7 +3620,7 @@ You can tell Git not to export certain files or directories when generating an a
  you dont want to include in your archive file but that you do- want checked into your project, you can determine those files via the export-ignore attribute.
 For- example, say you have some test files in a test/ subdirectory, and it doesnt make sense to include them in the
  tarball export of your project. You can add the following line to your Git attributes file:
-#test/ export-ignore
+test/ export-ignore
 Now- when you run git archive to create a tarball of your project, that directory wont be included in the archive.
 'export-subst'
 When exporting files for deployment you can apply git logs formatting and keyword-expansion processing to
@@ -3628,25 +3628,25 @@ When exporting files for deployment you can apply git logs formatting and keywor
 For- instance, if you want to include a file named LAST_COMMIT in your project, and have metadata about the
  last commit automatically injected into it when git archive runs, you can for example set up your '.gitattributes' and LAST_COMMIT files like this:
 LAST_COMMIT export-subst
-#$ echo 'Last commit date: $Format:%cd by %aN$' > LAST_COMMIT
+$ echo 'Last commit date: $Format:%cd by %aN$' > LAST_COMMIT
 $ 'git add' LAST_COMMIT .gitattributes
 $ 'git commit' -am 'adding LAST_COMMIT file for archives'
 When you run git archive, the contents of the archived file will look like this:
 $ 'git archive' HEAD | tar xCf ../deployment-testing -
 $ cat ../deployment-testing/LAST_COMMIT
-#Last commit date: Tue Apr 21 08:38:48 2009 -0700 by Scott Chacon
+Last commit date: Tue Apr 21 08:38:48 2009 -0700 by Scott Chacon
 The substitutions can include for example the commit message and any git notes, and git log can do- simple word wrapping:
-#$ echo '$Format:Last commit: %h by %aN at %cd%n%+w(76,6,9)%B$' > LAST_COMMIT
+$ echo '$Format:Last commit: %h by %aN at %cd%n%+w(76,6,9)%B$' > LAST_COMMIT
 $ 'git commit -am'
-#\'export-subst uses git log'\''s custom formatter
-#git archive uses git log'\''s `pretty=format:` processor
-#directly, and strips the surrounding `$Format:` and `$`
-#markup from the output.'
+\'export-subst uses git log'\''s custom formatter
+git archive uses git log'\''s `pretty=format:` processor
+directly, and strips the surrounding `$Format:` and `$`
+markup from the output.'
 $ 'git archive' @ | tar xfO - LAST_COMMIT
-#Last commit: 312ccc8 by Jim Hill at Fri May 8 09:14:04 2015 -0700
-#       export-subst uses git log's custom formatter
-#         git archive uses git log's `pretty=format:` processor directly, and
-#         strips the surrounding `$Format:` and `$` markup from the output.
+Last commit: 312ccc8 by Jim Hill at Fri May 8 09:14:04 2015 -0700
+       export-subst uses git log's custom formatter
+         git archive uses git log's `pretty=format:` processor directly, and
+         strips the surrounding `$Format:` and `$` markup from the output.
 The resulting archive is suitable for deployment work, but like any exported archive it isnt suitable for further development work.
 
 'Merge Strategies';
@@ -3657,13 +3657,13 @@ This is helpful if a branch in your project has diverged or is specialized, but 
  merge changes back in from it, and you want to ignore certain files. Say you have a database settings file called database.xml that
 is different in two branches, and you want to merge in your other branch without messing up the database file.
  You can set up an attribute like this:
-#database.xml merge=ours
+database.xml merge=ours
 And then- define a dummy ours merge strategy with:
 $ 'git config --global merge.ours.driver true'
 If- you merge in the other branch, instead of having merge conflicts with the database.xml file, you see something like this:
 $ 'git merge' topic
-#Auto-merging database.xml
-#Merge made by recursive.
+Auto-merging database.xml
+Merge made by recursive.
 In this case, database.xml stays at whatever version you originally had.
 
 'https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks';
@@ -3731,19 +3731,19 @@ determines which user is connecting based on the public key, and set an environm
 
 'Enforcing a Specific Commit-Message Format';
 '.git/hooks/update'
-#$regex = /\[ref: (\d+)\]/
-# enforced custom commit message format
-#def check_message_format
-#  missed_revs = `git rev-list #{$oldrev}..#{$newrev}`.split("\n")
-#  missed_revs.each do |rev|
-#    message = `git cat-file commit #{rev} | sed '1,/^$/d'`
-#    if !$regex.match(message)
-#      puts "[POLICY] Your message is not formatted correctly"
-#      exit 1
-#    end
-#  end
-#end
-#check_message_format
+$regex = /\[ref: (\d+)\]/
+ enforced custom commit message format
+def check_message_format
+  missed_revs = `git rev-list #{$oldrev}..#{$newrev}`.split("\n")
+  missed_revs.each do |rev|
+    message = `git cat-file commit #{rev} | sed '1,/^$/d'`
+    if !$regex.match(message)
+      puts "[POLICY] Your message is not formatted correctly"
+      exit 1
+    end
+  end
+end
+check_message_format
 Putting that in your '.git/hooks/update' script, will reject updates that contain commits that have messages that dont adhere to your rule.
 
 'Enforcing a User-Based ACL System';
@@ -3758,44 +3758,44 @@ avail|usinclair,cdickens,ebronte|doc
 avail|schacon|lib
 avail|schacon|tests
 '.git/hooks/update'
-#def get_acl_access_data(acl_file)
-#  # read in ACL data
-#  acl_file = File.read(acl_file).split("\n").reject { |line| line == '' }
-#  access = {}
-#  acl_file.each do |line|
-#    avail, users, path = line.split('|')
-#    next unless avail == 'avail'
-#    users.split(',').each do |user|
-#      access[user] ||= []
-#      access[user] << path
-#    end
-#  end
-#  access
-#end
-## only allows certain users to modify certain subdirectories in a project
-#def check_directory_perms
-#  access = get_acl_access_data('acl')
-#  # see if anyone is trying to push something they can't
-#  new_commits = `git rev-list #{$oldrev}..#{$newrev}`.split("\n")
-#  new_commits.each do |rev|
-#    files_modified = `git log -1 --name-only --pretty=format:'' #{rev}`.split("\n")
-#    files_modified.each do |path|
-#      next if path.size == 0
-#      has_file_access = false
-#      access[$user].each do |access_path|
-#        if !access_path  # user has access to everything
-#           || (path.start_with? access_path) # access to this path
-#          has_file_access = true
-#        end
-#      end
-#      if !has_file_access
-#        puts "[POLICY] You do not have access to push to #{path}"
-#        exit 1
-#      end
-#    end
-#  end
-#end
-#check_directory_perms
+def get_acl_access_data(acl_file)
+  # read in ACL data
+  acl_file = File.read(acl_file).split("\n").reject { |line| line == '' }
+  access = {}
+  acl_file.each do |line|
+    avail, users, path = line.split('|')
+    next unless avail == 'avail'
+    users.split(',').each do |user|
+      access[user] ||= []
+      access[user] << path
+    end
+  end
+  access
+end
+# only allows certain users to modify certain subdirectories in a project
+def check_directory_perms
+  access = get_acl_access_data('acl')
+  # see if anyone is trying to push something they can't
+  new_commits = `git rev-list #{$oldrev}..#{$newrev}`.split("\n")
+  new_commits.each do |rev|
+    files_modified = `git log -1 --name-only --pretty=format:'' #{rev}`.split("\n")
+    files_modified.each do |path|
+      next if path.size == 0
+      has_file_access = false
+      access[$user].each do |access_path|
+        if !access_path  # user has access to everything
+           || (path.start_with? access_path) # access to this path
+          has_file_access = true
+        end
+      end
+      if !has_file_access
+        puts "[POLICY] You do not have access to push to #{path}"
+        exit 1
+      end
+    end
+  end
+end
+check_directory_perms
 Now your users cant push any commits with badly formed messages or with modified files outside of their designated paths.
 From now on, as long as that '.git/hooks/update' script is there and executable, your repository will never have a
  commit message without your pattern in it, and your users will be sandboxed.
@@ -3811,18 +3811,18 @@ more difficult to fix. Because hooks arent transferred with a clone of a project
 You can distribute these hooks within the project or in a separate project, but Git wont set them up automatically.
 First- the ACL file is in a different place, because this script runs from your working directory, not from your '.git' directory.
  You have to change the path to the ACL file from this:
-#access = get_acl_access_data('acl')
+access = get_acl_access_data('acl')
 to this:
-#access = get_acl_access_data('.git/acl')
+access = get_acl_access_data('.git/acl')
 The other important difference is the way you get a listing of the files that have been changed. Because the
  server-side method looks at the log of commits, and, at this point, the commit hasnt been recorded yet, you must get your
 file listing from the staging area instead. Instead of:
-#files_modified = `git log -1 --name-only --pretty=format:'' #{ref}`
+files_modified = `git log -1 --name-only --pretty=format:'' #{ref}`
 you have to use:
-#files_modified = `git diff-index --cached --name-only HEAD`
+files_modified = `git diff-index --cached --name-only HEAD`
 But those are the only two differences – otherwise, the script works the same way. One caveat is that it expects you to
  be running locally as the same user you push as to the remote machine. If that is different, you must set the
-#$user variable manually.
+$user variable manually.
 
 'https://git-scm.com/book/en/v2/Git-and-Other-Systems-Git-as-a-Client';
 
@@ -3843,13 +3843,13 @@ When you run 'git init' in a new or existing directory, Git creates the '.git' d
 nearly everything you need. This entire chapter basically deals with what you can see in this directory. Heres what a
  newly-initialized '.git' directory typically looks like:
 $ ls -F1
-#config
-#description
-#HEAD
-#hooks/
-#info/
-#objects/
-#refs/
+config
+description
+HEAD
+hooks/
+info/
+objects/
+refs/
 Depending on your version of Git, you may see some additional content there, but this is a
  fresh 'git init' repository — its what you see by default. The description file is used only by the GitWeb program,
 so dont worry about it. The config file contains your project-specific configuration options, and the info directory keeps a
@@ -3869,17 +3869,17 @@ As a demonstration, lets look at the plumbing command 'git hash-object', which t
  '.git/objects' directory =the object database=, and gives you back the unique key that now refers to that data object.
 First- you initialize a new Git repository and verify that there is =predictably= nothing in the objects directory:
 $ 'git init' test
-#Initialized empty Git repository in /tmp/test/.git/
+Initialized empty Git repository in /tmp/test/.git/
 $ cd test
 $ 'find .git/objects'
-#.git/objects
-#.git/objects/info
-#.git/objects/pack
+.git/objects
+.git/objects/info
+.git/objects/pack
 $ 'find .git/objects -type f'
 Git has initialized the objects directory and created pack and info subdirectories in it, but there are no regular files.
  Now- lets use git hash-object to create a new data object and manually store it in your new Git database:
 $ echo 'test content' | 'git hash-object -w --stdin'
-#d670460b4b4aece5915caf5c68d12f560a9fe3e4
+d670460b4b4aece5915caf5c68d12f560a9fe3e4
 In its simplest form, 'git hash-object' would take the content you handed to it and merely return the unique key that
  would be used to store it in your Git database. The -w option then- tells the command to not simply return the key,
 but to write that object to the database. Finally, the --stdin option tells git hash-object to get the content to be
@@ -3887,7 +3887,7 @@ but to write that object to the database. Finally, the --stdin option tells git 
 The output from the above command is a 40-character checksum hash. This is the SHA-1 hash — a checksum of the
  content youre storing plus a header, which youll learn about in a bit. Now you can see how Git has stored your data:
 $ find .git/objects -type f
-#.git/objects/d6/70460b4b4aece5915caf5c68d12f560a9fe3e4
+.git/objects/d6/70460b4b4aece5915caf5c68d12f560a9fe3e4
 If- you again examine your objects directory, you can see that it now contains a file for that new content.
  This is how Git stores the content initially — as a single file per piece of content, named with the SHA-1 checksum of the
 content and its header. The subdirectory is named with the first 2 characters of the SHA-1, and the filename is the remaining 38 characters.
@@ -3895,34 +3895,34 @@ Once you have content in your object database, you can examine that content with
  This command is sort of a Swiss army knife for inspecting Git objects. Passing -p to cat-file instructs the command to
 first figure out the type of content, then- display it appropriately:
 $ 'git cat-file -p' d670460b4b4aece5915caf5c68d12f560a9fe3e4
-#test content
+test content
 Now- you can add content to Git and pull it back out again. You can also do- this with content in files. For example, you can do-
  some simple version control on a file. First, create a new file and save its contents in your database:
 $ echo 'version 1' > test.txt
 $ 'git hash-object -w' test.txt
-#83baae61804e65cc73a7201a7252750c76066a30
+83baae61804e65cc73a7201a7252750c76066a30
 Then- write some new content to the file, and save it again:
 $ echo 'version 2' > test.txt
 $ 'git hash-object -w' test.txt
-#1f7a7a472abf3dd9643fd615f6da379c4acb3e3a
+1f7a7a472abf3dd9643fd615f6da379c4acb3e3a
 Your object database now contains both versions of this new file =as well as the first content you stored there=:
 $ find .git/objects -type f
-#.git/objects/1f/7a7a472abf3dd9643fd615f6da379c4acb3e3a
-#.git/objects/83/baae61804e65cc73a7201a7252750c76066a30
-#.git/objects/d6/70460b4b4aece5915caf5c68d12f560a9fe3e4
+.git/objects/1f/7a7a472abf3dd9643fd615f6da379c4acb3e3a
+.git/objects/83/baae61804e65cc73a7201a7252750c76066a30
+.git/objects/d6/70460b4b4aece5915caf5c68d12f560a9fe3e4
 At this point, you can delete your local copy of that test.txt file, then- use Git to retrieve, from the object database, either the first version you saved:
 $ 'git cat-file -p' 83baae61804e65cc73a7201a7252750c76066a30 > test.txt
 $ cat test.txt
-#version 1
+version 1
 or the second version:
 $ 'git cat-file -p' 1f7a7a472abf3dd9643fd615f6da379c4acb3e3a > test.txt
 $ cat test.txt
-#version 2
+version 2
 But remembering the SHA-1 key for each version of your file isnt practical; plus- you arent storing the filename in your
  system — just the content. This object type is called a blob. You can have Git tell you the
 object type of any object in Git, given its SHA-1 key, with git cat-file -t:
 $ 'git cat-file -t' 1f7a7a472abf3dd9643fd615f6da379c4acb3e3a
-#blob
+blob
 
 'Tree Objects';
 The next type of Git object well examine is the tree, which solves the problem of storing the filename and also allows you to
@@ -3932,20 +3932,20 @@ All the content is stored as tree and blob objects, with trees corresponding to 
 each of which is the SHA-1 hash of a blob or subtree with its associated mode, type, and filename. For example, lets say you have a
  project where the most-recent tree looks something like:
 $ 'git cat-file -p master^{tree}'
-#100644 blob a906cb2a4a904a152e80877d4088654daad0c859      README
-#100644 blob 8f94139338f9404f26296befa88755fc2598c289      Rakefile
-#040000 tree 99f1a6d12cb4b6f19c8655fca46c3ecf317074e0      lib
+100644 blob a906cb2a4a904a152e80877d4088654daad0c859      README
+100644 blob 8f94139338f9404f26296befa88755fc2598c289      Rakefile
+040000 tree 99f1a6d12cb4b6f19c8655fca46c3ecf317074e0      lib
 The 'master^{tree}' syntax specifies the tree object that is pointed to by the last commit on your master branch.
  Notice that the lib subdirectory isnt a blob but a pointer to another tree:
 $ 'git cat-file -p' 99f1a6d12cb4b6f19c8655fca46c3ecf317074e0
-#100644 blob 47c6340d6459e05787f644c2447d2595f5d3a54b      simplegit.rb
+100644 blob 47c6340d6459e05787f644c2447d2595f5d3a54b      simplegit.rb
 Note- Depending on what shell you use, you may encounter errors when using the 'master^{tree}' syntax.
  In CMD on Windows, the ^ character is used for escaping, so you have to double it to avoid this:
-# git cat-file -p master^^{tree}.
+ git cat-file -p master^^{tree}.
 When using PowerShell, parameters using {} characters have to be quoted to avoid the parameter being parsed incorrectly:
-# git cat-file -p 'master^{tree}'.
+ git cat-file -p 'master^{tree}'.
 If- youre using ZSH, the ^ character is used for globbing, so you have to enclose the whole expression in quotes:
-# git cat-file -p "master^{tree}".
+ git cat-file -p "master^{tree}".
 You can fairly easily create your own tree. Git normally creates a tree by taking the state of your staging area or index and
  writing a series of tree objects from it. So, to create a tree object, you first have to set up an index by staging some files.
 To create an index with a single entry — the first version of your test.txt file — you can use the
@@ -3962,12 +3962,12 @@ In this case, youre specifying a mode of '100644', which means its a 'normal' fi
 Now- you can use 'git write-tree' to write the staging area out to a tree object. No '-w' option is needed — calling this
  command automatically creates a tree object from the state of the index if that tree doesnt yet exist:
 $ 'git write-tree'
-#d8329fc1cc938780ffdd9f94e0d364e0ea74f579
+d8329fc1cc938780ffdd9f94e0d364e0ea74f579
 $ 'git cat-file -p' d8329fc1cc938780ffdd9f94e0d364e0ea74f579
-#100644 blob 83baae61804e65cc73a7201a7252750c76066a30      test.txt
+100644 blob 83baae61804e65cc73a7201a7252750c76066a30      test.txt
 You can also verify that this is a tree object using the same git cat-file command you saw earlier:
 $ 'git cat-file -t' d8329fc1cc938780ffdd9f94e0d364e0ea74f579
-#tree
+tree
 Youll now create a new tree with the second version of test.txt and a new file as well:
 $ echo 'new file' > new.txt
 $ 'git update-index --cacheinfo 100644' 1f7a7a472abf3dd9643fd615f6da379c4acb3e3a test.txt
@@ -3975,21 +3975,21 @@ $ 'git update-index --add' new.txt
 Your staging area now has the new version of test.txt as well as the new file new.txt.
  Write out that tree =recording the state of the staging area or index to a tree object= and see what it looks like:
 $ 'git write-tree'
-#0155eb4229851634a0f03eb265b69f5a2d56f341
+0155eb4229851634a0f03eb265b69f5a2d56f341
 $ 'git cat-file -p' 0155eb4229851634a0f03eb265b69f5a2d56f341
-#100644 blob fa49b077972391ad58037050f2a75f74e3671e92      new.txt
-#100644 blob 1f7a7a472abf3dd9643fd615f6da379c4acb3e3a      test.txt
+100644 blob fa49b077972391ad58037050f2a75f74e3671e92      new.txt
+100644 blob 1f7a7a472abf3dd9643fd615f6da379c4acb3e3a      test.txt
 Notice that this tree has both file entries and also that the test.txt SHA-1 is the =version 2= SHA-1 from earlier =1f7a7a=.
  Just for fun, youll add the first tree as a subdirectory into this one. You can read trees into your staging area by
 calling 'git read-tree'. In this case, you can read an existing tree into your staging area as a
  subtree by using the '--prefix' option with this command:
 $ 'git read-tree --prefix'=bak d8329fc1cc938780ffdd9f94e0d364e0ea74f579
 $ 'git write-tree'
-#3c4e9cd789d88d8d89c1073707c3585e41b0e614
+3c4e9cd789d88d8d89c1073707c3585e41b0e614
 $ 'git cat-file -p' 3c4e9cd789d88d8d89c1073707c3585e41b0e614
-#040000 tree d8329fc1cc938780ffdd9f94e0d364e0ea74f579      bak
-#100644 blob fa49b077972391ad58037050f2a75f74e3671e92      new.txt
-#100644 blob 1f7a7a472abf3dd9643fd615f6da379c4acb3e3a      test.txt
+040000 tree d8329fc1cc938780ffdd9f94e0d364e0ea74f579      bak
+100644 blob fa49b077972391ad58037050f2a75f74e3671e92      new.txt
+100644 blob 1f7a7a472abf3dd9643fd615f6da379c4acb3e3a      test.txt
 If- you created a working directory from the new tree you just wrote, you would get the two files in the top level of the
  working directory and a subdirectory named bak that contained the first version of the test.txt file.
 
@@ -4001,56 +4001,56 @@ You also dont have any information about who saved the snapshots, when they were
 To create a commit object, you call commit-tree and specify a single tree SHA-1 and which commit objects, if any, directly preceded it.
  Start with the first tree you wrote:
 $ echo 'First commit' | 'git commit-tree' d8329f
-#fdf4fc3344e67ab068f836878b6c4951e3b15f3d
+fdf4fc3344e67ab068f836878b6c4951e3b15f3d
 Note- You will get a different hash value because of different creation time and author data. Moreover, while in principle any
  commit object can be reproduced precisely given that data, historical details of this books construction mean that the
 printed commit hashes might not correspond to the given commits. Replace commit and tag hashes with your own checksums further in this chapter.
 Now you can look at your new commit object with git cat-file:
 $ 'git cat-file -p' fdf4fc3
-#tree d8329fc1cc938780ffdd9f94e0d364e0ea74f579
-#author Scott Chacon <schacon@gmail.com> 1243040974 -0700
-#committer Scott Chacon <schacon@gmail.com> 1243040974 -0700
-#
-#First commit
+tree d8329fc1cc938780ffdd9f94e0d364e0ea74f579
+author Scott Chacon <schacon@gmail.com> 1243040974 -0700
+committer Scott Chacon <schacon@gmail.com> 1243040974 -0700
+
+First commit
 The format for a commit object is simple: it specifies the top-level tree for the snapshot of the project at that point;
  the parent commits if any =the commit object described above does not have any parents=;
 the author/committer information =which uses your user.name and user.email configuration settings and a timestamp=;
  a blank line, and then- the commit message.
 Next- youll write the other two commit objects, each referencing the commit that came directly before it:
 $ echo 'Second commit' | 'git commit-tree' 0155eb '-p' fdf4fc3
-#cac0cab538b970a37ea1e769cbbde608743bc96d
+cac0cab538b970a37ea1e769cbbde608743bc96d
 $ echo 'Third commit'  | 'git commit-tree' 3c4e9c '-p' cac0cab
-#1a410efbd13591db07496601ebc7a059dd55cfe9
+1a410efbd13591db07496601ebc7a059dd55cfe9
 Each of the three commit objects points to one of the three snapshot trees you created. Oddly enough, you have a
  real Git history now that you can view with the git log command, if you run it on the last commit SHA-1:
 $ 'git log --stat' 1a410e
-#commit 1a410efbd13591db07496601ebc7a059dd55cfe9
-#Author: Scott Chacon <schacon@gmail.com>
-#Date:   Fri May 22 18:15:24 2009 -0700
-#
-#	Third commit
-#
-# bak/test.txt | 1 +
-# 1 file changed, 1 insertion(+)
-#
-#commit cac0cab538b970a37ea1e769cbbde608743bc96d
-#Author: Scott Chacon <schacon@gmail.com>
-#Date:   Fri May 22 18:14:29 2009 -0700
-#
-#	Second commit
-#
-# new.txt  | 1 +
-# test.txt | 2 +-
-# 2 files changed, 2 insertions(+), 1 deletion(-)
-#
-#commit fdf4fc3344e67ab068f836878b6c4951e3b15f3d
-#Author: Scott Chacon <schacon@gmail.com>
-#Date:   Fri May 22 18:09:34 2009 -0700
-#
-#    First commit
-#
-# test.txt | 1 +
-# 1 file changed, 1 insertion(+)
+commit 1a410efbd13591db07496601ebc7a059dd55cfe9
+Author: Scott Chacon <schacon@gmail.com>
+Date:   Fri May 22 18:15:24 2009 -0700
+
+	Third commit
+
+ bak/test.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit cac0cab538b970a37ea1e769cbbde608743bc96d
+Author: Scott Chacon <schacon@gmail.com>
+Date:   Fri May 22 18:14:29 2009 -0700
+
+	Second commit
+
+ new.txt  | 1 +
+ test.txt | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+commit fdf4fc3344e67ab068f836878b6c4951e3b15f3d
+Author: Scott Chacon <schacon@gmail.com>
+Date:   Fri May 22 18:09:34 2009 -0700
+
+    First commit
+
+ test.txt | 1 +
+ 1 file changed, 1 insertion(+)
 Amazing- Youve just done- the low-level operations to build up a Git history without using any of the front end commands.
  This is essentially what Git does when you run the git add and git commit commands — it stores blobs for the
 files that have changed, updates the index, writes out trees, and writes commit objects that reference the top-level trees and
@@ -4058,16 +4058,16 @@ files that have changed, updates the index, writes out trees, and writes commit 
 commit — are initially stored as separate files in your '.git/objects' directory. Here are all the objects in the
  example directory now, commented with what they store:
 $ find .git/objects -type f
-#.git/objects/01/55eb4229851634a0f03eb265b69f5a2d56f341 # tree 2
-#.git/objects/1a/410efbd13591db07496601ebc7a059dd55cfe9 # commit 3
-#.git/objects/1f/7a7a472abf3dd9643fd615f6da379c4acb3e3a # test.txt v2
-#.git/objects/3c/4e9cd789d88d8d89c1073707c3585e41b0e614 # tree 3
-#.git/objects/83/baae61804e65cc73a7201a7252750c76066a30 # test.txt v1
-#.git/objects/ca/c0cab538b970a37ea1e769cbbde608743bc96d # commit 2
-#.git/objects/d6/70460b4b4aece5915caf5c68d12f560a9fe3e4 # 'test content'
-#.git/objects/d8/329fc1cc938780ffdd9f94e0d364e0ea74f579 # tree 1
-#.git/objects/fa/49b077972391ad58037050f2a75f74e3671e92 # new.txt
-#.git/objects/fd/f4fc3344e67ab068f836878b6c4951e3b15f3d # commit 1
+.git/objects/01/55eb4229851634a0f03eb265b69f5a2d56f341 # tree 2
+.git/objects/1a/410efbd13591db07496601ebc7a059dd55cfe9 # commit 3
+.git/objects/1f/7a7a472abf3dd9643fd615f6da379c4acb3e3a # test.txt v2
+.git/objects/3c/4e9cd789d88d8d89c1073707c3585e41b0e614 # tree 3
+.git/objects/83/baae61804e65cc73a7201a7252750c76066a30 # test.txt v1
+.git/objects/ca/c0cab538b970a37ea1e769cbbde608743bc96d # commit 2
+.git/objects/d6/70460b4b4aece5915caf5c68d12f560a9fe3e4 # 'test content'
+.git/objects/d8/329fc1cc938780ffdd9f94e0d364e0ea74f579 # tree 1
+.git/objects/fa/49b077972391ad58037050f2a75f74e3671e92 # new.txt
+.git/objects/fd/f4fc3344e67ab068f836878b6c4951e3b15f3d # commit 1
 
 'Object Storage';
 We mentioned earlier that there is a header stored with every object you commit to your Git object database.
@@ -4075,47 +4075,47 @@ We mentioned earlier that there is a header stored with every object you commit 
 the string =what is up, doc?= — interactively in the Ruby scripting language.
 You can start up interactive Ruby mode with the irb command:
 $ irb
-#>> content = "what is up, doc?"
-#=> "what is up, doc?"
+>> content = "what is up, doc?"
+=> "what is up, doc?"
 Git first constructs a header which starts by identifying the type of object — in this case, a blob. To that
  first part of the header, Git adds a space followed by the size in bytes of the content, and adding a final null byte:
-#>> header = "blob #{content.bytesize}\0"
-#=> "blob 16\u0000"
+>> header = "blob #{content.bytesize}\0"
+=> "blob 16\u0000"
 Git concatenates the header and the original content and then- calculates the SHA-1 checksum of that new content.
  You can calculate the SHA-1 value of a string in Ruby by including the SHA1 digest library with the require command and then- calling
-#  Digest::SHA1.hexdigest() with the string:
-#>> store = header + content
-#=> "blob 16\u0000what is up, doc?"
-#>> require 'digest/sha1'
-#=> true
-#>> sha1 = Digest::SHA1.hexdigest(store)
-#=> "bd9dbf5aae1a3862dd1526723246b20206e5fc37"
+  Digest::SHA1.hexdigest() with the string:
+>> store = header + content
+=> "blob 16\u0000what is up, doc?"
+>> require 'digest/sha1'
+=> true
+>> sha1 = Digest::SHA1.hexdigest(store)
+=> "bd9dbf5aae1a3862dd1526723246b20206e5fc37"
 Lets compare that to the output of git hash-object. Here we use echo -n to prevent adding a newline to the input.
 $ echo -n "what is up, doc?" | 'git hash-object --stdin'
-#bd9dbf5aae1a3862dd1526723246b20206e5fc37
+bd9dbf5aae1a3862dd1526723246b20206e5fc37
 Git compresses the new content with zlib, which you can do- in Ruby with the zlib library.
  First- you need to require the library and then- run
-#  Zlib::Deflate.deflate() on the content:
-#>> require 'zlib'
-#=> true
-#>> zlib_content = Zlib::Deflate.deflate(store)
-#=> "x\x9CK\xCA\xC9OR04c(\xCFH,Q\xC8,V(-\xD0QH\xC9O\xB6\a\x00_\x1C\a\x9D"
+  Zlib::Deflate.deflate() on the content:
+>> require 'zlib'
+=> true
+>> zlib_content = Zlib::Deflate.deflate(store)
+=> "x\x9CK\xCA\xC9OR04c(\xCFH,Q\xC8,V(-\xD0QH\xC9O\xB6\a\x00_\x1C\a\x9D"
 Finally- youll write your zlib-deflated content to an object on disk. Youll determine the path of the object you want to
  write out =the first two characters of the SHA-1 value being the subdirectory name, and the last 38 characters being the
 filename within that directory=. In Ruby, you can use the #FileUtils.mkdir_p() function to create the subdirectory if it
  doesnt exist. Then, open the file with #File.open() and write out the previously zlib-compressed content to the
 file with a #write() call on the resulting file handle:
-#>> path = '.git/objects/' + sha1[0,2] + '/' + sha1[2,38]
-#=> ".git/objects/bd/9dbf5aae1a3862dd1526723246b20206e5fc37"
-#>> require 'fileutils'
-#=> true
-#>> FileUtils.mkdir_p(File.dirname(path))
-#=> ".git/objects/bd"
-#>> File.open(path, 'w') { |f| f.write zlib_content }
-#=> 32
+>> path = '.git/objects/' + sha1[0,2] + '/' + sha1[2,38]
+=> ".git/objects/bd/9dbf5aae1a3862dd1526723246b20206e5fc37"
+>> require 'fileutils'
+=> true
+>> FileUtils.mkdir_p(File.dirname(path))
+=> ".git/objects/bd"
+>> File.open(path, 'w') { |f| f.write zlib_content }
+=> 32
 Lets check the content of the object using git cat-file:
 $ 'git cat-file -p' bd9dbf5aae1a3862dd1526723246b20206e5fc37
-#what is up, doc?
+what is up, doc?
 Thats it – youve created a valid Git blob object.
 All Git objects are stored the same way, just with different types –
  instead of the string blob, the header will begin with commit or tree. Also, although the blob content can be nearly anything,
@@ -4130,17 +4130,17 @@ use as the starting point for that history. Instead, it would be easier if you h
 In Git, these simple names are called =references= or =refs=; you can find the files that contain those SHA-1 values in the
  '.git/refs' directory. In the current project, this directory contains no files, but it does contain a simple structure:
 $ find .git/refs
-#.git/refs
-#.git/refs/heads
-#.git/refs/tags
+.git/refs
+.git/refs/heads
+.git/refs/tags
 $ find .git/refs -type f
 To create a new reference that will help you remember where your latest commit is, you can technically do- something as simple as this:
 $ echo 1a410efbd13591db07496601ebc7a059dd55cfe9 > '.git/refs/heads/master'
 Now- you can use the head reference you just created instead of the SHA-1 value in your Git commands:
 $ 'git log --pretty=oneline master'
-#1a410efbd13591db07496601ebc7a059dd55cfe9 Third commit
-#cac0cab538b970a37ea1e769cbbde608743bc96d Second commit
-#fdf4fc3344e67ab068f836878b6c4951e3b15f3d First commit
+1a410efbd13591db07496601ebc7a059dd55cfe9 Third commit
+cac0cab538b970a37ea1e769cbbde608743bc96d Second commit
+fdf4fc3344e67ab068f836878b6c4951e3b15f3d First commit
 You arent encouraged to directly edit the reference files; instead- Git provides the
  safer command 'git update-ref' to do- this if you want to update a reference:
 $ 'git update-ref refs/heads/master' 1a410efbd13591db07496601ebc7a059dd55cfe9
@@ -4149,8 +4149,8 @@ Thats basically what a branch in Git is: a simple pointer or reference to the he
 $ 'git update-ref refs/heads/test' cac0ca
 Your branch will contain only work from that commit down:
 $ 'git log --pretty=oneline' test
-#cac0cab538b970a37ea1e769cbbde608743bc96d Second commit
-#fdf4fc3344e67ab068f836878b6c4951e3b15f3d First commit
+cac0cab538b970a37ea1e769cbbde608743bc96d Second commit
+fdf4fc3344e67ab068f836878b6c4951e3b15f3d First commit
 When you run commands like 'git branch' =branch=, Git basically runs that update-ref command to add the SHA-1 of the
  last commit of the branch youre on into whatever new reference you want to create.
 
@@ -4162,23 +4162,23 @@ However in some rare cases the HEAD file may contain the SHA-1 value of a Git ob
  checkout a tag, commit, or remote branch, which puts your repository in "detached HEAD" state.
 If- you look at the file, youll normally see something like this:
 $ cat .git/HEAD
-#ref: refs/heads/master
+ref: refs/heads/master
 If- you run 'git checkout' test, Git updates the file to look like this:
 $ cat .git/HEAD
-#ref: refs/heads/test
+ref: refs/heads/test
 When you run 'git commit', it creates the commit object, specifying the parent of that commit object to be
  whatever SHA-1 value the reference in HEAD points to.
 You can also manually edit this file, but again a safer command exists to do- so:
  git symbolic-ref. You can read the value of your HEAD via this command:
 $ 'git symbolic-ref HEAD'
-#refs/heads/master
+refs/heads/master
 You can also set the value of HEAD using the same command:
 $ 'git symbolic-ref HEAD' refs/heads/test
 $ cat .git/HEAD
-#ref: refs/heads/test
+ref: refs/heads/test
 You cant set a symbolic reference outside of the refs style:
 $ 'git symbolic-ref HEAD' test
-#fatal: Refusing to point HEAD outside of refs/
+fatal: Refusing to point HEAD outside of refs/
 
 'Tags';
 We just finished discussing Gits three main object types =blobs, trees and commits=, but there is a fourth.
@@ -4194,14 +4194,14 @@ directly to the commit. You can see this by creating an annotated tag =using the
 $ 'git tag -a' v1.1 1a410efbd13591db07496601ebc7a059dd55cfe9 -m 'Test tag'
 Heres the object SHA-1 value it created:
 $ cat .git/refs/tags/v1.1
-#9585191f37f7b0fb9444f35a9bf50de191beadc2
+9585191f37f7b0fb9444f35a9bf50de191beadc2
 Now- run git cat-file -p on that SHA-1 value:
 $ 'git cat-file -p' 9585191f37f7b0fb9444f35a9bf50de191beadc2
-#object 1a410efbd13591db07496601ebc7a059dd55cfe9
-#type commit
-#tag v1.1
-#tagger Scott Chacon <schacon@gmail.com> Sat May 23 16:48:58 2009 -0700
-#Test tag
+object 1a410efbd13591db07496601ebc7a059dd55cfe9
+type commit
+tag v1.1
+tagger Scott Chacon <schacon@gmail.com> Sat May 23 16:48:58 2009 -0700
+Test tag
 Notice that the object entry points to the commit SHA-1 value that you tagged. Also notice that it doesnt need to
  point to a commit; you can tag any Git object. In the Git source code, for example, the maintainer has added their
 GPG public key as a blob object and then- tagged it. You can view the public key by running this in a clone of the Git repository:
@@ -4215,16 +4215,16 @@ The third type of reference that youll see is a remote reference. If you add a r
 remote called origin and push your master branch to it:
 $ 'git remote add' origin git@github.com:schacon/simplegit-progit.git
 $ 'git push' origin master
-#Counting objects: 11, done.
-#Compressing objects: 100% (5/5), done.
-#Writing objects: 100% (7/7), 716 bytes, done.
-#Total 7 (delta 2), reused 4 (delta 1)
-#To git@github.com:schacon/simplegit-progit.git
-#  a11bef0..ca82a6d  master -> master
+Counting objects: 11, done.
+Compressing objects: 100% (5/5), done.
+Writing objects: 100% (7/7), 716 bytes, done.
+Total 7 (delta 2), reused 4 (delta 1)
+To git@github.com:schacon/simplegit-progit.git
+  a11bef0..ca82a6d  master -> master
 Then- you can see what the master branch on the origin remote was the last time you communicated with the server,
  by checking the refs/remotes/origin/master file:
 $ cat .git/refs/remotes/origin/master
-#ca82a6dff817ec66f44342007202690a93763949
+ca82a6dff817ec66f44342007202690a93763949
 Remote references differ from branches ='refs/heads' references= mainly in that theyre considered read-only.
  You can 'git checkout' to one, but Git wont symbolically reference HEAD to one, so youll never update it with a
 commit command. Git manages them as bookmarks to the last known state of where those branches were on those servers.
@@ -4234,17 +4234,17 @@ commit command. Git manages them as bookmarks to the last known state of where t
 If- you followed all of the instructions in the example from the previous section, you should now have a
  test Git repository with 11 objects — four blobs, three trees, three commits, and one tag:
 $ find .git/objects -type f
-#.git/objects/01/55eb4229851634a0f03eb265b69f5a2d56f341 # tree 2
-#.git/objects/1a/410efbd13591db07496601ebc7a059dd55cfe9 # commit 3
-#.git/objects/1f/7a7a472abf3dd9643fd615f6da379c4acb3e3a # test.txt v2
-#.git/objects/3c/4e9cd789d88d8d89c1073707c3585e41b0e614 # tree 3
-#.git/objects/83/baae61804e65cc73a7201a7252750c76066a30 # test.txt v1
-#.git/objects/95/85191f37f7b0fb9444f35a9bf50de191beadc2 # tag
-#.git/objects/ca/c0cab538b970a37ea1e769cbbde608743bc96d # commit 2
-#.git/objects/d6/70460b4b4aece5915caf5c68d12f560a9fe3e4 # 'test content'
-#.git/objects/d8/329fc1cc938780ffdd9f94e0d364e0ea74f579 # tree 1
-#.git/objects/fa/49b077972391ad58037050f2a75f74e3671e92 # new.txt
-#.git/objects/fd/f4fc3344e67ab068f836878b6c4951e3b15f3d # commit 1
+.git/objects/01/55eb4229851634a0f03eb265b69f5a2d56f341 # tree 2
+.git/objects/1a/410efbd13591db07496601ebc7a059dd55cfe9 # commit 3
+.git/objects/1f/7a7a472abf3dd9643fd615f6da379c4acb3e3a # test.txt v2
+.git/objects/3c/4e9cd789d88d8d89c1073707c3585e41b0e614 # tree 3
+.git/objects/83/baae61804e65cc73a7201a7252750c76066a30 # test.txt v1
+.git/objects/95/85191f37f7b0fb9444f35a9bf50de191beadc2 # tag
+.git/objects/ca/c0cab538b970a37ea1e769cbbde608743bc96d # commit 2
+.git/objects/d6/70460b4b4aece5915caf5c68d12f560a9fe3e4 # 'test content'
+.git/objects/d8/329fc1cc938780ffdd9f94e0d364e0ea74f579 # tree 1
+.git/objects/fa/49b077972391ad58037050f2a75f74e3671e92 # new.txt
+.git/objects/fd/f4fc3344e67ab068f836878b6c4951e3b15f3d # commit 1
 Git compresses the contents of these files with zlib, and youre not storing much, so all these files collectively take up
  only 925 bytes. Now youll add some more sizable content to the repository to demonstrate an interesting feature of Git.
 To demonstrate, well add the repo.rb file from the Grit library — this is about a 22K source code file:
@@ -4252,33 +4252,33 @@ $ curl https://raw.githubusercontent.com/mojombo/grit/master/lib/grit/repo.rb > 
 $ 'git checkout' master
 $ 'git add' repo.rb
 $ 'git commit -m' 'Create repo.rb'
-#[master 484a592] Create repo.rb
-# 3 files changed, 709 insertions(+), 2 deletions(-)
-# delete mode 100644 bak/test.txt
-# create mode 100644 repo.rb
-# rewrite test.txt (100%)
+[master 484a592] Create repo.rb
+ 3 files changed, 709 insertions(+), 2 deletions(-)
+ delete mode 100644 bak/test.txt
+ create mode 100644 repo.rb
+ rewrite test.txt (100%)
 If- you look at the resulting tree, you can see the SHA-1 value that was calculated for your new repo.rb blob object:
 $ 'git cat-file -p' #master^{tree}
-#100644 blob fa49b077972391ad58037050f2a75f74e3671e92      new.txt
-#100644 blob 033b4468fa6b2a9547a70d88d1bbe8bf3f9ed0d5      repo.rb
-#100644 blob e3f094f522629ae358806b17daf78246c27c007b      test.txt
+100644 blob fa49b077972391ad58037050f2a75f74e3671e92      new.txt
+100644 blob 033b4468fa6b2a9547a70d88d1bbe8bf3f9ed0d5      repo.rb
+100644 blob e3f094f522629ae358806b17daf78246c27c007b      test.txt
 You can then- use git cat-file to see how large that object is:
 $ 'git cat-file -s' 033b4468fa6b2a9547a70d88d1bbe8bf3f9ed0d5
-#22044
+22044
 At this point, modify that file a little, and see what happens:
 $ echo '# testing' >> repo.rb
 $ 'git commit -am' 'Modify repo.rb a bit'
-#[master 2431da6] Modify repo.rb a bit
-# 1 file changed, 1 insertion(+)
+[master 2431da6] Modify repo.rb a bit
+ 1 file changed, 1 insertion(+)
 Check the tree created by that last commit, and you see something interesting:
 $ 'git cat-file -p' #master^{tree}
-#100644 blob fa49b077972391ad58037050f2a75f74e3671e92      new.txt
-#100644 blob b042a60ef7dff760008df33cee372b945b6e884e      repo.rb
-#100644 blob e3f094f522629ae358806b17daf78246c27c007b      test.txt
+100644 blob fa49b077972391ad58037050f2a75f74e3671e92      new.txt
+100644 blob b042a60ef7dff760008df33cee372b945b6e884e      repo.rb
+100644 blob e3f094f522629ae358806b17daf78246c27c007b      test.txt
 The blob is now a different blob, which means that although you added only a single line to the end of a 400-line file,
  Git stored that new content as a completely new object:
 $ 'git cat-file -s' b042a60ef7dff760008df33cee372b945b6e884e
-#22054
+22054
 You have two nearly identical 22K objects on your disk =each compressed to approximately 7K=. Wouldnt it be nice if
  Git could store one of them in full but then- the second object only as the delta between it and the first?
 It turns out that it can. The initial format in which Git saves objects on disk is called a =loose= object format. However,
@@ -4286,18 +4286,18 @@ It turns out that it can. The initial format in which Git saves objects on disk 
 be more efficient. Git does this if you have too many loose objects around, if you run the git gc command manually, or if
  you push to a remote server. To see what happens, you can manually ask Git to pack up the objects by calling the git gc command:
 $ git gc
-#Counting objects: 18, done.
-#Delta compression using up to 8 threads.
-#Compressing objects: 100% (14/14), done.
-#Writing objects: 100% (18/18), done.
-#Total 18 (delta 3), reused 0 (delta 0)
+Counting objects: 18, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (14/14), done.
+Writing objects: 100% (18/18), done.
+Total 18 (delta 3), reused 0 (delta 0)
 If- you look in your objects directory, youll find that most of your objects are gone, and a new pair of files has appeared:
 $ find .git/objects -type f
-#.git/objects/bd/9dbf5aae1a3862dd1526723246b20206e5fc37
-#.git/objects/d6/70460b4b4aece5915caf5c68d12f560a9fe3e4
-#.git/objects/info/packs
-#.git/objects/pack/pack-978e03944f5c581011e6998cd0e9e30000905586.idx
-#.git/objects/pack/pack-978e03944f5c581011e6998cd0e9e30000905586.pack
+.git/objects/bd/9dbf5aae1a3862dd1526723246b20206e5fc37
+.git/objects/d6/70460b4b4aece5915caf5c68d12f560a9fe3e4
+.git/objects/info/packs
+.git/objects/pack/pack-978e03944f5c581011e6998cd0e9e30000905586.idx
+.git/objects/pack/pack-978e03944f5c581011e6998cd0e9e30000905586.pack
 The objects that remain are the blobs that arent pointed to by any commit — in this case,
  the "what is up, doc?" example and the =test content= example blobs you created earlier. Because you never added them to
 any commits, theyre considered dangling and arent packed up in your new packfile.
@@ -4309,30 +4309,30 @@ How does Git do- this? When Git packs objects, it looks for files that are named
  deltas from one version of the file to the next. You can look into the packfile and see what Git did to save space.
 The git verify-pack plumbing command allows you to see what was packed up:
 $ 'git verify-pack -v' .git/objects/pack/pack-978e03944f5c581011e6998cd0e9e30000905586.idx
-#2431da676938450a4d72e260db3bf7b0f587bbc1 commit 223 155 12
-#69bcdaff5328278ab1c0812ce0e07fa7d26a96d7 commit 214 152 167
-#80d02664cb23ed55b226516648c7ad5d0a3deb90 commit 214 145 319
-#43168a18b7613d1281e5560855a83eb8fde3d687 commit 213 146 464
-#092917823486a802e94d727c820a9024e14a1fc2 commit 214 146 610
-#702470739ce72005e2edff522fde85d52a65df9b commit 165 118 756
-#d368d0ac0678cbe6cce505be58126d3526706e54 tag    130 122 874
-#fe879577cb8cffcdf25441725141e310dd7d239b tree   136 136 996
-#d8329fc1cc938780ffdd9f94e0d364e0ea74f579 tree   36 46 1132
-#deef2e1b793907545e50a2ea2ddb5ba6c58c4506 tree   136 136 1178
-#d982c7cb2c2a972ee391a85da481fc1f9127a01d tree   6 17 1314 1 \
-#  deef2e1b793907545e50a2ea2ddb5ba6c58c4506
-#3c4e9cd789d88d8d89c1073707c3585e41b0e614 tree   8 19 1331 1 \
-#  deef2e1b793907545e50a2ea2ddb5ba6c58c4506
-#0155eb4229851634a0f03eb265b69f5a2d56f341 tree   71 76 1350
-#83baae61804e65cc73a7201a7252750c76066a30 blob   10 19 1426
-#fa49b077972391ad58037050f2a75f74e3671e92 blob   9 18 1445
-#b042a60ef7dff760008df33cee372b945b6e884e blob   22054 5799 1463
-#033b4468fa6b2a9547a70d88d1bbe8bf3f9ed0d5 blob   9 20 7262 1 \
-#  b042a60ef7dff760008df33cee372b945b6e884e
-#1f7a7a472abf3dd9643fd615f6da379c4acb3e3a blob   10 19 7282
-#non delta: 15 objects
-#chain length = 1: 3 objects
-#.git/objects/pack/pack-978e03944f5c581011e6998cd0e9e30000905586.pack: ok
+2431da676938450a4d72e260db3bf7b0f587bbc1 commit 223 155 12
+69bcdaff5328278ab1c0812ce0e07fa7d26a96d7 commit 214 152 167
+80d02664cb23ed55b226516648c7ad5d0a3deb90 commit 214 145 319
+43168a18b7613d1281e5560855a83eb8fde3d687 commit 213 146 464
+092917823486a802e94d727c820a9024e14a1fc2 commit 214 146 610
+702470739ce72005e2edff522fde85d52a65df9b commit 165 118 756
+d368d0ac0678cbe6cce505be58126d3526706e54 tag    130 122 874
+fe879577cb8cffcdf25441725141e310dd7d239b tree   136 136 996
+d8329fc1cc938780ffdd9f94e0d364e0ea74f579 tree   36 46 1132
+deef2e1b793907545e50a2ea2ddb5ba6c58c4506 tree   136 136 1178
+d982c7cb2c2a972ee391a85da481fc1f9127a01d tree   6 17 1314 1 \
+  deef2e1b793907545e50a2ea2ddb5ba6c58c4506
+3c4e9cd789d88d8d89c1073707c3585e41b0e614 tree   8 19 1331 1 \
+  deef2e1b793907545e50a2ea2ddb5ba6c58c4506
+0155eb4229851634a0f03eb265b69f5a2d56f341 tree   71 76 1350
+83baae61804e65cc73a7201a7252750c76066a30 blob   10 19 1426
+fa49b077972391ad58037050f2a75f74e3671e92 blob   9 18 1445
+b042a60ef7dff760008df33cee372b945b6e884e blob   22054 5799 1463
+033b4468fa6b2a9547a70d88d1bbe8bf3f9ed0d5 blob   9 20 7262 1 \
+  b042a60ef7dff760008df33cee372b945b6e884e
+1f7a7a472abf3dd9643fd615f6da379c4acb3e3a blob   10 19 7282
+non delta: 15 objects
+chain length = 1: 3 objects
+.git/objects/pack/pack-978e03944f5c581011e6998cd0e9e30000905586.pack: ok
 Here- the 033b4 blob, which if you remember was the first version of your repo.rb file, is referencing the b042a blob,
  which was the second version of the file. The third column in the output is the size of the object in the pack, so you
 can see that b042a takes up 22K of the file, but that 033b4 only takes up 9 bytes. What is also interesting is that the
@@ -4349,9 +4349,9 @@ small local Git repository, and now wanted to add a remote to it:
 $ 'git remote add' origin https://github.com/schacon/simplegit-progit
 Running the command above adds a section to your repositorys '.git/config' file, specifying the name of the remote =origin=,
  the URL of the remote repository, and the refspec to be used for fetching:
-#[remote "origin"]
-#	url = https://github.com/schacon/simplegit-progit
-#	fetch = +refs/heads/*:refs/remotes/origin/*
+[remote "origin"]
+	url = https://github.com/schacon/simplegit-progit
+	fetch = +refs/heads/*:refs/remotes/origin/*
 The format of the refspec is, first, an optional +, followed by 'src:dst', where =src= is the pattern for references on the
  remote side and =dst= is where those references will be tracked locally. The + tells Git to update the reference even if it isnt a fast-forward.
 In the default case that is automatically written by a git remote add origin command, Git fetches all the
@@ -4363,32 +4363,32 @@ $ 'git log' refs/remotes/origin/master
 Theyre all equivalent, because Git expands each of them to refs/remotes/origin/master.
 If- you want Git instead to pull down only the master branch each time, and not every other branch on the remote server,
  you can change the fetch line to refer to that branch only:
-#fetch = +refs/heads/master:refs/remotes/origin/master
+fetch = +refs/heads/master:refs/remotes/origin/master
 This is just the default refspec for git fetch for that remote. If you want to do- a one-time only fetch, you can specify the
  specific refspec on the command line, too. To pull the master branch on the remote down to origin/mymaster locally, you can run:
 $ 'git fetch' origin master:refs/remotes/origin/mymaster
 You can also specify multiple refspecs. On the command line, you can pull down several branches like so:
 $ 'git fetch' origin master:refs/remotes/origin/mymaster topic:refs/remotes/origin/topic
-#From git@github.com:schacon/simplegit
-# ! [rejected]        master     -> origin/mymaster  (non fast forward)
-# * [new branch]      topic      -> origin/topic
+From git@github.com:schacon/simplegit
+ ! [rejected]        master     -> origin/mymaster  (non fast forward)
+ * [new branch]      topic      -> origin/topic
 In this case, the master branch pull was rejected because it wasnt listed as a fast-forward reference.
  You can override that by specifying the + in front of the refspec.
 You can also specify multiple refspecs for fetching in your configuration file. If you want to always fetch the master and
  experiment branches from the origin remote, add two lines:
-#[remote "origin"]
-#	url = https://github.com/schacon/simplegit-progit
-#	fetch = +refs/heads/master:refs/remotes/origin/master
-#	fetch = +refs/heads/experiment:refs/remotes/origin/experiment
+[remote "origin"]
+	url = https://github.com/schacon/simplegit-progit
+	fetch = +refs/heads/master:refs/remotes/origin/master
+	fetch = +refs/heads/experiment:refs/remotes/origin/experiment
 Since Git 2.6.0 you can use partial globs in the pattern to match multiple branches, so this works:
-#fetch = +refs/heads/qa*:refs/remotes/origin/qa*
+fetch = +refs/heads/qa*:refs/remotes/origin/qa*
 Even better, you can use namespaces =or directories= to accomplish the same with more structure. If you have a QA team that
  pushes a series of branches, and you want to get the master branch and any of the QA teams branches but nothing else,
 you can use a config section like this:
-#[remote "origin"]
-#	url = https://github.com/schacon/simplegit-progit
-#	fetch = +refs/heads/master:refs/remotes/origin/master
-#	fetch = +refs/heads/qa/*:refs/remotes/origin/qa/*
+[remote "origin"]
+	url = https://github.com/schacon/simplegit-progit
+	fetch = +refs/heads/master:refs/remotes/origin/master
+	fetch = +refs/heads/qa/*:refs/remotes/origin/qa/*
 If- you have a complex workflow process that has a QA team pushing branches, developers pushing branches, and
  integration teams pushing and collaborating on remote branches, you can namespace them easily this way.
 
@@ -4398,10 +4398,10 @@ Its nice that you can fetch namespaced references that way, but how does the QA 
 If- the QA team wants to push their master branch to qa/master on the remote server, they can run:
 $ 'git push' origin master:refs/heads/qa/master
 If- they want Git to do- that automatically each time they run git push origin, they can add a push value to their config file:
-#[remote "origin"]
-#	url = https://github.com/schacon/simplegit-progit
-#	fetch = +refs/heads/*:refs/remotes/origin/*
-#	push = refs/heads/master:refs/heads/qa/master
+[remote "origin"]
+	url = https://github.com/schacon/simplegit-progit
+	fetch = +refs/heads/*:refs/remotes/origin/*
+	push = refs/heads/master:refs/heads/qa/master
 Again- this will cause a git push origin to push the local master branch to the remote qa/master branch by default.
 Note- You cannot use the refspec to fetch from one repository and push to another one. For an example to do- so, refer to
  Keep your GitHub public repository up-to-date.
@@ -4430,50 +4430,50 @@ Lets follow the http-fetch process for the simplegit library:
 $ 'git clone' http://server/simplegit-progit.git
 The first thing this command does is pull down the 'info/refs' file. This file is written by the 'update-server-info' command,
  which is why you need to enable that as a 'post-receive' hook in order for the HTTP transport to work properly:
-#=> GET info/refs
-#ca82a6dff817ec66f44342007202690a93763949     refs/heads/master
+=> GET info/refs
+ca82a6dff817ec66f44342007202690a93763949     refs/heads/master
 Now you have a list of the remote references and SHA-1s. Next, you look for what the HEAD reference is so you know what to
  check out when youre finished:
-#=> GET HEAD
-#ref: refs/heads/master
+=> GET HEAD
+ref: refs/heads/master
 You need to check out the master branch when youve completed the process. At this point, youre ready to start the
  walking process. Because your starting point is the ca82a6 commit object you saw in the 'info/refs' file, you start by fetching that:
-#=> GET objects/ca/82a6dff817ec66f44342007202690a93763949
-#(179 bytes of binary data)
+=> GET objects/ca/82a6dff817ec66f44342007202690a93763949
+(179 bytes of binary data)
 You get an object back – that object is in loose format on the server, and you fetched it over a static HTTP GET request.
  You can 'zlib-uncompress' it, strip off the header, and look at the commit content:
 $ 'git cat-file -p' ca82a6dff817ec66f44342007202690a93763949
-#tree cfda3bf379e4f8dba8717dee55aab78aef7f4daf
-#parent 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
-#author Scott Chacon <schacon@gmail.com> 1205815931 -0700
-#committer Scott Chacon <schacon@gmail.com> 1240030591 -0700
-#Change version number
+tree cfda3bf379e4f8dba8717dee55aab78aef7f4daf
+parent 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
+author Scott Chacon <schacon@gmail.com> 1205815931 -0700
+committer Scott Chacon <schacon@gmail.com> 1240030591 -0700
+Change version number
 Next- you have two more objects to retrieve – cfda3b, which is the tree of content that the commit we just retrieved points to;
  and 085bb3, which is the parent commit:
-#=> GET objects/08/5bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
-#(179 bytes of data)
+=> GET objects/08/5bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
+(179 bytes of data)
 That gives you your next commit object. Grab the tree object:
-#=> GET objects/cf/da3bf379e4f8dba8717dee55aab78aef7f4daf
-#(404 - Not Found)
+=> GET objects/cf/da3bf379e4f8dba8717dee55aab78aef7f4daf
+(404 - Not Found)
 Oops – it looks like that tree object isnt in loose format on the server, so you get a 404 response back. There are a
  couple of reasons for this – the object could be in an alternate repository, or it could be in a packfile in this repository.
 Git checks for any listed alternates first:
-#=> GET objects/info/http-alternates
-#(empty file)
+=> GET objects/info/http-alternates
+(empty file)
 If- this comes back with a list of alternate URLs, Git checks for loose files and packfiles there – this is a nice mechanism for
  projects that are forks of one another to share objects on disk. However, because no alternates are listed in this case,
 your object must be in a packfile. To see what packfiles are available on this server, you need to get the 'objects/info/packs' file,
  which contains a listing of them =also generated by update-server-info=:
-#=> GET objects/info/packs
-#P pack-816a9b2334da9953e530f27bcac22082a9f5b835.pack
+=> GET objects/info/packs
+P pack-816a9b2334da9953e530f27bcac22082a9f5b835.pack
 There is only one packfile on the server, so your object is obviously in there, but youll check the index file to make sure.
  This is also useful if you have multiple packfiles on the server, so you can see which packfile contains the object you need:
-#=> GET objects/pack/pack-816a9b2334da9953e530f27bcac22082a9f5b835.idx
-#(4k of binary data)
+=> GET objects/pack/pack-816a9b2334da9953e530f27bcac22082a9f5b835.idx
+(4k of binary data)
 Now that you have the packfile index, you can see if your object is in it – because the index lists the SHA-1s of the
  objects contained in the packfile and the offsets to those objects. Your object is there, so go ahead and get the whole packfile:
-#=> GET objects/pack/pack-816a9b2334da9953e530f27bcac22082a9f5b835.pack
-#(13k of binary data)
+=> GET objects/pack/pack-816a9b2334da9953e530f27bcac22082a9f5b835.pack
+(13k of binary data)
 You have your tree object, so you continue walking your commits. Theyre all also within the packfile you just downloaded,
  so you dont have to do- any more requests to your server. Git checks out a working copy of the master branch that was
 pointed to by the HEAD reference you downloaded at the beginning.
@@ -4488,15 +4488,15 @@ a pair for uploading data and a pair for downloading data.
 'Uploading Data';
 To upload data to a remote process, Git uses the send-pack and receive-pack processes. The send-pack process runs on the
  client and connects to a receive-pack process on the remote side.
-#SSH
+SSH
 For- example, say you run git push origin master in your project, and origin is defined as a URL that uses the SSH protocol.
  Git fires up the send-pack process, which initiates a connection over SSH to your server. It tries to run a command on the
 remote server via an SSH call that looks something like this:
 $ ssh -x git@server "git-receive-pack 'simplegit-progit.git'"
-#00a5ca82a6dff817ec66f4437202690a93763949 refs/heads/master□report-status \
-#	delete-refs side-band-64k quiet ofs-delta \
-#	agent=git/2:2.1.1+github-607-gfba4028 delete-refs
-#0000
+00a5ca82a6dff817ec66f4437202690a93763949 refs/heads/master□report-status \
+	delete-refs side-band-64k quiet ofs-delta \
+	agent=git/2:2.1.1+github-607-gfba4028 delete-refs
+0000
 The 'git-receive-pack' command immediately responds with one line for each reference it currently has – in this case,
  just the master branch and its SHA-1. The first line also has a list of the
 servers capabilities =here, report-status, delete-refs, and some others, including the client identifier=.
@@ -4507,29 +4507,29 @@ Your first chunk starts with 00a5, which is hexadecimal for 165, meaning the chu
 Now that it knows the servers state, your 'send-pack' process determines what commits it has that the server doesnt.
  For- each reference that this push will update, the send-pack process tells the 'receive-pack' process that information.
 For- instance, if youre updating the master branch and adding an experiment branch, the send-pack response may look something like this:
-#0076ca82a6dff817ec66f44342007202690a93763949 15027957951b64cf874c3557a0f3547bd83b3ff6 \
-#	refs/heads/master report-status
-#006c0000000000000000000000000000000000000000 cdfdb42577e2506715f8cfeacdbabc092bf63e8d \
-#	refs/heads/experiment
-#0000
+0076ca82a6dff817ec66f44342007202690a93763949 15027957951b64cf874c3557a0f3547bd83b3ff6 \
+	refs/heads/master report-status
+006c0000000000000000000000000000000000000000 cdfdb42577e2506715f8cfeacdbabc092bf63e8d \
+	refs/heads/experiment
+0000
 Git sends a line for each reference youre updating with the lines length, the old SHA-1, the new SHA-1, and
  the reference that is being updated. The first line also has the clients capabilities. The SHA-1 value of
 all 0s means that nothing was there before – because youre adding the experiment reference. If you were deleting a reference,
  you would see the opposite: all 0s on the right side.
 Next- the client sends a packfile of all the objects the server doesnt have yet. Finally, the server responds with a
  success /or failure/ indication:
-#000eunpack ok
-#HTTP(S)
+000eunpack ok
+HTTP(S)
 This process is mostly the same over HTTP, though the handshaking is a bit different. The connection is initiated with this request:
-#=> GET http://server/simplegit-progit.git/info/refs?service=git-receive-pack
-#001f# service=git-receive-pack
-#00ab6c5f0e45abd7832bf23074a333f739977c9e8188 refs/heads/master□report-status \
-#	delete-refs side-band-64k quiet ofs-delta \
-#	agent=git/2:2.1.1~vmg-bitmaps-bugaloo-608-g116744e
-#0000
+=> GET http://server/simplegit-progit.git/info/refs?service=git-receive-pack
+001f# service=git-receive-pack
+00ab6c5f0e45abd7832bf23074a333f739977c9e8188 refs/heads/master□report-status \
+	delete-refs side-band-64k quiet ofs-delta \
+	agent=git/2:2.1.1~vmg-bitmaps-bugaloo-608-g116744e
+0000
 Thats the end of the first client-server exchange. The client then- makes another request, this time a POST,
  with the data that send-pack provides.
-#=> POST http://server/simplegit-progit.git/git-receive-pack
+=> POST http://server/simplegit-progit.git/git-receive-pack
 The POST request includes the send-pack output and the packfile as its payload. The server then- indicates success or
  failure with its HTTP response.
 Keep in mind the HTTP protocol may further wrap this data inside a chunked transfer encoding.
@@ -4537,40 +4537,40 @@ Keep in mind the HTTP protocol may further wrap this data inside a chunked trans
 'Downloading Data';
 When you download data, the 'fetch-pack' and 'upload-pack' processes are involved. The client initiates a fetch-pack process that
  connects to an upload-pack process on the remote side to negotiate what data will be transferred down.
-#SSH
+SSH
 If- youre doing the fetch over SSH, fetch-pack runs something like this:
 $ ssh -x git@server "git-upload-pack 'simplegit-progit.git'"
 After fetch-pack connects, upload-pack sends back something like this:
-#00dfca82a6dff817ec66f44342007202690a93763949 HEAD□multi_ack thin-pack \
-#	side-band side-band-64k ofs-delta shallow no-progress include-tag \
-#	multi_ack_detailed symref=HEAD:refs/heads/master \
-#	agent=git/2:2.1.1+github-607-gfba4028
-#003fe2409a098dc3e53539a9028a94b6224db9d6a6b6 refs/heads/master
-#0000
+00dfca82a6dff817ec66f44342007202690a93763949 HEAD□multi_ack thin-pack \
+	side-band side-band-64k ofs-delta shallow no-progress include-tag \
+	multi_ack_detailed symref=HEAD:refs/heads/master \
+	agent=git/2:2.1.1+github-607-gfba4028
+003fe2409a098dc3e53539a9028a94b6224db9d6a6b6 refs/heads/master
+0000
 This is very similar to what receive-pack responds with, but the capabilities are different. In addition, it sends back
  what HEAD points to 'symref=HEAD:refs/heads/master' so the client knows what to check out if this is a clone.
 At this point, the fetch-pack process looks at what objects it has and responds with the objects that it needs by
  sending /want/ and then- the SHA-1 it wants. It sends all the objects it already has with =have= and then- the SHA-1.
 At the end of this list, it writes =done= to initiate the upload-pack process to begin sending the packfile of the data it needs:
-#003cwant ca82a6dff817ec66f44342007202690a93763949 ofs-delta
-#0032have 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
-#0009done
-#0000
-#HTTP(S)
+003cwant ca82a6dff817ec66f44342007202690a93763949 ofs-delta
+0032have 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7
+0009done
+0000
+HTTP(S)
 The handshake for a fetch operation takes two HTTP requests. The first is a GET to the same endpoint used in the dumb protocol:
-#=> GET $GIT_URL/info/refs?service=git-upload-pack
-#001e# service=git-upload-pack
-#00e7ca82a6dff817ec66f44342007202690a93763949 HEAD□multi_ack thin-pack \
-#	side-band side-band-64k ofs-delta shallow no-progress include-tag \
-#	multi_ack_detailed no-done symref=HEAD:refs/heads/master \
-#	agent=git/2:2.1.1+github-607-gfba4028
-#003fca82a6dff817ec66f44342007202690a93763949 refs/heads/master
-#0000
+=> GET $GIT_URL/info/refs?service=git-upload-pack
+001e# service=git-upload-pack
+00e7ca82a6dff817ec66f44342007202690a93763949 HEAD□multi_ack thin-pack \
+	side-band side-band-64k ofs-delta shallow no-progress include-tag \
+	multi_ack_detailed no-done symref=HEAD:refs/heads/master \
+	agent=git/2:2.1.1+github-607-gfba4028
+003fca82a6dff817ec66f44342007202690a93763949 refs/heads/master
+0000
 This is very similar to invoking git-upload-pack over an SSH connection, but the second exchange is performed as a separate request:
-#=> POST $GIT_URL/git-upload-pack HTTP/1.0
-#0032want 0a53e9ddeaddad63ad106860237bbf53411d11a7
-#0032have 441b40d833fdfa93eb2908e52742248faf0ee993
-#0000
+=> POST $GIT_URL/git-upload-pack HTTP/1.0
+0032want 0a53e9ddeaddad63ad106860237bbf53411d11a7
+0032have 441b40d833fdfa93eb2908e52742248faf0ee993
+0000
 Again- this is the same format as above. The response to this request indicates 'success' or 'failure', and includes the packfile.
 
 'Protocols Summary';
@@ -4595,19 +4595,19 @@ Again- this generally does nothing. You must have around 7,000 loose objects or 
  real gc command. You can modify these limits with the 'gc.auto' and 'gc.autopacklimit' config settings, respectively.
 The other thing gc will do- is pack up your references into a single file. Suppose your repository contains the following branches and tags:
 $ find '.git/refs' -type f
-#.git/refs/heads/experiment
-#.git/refs/heads/master
-#.git/refs/tags/v1.0
-#.git/refs/tags/v1.1
+.git/refs/heads/experiment
+.git/refs/heads/master
+.git/refs/tags/v1.0
+.git/refs/tags/v1.1
 If- you run 'git gc', youll no longer have these files in the refs directory. Git will move them for the sake of efficiency into a
  file named '.git/packed-refs' that looks like this:
 $ cat .git/packed-refs
-# pack-refs with: peeled fully-peeled
-#cac0cab538b970a37ea1e769cbbde608743bc96d refs/heads/experiment
-#ab1afef80fac8e34258ff41fc1b867c702daa24b refs/heads/master
-#cac0cab538b970a37ea1e769cbbde608743bc96d refs/tags/v1.0
-#9585191f37f7b0fb9444f35a9bf50de191beadc2 refs/tags/v1.1
-#^1a410efbd13591db07496601ebc7a059dd55cfe9
+ pack-refs with: peeled fully-peeled
+cac0cab538b970a37ea1e769cbbde608743bc96d refs/heads/experiment
+ab1afef80fac8e34258ff41fc1b867c702daa24b refs/heads/master
+cac0cab538b970a37ea1e769cbbde608743bc96d refs/tags/v1.0
+9585191f37f7b0fb9444f35a9bf50de191beadc2 refs/tags/v1.1
+^1a410efbd13591db07496601ebc7a059dd55cfe9
 If- you update a reference, Git doesnt edit this file but instead writes a new file to 'refs/heads'. To get the
  appropriate SHA-1 for a given reference, Git checks for that reference in the 'refs' directory and then-
 checks the 'packed-refs' file as a fallback. So if you cant find a reference in the refs directory, its probably in your packed-refs file.
@@ -4621,18 +4621,18 @@ abandoning commits that you wanted something from. Assuming this happens, how ca
 Heres an example that hard-resets the master branch in your test repository to an older commit and then- recovers the
  lost commits. First, lets review where your repository is at this point:
 $ 'git log --pretty=oneline'
-#ab1afef80fac8e34258ff41fc1b867c702daa24b Modify repo.rb a bit
-#484a59275031909e19aadb7c92262719cfcdf19a Create repo.rb
-#1a410efbd13591db07496601ebc7a059dd55cfe9 Third commit
-#cac0cab538b970a37ea1e769cbbde608743bc96d Second commit
-#fdf4fc3344e67ab068f836878b6c4951e3b15f3d First commit
+ab1afef80fac8e34258ff41fc1b867c702daa24b Modify repo.rb a bit
+484a59275031909e19aadb7c92262719cfcdf19a Create repo.rb
+1a410efbd13591db07496601ebc7a059dd55cfe9 Third commit
+cac0cab538b970a37ea1e769cbbde608743bc96d Second commit
+fdf4fc3344e67ab068f836878b6c4951e3b15f3d First commit
 Now- move the master branch back to the middle commit:
 $ 'git reset --hard' 1a410efbd13591db07496601ebc7a059dd55cfe9
-#HEAD is now at 1a410ef Third commit
+HEAD is now at 1a410ef Third commit
 $ 'git log --pretty=oneline'
-#1a410efbd13591db07496601ebc7a059dd55cfe9 Third commit
-#cac0cab538b970a37ea1e769cbbde608743bc96d Second commit
-#fdf4fc3344e67ab068f836878b6c4951e3b15f3d First commit
+1a410efbd13591db07496601ebc7a059dd55cfe9 Third commit
+cac0cab538b970a37ea1e769cbbde608743bc96d Second commit
+fdf4fc3344e67ab068f836878b6c4951e3b15f3d First commit
 Youve effectively lost the top two commits – you have no branch from which those commits are reachable. You need to find the
  latest commit SHA-1 and then- add a branch that points to it. The trick is finding that latest commit SHA-1 –
 its not like youve memorized it, right?
@@ -4641,33 +4641,33 @@ Often- the quickest way is to use a tool called 'git reflog'. As youre working, 
 'git update-ref' command, which is another reason to use it instead of just writing the SHA-1 value to your ref files,
  as we covered in Git References. You can see where youve been at any time by running git reflog:
 $ 'git reflog'
-#1a410ef HEAD@{0}: reset: moving to 1a410ef
-#ab1afef HEAD@{1}: commit: Modify repo.rb a bit
-#484a592 HEAD@{2}: commit: Create repo.rb
+1a410ef HEAD@{0}: reset: moving to 1a410ef
+ab1afef HEAD@{1}: commit: Modify repo.rb a bit
+484a592 HEAD@{2}: commit: Create repo.rb
 Here we can see the two commits that we have had checked out, however there is not much information here. To see the
  same information in a much more useful way, we can run 'git log -g', which will give you a normal log output for your reflog.
 $ 'git log -g'
-#commit 1a410efbd13591db07496601ebc7a059dd55cfe9
-#Reflog: HEAD@{0} (Scott Chacon <schacon@gmail.com>)
-#Reflog message: updating HEAD
-#Author: Scott Chacon <schacon@gmail.com>
-#Date:   Fri May 22 18:22:37 2009 -0700
-#		Third commit
-#commit ab1afef80fac8e34258ff41fc1b867c702daa24b
-#Reflog: HEAD@{1} (Scott Chacon <schacon@gmail.com>)
-#Reflog message: updating HEAD
-#Author: Scott Chacon <schacon@gmail.com>
-#Date:   Fri May 22 18:15:24 2009 -0700
-#       Modify repo.rb a bit
+commit 1a410efbd13591db07496601ebc7a059dd55cfe9
+Reflog: HEAD@{0} (Scott Chacon <schacon@gmail.com>)
+Reflog message: updating HEAD
+Author: Scott Chacon <schacon@gmail.com>
+Date:   Fri May 22 18:22:37 2009 -0700
+		Third commit
+commit ab1afef80fac8e34258ff41fc1b867c702daa24b
+Reflog: HEAD@{1} (Scott Chacon <schacon@gmail.com>)
+Reflog message: updating HEAD
+Author: Scott Chacon <schacon@gmail.com>
+Date:   Fri May 22 18:15:24 2009 -0700
+       Modify repo.rb a bit
 It looks like the bottom commit is the one you lost, so you can recover it by creating a new branch at that commit.
  For- example, you can start a branch named recover-branch at that commit /ab1afef/:
 $ 'git branch' recover-branch ab1afef
 $ 'git log --pretty=oneline' recover-branch
-#ab1afef80fac8e34258ff41fc1b867c702daa24b Modify repo.rb a bit
-#484a59275031909e19aadb7c92262719cfcdf19a Create repo.rb
-#1a410efbd13591db07496601ebc7a059dd55cfe9 Third commit
-#cac0cab538b970a37ea1e769cbbde608743bc96d Second commit
-#fdf4fc3344e67ab068f836878b6c4951e3b15f3d First commit
+ab1afef80fac8e34258ff41fc1b867c702daa24b Modify repo.rb a bit
+484a59275031909e19aadb7c92262719cfcdf19a Create repo.rb
+1a410efbd13591db07496601ebc7a059dd55cfe9 Third commit
+cac0cab538b970a37ea1e769cbbde608743bc96d Second commit
+fdf4fc3344e67ab068f836878b6c4951e3b15f3d First commit
 Cool – now you have a branch named recover-branch that is where your master branch used to be, making the
  first two commits reachable again. Next, suppose your loss was for some reason not in the reflog – you can simulate that
 by removing recover-branch and deleting the reflog. Now the first two commits arent reachable by anything:
@@ -4677,12 +4677,12 @@ Because the reflog data is kept in the '.git/logs/' directory, you effectively h
  commit at this point? One way is to use the 'git fsck' utility, which checks your database for integrity. If you run it
 with the --full option, it shows you all objects that arent pointed to by another object:
 $ 'git fsck --full'
-#Checking object directories: 100% (256/256), done.
-#Checking objects: 100% (18/18), done.
-#dangling blob d670460b4b4aece5915caf5c68d12f560a9fe3e4
-#dangling commit ab1afef80fac8e34258ff41fc1b867c702daa24b
-#dangling tree aea790b9a58f6cf6f2804eeac9f0abbe9631e4c9
-#dangling blob 7108f7ecb345ee9d0084193f147cdad4d2998293
+Checking object directories: 100% (256/256), done.
+Checking objects: 100% (18/18), done.
+dangling blob d670460b4b4aece5915caf5c68d12f560a9fe3e4
+dangling commit ab1afef80fac8e34258ff41fc1b867c702daa24b
+dangling tree aea790b9a58f6cf6f2804eeac9f0abbe9631e4c9
+dangling blob 7108f7ecb345ee9d0084193f147cdad4d2998293
 In this case, you can see your missing commit after the string =dangling commit=. You can recover it the same way,
  by adding a branch that points to that SHA-1.
 
@@ -4704,33 +4704,33 @@ To demonstrate, youll add a large file into your test repository, remove it in t
 $ curl -L https://www.kernel.org/pub/software/scm/git/git-2.1.0.tar.gz > git.tgz
 $ 'git add' git.tgz
 $ 'git commit -m' 'Add git tarball'
-#[master 7b30847] Add git tarball
-# 1 file changed, 0 insertions(+), 0 deletions(-)
-# create mode 100644 git.tgz
+[master 7b30847] Add git tarball
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 git.tgz
 Oops – you didnt want to add a huge tarball to your project. Better get rid of it:
 $ 'git rm' git.tgz
-#rm 'git.tgz'
+rm 'git.tgz'
 $ 'git commit -m' 'Oops - remove large tarball'
-#[master dadf725] Oops - remove large tarball
-# 1 file changed, 0 insertions(+), 0 deletions(-)
-# delete mode 100644 git.tgz
+[master dadf725] Oops - remove large tarball
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ delete mode 100644 git.tgz
 Now- gc your database and see how much space youre using:
 $ 'git gc'
-#Counting objects: 17, done.
-#Delta compression using up to 8 threads.
-#Compressing objects: 100% (13/13), done.
-#Writing objects: 100% (17/17), done.
-#Total 17 (delta 1), reused 10 (delta 0)
+Counting objects: 17, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (13/13), done.
+Writing objects: 100% (17/17), done.
+Total 17 (delta 1), reused 10 (delta 0)
 You can run the 'count-objects' command to quickly see how much space youre using:
 $ 'git count-objects -v'
-#count: 7
-#size: 32
-#in-pack: 17
-#packs: 1
-#size-pack: 4868
-#prune-packable: 0
-#garbage: 0
-#size-garbage: 0
+count: 7
+size: 32
+in-pack: 17
+packs: 1
+size-pack: 4868
+prune-packable: 0
+garbage: 0
+size-garbage: 0
 The 'size-pack' entry is the size of your packfiles in kilobytes, so youre using almost 5MB. Before the last commit,
  you were using closer to 2K – clearly, removing the file from the previous commit didnt remove it from your history.
 Every time anyone clones this repository, they will have to clone all 5MB just to get this tiny project, because you
@@ -4741,25 +4741,25 @@ you can identify the big objects by running another plumbing command called 'git
  third field in the output, which is file size. You can also pipe it through the tail command because youre only interested in the
 last few largest files:
 $ 'git verify-pack -v' .git/objects/pack/pack-29…69.idx | sort -k 3 -n | tail -3
-#dadf7258d699da2c8d89b09ef6670edb7d5f91b4 commit 229 159 12
-#033b4468fa6b2a9547a70d88d1bbe8bf3f9ed0d5 blob   22044 5792 4977696
-#82c99a3e86bb1267b236a4b6eff7868d97489af1 blob   4975916 4976258 1438
+dadf7258d699da2c8d89b09ef6670edb7d5f91b4 commit 229 159 12
+033b4468fa6b2a9547a70d88d1bbe8bf3f9ed0d5 blob   22044 5792 4977696
+82c99a3e86bb1267b236a4b6eff7868d97489af1 blob   4975916 4976258 1438
 The big object is at the bottom: 5MB. To find out what file it is, youll use the 'rev-list' command,
  which you used briefly in Enforcing a Specific Commit-Message Format. If you pass '--objects' to rev-list,
 it lists all the commit SHA-1s and also the blob SHA-1s with the file paths associated with them.
  You can use this to find your blobs name:
 $ 'git rev-list --objects --all' | grep 82c99a3
-#82c99a3e86bb1267b236a4b6eff7868d97489af1 git.tgz
+82c99a3e86bb1267b236a4b6eff7868d97489af1 git.tgz
 Now- you need to remove this file from all trees in your past. You can easily see what commits modified this file:
 $ 'git log --oneline --branches --' git.tgz
-#dadf725 Oops - remove large tarball
-#7b30847 Add git tarball
+dadf725 Oops - remove large tarball
+7b30847 Add git tarball
 You must rewrite all the commits downstream from 7b30847 to fully remove this file from your Git history.
  To do- so, you use 'filter-branch', which you used in Rewriting History:
 $ 'git filter-branch --index-filter' 'git rm --ignore-unmatch --cached git.tgz' -- 7b30847^..
-#Rewrite 7b30847d080183a1ab7d18fb202473b3096e9f34 (1/2)rm 'git.tgz'
-#Rewrite dadf7258d699da2c8d89b09ef6670edb7d5f91b4 (2/2)
-#Ref 'refs/heads/master' was rewritten
+Rewrite 7b30847d080183a1ab7d18fb202473b3096e9f34 (1/2)rm 'git.tgz'
+Rewrite dadf7258d699da2c8d89b09ef6670edb7d5f91b4 (2/2)
+Ref 'refs/heads/master' was rewritten
 The '--index-filter' option is similar to the '--tree-filter' option used in Rewriting History, except that instead of passing a
  command that modifies files checked out on disk, youre modifying your staging area or index each time.
 Rather than remove a specific file with something like rm file, you have to remove it with 'git rm --cached' – you must
@@ -4774,35 +4774,35 @@ You need to get rid of anything that has a pointer to those old commits before y
 $ rm -Rf .git/refs/original
 $ rm -Rf .git/logs/
 $ 'git gc'
-#Counting objects: 15, done.
-#Delta compression using up to 8 threads.
-#Compressing objects: 100% (11/11), done.
-#Writing objects: 100% (15/15), done.
-#Total 15 (delta 1), reused 12 (delta 0)
+Counting objects: 15, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (11/11), done.
+Writing objects: 100% (15/15), done.
+Total 15 (delta 1), reused 12 (delta 0)
 Lets see how much space you saved.
 $ 'git count-objects -v'
-#count: 11
-#size: 4904
-#in-pack: 15
-#packs: 1
-#size-pack: 8
-#prune-packable: 0
-#garbage: 0
-#size-garbage: 0
+count: 11
+size: 4904
+in-pack: 15
+packs: 1
+size-pack: 8
+prune-packable: 0
+garbage: 0
+size-garbage: 0
 The packed repository size is down to 8K, which is much better than 5MB. You can see from the size value that the
  big object is still in your loose objects, so its not gone; but it wont be transferred on a push or subsequent clone,
 which is what is important.
 If- you really wanted to, you could remove the object completely by running 'git prune' with the '--expire' option:
 $ 'git prune --expire now'
 $ 'git count-objects -v'
-#count: 0
-#size: 0
-#in-pack: 15
-#packs: 1
-#size-pack: 8
-#prune-packable: 0
-#garbage: 0
-#size-garbage: 0
+count: 0
+size: 0
+in-pack: 15
+packs: 1
+size-pack: 8
+prune-packable: 0
+garbage: 0
+size-garbage: 0
 
 'https://git-scm.com/book/en/v2/Git-Internals-Environment-Variables';
 'Environment Variables';
@@ -4885,12 +4885,12 @@ If- the data rate of an HTTP operation is lower than 'GIT_HTTP_LOW_SPEED_LIMIT' 
  'GIT_EXTERNAL_DIFF' or 'diff.external'. The former represents which file in a series is being diffed =starting with 1=, and
 the latter is the total number of files in the batch.
 'GIT_MERGE_VERBOSITY' controls the output for the recursive merge strategy. The allowed values are as follows:
-#0 outputs nothing, except possibly a single error message.
-#1 shows only conflicts.
-#2 also shows file changes.
-#3 shows when files are skipped because they haven’t changed.
-#4 shows all paths as they are processed.
-#5 and above show detailed debugging information.
+0 outputs nothing, except possibly a single error message.
+1 shows only conflicts.
+2 also shows file changes.
+3 shows when files are skipped because they haven’t changed.
+4 shows all paths as they are processed.
+5 and above show detailed debugging information.
 The default value is 2.
 
 'Debugging';
@@ -4913,7 +4913,7 @@ $ GIT_TRACE_SETUP=true 'git status'
 
 'Miscellaneous';
 'GIT_SSH' if specified, is a program that is invoked instead of ssh when Git tries to connect to an SSH host. It is invoked like
-# $GIT_SSH [username@]host [-p <port>] <command>.
+ $GIT_SSH [username@]host [-p <port>] <command>.
 Note that this isnt the easiest way to customize how ssh is invoked; it wont support extra command-line parameters.
  To support extra command-line parameters, you can use GIT_SSH_COMMAND, write a wrapper script and set GIT_SSH to
 point to it or use the "$HOME/.ssh/config" file.
@@ -4930,7 +4930,7 @@ answer on stdout =see Credential Storage for more on this subsystem=.
 The default value =if this variable is not set= is to choose an appropriate buffering scheme depending on the activity and the output mode.
 'GIT_REFLOG_ACTION' lets you specify the descriptive text written to the reflog. Heres an example:
 $ GIT_REFLOG_ACTION="my action" 'git commit --allow-empty -m' 'My message'
-#[master 9e3d55a] My message
+[master 9e3d55a] My message
 $ git reflog -1
-#9e3d55a HEAD@{0}: my action: My message
+9e3d55a HEAD@{0}: my action: My message
 ----
