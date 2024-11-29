@@ -11,19 +11,22 @@ https://docs.gradle.org/current/userguide/quick_start.html
 
 NOTE: Gradle supports Android, Java, Kotlin Multiplatform, Groovy, Scala, Javascript, and C/C++. The presence of the gradlew and gradlew.bat files in the root directory of a project is a clear indicator that Gradle is used.
 
+[source, shell]
 ----
 $ gradle build #Gradle can be invoked in the command line
 ----
 
-The Wrapper is a script that invokes a declared version of Gradle and is the recommended way to execute a Gradle build. It is found in the project root directory as a gradlew or gradlew.bat file:
+NOTE: The Wrapper is a script that invokes a declared version of Gradle and is the recommended way to execute a Gradle build. It is found in the project root directory as a gradlew or gradlew.bat file:
 
+[source, shell]
 ----
 $ gradlew build     // Linux or OSX
 $ gradlew.bat build  // Windows
 ----
 
-If you want to view or update the Gradle version of your project, use the command line. Do not edit the wrapper files manually:
+TIP: If you want to view or update the Gradle version of your project, use the command line. Do not edit the wrapper files manually:
 
+[source, shell]
 ----
 $ ./gradlew --version
 $ ./gradlew wrapper --gradle-version 8.10.2
@@ -37,12 +40,14 @@ https://docs.gradle.org/current/userguide/getting_started_eng.html
 
 To execute a task called taskName on the root project, type:
 
+[source, shell]
 ----
 $ gradle :taskName
 ----
 
 To pass an option to a task, prefix the option name with -- after the task name:
 
+[source, shell]
 ----
 $ gradle taskName --exampleOption=exampleValue
 ----
@@ -60,7 +65,8 @@ settings.gradle.kts
 ----
 
 The settings file is a script. It is either a settings.gradle file written in Groovy or a settings.gradle.kts file in Kotlin.
-There is only one root project per build.
+
+NOTE: There is only one root project per build.
 
 In the build file, two types of dependencies can be added:
 The libraries and/or plugins on which Gradle and the build script depend.
@@ -82,15 +88,21 @@ Every Gradle build comprises at least one build script.
 
 Version catalogs provide a way to centralize your dependency declarations in a libs.versions.toml file.
 The version catalog typically contains four sections:
+
+[source, console]
+----
 [versions] to declare the version numbers that plugins and libraries will reference.
 [libraries] to define the libraries used in the build files.
 [bundles] to define a set of dependencies.
 [plugins] to define plugins.
+----
 
 The file is located in the gradle directory so that it can be used by Gradle and IDEs automatically. The version catalog should be checked into source control: gradle/libs.versions.toml.
 
+==== "`libs.versions.toml`"
+
+[source, toml]
 ----
-<< 'libs.versions.toml'
 [versions]
 androidGradlePlugin = "7.4.1"
 mockito = "2.16.0"
@@ -101,9 +113,11 @@ mockitoCore = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "androidGradlePlugin" }
-libs.versions.toml
+----
 
 The following build.gradle.kts file adds a plugin and two dependencies to the project using the version catalog above:
+
+----
 << 'build.gradle.kts'
 plugins {
    alias(libs.plugins.androidApplication)
