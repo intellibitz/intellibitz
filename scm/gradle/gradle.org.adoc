@@ -1,11 +1,13 @@
 //gradle.org.adoc
 :hardbreaks-option:
+:source-highlighter: rouge
+:source-language: gradle
 
 ==== Reference
 https://docs.gradle.org/current/userguide/userguide.html
 https://docs.gradle.org/current/userguide/quick_start.html
 
-[source, shell]
+[source, gradle]
 ----
 
 #Gradle supports Android, Java, Kotlin Multiplatform, Groovy, Scala, Javascript, and C/C++.

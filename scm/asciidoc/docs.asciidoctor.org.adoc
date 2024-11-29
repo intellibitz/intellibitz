@@ -67,11 +67,11 @@ literal
 ls -l
 
 .quote
-[quote]
+[quote, a well read man]
 quote
 
-.title
-[verse]
+.verse
+[verse, a nice poem]
 verse
 
 .table

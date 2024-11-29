@@ -1,5 +1,7 @@
 //git-scm.org.adoc
 :hardbreaks-option:
+:source-highlighter: rouge
+:source-language: shell
 
 ==== Reference
 https://git-scm.com
