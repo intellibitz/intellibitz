@@ -1,19 +1,21 @@
 //git-scm.org.adoc
 :hardbreaks-option:
-----
+==== Reference
 https://git-scm.com
 https://git-scm.com/docs/gitcredentials
 https://git-scm.com/doc/credential-helpers
 https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things
 https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
 https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository
-----
+
 ==== Debian-Ubuntu
-For- the latest stable version for your release of Debian-Ubuntu
+[source, shell]
 ----
+
+#For- the latest stable version for your release of Debian-Ubuntu
 apt-get install git
-----
-For- Ubuntu, this PPA provides the latest stable upstream Git version
+
+#For- Ubuntu, this PPA provides the latest stable upstream Git version
 add-apt-repository ppa:git-core/ppa
 apt update; apt install git
 
@@ -55,7 +57,6 @@ git clone URL directory_name #clones a remote repository
 $ git clone https://github.com/libgit2/libgit2 mylibgit
 #Git has a number of different transfer protocols you can use. The previous example uses the https:// protocol, but
 # you may also see git:// or user@server:path/to/repo.git, which uses the SSH transfer protocol.
-
 #The .git folder manages your project's repo. Git doesn't run as a server*. Instead the .git folder acts as your
 # local 'server' that all the git commands communicate with. Basically, running a git command edits the contents of the .git folder.
 
@@ -4927,3 +4928,4 @@ $ GIT_REFLOG_ACTION="my action" 'git commit --allow-empty -m' 'My message'
 #[master 9e3d55a] My message
 $ git reflog -1
 #9e3d55a HEAD@{0}: my action: My message
+----

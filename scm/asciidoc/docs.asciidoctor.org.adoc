@@ -2,17 +2,17 @@
 = Title
 
 == Section
-
 :sectnums:
 === Section
 :sectnums!:
 
 ==== Section
+'''
 
 
 :name-attribute: value
 
-.title
+.literal block
 ----
 literal block
 ----
@@ -31,14 +31,16 @@ nested literal block
 ====
 example block
 
-.title
+.nested block title
 [caption="Nested Block {counter:number:2}: "]
 =====
-nested example block, same structural block as parent, varied length of delimiter lines in child
+nested example block,
+same structural block as parent,
+varied length of delimiter lines in child
 =====
 ====
 
-.title
+.sidebar
 [sidebar]
 text
 
@@ -47,7 +49,7 @@ text
 content
 ****
 
-.title
+.listing
 [listing]
 text
 
@@ -55,16 +57,16 @@ text
 this is a comment
 ////
 
-.title
+.literal
 ....
 literal
 ....
 
-.title
+.source
 [source, shell]
 ls -l
 
-.title
+.quote
 [quote]
 quote
 
@@ -72,22 +74,54 @@ quote
 [verse]
 verse
 
-.title
+.table
 [cols="1"]
 |===
 | column
 |===
 
+paragraph
+*does not*
+_have_ line
+break
+`monospace`
+#hightlight#
+e=~m~c^2^
+
+.unordered list
+* unordered
+* list
+//-
+* another
+* list
+
+.nested unordered list
+* list
+** nested
+*** list
+
+.ordered list
+. ordered
+. list
+
+
+
 paragraph with hard line +
 break
 
 [%hardbreaks]
-paragraph with hardbreaks line
+paragraph
+with
+hardbreaks line
+[.text-right]
 break
 
 :hardbreaks-option:
 line breaks
+[.lead]
  are preserved
 
+[.text-center]
 through
+[.normal]
 entire document
