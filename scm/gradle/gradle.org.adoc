@@ -2,6 +2,8 @@
 :hardbreaks-option:
 :source-highlighter: rouge
 :source-language: gradle
+:toc: left
+:toc-title: Gradle
 
 ==== Reference
 https://docs.gradle.org/current/userguide/userguide.html

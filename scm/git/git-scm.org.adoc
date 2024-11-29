@@ -2,6 +2,8 @@
 :hardbreaks-option:
 :source-highlighter: rouge
 :source-language: gradle
+:toc: left
+:toc-title: Git
 
 ==== Reference
 https://git-scm.com

@@ -1,5 +1,19 @@
 //docs.asciidoctor.org.adoc
-= Title
+// :hardbreaks-option:
+:source-highlighter: rouge
+:source-language: asciidoc
+:toc: left
+:toc-title: AsciiDoc Cheatsheet
+
+= AsciiDoc Cheatsheet
+
+// single line comment
+////
+
+this is a comment block
+
+////
+
 
 == Section
 :sectnums:
@@ -9,6 +23,92 @@
 ==== Section
 '''
 
+// ---
+
+- - -
+
+// ***
+
+* * *
+
+// include::basics.adoc[]
+
+Output literal monospace text, such as `+{backtick}+` or `+http://localhost:8080+`, by enclosing the text in a pair of pluses surrounded by a pair backticks.
+
+:url-home: https://asciidoctor.org
+:link-docs: https://asciidoctor.org/docs[documentation]
+:summary: AsciiDoc is a mature, plain-text document format for \
+       writing notes, articles, documentation, books, and more. \
+       It's also a text processor & toolchain for translating \
+       documents into various output formats (i.e., backends), \
+       including HTML, DocBook, PDF and ePub.
+:checkedbox: pass:normal[{startsb}&#10004;{endsb}]
+
+Check out {url-home}[Asciidoctor]!
+
+{summary}
+
+Be sure to read the {link-docs} too!
+
+{checkedbox} That's done!
+
+In /items/\{id}, the id attribute isn't replaced.
+The curly braces around it are preserved.
+
+\*Stars* isn't displayed as bold text.
+The asterisks around it are preserved.
+
+\&sect; appears as an entity reference.
+It's not converted into the section symbol (&sect;).
+
+\=> The backslash prevents the equals sign followed by a greater
+than sign from combining to form a double arrow character (=>).
+
+\[[Word]] is not interpreted as an anchor.
+The double brackets around it are preserved.
+
+[\[[Word]]] is not interpreted as a bibliography anchor.
+The triple brackets around it are preserved.
+
+The URL \https://example.org isn't converted into an active link.
+
+A statement.footnote:[Clarification about this statement.]
+
+A bold statement!footnote:disclaimer[Opinions are my own.]
+
+Another bold statement.footnote:disclaimer[]
+
+Press the btn:[OK] button when you are finished.
+
+Select a file in the file navigator and click btn:[Open].
+
+To save the file, select menu:File[Save].
+
+Select menu:View[Zoom > Reset] to reset the zoom level to the default setting.
+
+> I hold it that a little rebellion now and then is a good thing,
+> and as necessary in the political world as storms in the physical.
+> -- Thomas Jefferson, Papers of Thomas Jefferson: Volume 11
+
+> > What's new?
+>
+> I've got Markdown in my AsciiDoc!
+>
+> > Like what?
+>
+> * Blockquotes
+> * Headings
+> * Fenced code blocks
+>
+> > Is there more?
+>
+> Yep. AsciiDoc and Markdown share a lot of common syntax already.
+
+.collapsible block - click to expand
+[%collapsible]
+====
+This content is only revealed when the user clicks the block title.
+====
 
 :name-attribute: value
 
@@ -53,10 +153,6 @@ content
 [listing]
 text
 
-////
-this is a comment
-////
-
 .literal
 ....
 literal
@@ -74,11 +170,38 @@ quote
 [verse, a nice poem]
 verse
 
+++++
+<p>
+Content in a passthrough block is passed to the output unprocessed.
+That means you can include raw HTML, like this embedded Gist:
+</p>
+
+<script src="https://gist.github.com/mojavelinux/5333524.js">
+</script>
+++++
+
 .table
 [cols="1"]
 |===
 | column
 |===
+
+.Table Title
+|===
+|Column 1, Header Row |Column 2, Header Row
+
+|Cell in column 1, row 1
+|Cell in column 2, row 1
+
+|Cell in column 1, row 2
+|Cell in column 2, row 2
+|===
+
+before
+
+'''
+
+after
 
 paragraph
 *does not*
@@ -104,6 +227,55 @@ e=~m~c^2^
 . ordered
 . list
 
+First term:: The description can be placed on the same line
+as the term.
+Second term::
+Description of the second term.
+The description can also start on its own line.
+
+|===
+|Shortcut |Purpose
+
+|kbd:[F11]
+|Toggle fullscreen
+
+|kbd:[Ctrl+T]
+|Open a new tab
+|===
+
+[source,ruby]
+----
+require 'sinatra' // <1>
+
+get '/hi' do // <2>
+  "Hello World!" // <3>
+end
+----
+<1> Library import
+<2> URL mapping
+<3> HTTP response body
+
+// ```ruby
+require 'sinatra'
+
+get '/hi' do
+  "Hello World!"
+end
+// ```
+
+NOTE: An admonition draws the reader's attention to auxiliary information.
+
+Here are the other built-in admonition types:
+
+IMPORTANT: Don't forget the children!
+
+TIP: Look for the warp zone under the bridge.
+
+CAUTION: Slippery when wet.
+
+WARNING: The software you're about to use is untested.
+
+IMPORTANT: Sign off before stepping away from your computer.
 
 
 paragraph with hard line +
