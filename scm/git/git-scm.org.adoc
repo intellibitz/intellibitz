@@ -1,7 +1,7 @@
 //git-scm.org.adoc
 :hardbreaks-option:
 :source-highlighter: rouge
-:source-language: shell
+:source-language: gradle
 
 ==== Reference
 https://git-scm.com
@@ -12,7 +12,7 @@ https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
 https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository
 
 ==== Debian-Ubuntu
-[source, shell]
+[source, gradle]
 ----
 
 #For- the latest stable version for your release of Debian-Ubuntu
