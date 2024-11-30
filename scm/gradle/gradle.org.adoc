@@ -131,25 +131,41 @@ dependencies {
     testImplementation(libs.mockitoCore)
 }
 build.gradle.kts
+----
 
 You can view your dependency tree in the terminal using the ./gradlew :app:dependencies command:
+----
 $ ./gradlew :app:dependencies
+----
 
 You run a Gradle build task using the gradle command or by invoking the Gradle Wrapper (./gradlew or gradlew.bat) in your project directory:
+----
 $ ./gradlew build
+----
 
 All available tasks in your project come from Gradle plugins and build scripts.
 You can list all the available tasks in the project by running the following command in the terminal:
+----
 $ ./gradlew tasks
+----
+
 You can also list the tasks only available in the app subproject by running
+----
 $ ./gradlew :app:tasks.
+----
+
 You can obtain more information in the task listing using the --all option:
+----
 $ ./gradlew tasks --all
+----
 
 The run task is executed with ./gradlew run:
+----
 $ ./gradlew run
+----
 
 Many times, a task requires another task to run first.
+----
 $ ./gradlew build
 ----
 
@@ -171,37 +187,51 @@ plugins {
     id «plugin id» version «plugin version»
 }
 build.gradle.kts
+----
 
 Core plugins are unique in that they provide short names, such as java for the core JavaPlugin, when applied in build scripts. They also do not require versions. To apply the java plugin to a project:
+----
 << 'build.gradle.kts'
 plugins {
     id("java")
 }
 build.gradle.kts
+----
 
 Community plugins can be published at the Gradle Plugin Portal, where other Gradle users can easily discover and use them.
+----
 << 'build.gradle.kts'
 plugins {
     id("org.springframework.boot") version "3.1.5"
 }
 build.gradle.kts
+----
 
 Incremental builds are always enabled, and the best way to see them in action is to turn on verbose mode. With verbose mode, each task state is labeled during a build:
+----
 $ ./gradlew compileJava --console=verbose
+----
 
 When the build cache has been used to repopulate the local directory, the tasks are marked as FROM-CACHE:
+----
 $ ./gradlew compileJava --build-cache
+----
 
 A build scan is a representation of metadata captured as you run your build.
 A Build Scan is a shareable and centralized record of a build and is available as a free service from Gradle.
 To enable build scans on a gradle command, add --scan to the command line option:
+----
 $ ./gradlew build --scan
+----
 
 https://docs.gradle.org/current/userguide/part1_gradle_init.html
+----
 $ gradle
 $ gradle init --type java-application  --dsl kotlin
+----
 
 https://docs.gradle.org/current/userguide/part2_gradle_tasks.html#part2_begin
+----
 << 'build.gradle.kts'
 tasks.register<Copy>("copyTask") {
     from("source")
@@ -222,8 +252,10 @@ tasks.register("greet") {
     dependsOn("hello")
 }
 build.gradle.kts
+----
 
 https://docs.gradle.org/current/userguide/part3_gradle_dep_man.html#part3_begin
+----
 << 'build.gradle.kts'
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -277,8 +309,10 @@ publishing {
     }
 }
 build.gradle.kts
+----
 
 The publishToMavenLocal task builds the POM file and the artifacts to be published. It then installs them into the local Maven repository.
+----
 $ ./gradlew :app:publishToMavenLocal
 ----
 
@@ -299,6 +333,7 @@ https://docs.gradle.org/current/userguide/part5_gradle_inc_builds.html#part5_beg
 ----
 $ ./gradlew :app:clean :app:build
 $ ./gradlew :app:build
+----
 
 There are four labels that developers can use to view task outcomes when verbose mode is turned on:
 OutcomeLabel	Description
@@ -311,11 +346,15 @@ If there is no label, the task was newly executed by Gradle   locally.
 https://docs.gradle.org/current/userguide/part6_gradle_caching.html#part6_begin
 https://docs.gradle.org/current/userguide/gradle_directories.html
 Add org.gradle.caching=true to the gradle.properties file:
-<< 'gradle.properties'
+
+[source, properties]
+----
+#<< 'gradle.properties'
 org.gradle.console=verbose
 org.gradle.caching=true
-gradle.properties
+----
 
+----
 $ ./gradlew :app:clean :app:build
 $ ./gradlew :app:build
 ----
@@ -538,21 +577,25 @@ The plugin is moved to its own build called build-logic with a build script and 
 │   └── build.gradle.kts
 └── documentation
     └── build.gradle.kts
+----
 
 The fact that build-logic is located in a subdirectory of the root project is irrelevant.
 The folder could be located outside the root project if desired.
+----
 << 'settings.gradle.kts'
 pluginManagement {
     includeBuild("build-logic")
 }
 include("mobile-app", "web-app", "api", "lib", "documentation")
 settings.gradle.kts
+----
 
 A project path has the following pattern: it starts with an optional colon, which denotes the root project.
 The root project, :, is the only project in a path not specified by its name.
 The rest of a project path is a colon-separated sequence of project names, where the next project is a subproject of the previous project:
 :sub-project-1
 
+----
 gradlew -q projects
 ----
 
@@ -575,12 +618,21 @@ The build task is typically used to compile, test, and check a single project.
 
 ----
 $ gradle :api:build
+----
+
 The buildNeeded task builds AND tests all the projects from the project dependencies of the testRuntime configuration:
+----
 $ gradle :api:buildNeeded
+----
+
 The buildDependents task tests ALL the projects that have a project dependency   in the testRuntime configuration   on the specified project:
+----
 $ gradle :api:buildDependents
+----
+
 Finally, you can build and test everything in all projects. Any task you run in the root project folder will cause that same-named task to be run on all the children.
 You can run gradle build to build and test ALL projects.
+----
 $ gradle build
 ----
 
@@ -639,9 +691,13 @@ tasks.register("testBoth") {
     println("This is executed during the configuration phase as well, because :testBoth is used in the build.")
 }
 build.gradle.kts
+----
 
 The following command executes the test and testBoth tasks specified above. Because Gradle only configures requested tasks and their dependencies, the configured task never configures:
+----
 > gradle test testBoth
+----
+
 This is executed during the initialization phase.
 > Configure project :
 This is executed during the configuration phase.
@@ -651,7 +707,6 @@ This is executed during the execution phase.
 > Task :testBoth
 This is executed first during the execution phase.
 This is executed last during the execution phase.
-----
 
 https://docs.gradle.org/current/userguide/writing_settings_files.html#writing_settings_files
 
@@ -710,10 +765,13 @@ plugins(function() {
     id("plugin")
 })
 settings.gradle.kts
+----
+
 Blocks are mapped to Gradle API methods.
 The code inside the function is executed against a this object called a receiver in Kotlin lambda and a delegate in Groovy closure. Gradle determines the correct this object and invokes the correct corresponding method. The this of the  method invocation id"plugin" object is of type PluginDependenciesSpec.
 
 The settings file is composed of Gradle API calls built on top of the DSLs. Gradle executes the script line by line, top to bottom.
+----
 << 'settings.gradle.kts'
 pluginManagement {
     repositories {
@@ -738,10 +796,12 @@ include("sub-project-a")
 include("sub-project-b")
 include("sub-project-c")
 settings.gradle.kts
+----
 
 1. Define the location of plugins
 The settings file can optionally manage plugin versions and repositories for your build with pluginManagement It provides a centralized way to define which plugins should be used in your project and from which repositories they should be resolved.
 
+----
 << 'settings.gradle.kts'
 pluginManagement {
     repositories {
@@ -750,25 +810,34 @@ pluginManagement {
     }
 }
 settings.gradle.kts
-2. Apply settings plugins
+----
+
+2: Apply settings plugins
 The settings file can optionally apply plugins that are required for configuring the settings of the project. These are commonly the Develocity plugin and the Toolchain Resolver plugin in the example below.
 Plugins applied in the settings file only affect the Settings object.
 
+----
 << 'settings.gradle.kts'
 plugins {
   id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
 }
 settings.gradle.kts
-3. Define the root project name
+----
+
+3: Define the root project name
 The settings file defines your project name using the rootProject.name property:
 
+----
 << 'settings.gradle.kts'
 rootProject.name = "root-project"
 settings.gradle.kts
+----
+
 There is only one root project per build.
 4. Define dependency resolution strategies
 The settings file can optionally define rules and configurations for dependency resolution across your projects. It provides a centralized way to manage and customize dependency resolution.
 
+----
 << 'settings.gradle.kts'
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
@@ -777,28 +846,37 @@ dependencyResolutionManagement {
     }
 }
 settings.gradle.kts
+----
+
 You can also include version catalogs in this section.
 5. Add subprojects to the build
 The settings file defines the structure of the project by adding all the subprojects using the include statement:
 
+----
 << 'settings.gradle.kts'
 include("app")
 include("business-logic")
 include("data-model")
 settings.gradle.kts
+----
+
 You can also include entire builds using includeBuild.
 
 There are many more properties and methods on the Settings object that you can use to configure your build.
 It’s important to remember that while many Gradle scripts are typically written in short Groovy or Kotlin syntax, every item in the settings script is essentially invoking a method on the Settings object in the Gradle API:
 
+----
 << 'settings.gradle.kts'
 include("app")
 Is actually:
 settings.include("app")
 settings.gradle.kts
+----
+
 Additionally, the full power of the Groovy and Kotlin languages is available to you.
 For example, instead of using include many times to add subprojects, you can iterate over the list of directories in the project root folder and include them automatically:
 
+----
 << 'settings.gradle.kts'
 rootDir.listFiles().filter { it.isDirectory && (new File(it, "build.gradle.kts").exists()) }.forEach {
     include(it.name)
@@ -840,7 +918,9 @@ println(name)
 println(project.name)
 The first uses the top-level reference to the name property of the Project object. The second statement uses the project property available to any build script, which returns the associated Project object.
 build.gradle.kts
+----
 
+----
 $ gradle -q check
 ----
 
@@ -975,7 +1055,10 @@ tasks.register<Zip>("zip-reports") {
     destinationDir(file('/dir'))
 }
 build.gradle.kts
+----
+
 You may have seen usage of the TaskContainer.create~java.lang.String method which should be avoided:
+----
 << 'build.gradle.kts'
 tasks.create<Zip>("zip-reports") {
     from 'Reports/'
@@ -985,13 +1068,19 @@ tasks.create<Zip>("zip-reports") {
 }
 register(), which enables task configuration avoidance, is preferred over create().
 build.gradle.kts
+----
+
 You can locate a task to configure it using the TaskCollection.named~java.lang.String method:
+----
 << 'build.gradle.kts'
 tasks.named<Test>("test") {
     useJUnitPlatform()
 }
 build.gradle.kts
+----
+
 The example below configures the Javadoc task to automatically generate HTML documentation from Java code:
+----
 << 'build.gradle.kts'
 tasks.named("javadoc").configure {
     exclude 'app/Internal*.java'
@@ -999,8 +1088,10 @@ tasks.named("javadoc").configure {
     exclude 'app/internal/*'
 }
 build.gradle.kts
+----
 
 A build script is made up of zero or more statements and script blocks:
+----
 << 'build.gradle.kts'
 println(project.layout.projectDirectory);
 Statements can include method calls, property assignments, and local variable definitions:
@@ -1013,8 +1104,10 @@ repositories {
     google()
 }
 build.gradle.kts
+----
 
 A build script is also a Groovy or a Kotlin script:
+----
 << 'build.gradle.kts'
 tasks.register("upper") {
     doLast {
@@ -1024,9 +1117,14 @@ tasks.register("upper") {
     }
 }
 build.gradle.kts
+----
+
+----
 $ gradle -q upper
+----
 
 It can contain elements allowed in a Groovy or Kotlin script, such as method definitions and class definitions:
+----
 << 'build.gradle.kts'
 tasks.register("count") {
     doLast {
@@ -1034,9 +1132,14 @@ tasks.register("count") {
     }
 }
 build.gradle.kts
+----
+
+----
 $ gradle -q count
+----
 
 Using the capabilities of the Groovy or Kotlin language, you can register multiple tasks in a loop:
+----
 << 'build.gradle.kts'
 repeat(4) { counter ->
     tasks.register("task$counter") {
@@ -1046,12 +1149,17 @@ repeat(4) { counter ->
     }
 }
 build.gradle.kts
+----
+
+----
 $ gradle -q task1
+----
 
 Build scripts can declare two variables: local variables and extra properties.
 
 Local Variables
 Declare local variables with the val keyword. Local variables are only visible in the scope where they have been declared. They are a feature of the underlying Kotlin language.
+----
 << 'build.gradle.kts'
 val dest = "dest"
 
@@ -1060,11 +1168,13 @@ tasks.register<Copy>("copy") {
     into(dest)
 }
 build.gradle.kts
+----
 
 Extra Properties
 Gradle’s enhanced objects, including projects, tasks, and source sets, can hold user-defined properties.
 Add, read, and set extra properties via the owning object’s extra property. Alternatively, you can access extra
  properties via Kotlin delegated properties using by extra.
+----
 << 'build.gradle.kts'
 plugins {
     id("java-library")
@@ -1100,6 +1210,9 @@ tasks.register("printProperties") {
     }
 }
 build.gradle.kts
+----
+
+----
 $ gradle -q printProperties
 ----
 
@@ -1133,6 +1246,9 @@ tasks.register("greet") {
     }
 }
 build.gradle.kts
+----
+
+----
 $ gradle -q greet
 ----
 
@@ -1149,10 +1265,12 @@ dependencies {
     delegate.testImplementation('junit:junit:4.13')
 }
 build.gradle.kts
+----
 
 Default imports
 To make build scripts more concise, Gradle automatically adds a set of import statements to scripts.
 As a result, instead of writing
+----
 << 'build.gradle.kts'
 throw new org.gradle.api.tasks.StopExecutionException()
 , you can write
@@ -1182,6 +1300,7 @@ plugins {
     id("application")
 }
 build.gradle.kts
+----
 
 Task classification - There are two classes of tasks that can be executed:
 
@@ -1192,6 +1311,7 @@ Typically, a lifecycle tasks depends on many actionable tasks, and is used to ex
 
 Task registration and action
 Let’s take a look at a simple "Hello World" task in a build script:
+----
 << 'build.gradle.kts'
 tasks.register("hello") {
     doLast {
@@ -1199,16 +1319,24 @@ tasks.register("hello") {
     }
 }
 build.gradle.kts
+----
+
 In the example, the build script registers a single task called hello using the TaskContainer API, and adds an action to it.
 https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/TaskContainer.html
 
 If the tasks in the project are listed, the hello task is available to Gradle:
+----
 $ ./gradlew app:tasks --all
+----
+
 You can execute the task in the build script with ./gradlew hello:
+----
 $ ./gradlew hello
+----
 
 Task group and description
 The hello task from the previous section can be detailed with a description and assigned to a group with the following update:
+----
 << 'build.gradle.kts'
 tasks.register("hello") {
     group = "Custom"
@@ -1218,11 +1346,16 @@ tasks.register("hello") {
     }
 }
 build.gradle.kts
+----
+
 To view information about a task, use the help --task <task-name> command:
+----
 $./gradlew help --task hello
+----
 
 Task dependencies
 You can declare tasks that depend on other tasks:
+----
 << 'build.gradle.kts'
 tasks.register("hello") {
     doLast {
@@ -1237,9 +1370,14 @@ tasks.register("intro") {
     }
 }
 build.gradle.kts
+----
+
+----
 $ gradle -q intro
+----
 
 The dependency of taskX to taskY may be declared before taskY is defined:
+----
 << 'build.gradle.kts'
 tasks.register("taskX") {
     dependsOn("taskY")
@@ -1253,11 +1391,16 @@ tasks.register("taskY") {
     }
 }
 build.gradle.kts
+----
+
+----
 $ gradle -q taskX
+----
 
 Task configuration
 Once registered, tasks can be accessed via the TaskProvider API for further configuration.
 https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/TaskProvider.html
+----
 << 'build.gradle.kts'
 For instance, you can use this to add dependencies to a task at runtime dynamically:
 repeat(4) { counter ->
@@ -1269,9 +1412,14 @@ repeat(4) { counter ->
 }
 tasks.named("task0") { dependsOn("task2", "task3") }
 build.gradle.kts
+----
+
+----
 $ gradle -q task0
+----
 
 You can add behavior to an existing task:
+----
 << 'build.gradle.kts'
 tasks.register("hello") {
     doLast {
@@ -1296,17 +1444,24 @@ tasks.named("hello") {
 The calls doFirst and doLast can be executed multiple times. They add an action to the beginning or the end of the
  task’s actions list. When the task executes, the actions in the action list are executed in order.
 build.gradle.kts
+----
+
+----
 $ gradle -q hello
+----
 
 Here is an example of the named method being used to configure a task added by a plugin:
+----
 << 'build.gradle.kts'
 tasks.named("dokkaHtml") {
     outputDirectory.set(buildDir.resolve("dokka"))
 }
 build.gradle.kts
+----
 
 Task types - Gradle tasks are a subclass of Task.
 In the build script, the HelloTask class is created by extending DefaultTask:
+----
 << 'build.gradle.kts'
 // Extend the DefaultTask class to create a HelloTask class
 abstract class HelloTask : DefaultTask() {
@@ -1323,13 +1478,21 @@ tasks.register<HelloTask>("hello") {
 }
 The hello task is registered with the type HelloTask. Executing our new hello task:
 build.gradle.kts
+----
+
+----
 $ ./gradlew hello
+----
+
 Now the hello task is of type HelloTask instead of type Task. The Gradle help task reveals the change:
+----
 $ ./gradlew help --task hello
+----
 
 Built-in task types
 Gradle provides many built-in task types with common and popular functionality, such as copying or deleting files.
 This example task copies *.war files from the source directory to the target directory using the Copy built-in task:
+----
 << 'build.gradle.kts'
 tasks.register("copyTask",Copy) {
     from("source")
@@ -1367,10 +1530,13 @@ abstract class CreateFileTask : DefaultTask() {
     }
 }
 build.gradle.kts
+----
+
 The CreateFileTask implements a simple set of actions. First, a file called "myfile.txt" is created in the
  main project. Then, some text is written to the file.
 
 Register a task
+----
 << 'build.gradle.kts'
 A task is registered in the build script using the TaskContainer.register() method, which allows it
  to be then used in the build logic.
@@ -1384,9 +1550,11 @@ abstract class CreateFileTask : DefaultTask() {
 }
 tasks.register<CreateFileTask>("createFileTask")
 build.gradle.kts
+----
 
 Task group and description
 Setting the group and description properties on your tasks can help users understand how to use your task:
+----
 << 'build.gradle.kts'
 abstract class CreateFileTask : DefaultTask() {
     @TaskAction
@@ -1402,9 +1570,11 @@ tasks.register<CreateFileTask>("createFileTask", ) {
 }
 Once a task is added to a group, it is visible when listing tasks.
 build.gradle.kts
+----
 
 Task input and outputs
 For the task to do useful work, it typically needs some inputs. A task typically produces outputs.
+----
 << 'build.gradle.kts'
 abstract class CreateFileTask : DefaultTask() {
     @Input
@@ -1428,9 +1598,11 @@ tasks.register<CreateFileTask>("createFileTask") {
     description = "Create myfile.txt in the current directory"
 }
 build.gradle.kts
+----
 
 Configure a task
 The CreateFileTask class is updated so that the text in the file is configurable:
+----
 << 'build.gradle.kts'
 abstract class CreateFileTask : DefaultTask() {
     @get:Input
@@ -1461,9 +1633,15 @@ tasks.named<CreateFileTask>("createFileTask") {
 }
 In the named() method, we find the createFileTask task and set the text that will be written to the file.
 build.gradle.kts
+----
+
 When the task is executed:
+----
 $ ./gradlew createFileTask
+----
+
 A text file called myfile.txt is created in the project root folder:
+----
 myfile.txt
 HELLO FROM THE NAMED METHOD
 ----
@@ -1544,13 +1722,19 @@ plugins {
     id("java")
 }
 build.gradle.kts
+----
+
 Non-core plugins must be resolved before they can be applied. Non-core plugins are identified by a unique ID and a version in the build file:
+----
 << 'build.gradle.kts'
 plugins {
     id «plugin id» version «plugin version»
 }
 build.gradle.kts
+----
+
 And the location of the plugin must be specified in the settings file:
+----
 << 'settings.gradle.kts'
 pluginManagement {
     repositories {
@@ -1561,21 +1745,26 @@ pluginManagement {
     }
 }
 settings.gradle.kts
+----
+
 There are additional considerations for resolving and applying plugins:
 
 To	Use	For example:
 1 Apply a core, community or local plugin to a specific project.
 The plugins block in the build file
 https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_block
+----
 << 'build.gradle.kts'
 plugins {
   id("org.barfuin.gradle.taskinfo") version "2.1.0"
 }
 build.gradle.kts
+----
 
 2 Apply common core, community or local plugin to multiple subprojects.
 A build script in the buildSrc directory
 https://docs.gradle.org/current/userguide/plugins.html#sec:buildsrc_plugins_dsl
+----
 << 'build.gradle.kts'
 plugins {
     id("org.barfuin.gradle.taskinfo") version "2.1.0"
@@ -1587,10 +1776,12 @@ dependencies {
     implementation(Libs.Kotlin.coroutines)
 }
 build.gradle.kts
+----
 
 3 Apply a core, community or local plugin needed for the build script itself.
 The buildscript block in the build file
 https://docs.gradle.org/current/userguide/plugins.html#sec:applying_plugins_buildscript
+----
 << 'build.gradle.kts'
 buildscript {
   repositories {
@@ -1606,20 +1797,24 @@ plugins {
   id("org.barfuin.gradle.taskinfo") version "2.1.0"
 }
 build.gradle.kts
+----
 
 4 Apply a local script plugins.
 https://docs.gradle.org/current/userguide/plugins.html#sec:script_plugins
+----
 << 'build.gradle.kts'
 The legacy apply() method in the build file
 apply(plugin = "org.barfuin.gradle.taskinfo")
 apply<MyPlugin>()
 build.gradle.kts
+----
 
 1. Applying plugins using the plugins{} block
 https://docs.gradle.org/current/userguide/plugins.html#sec:plugins_block
 The plugin DSL provides a concise and convenient way to declare plugin dependencies.
 The plugins block configures an instance of PluginDependenciesSpec:
 https://docs.gradle.org/current/javadoc/org/gradle/plugin/use/PluginDependenciesSpec.html
+----
 << 'build.gradle.kts'
 plugins {
     application                                     // by name
@@ -1628,17 +1823,23 @@ plugins {
     id("org.jetbrains.kotlin.jvm") version "2.0.20"  // by id - recommended
 }
 build.gradle.kts
+----
+
 Core Gradle plugins are unique in that they provide short names, such as java for the core JavaPlugin.
 https://docs.gradle.org/current/javadoc/org/gradle/api/plugins/JavaPlugin.html
 To apply a core plugin, the short name can be used:
+----
 << 'build.gradle.kts'
 plugins {
     java                                            // by name
 }
 build.gradle.kts
+----
+
 All other binary plugins must use the fully qualified form of the plugin id e.g., com.github.foo.bar.
 To apply a community plugin from Gradle plugin portal, the fully qualified plugin id, a globally unique identifier, must be used:
 http://plugins.gradle.org/
+----
 << 'build.gradle.kts'
 plugins {
     id("org.springframework.boot") version "3.3.1"
@@ -1773,15 +1974,20 @@ tasks.register('encode') {
     }
 }
 build.gradle.kts
+----
+
 And you can apply the globally declared dependencies in the subproject that needs it:
+----
 << 'build.gradle.kts'
 plugins {
     id 'com.android.application'
 }
 build.gradle.kts
+----
 
 Binary plugins published as external jar files can be added to a project by adding the plugin to the build script classpath and then applying the plugin.
 External jars can be added to the build script classpath using the buildscript{} block as described in External dependencies for the build script:
+----
 << 'build.gradle.kts'
 buildscript {
     repositories {
@@ -1794,12 +2000,14 @@ buildscript {
 
 apply(plugin = "org.springframework.boot")
 build.gradle.kts
+----
 
-4. Applying script plugins using the legacy apply method
+4: Applying script plugins using the legacy apply method
 https://docs.gradle.org/current/userguide/plugins.html#sec:script_plugins
 
 A script plugin is an ad-hoc plugin, typically written and applied in the same build script. It is applied using the legacy application method:
 https://docs.gradle.org/current/userguide/plugins.html#sec:old_plugin_application
+----
 << 'build.gradle.kts'
 class MyPlugin : Plugin<Project> {
     override fun apply(project: Project) {
@@ -1809,7 +2017,10 @@ class MyPlugin : Plugin<Project> {
 
 apply<MyPlugin>()
 build.gradle.kts
+----
+
 Lets take a rudimentary example of a plugin written in a file called other.gradle located in the same directory as the build.gradle file:
+----
 << 'other.gradle.kts'
 public class Other implements Plugin<Project> {
     @Override
@@ -1818,22 +2029,31 @@ public class Other implements Plugin<Project> {
     }
 }
 other.gradle.kts
+----
+
 First, import the external file using:
+----
 << 'build.gradle.kts'
 apply from: 'other.gradle'
 Then you can apply it:
 apply plugin: Other
 build.gradle.kts
+----
+
 Script plugins are automatically resolved and can be applied from a script on the local filesystem or remotely:
+----
 << 'build.gradle.kts'
 apply(from = "other.gradle.kts")
 build.gradle.kts
+----
+
 Filesystem locations are relative to the project directory, while remote script locations are specified with an HTTP URL.
  Multiple script plugins of either form can be applied to a given target.
 
 The pluginManagement{} block is used to configure repositories for plugin resolution and to define version constraints for
  plugins that are applied in the build scripts.
 The pluginManagement{} block can be used in a settings.gradle.kts file, where it must be the first block in the file:
+----
 << 'settings.gradle.kts'
 pluginManagement {
     plugins {
@@ -1845,8 +2065,11 @@ pluginManagement {
 }
 rootProject.name = "plugin-management"
 settings.gradle.kts
+----
+
 The block can also be used in Initialization Script:
 https://docs.gradle.org/current/userguide/init_scripts.html#init_scripts
+----
 << 'init.gradle.kts'
 settingsEvaluated {
     pluginManagement {
@@ -1907,9 +2130,14 @@ plugins {
     id("com.example.hello")
 }
 build.gradle.kts
-<< 'gradle.properties'
+----
+
+[source, properties]
+----
+#<< 'gradle.properties'
 helloPluginVersion=1.0.0
-gradle.properties
+----
+
 The plugin version is loaded from gradle.properties and configured in the settings script, allowing the plugin to be
  added to any project without specifying the version.
 
@@ -1917,6 +2145,7 @@ Plugin Resolution Rules
 Plugin resolution rules allow you to modify plugin requests made in plugins{} blocks, e.g., changing the
  requested version or explicitly specifying the implementation artifact coordinates.
 To add resolution rules, use the resolutionStrategy{} inside the pluginManagement{} block:
+----
 << 'settings.gradle.kts'
 pluginManagement {
     resolutionStrategy {
@@ -1999,24 +2228,32 @@ publishing {
     }
 }
 build.gradle.kts
+----
 
 ==== Using a Version Catalog
 When a project uses a version catalog, plugins can be referenced via aliases when applied.
 Let’s take a look at a simple Version Catalog:
-<< 'libs.versions.toml'
+----
 gradle/libs.versions.toml
+----
+
+[source, toml]
+----
 [versions]
 kotlin = "2.0.20"
 
 [plugins]
 kotlin-jvm = {id="org.jetbrains.kotlin.jvm", version.ref="kotlin"}
-libs.versions.toml
+----
+
+----
 << 'build.gradle.kts'
 plugins {
     alias(libs.plugins.kotlin.jvm)
 }
 kotlin-jvm is available as the Gradle generated safe accessor: kotlin.jvm
 build.gradle.kts
+----
 
 https://docs.gradle.org/current/userguide/writing_plugins.html#writing_plugins
 Custom plugin
@@ -2025,6 +2262,7 @@ https://docs.gradle.org/current/javadoc/org/gradle/api/Plugin.html
 To create a "hello world" plugin:
 	Extend the org.gradle.api.Plugin interface.
   Override the apply method.
+----
 << 'build.gradle.kts'
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -2145,7 +2383,10 @@ class MyConventionPlugin : Plugin<Project> {
     }
 }
 buildSrc/src/main/kotlin/MyConventionPlugin.kt
+----
+
 The plugin can be given an id using a gradlePlugin{} block so that it can be referenced in the root:
+----
 << 'buildSrc/build.gradle.kts'
 gradlePlugin {
     plugins {
@@ -2156,8 +2397,11 @@ gradlePlugin {
     }
 }
 buildSrc/build.gradle.kts
+----
+
 The gradlePlugin{} block defines the plugins being built by the project. With the newly created id, the plugin can be
  applied in other build scripts accordingly:
+----
 << 'build.gradle.kts'
 plugins {
     application
@@ -2191,10 +2435,16 @@ https://docs.gradle.org/current/userguide/custom_plugins.html#custom_plugins
 
 https://docs.gradle.org/current/userguide/partr1_gradle_init.html
 
+----
 $ mkdir authoring-tutorial
 $ cd authoring-tutorial
+----
+
 Run gradle init with parameters to generate a Java application:
+----
 $ gradle init --type java-application  --dsl kotlin
+----
+
 Select defaults for any additional prompts.
 
 Step 2. Understanding the Directory layout
@@ -2247,10 +2497,12 @@ rootProject.name assigns a name to the build, overriding the default behavior of
 include("app") defines that the build consists of one subproject called app that contains its own source code and build logic.
 More subprojects can be added by additional include() statements.
 settings.gradle.kts
+----
 
 Our build contains one subproject called app representing the Java application we are building. It is configured in the
  app/build.gradle.kts file:
 
+----
 << 'build.gradle.kts'
 plugins {
 Apply the application plugin to add support for building a CLI application in Java.
@@ -2288,7 +2540,9 @@ Use JUnit Platform for unit tests.
 }
 The build script in the app subproject directory declares the dependencies the app code will need to be assembled and tested.
 build.gradle.kts
+----
 
+----
 $ ./gradlew run
 $ ./gradlew build
 $ ./gradlew build --scan
@@ -2353,9 +2607,11 @@ tasks.named("task2"){
     }
 }
 app/build.gradle.kts
+----
 
 Step 4. Run a Gradle Task
 Run the task1 task that you registered and configured in Step 3:
+----
 $ ./gradlew task1
 
 SETTINGS FILE: This is executed during the initialization phase
@@ -2413,7 +2669,10 @@ Let’s create this imaginary lib. First, create a lib folder:
 ----
 mkdir lib
 cd lib
+----
+
 Create a file called build.gradle.kts and add the following lines to it:
+----
 << 'lib/build.gradle.kts'
 plugins {
     id("java")
@@ -2447,8 +2706,11 @@ tasks.named("task3"){
     }
 }
 lib/build.gradle.kts
+----
+
 Your project should look like this:
 
+----
 .
 ├── app
 │   ...
@@ -2456,11 +2718,13 @@ Your project should look like this:
 ├── lib
 │   └── build.gradle.kts
 └── settings.gradle.kts
+----
 
 Let’s add some code to the lib subproject. Create a new directory:
 mkdir -p lib/src/main/java/com/gradle
 Create a Java class called CustomLib in a file called CustomLib.java with the following source code:
 
+----
 << 'lib/src/main/java/com/gradle/CustomLib.java'
 package com.gradle;
 
@@ -2468,8 +2732,11 @@ public class CustomLib {
     public static String identifier = "I'm a String from a lib.";
 }
 lib/src/main/java/com/gradle/CustomLib.java
+----
+
 The project should now have the following file and directory structure:
 
+----
 .
 ├── app
 │   ├── build.gradle.kts
@@ -2488,12 +2755,14 @@ The project should now have the following file and directory structure:
 │                   └── gradle
 │                       └── CustomLib.java
 └── settings.gradle.kts
+----
 
 However, the lib subproject does not belong to the build, and you won’t be able to execute task3, until it is added to
  the settings.gradle.kts file.
 
 To add lib to the build, update the settings.gradle.kts file in the root accordingly:
 
+----
 << 'settings.gradle.kts'
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
@@ -2504,15 +2773,21 @@ rootProject.name = "authoring-tutorial"
 include("app")
 include("lib") // Add lib to the build
 settings.gradle.kts
+----
+
 Let’s add the lib subproject as an app dependency in app/build.gradle.kts:
 
+----
 << 'app/build.gradle.kts'
 dependencies {
     implementation(project(":lib")) // Add lib as an app dependency
 }
 app/build.gradle.kts
+----
+
 Update the app source code so that it imports the lib:
 
+----
 << 'app/src/main/java/authoring/tutorial/App.java'
 package authoring.tutorial;
 
@@ -2528,7 +2803,10 @@ public class App {
     }
 }
 app/src/main/java/authoring/tutorial/App.java
+----
+
 Finally, let’s run the app with the command ./gradlew run:
+----
 $ ./gradlew run
 ----
 
@@ -2543,12 +2821,18 @@ Decompose a large build into smaller, more isolated chunks
 
 Step 4. Add build to the Build
 Let’s add a plugin to our build. First, create a new directory called license-plugin in the gradle directory:
+----
 cd gradle
 mkdir license-plugin
 cd license-plugin
+----
+
 Once in the gradle/license-plugin directory, run gradle init. Make sure that you select the Gradle plugin project as
  well as the other options for the init task below:
+----
 $ gradle init --dsl kotlin --type kotlin-gradle-plugin --project-name license
+----
+
 Select defaults for any additional prompts.
 Your project should look like this:
 
@@ -2579,17 +2863,22 @@ Your project should look like this:
 │            └── build.gradle.kts
 │
 └── settings.gradle.kts
+----
 
 Take the time to look at the LicensePlugin.kt or LicensePlugin.groovy code and the
  gradle/license-plugin/settings.gradle.kts file. It’s important to note that this is an entirely separate build with its
   own settings file and build script:
 
+----
 << 'gradle/license-plugin/settings.gradle.kts'
 rootProject.name = "license"
 include("plugin")
 gradle/license-plugin/settings.gradle.kts
+----
+
 To add our license-plugin build to the root project, update the root settings.gradle.kts file accordingly:
 
+----
 << 'settings.gradle.kts'
 plugins {
     id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
@@ -2602,7 +2891,10 @@ include("subproject")
 
 includeBuild("gradle/license-plugin") // Add the new build
 settings.gradle.kts
+----
+
 You can view the structure of the root project by running ./gradlew projects in the root folder authoring-tutorial:
+----
 $ ./gradlew projects
 ----
 
@@ -2652,9 +2944,11 @@ For example:
 includeBuild("some-build")                         // Delegates to Settings.includeBuild()
 reportsDir = findProject("/myInternalProject")     // Delegates to Settings.findProject()
 settings.gradle.kts
+----
 
 Step 3. The Settings file
 Let’s break down the settings file in our project root directory:
+----
 << 'settings.gradle.kts'
 plugins({}) from the PluginDependenciesSpec API
 https://docs.gradle.org/current/dsl/org.gradle.plugin.use.PluginDependenciesSpec.html
@@ -2674,6 +2968,7 @@ include() method from the Settings API
 includeBuild("gradle/license-plugin")
 includeBuild() method from the Settings API
 settings.gradle.kts
+----
 
 https://docs.gradle.org/current/userguide/partr5_build_scripts.html#partr5_build_scripts
 Step 1. The Project object
@@ -2685,13 +2980,16 @@ The purpose of the Project object is to create a collection of Task objects, app
 https://docs.gradle.org/current/javadoc/org/gradle/api/Task.html
 You can use any of the methods and properties on the Project interface directly in your script.
 For example:
+----
 << 'build.gradle.kts'
 defaultTasks("some-task")      // Delegates to Project.defaultTasks()
 reportsDir = file("reports")   // Delegates to Project.file() and the Java Plugin
 build.gradle.kts
+----
 
 Step 2. The Build script
 Let’s break down the build script for the plugin:
+----
 << 'gradle/license-plugin/plugin/build.gradle.kts'
 Use the plugins{} block from KotlinSettingsScript in the Kotlin DSL
 https://docs.gradle.org/current/kotlin-dsl/gradle/org.gradle.kotlin.dsl/-kotlin-settings-script/index.html
@@ -2742,21 +3040,25 @@ dependencies {
     // group: 'org.apache.commons', name: 'commons-lang3', version: '3.13.0'
     implementation("org.apache.commons:commons-lang3:3.13.0")
 }
+----
 
 In this example, implementation() means that the commons-lang3 library must be added to the Java classpath.
 Every dependency declared for a Gradle project must apply to a scope. That is, the dependency is either needed at
  compile time, runtime, or both. This is called a configuration and the implementation configuration is used when the
   dependency is only needed in the runtime classpath.
 Configuration blocks (not to be confused with dependency configurations above) are typically used to configure an applied plugin:
+----
 gradlePlugin {  // Define a custom plugin
     val greeting by plugins.creating {  // Define `greeting` plugin using the `plugins.creating` method
         id = "license.greeting" // Create plugin with the specified ID
         implementationClass = "license.LicensePlugin"   // and specified implementation class
     }
 }
+----
 
 When the java-gradle-plugin is applied, users must configure the plugin they are developing using the gradlePlugin{} configuration block.
 Tasks are units of work executed during your build. They can be defined by plugins or inline:
+----
 val functionalTest by tasks.registering(Test::class) {
     testClassesDirs = functionalTestSourceSet.output.classesDirs
     classpath = functionalTestSourceSet.runtimeClasspath
@@ -2767,12 +3069,12 @@ tasks.named<Test>("test") {
     // Use JUnit Jupiter for unit tests.
     useJUnitPlatform()
 }
+----
 
 In the example generated by Gradle init, we define two tasks:
 functionalTest: This task is registered using tasks.register(). It configures the test task for functional tests.
 test: This task is configured using tasks.named() for the existing test task. It also configures the task to use JUnit Jupiter for unit tests.
 gradle/license-plugin/plugin/build.gradle.kts
-----
 
 Step 3. Apply the Plugin
 Let’s apply our license plugin to the app subproject:
@@ -2812,8 +3114,10 @@ To view the task in the root directory, run:
 
 ----
 $ ./gradlew tasks --all
+----
 
 Finally, run the greeting task using ./gradlew greeting or:
+----
 $ ./gradlew :app:greeting
 ----
 
@@ -2888,9 +3192,12 @@ abstract class LicenseTask : DefaultTask() {
     }
 }
 gradle/license-plugin/plugin/src/main/kotlin/license/LicensePlugin.kt
+----
+
 The LicenseTask class encapsulates the task action logic and declares any inputs and outputs the task expects.
 The task action is annotated with @TaskAction. Inside, the logic first finds a file called "license.txt".
 This file contains text for an Apache license:
+----
 << 'license.txt'
 /*
 * Licensed under the Apache License
@@ -2930,8 +3237,8 @@ gradle/license-plugin/plugin/src/main/kotlin/license/LicensePlugin.kt
 
 Step 2. Add a license.txt file
 
-----
 Add a file called license.txt to the root directory of the project and add the following text to it:
+----
 << 'license.txt'
 /*
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -2959,10 +3266,15 @@ plugins {
     id("com.tutorial.license") // Apply custom plugin
 }
 app/build.gradle.kts
+----
+
 Make sure the plugin is correctly applied by listing the available tasks in the app subproject:
+----
 $ ./gradlew :app:tasks
+----
 
 Next, let’s run the task with
+----
 $ ./gradlew :app:license:
 ----
 
@@ -2973,7 +3285,7 @@ A multi-project build is the standard in Gradle.
 A multi-project build consists of one root project and one or more subprojects.
 Gradle can build the root project and any number of the subprojects in a single execution.
 
-Project locations
+==== Project locations
 Multi-project builds contain a single root project in a directory that Gradle views as the root path: ..
 Subprojects are located physically under the root path: ./subproject.
 https://docs.gradle.org/current/userguide/intro_multi_project_builds.html#sec:project_path
@@ -3024,6 +3336,9 @@ application {
     mainClass = "com.example.Hello"
 }
 app/build.gradle.kts
+----
+
+----
 << 'app/src/main/java/com/example/Hello.java'
 package com.example;
 
@@ -3033,7 +3348,10 @@ public class Hello {
     }
 }
 app/src/main/java/com/example/Hello.java
+----
+
 You can run the application by executing the run task from the application plugin in the project root:
+----
 $ ./gradlew -q run
 Hello, world!
 ----
@@ -3064,8 +3382,11 @@ rootProject.name = "basic-multiproject"
 include("app")
 include("lib")
 settings.gradle.kts
+----
+
 Gradle will then look for the build file of the new lib subproject in the ./lib/ directory:
 
+----
 .
 ├── app
 │   ...
@@ -3087,7 +3408,10 @@ include("project-a")
 println(rootProject.name)
 println(project(":project-a").name)
 settings.gradle.kts
+----
+
 Using this descriptor, you can change the name, project directory, and build file of a project:
+----
 << 'settings.gradle.kts'
 rootProject.name = "main"
 include("project-a")
@@ -3114,8 +3438,10 @@ Let’s take a hypothetical project with the following structure:
 │           ...
 │           └── build.gradle.kts
 └── settings.gradle.kts
+----
 
 If your settings.gradle.kts looks like this:
+----
 << 'settings.gradle.kts'
 include(':subs:web:my-web-module')
 settings.gradle.kts
@@ -3131,7 +3457,7 @@ settings.gradle.kts
 So that you only end up with a single subproject named :my-web-module.
 So, while the physical project layout is the same, the logical results are different.
 
-Naming recommendations
+==== Naming recommendations
 As your project grows, naming and consistency get increasingly more important.
  To keep your builds maintainable, we recommend the following:
 1. Keep default project names for subprojects: It is possible to configure custom project names in the
@@ -3185,6 +3511,9 @@ https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html#
 rootProject.name = "dependencies-java"
 include("api", "shared", "services:person-service")
 settings.gradle.kts
+----
+
+----
 << 'shared/build.gradle.kts'
 plugins {
     id("java")
@@ -3198,6 +3527,9 @@ dependencies {
     testImplementation("junit:junit:4.13")
 }
 shared/build.gradle.kts
+----
+
+----
 << 'api/build.gradle.kts'
 plugins {
     id("java")
@@ -3212,6 +3544,9 @@ dependencies {
     implementation(project(":shared"))
 }
 api/build.gradle.kts
+----
+
+----
 << 'services/person-service/build.gradle.kts'
 plugins {
     id("java")
@@ -3232,7 +3567,10 @@ services/person-service/build.gradle.kts
 A project dependency affects execution order. It causes the other project to be built first and adds the output with the
  classes of the other project to the classpath. It also adds the dependencies of the other project to the classpath.
 If you execute
+----
 ./gradlew :api:compile
+----
+
 , first the shared project is built, and then the api project is built.
 
 ==== Depending on artifacts produced by another project
@@ -3300,6 +3638,7 @@ A typical project including buildSrc has the following layout:
 │   │   └──...
 │   └── build.gradle.kts
 └── settings.gradle.kts
+----
 
 Create the MyCustomTask task.
 A shared build script.
@@ -3307,6 +3646,7 @@ Uses the MyCustomTask task and shared build script.
 In the buildSrc, the build script shared.gradle.kts is created. It contains dependencies and
  other build information that is common to multiple subprojects:
 
+----
 << 'shared.gradle.kts'
 repositories {
     mavenCentral()
@@ -3316,8 +3656,11 @@ dependencies {
     implementation("org.slf4j:slf4j-api:1.7.32")
 }
 shared.gradle.kts
+----
+
 In the buildSrc, the MyCustomTask is also created. It is a helper task that is used as part of the build logic for multiple subprojects:
 
+----
 << 'MyCustomTask.kt'
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
@@ -3335,9 +3678,12 @@ open class MyCustomTask : DefaultTask() {
     }
 }
 MyCustomTask.kt
+----
+
 The MyCustomTask task is used in the build script of the api and shared projects. The task is automatically available because it’s part of buildSrc.
 The shared.build.kts file is also applied:
 
+----
 << 'build.gradle.kts'
 // Apply any other configurations specific to your project
 
@@ -3379,17 +3725,22 @@ Let’s take a look at an example project:
 │   │   └──...
 │   └── build.gradle.kts
 └── settings.gradle.kts
+----
 
 Create the myproject.java-conventions convention plugin.
 Applies the myproject.java-conventions convention plugin.
 This build contains three subprojects:
 
+----
 << 'settings.gradle.kts'
 rootProject.name = "dependencies-java"
 include("api", "shared", "services:person-service")
 settings.gradle.kts
+----
+
 The source code for the convention plugin created in the buildSrc directory is as follows:
 
+----
 << 'buildSrc/src/main/kotlin/myproject.java-conventions.gradle.kts'
 plugins {
     id("java")
@@ -3406,8 +3757,11 @@ dependencies {
     testImplementation("junit:junit:4.13")
 }
 buildSrc/src/main/kotlin/myproject.java-conventions.gradle.kts
+----
+
 For the convention plugin to compile, basic configuration needs to be applied in the build file of the buildSrc directory:
 
+----
 << 'buildSrc/build.gradle.kts'
 plugins {
     `kotlin-dsl`
@@ -3417,8 +3771,11 @@ repositories {
     mavenCentral()
 }
 buildSrc/build.gradle.kts
+----
+
 The convention plugin is applied to the api, shared, and person-service subprojects:
 
+----
 << 'api/build.gradle.kts'
 plugins {
     id("myproject.java-conventions")
@@ -3428,11 +3785,17 @@ dependencies {
     implementation(project(":shared"))
 }
 api/build.gradle.kts
+----
+
+----
 << 'shared/build.gradle.kts'
 plugins {
     id("myproject.java-conventions")
 }
 shared/build.gradle.kts
+----
+
+----
 << 'services/person-service/build.gradle.kts'
 plugins {
     id("myproject.java-conventions")
@@ -3513,11 +3876,13 @@ dependencies {
     implementation("org.sample:string-utils:1.0")
 }
 my-app/app/build.gradle.kts
+----
 
 Defining a composite build via --include-build
 The --include-build command-line argument turns the executed build into a composite, substituting dependencies from the
  included build into the executed build.
 For example, the output of ./gradlew run --include-build ../my-utils run from my-app:
+----
 $ ./gradlew --include-build ../my-utils run
 ----
 
@@ -3540,10 +3905,19 @@ rootProject.name = "my-composite"
 includeBuild("my-app")
 includeBuild("my-utils")
 settings.gradle.kts
+----
+
 To execute the run task in the my-app build from my-composite, run
+----
 ./gradlew my-app:app:run.
+----
+
 You can optionally define a run task in my-composite that depends on my-app:app:run so that you can execute
+----
 ./gradlew run:
+----
+
+----
 << 'build.gradle.kts'
 tasks.register("run") {
     dependsOn(gradle.includedBuild("my-app").task(":app:run"))
@@ -3684,7 +4058,7 @@ build.gradle.kts
 
 A use-case would be to compare published and locally built JAR files.
 
-Depending on tasks in an included build
+==== Depending on tasks in an included build
 While included builds are isolated from one another and cannot declare direct dependencies, a composite build can
  declare task dependencies on its included builds. The included builds are accessed using
  Gradle.getIncludedBuilds() or Gradle.includedBuild(java.lang.String), and a task reference is obtained via the IncludedBuild.task(java.lang.String) method.
