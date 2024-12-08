@@ -13,14 +13,12 @@ https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things
 https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup
 https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository
 
-==== Debian-Ubuntu
-
-For- the latest stable version for your release of Debian-Ubuntu
+For the latest stable version for your release of Debian-Ubuntu
 ----
 apt-get install git
 ----
 
-For- Ubuntu, this PPA provides the latest stable upstream Git version
+For Ubuntu, this PPA provides the latest stable upstream Git version
 ----
 add-apt-repository ppa:git-core/ppa
 apt update; apt install git
@@ -2369,7 +2367,7 @@ If you need to be more specific, you can provide a regular expression to search 
 ==== Line Log Search
 Another fairly advanced log search that is insanely useful is the line history search. Simply run git log with the -L option,
  and it will show you the history of a function or line of code in your codebase.
-For- example, if we wanted to see every change made to the function git_deflate_bound in the zlib.c file, we could run
+For example, if we wanted to see every change made to the function git_deflate_bound in the zlib.c file, we could run
  git log -L :git_deflate_bound:zlib.c. This will try to figure out what the bounds of that function are and then-
 look through the history and show us every change that was made to the function as a series of patches back to when the function was first created.
 ----
@@ -2422,7 +2420,7 @@ To modify a commit that is farther back in your history, you must move to more c
 originally based on instead of moving them to another one. With the interactive rebase tool, you can then- stop after
  each commit you want to modify and change the message, add files, or do whatever you wish. You can run rebase interactively by
 adding the -i option to git rebase. You must indicate how far back you want to rewrite commits by telling the command which commit to rebase onto.
-For- example, if you want to change the last three commit messages, or any of the commit messages in that group, you supply as an
+For example, if you want to change the last three commit messages, or any of the commit messages in that group, you supply as an
  argument to git rebase -i the parent of the last commit you want to edit, which is HEAD~2^ or HEAD~3. It may be easier to
 remember the /3 because youre trying to edit the last three commits, but keep in mind that youre actually designating
  four commits ago, the parent of the last commit you want to edit:
@@ -2818,7 +2816,7 @@ First- unlike reset --hard, checkout is working-directory safe; it will check to
 so all of the files you havent changed will be updated. reset --hard, on the other hand, will simply replace everything across the
  board without checking. The second important difference is how checkout updates HEAD. Whereas reset will move the
 branch that HEAD points to, checkout will move HEAD itself to point to another branch.
-For- instance, say we have master and develop branches which point at different commits, and
+For instance, say we have master and develop branches which point at different commits, and
  were currently on develop /so HEAD points to it/. If we run
  `git reset master` develop itself will now point to the same commit that master does. If we instead run
  `git checkout master` develop does not move, HEAD itself does. HEAD will now point to master. So, in
@@ -3764,7 +3762,7 @@ This accomplishes the same thing, but at least this way you can verify that it w
 ==== Submodule Foreach
 There is a foreach submodule command to run some arbitrary command in each submodule. This can be really helpful if you have a
  number of submodules in the same project.
-For- example, lets say we want to start a new feature or do a bugfix and we have work going on in several submodules.
+For example, lets say we want to start a new feature or do a bugfix and we have work going on in several submodules.
  We can easily stash all the work in all our submodules.
 ----
 $ `git submodule foreach` `git stash`
@@ -3797,7 +3795,7 @@ $ `git config alias.supdate` `submodule update --remote --merge`
 This way you can simply run git supdate when you want to update your submodules, or git spush to push with submodule dependency checking.
 
 ==== Switching branches
-For- instance, switching branches with submodules in them can also be tricky with Git versions older than Git 2.13.
+For instance, switching branches with submodules in them can also be tricky with Git versions older than Git 2.13.
  If you create a new branch, add a submodule there, and then- switch back to a branch without that submodule, you still have the
 submodule directory as an untracked directory:
 ----
@@ -3864,7 +3862,7 @@ Using the --recurse-submodules flag of git checkout can also be useful when you 
 different commits, upon executing git status the submodule will appear as =modified=, and indicate =new commits=. That is
  because the submodule state is by default not carried over when switching branches.
 This can be really confusing, so its a good idea to always git checkout --recurse-submodules when your project has submodules.
- For- older Git versions that do not have the --recurse-submodules flag, after the checkout you can use
+ For older Git versions that do not have the --recurse-submodules flag, after the checkout you can use
 git submodule update --init --recursive to put the submodules in the right state.
 Luckily- you can tell Git />=2.14/ to always use the --recurse-submodules flag by setting the configuration option submodule.recurse:
  git config submodule.recurse true. As noted above, this will also make Git recurse into submodules for every command that
@@ -4158,7 +4156,7 @@ fourth commit
 Remember that the actual parent of 81a708d was our placeholder commit =622e88e=, not 9c68fdce as it states here.
 Another interesting thing is that this data is kept in our references:
 ----
-$ `git for-each-ref`
+$ `git Foreach-ref`
 e146b5f14e79d4935160c0e83fb9ebe526b8da0d commit	refs/heads/master
 c6e1e95051d41771a649f3145423f8809d1a74d4 commit	refs/remotes/history/master
 e146b5f14e79d4935160c0e83fb9ebe526b8da0d commit	refs/remotes/origin/HEAD
@@ -4261,7 +4259,7 @@ The stdin/stdout protocol is the same as git-credential, but they use a slightly
 `get` is a request for a username/password pair.
 `store` is a request to save a set of credentials in this helpers memory.
 `erase` purge the credentials for the given properties from this helpers memory.
-For- the store and erase actions, no response is required =Git ignores it anyway=. For the get action, however,
+For the store and erase actions, no response is required =Git ignores it anyway=. For the get action, however,
  Git is very interested in what the helper has to say. If the helper doesnt know anything useful, it can simply exit with
 no output, but if it does know, it should augment the provided information with the information it has stored. The output is
  treated like a series of assignment statements; anything provided will replace what Git already knows.
@@ -4702,14 +4700,14 @@ Git attribute data also allows you to do some interesting things when exporting 
 `export-ignore`
 You can tell Git not to export certain files or directories when generating an archive. If there is a subdirectory or file that
  you dont want to include in your archive file but that you do want checked into your project, you can determine those files via the export-ignore attribute.
-For- example, say you have some test files in a test/ subdirectory, and it doesnt make sense to include them in the
+For example, say you have some test files in a test/ subdirectory, and it doesnt make sense to include them in the
  tarball export of your project. You can add the following line to your Git attributes file:
 test/ export-ignore
 Now- when you run git archive to create a tarball of your project, that directory wont be included in the archive.
 `export-subst`
 When exporting files for deployment you can apply git logs formatting and keyword-expansion processing to
  selected portions of files marked with the export-subst attribute.
-For- instance, if you want to include a file named LAST_COMMIT in your project, and have metadata about the
+For instance, if you want to include a file named LAST_COMMIT in your project, and have metadata about the
  last commit automatically injected into it when git archive runs, you can for example set up your `.gitattributes` and LAST_COMMIT files like this:
 LAST_COMMIT export-subst
 ----
@@ -4830,7 +4828,7 @@ Tip- If youre writing a script/hook that others will need to read, prefer the lo
 
 An Example Git-Enforced Policy
 Server-Side Hook
-For- this example, all the server-side work will go into the `update` file in your `hooks` directory.
+For this example, all the server-side work will go into the `update` file in your `hooks` directory.
   The `.git/hooks/update` hook runs once per branch being pushed and takes three arguments:
 The name of the reference being pushed to
 The old revision where that branch was
@@ -5863,7 +5861,7 @@ a pair for uploading data and a pair for downloading data.
 To upload data to a remote process, Git uses the send-pack and receive-pack processes. The send-pack process runs on the
  client and connects to a receive-pack process on the remote side.
 SSH
-For- example, say you run git push origin master in your project, and origin is defined as a URL that uses the SSH protocol.
+For example, say you run git push origin master in your project, and origin is defined as a URL that uses the SSH protocol.
  Git fires up the send-pack process, which initiates a connection over SSH to your server. It tries to run a command on the
 remote server via an SSH call that looks something like this:
 ----
@@ -5882,8 +5880,8 @@ The data is transmitted in chunks. Each chunk starts with a 4-character hex valu
 Your first chunk starts with 00a5, which is hexadecimal for 165, meaning the chunk is 165 bytes long.
  The next chunk is 0000, meaning the server is done- with its references listing.
 Now that it knows the servers state, your `send-pack` process determines what commits it has that the server doesnt.
- For- each reference that this push will update, the send-pack process tells the `receive-pack` process that information.
-For- instance, if youre updating the master branch and adding an experiment branch, the send-pack response may look something like this:
+ For each reference that this push will update, the send-pack process tells the `receive-pack` process that information.
+For instance, if youre updating the master branch and adding an experiment branch, the send-pack response may look something like this:
 ----
 0076ca82a6dff817ec66f44342007202690a93763949 15027957951b64cf874c3557a0f3547bd83b3ff6 \
 	refs/heads/master report-status
@@ -6085,7 +6083,7 @@ Date:   Fri May 22 18:15:24 2009 -0700
 ----
 
 It looks like the bottom commit is the one you lost, so you can recover it by creating a new branch at that commit.
- For- example, you can start a branch named recover-branch at that commit /ab1afef/:
+ For example, you can start a branch named recover-branch at that commit /ab1afef/:
 ----
 $ `git branch` recover-branch ab1afef
 $ `git log --pretty=oneline` recover-branch
