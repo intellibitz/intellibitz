@@ -1,0 +1,303 @@
+//archlinux.org.adoc
+:hardbreaks-option:
+:source-highlighter: rouge
+:source-language: shell
+:toc: left
+:toc-title: ArchLinux
+
+==== Reference
+https://archlinux.org/
+https://aur.archlinux.org/
+https://wiki.archlinux.org/
+https://wiki.archlinux.org/title/Installation_guide
+https://wiki.archlinux.org/title/IRC_channels
+https://wiki.archlinux.org/title/Arch_User_Repository
+https://wiki.archlinux.org/title/Pacman
+https://man.archlinux.org/
+https://planet.archlinux.org/
+
+NOTE: Arch Linux installation images do not support Secure Boot. You will need to disable Secure Boot to boot the installation medium. If desired, Secure Boot can be set up after completing the installation.
+
+To verify the boot mode, check the UEFI bitness:
+
+----
+cat /sys/firmware/efi/fw_platform_size
+----
+
+If the command returns 64, then system is booted in UEFI mode and has a 64-bit x64 UEFI. If the command returns 32, then system is booted in UEFI mode and has a 32-bit IA32 UEFI; while this is supported, it will limit the boot loader choice to systemd-boot and GRUB. If the file does not exist, the system may be booted in BIOS (or CSM) mode. If the system did not boot in the mode you desired (UEFI vs BIOS), refer to your motherboard's manual.
+
+====  ip
+
+  Show/manipulate routing, devices, policy routing and tunnels.
+  Some subcommands such as `address` have their own usage documentation.
+  More information: https://www.manned.org/ip.8.
+
+- List interfaces with detailed info:
+----
+ip address
+----
+
+- List interfaces with brief network layer info:
+----
+ip -brief address
+----
+
+- List interfaces with brief link layer info:
+----
+ip -brief link
+----
+
+- Display the routing table:
+----
+ip route
+----
+
+- Show neighbors (ARP table):
+----
+ip neighbour
+----
+
+- Make an interface up/down:
+----
+ip link set interface up|down
+----
+
+- Add/Delete an IP address to an interface:
+----
+ip addr add/del ip/mask dev interface
+----
+
+- Add a default route:
+----
+ip route add default via ip dev interface
+----
+
+====  iwctl
+
+  Control the `iwd` network supplicant.
+  More information: https://archive.kernel.org/oldwiki/iwd.wiki.kernel.org/gettingstarted.html.
+
+- Start the interactive mode, in this mode you can enter the commands directly, with autocompletion:
+----
+iwctl
+----
+
+- Call general help:
+----
+iwctl --help
+----
+
+- Display your Wi-Fi stations:
+----
+iwctl station list
+----
+
+- Start looking for networks with a station:
+----
+iwctl station station scan
+----
+
+- Display the networks found by a station:
+----
+iwctl station station get-networks
+----
+
+- Connect to a network with a station, if credentials are needed they will be asked:
+----
+iwctl station station connect network_name
+----
+
+----
+systemctl restart iwd.service
+iwctl station wlan0 connect
+dhclient -r
+dhclient
+ping archlinux.org
+----
+
+NOTE: In the installation image, systemd-networkd, systemd-resolved, iwd and ModemManager are preconfigured and enabled by default. That will not be the case for the installed system.
+
+==== Format the partitions
+Once the partitions have been created, each newly created partition must be formatted with an appropriate file system. See File systems#Create a file system for details.
+
+For example, to create an Ext4 file system on /dev/root_partition, run:
+
+----
+ mkfs.ext4 /dev/root_partition
+----
+
+If you created a partition for swap, initialize it with mkswap(8):
+
+----
+ mkswap /dev/swap_partition
+----
+
+NOTE: For stacked block devices replace /dev/*_partition with the appropriate block device path.
+If you created an EFI system partition, format it to FAT32 using mkfs.fat(8).
+
+WARNING: Only format the EFI system partition if you created it during the partitioning step. If there already was an EFI system partition on disk beforehand, reformatting it can destroy the boot loaders of other installed operating systems.
+
+----
+ mkfs.fat -F 32 /dev/efi_system_partition
+----
+
+==== Mount the file systems
+Mount the root volume to /mnt. For example, if the root volume is /dev/root_partition:
+
+----
+ mount /dev/root_partition /mnt
+----
+
+Create any remaining mount points under /mnt (such as /mnt/boot for /boot) and mount the volumes in their corresponding hierarchical order.
+
+TIP: Run mount(8) with the --mkdir option to create the specified mount point. Alternatively, create it using mkdir(1) beforehand.
+For UEFI systems, mount the EFI system partition:
+
+----
+ # mount --mkdir /dev/efi_system_partition /mnt/boot
+ mount --mkdir /dev/efi_system_partition /mnt/boot/efi
+----
+
+If you created a swap volume, enable it with swapon(8):
+
+----
+ swapon /dev/swap_partition
+----
+
+genfstab(8) will later detect mounted file systems and swap space.
+
+==== Install essential packages
+NOTE: No software or configuration (except for /etc/pacman.d/mirrorlist) gets carried over from the live environment to the installed system.
+Use the pacstrap(8) script to install the base package, Linux kernel and firmware for common hardware:
+
+----
+ pacstrap -K /mnt base linux linux-firmware
+----
+
+TIP: You can substitute linux with a kernel package of your choice, or you could omit it entirely when installing in a container.
+You could omit the installation of the firmware package when installing in a virtual machine or container.
+
+The base package does not include all tools from the live installation, so installing more packages may be necessary for a fully functional base system. To install other packages or package groups, append the names to the pacstrap command above (space separated) or use pacman to install them while chrooted into the new system.
+https://geo.mirror.pkgbuild.com/iso/latest/arch/pkglist.x86_64.txt
+
+==== Fstab
+Generate an fstab file (use -U or -L to define by UUID or labels, respectively):
+----
+ genfstab -U /mnt >> /mnt/etc/fstab
+----
+Check the resulting /mnt/etc/fstab file, and edit it in case of errors.
+
+==== Chroot
+Change root into the new system:
+----
+ arch-chroot /mnt
+----
+
+==== Time
+Set the time zone:
+----
+ ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+----
+Run hwclock(8) to generate /etc/adjtime:
+----
+ hwclock --systohc
+----
+This command assumes the hardware clock is set to UTC. See System time#Time standard for details.
+
+To prevent clock drift and ensure accurate time, set up time synchronization using a Network Time Protocol (NTP) client such as systemd-timesyncd.
+
+==== Localization
+Edit /etc/locale.gen and uncomment en_US.UTF-8 UTF-8 and other needed UTF-8 locales. Generate the locales by running:
+----
+ locale-gen
+----
+Create the locale.conf(5) file, and set the LANG variable accordingly:
+----
+/etc/locale.conf
+LANG=en_US.UTF-8
+----
+If you set the console keyboard layout, make the changes persistent in vconsole.conf(5):
+----
+/etc/vconsole.conf
+KEYMAP=de-latin1
+----
+
+==== Network configuration
+Create the hostname file:
+----
+/etc/hostname
+yourhostname
+----
+Complete the network configuration for the newly installed environment. That may include installing suitable network management software, configuring it if necessary and enabling its systemd unit so that it starts at boot.
+
+==== Initramfs
+Creating a new initramfs is usually not required, because mkinitcpio was run on installation of the kernel package with pacstrap.
+
+For LVM, system encryption or RAID, modify mkinitcpio.conf(5) and recreate the initramfs image:
+----
+ mkinitcpio -P
+----
+
+==== Root password
+Set the root password:
+----
+ passwd
+----
+
+==== Boot loader
+Choose and install a Linux-capable boot loader.
+https://wiki.archlinux.org/title/Boot_loader
+
+====  grub-install
+  Install GRUB to a device.
+  More information: https://www.gnu.org/software/grub/manual/grub/html_node/Installing-GRUB-using-grub_002dinstall.html.
+
+- Install GRUB on a BIOS system:
+----
+grub-install --target=i386-pc path/to/device
+----
+
+- Install GRUB on an UEFI system:
+----
+grub-install --target=x86_64-efi --efi-directory=path/to/efi_directory --bootloader-id=GRUB
+----
+
+- Install GRUB pre-loading specific modules:
+----
+grub-install --target=x86_64-efi --efi-directory=path/to/efi_directory --modules="part_gpt part_msdos"
+----
+
+====  grub-mkconfig
+
+  Generate a GRUB configuration file.
+  More information: https://www.gnu.org/software/grub/manual/grub/html_node/Invoking-grub_002dmkconfig.html.
+
+- Do a dry run and print the configuration to `stdout`:
+----
+sudo grub-mkconfig
+----
+
+- Generate the configuration file:
+----
+sudo grub-mkconfig --output=/boot/grub/grub.cfg
+----
+
+- Display help:
+----
+grub-mkconfig --help
+----
+
+==== Reboot
+Exit the chroot environment by typing exit or pressing Ctrl+d.
+
+Optionally manually unmount all the partitions with umount -R /mnt: this allows noticing any "busy" partitions, and finding the cause with fuser(1).
+
+Finally, restart the machine by typing reboot: any partitions still mounted will be automatically unmounted by systemd. Remember to remove the installation medium and then login into the new system with the root account.
+
+==== Post-installation
+See General recommendations for system management directions and post-installation tutorials (like creating unprivileged user accounts, setting up a graphical user interface, sound or a touchpad).
+https://wiki.archlinux.org/title/General_recommendations
+
+For a list of applications that may be of interest, see List of applications.
+https://wiki.archlinux.org/title/List_of_applications
+
