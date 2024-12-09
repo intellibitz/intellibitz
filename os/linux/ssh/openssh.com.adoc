@@ -1,0 +1,336 @@
+//openssh.com.adoc
+:hardbreaks-option:
+:source-highlighter: rouge
+:source-language: shell
+:toc: left
+:toc-title: OpenSSH
+
+==== Reference
+https://www.openssh.com/
+https://www.openssh.com/manual.html
+https://man.openbsd.org/ssh.1
+https://man.openbsd.org/ssh-add.1
+https://man.openbsd.org/ssh-keygen.1
+https://man.openbsd.org/ssh-agent.1
+https://man.openbsd.org/sshd.8
+https://man.openbsd.org/ssh-keyscan.1
+
+----
+sudo apt-get install openssh-server
+
+sudo systemctl enable ssh
+## OR enable and start the ssh service immediately ##
+sudo systemctl enable ssh --now
+
+sudo systemctl start ssh
+
+ssh userName@Your-server-name-IP
+ssh ec2-user@ec2-aws-ip-here
+
+sudo ufw allow ssh
+sudo ufw enable
+sudo ufw status
+
+ssh-keygen
+ssh-copy-id user@ip
+
+/etc/ssh #configuration files
+ls ~/.ssh
+----
+
+==== ssh
+
+  Secure Shell is a protocol used to securely log onto remote systems.
+  It can be used for logging or executing commands on a remote server.
+  More information: https://man.openbsd.org/ssh.
+
+- Connect to a remote server:
+----
+ssh username@remote_host
+----
+
+- Connect to a remote server with a specific identity (private key):
+----
+ssh -i path/to/key_file username@remote_host
+----
+
+- Connect to a remote server using a specific [p]ort:
+----
+ssh username@remote_host -p 2222
+----
+
+- Run a command on a remote server with a [t]ty allocation allowing interaction with the remote command:
+----
+ssh username@remote_host -t command command_arguments
+----
+
+- SSH tunneling: [D]ynamic port forwarding (SOCKS proxy on `localhost:1080`):
+----
+ssh -D 1080 username@remote_host
+----
+
+- SSH tunneling: Forward a specific port (`localhost:9999` to `example.org:80`) along with disabling pseudo-[T]ty allocation and executio[N] of remote commands:
+----
+ssh -L 9999:example.org:80 -N -T username@remote_host
+----
+
+- SSH [J]umping: Connect through a jumphost to a remote server (Multiple jump hops may be specified separated by comma characters):
+----
+ssh -J username@jump_host username@remote_host
+----
+
+- Close a hanged session:
+----
+<Enter> ~ .
+----
+
+====  ssh-keygen
+
+  Generate SSH keys used for authentication, password-less logins, and other things.
+  More information: https://man.openbsd.org/ssh-keygen.
+
+- Generate a key interactively:
+----
+ssh-keygen
+----
+
+- Generate an ed25519 key with 32 key derivation function rounds and save the key to a specific file:
+----
+ssh-keygen -t ed25519 -a 32 -f ~/.ssh/filename
+----
+
+- Generate an RSA 4096-bit key with email as a comment:
+----
+ssh-keygen -t rsa -b 4096 -C "comment|email"
+----
+
+- Remove the keys of a host from the known_hosts file (useful when a known host has a new key):
+----
+ssh-keygen -R remote_host
+----
+
+- Retrieve the fingerprint of a key in MD5 Hex:
+----
+ssh-keygen -l -E md5 -f ~/.ssh/filename
+----
+
+- Change the password of a key:
+----
+ssh-keygen -p -f ~/.ssh/filename
+----
+
+- Change the type of the key format (for example from OPENSSH format to PEM), the file will be rewritten in-place:
+----
+ssh-keygen -p -N "" -m PEM -f ~/.ssh/OpenSSH_private_key
+----
+
+- Retrieve public key from secret key:
+----
+ssh-keygen -y -f ~/.ssh/OpenSSH_private_key
+----
+
+====  ssh-copy-id
+
+  Install your public key in a remote machine's authorized_keys.
+  More information: https://manned.org/ssh-copy-id.
+
+- Copy your keys to the remote machine:
+----
+ssh-copy-id username@remote_host
+----
+
+- Copy the given public key to the remote:
+----
+ssh-copy-id -i path/to/certificate username@remote_host
+----
+
+- Copy the given public key to the remote with specific port:
+----
+ssh-copy-id -i path/to/certificate -p port username@remote_host
+----
+
+====  ssh-agent
+
+  Spawn an SSH Agent process.
+  An SSH Agent holds SSH keys decrypted in memory until removed or the process is killed.
+  See also `ssh-add`, which can add and manage keys held by an SSH Agent.
+  More information: https://man.openbsd.org/ssh-agent.
+
+- Start an SSH Agent for the current shell:
+----
+eval $(ssh-agent)
+----
+
+- Kill the currently running agent:
+----
+ssh-agent -k
+----
+
+==== ssh-add
+
+  Manage loaded SSH keys in the `ssh-agent`.
+  Ensure that `ssh-agent` is up and running for the keys to be loaded in it.
+  More information: https://man.openbsd.org/ssh-add.
+
+- Add the default SSH keys in `~/.ssh` to the ssh-agent:
+----
+ssh-add
+----
+
+- Add a specific key to the ssh-agent:
+----
+ssh-add path/to/private_key
+----
+
+- List fingerprints of currently loaded keys:
+----
+ssh-add -l
+----
+
+- Delete a key from the ssh-agent:
+----
+ssh-add -d path/to/private_key
+----
+
+- Delete all currently loaded keys from the ssh-agent:
+----
+ssh-add -D
+----
+
+- Add a key to the ssh-agent and the keychain:
+----
+ssh-add -K path/to/private_key
+----
+
+====  sshd
+
+  Secure Shell Daemon - allows remote machines to securely log in to the current machine.
+  Remote machines can execute commands as it is executed at this machine.
+  More information: https://man.openbsd.org/sshd.
+
+- Start daemon in the background:
+----
+sshd
+----
+
+- Run sshd in the foreground:
+----
+sshd -D
+----
+
+- Run with verbose output (for debugging):
+----
+sshd -D -d
+----
+
+- Run on a specific port:
+----
+sshd -p port
+----
+
+====  ssh-keyscan
+
+  Get the public SSH keys of remote hosts.
+  More information: https://man.openbsd.org/ssh-keyscan.
+
+- Retrieve all public SSH keys of a remote host:
+----
+ssh-keyscan host
+----
+
+- Retrieve all public SSH keys of a remote host listening on a specific port:
+----
+ssh-keyscan -p port host
+----
+
+- Retrieve certain types of public SSH keys of a remote host:
+----
+ssh-keyscan -t rsa,dsa,ecdsa,ed25519 host
+----
+
+- Manually update the SSH known_hosts file with the fingerprint of a given host:
+----
+ssh-keyscan -H host >> ~/.ssh/known_hosts
+----
+
+http://www.unixwiz.net/techtips/ssh-agent-forwarding.html
+
+ Ordinary Password Authentication
+--
+SSH supports access with a username and password, and this is little more than an encrypted telnet. Access is, in fact, just like telnet, with the normal username/password exchange.
+
+We'll note that this exchange, and all others in this paper, assume that an initial exchange of host keys has been completed successfully. Though an important part of session security, host validation is not material to the discussion of agent key forwarding.
+
+All examples start from a user on homepc (perhaps a Windows workstation) connecting with PuTTY to a server running OpenSSH. The particular details (program names, mainly) vary from implementation to implementation, but the underlying protocol has been proven to be highly interoperable.
+
+ Public Key Access
+--
+Note - older versions of OpenSSH stored the v2 keys in authorized_keys2 to distinguish them from v1 keys, but newer versions use either file.
+
+To counteract the shortcomings of password authentication, ssh supports public key access. A user creates a pair of public and private keys, and installs the public key in his $HOME/.ssh/authorized_keys file on the target server. This is nonsensitive information which need not be guarded, but the other half — the private key — is protected on the local machine by a (hopefully) strong passphrase.
+
+A public key is a long string of bits encoded in ASCII, and it's stored on one long line (though represented here on three continued lines for readability). It includes a type (ssh-rsa, or others), the key itself, and a comment:
+
+----
+    $HOME/.ssh/authorized_keys
+
+    ssh-rsa AzAAB3NzaC1yc2EaaaabiWaaaieaX9AyNR7xWnW0eI3x2NGXrJ4gkQpK/EqpkveGCvvbM \
+    oH84zqu3Us8jSaQD392JZAEAhGSoe0dWMBFm9Y41VGZYmncwkfTQPFH1P07vDw49aTAa2RJNFyV \
+    QANZCbSocDeuT0Q7usuUj/v8h27+PqsUUl9XVQSDIhXBkWV+bJawc1c= Steve's key
+----
+
+This key must be installed on the target system — one time — where it is used for subsequent remote access by the holder of the private key.
+
+ Public Key Access with Agent support
+--
+Now that we've taken the leap into public key access, we'll take the next step to enable agent support. In the previous section, the user's private key was unlocked at every connection request: this is not functionally different from typing a password, and though it's the same passphrase every time (which makes it habitual), it nevertheless gets tedious in the same manner.
+
+Fortunately, the ssh suite provides a broker known as a "key agent" which can hold and manage private keys on your workstations, and responding to requests from remote systems to verify your keys. Agents provide a tremendous productivity benefit, because once you've unlocked your private key (one time when you launch the agent), subsequent access works with the agent without prompting.
+
+ Public Key Access with Agent Forwarding
+--
+With our Key Agent in place, agent forwarding.. allows a chain of ssh connections to forward key challenges back to the original agent, obviating the need for passwords or private keys on any intermediate machines.
+
+http://www.OpenSSH.com
+
+==== OpenSSH
+Secure shell (SSH) is a protocol for creating an encrypted communications channel between two networked hosts. SSH protects data passing between two machines so that other people cannot eavesdrop on it.
+
+OpenSSH is the most widely deployed implementation of the SSH protocol.
+
+An SSH server listens on the network for incoming SSH requests, authenticates those requests, and provides a system command prompt (or another service that you configure). The most popular SSH server is OpenSSH’s sshd.
+
+Use an SSH client to connect to your remote server or network device. The most popular SSH client for Windows systems is PuTTY. The standard SSH client for Unix-like systems is ssh(1), from OpenSSH.
+
+The SSH protocol comes in two versions, SSH-1 (version 1) and SSH-2 (version 2). Always use SSH-2. All modern SSH software defaults to version 2. You will find old embedded devices that still rely on SSH version 1, but SSH-1 is barely more secure than unencrypted telnet.
+
+SSH-2 is the modern standard. The protocol is designed so that
+vulnerabilities can be quickly addressed as they are discovered. Our constantly-increasing computing power makes today’s strong encryption tomorrow’s security risk, so SSH-2 is designed so that its algorithms and protocols can be upgraded in place. Protocols such as SCP and SFTP are built atop SSH.
+
+All system-wide OpenSSH configuration files reside in /etc/ssh by default.
+Default settings for the ssh(1) client appear in ssh_config.
+The files starting with ssh_host and ending in _key are the server’s private keys. The middle of each file name gives the encryption algorithm—for example, ssh_host_ecdsa_key contains the host key that uses the ECDSA algorithm. These files should only be readable by root.
+Each private key has a corresponding file with the same name but an added .pub at the end. This is the public key for that file. The server will offer the content of these files to any client.
+Finally, sshd_config contains the server configuration. While you can tweak sshd with command-line options, permanent configuration is handled in the configuration file.
+
+==== SSH
+normally runs on TCP port 22. Use netcat(1) to see if you can access the daemon.
+
+----
+    $ nc -v devio.us 22
+    Connection to devio.us 22 port [tcp/ssh] succeeded!
+    SSH-2.0-OpenSSH_7.0
+    ^C
+----
+
+From the server, check and see if the sshd process is running.
+
+----
+    $ ps ax | grep sshd
+    626 - Is 0:00.03 /usr/sbin/sshd
+    31960 - Is 0:00.38 sshd: mwlucas [priv] (sshd)
+    44387 - S 0:05.75 sshd: mwlucas@pts/0 (sshd)
+----
+
+
+
