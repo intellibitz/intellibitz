@@ -376,7 +376,7 @@ social applications) that can be included in an action bar.
 // that have a consistent look on any app. These cards are useful for material design implementations,
 // and are used extensively in layouts for TV apps.
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.0.0-rc1")
+    implementation("androidx.constraintlayout:constraintlayout:2.2.2")
 // After you download the Android Support Libraries, this library adds support for the GridLayout class,
 // which allows you to arrange user interface elements using a grid of rectangular cells.
 // For detailed information about the v7 gridlayout library APIs, see the android.support.v7.widget package in the API reference.
