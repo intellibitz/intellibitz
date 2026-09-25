@@ -315,7 +315,7 @@ dependencies {
     // Use the Kotlin JDK 8 standard library.
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("script-runtime"))
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
     implementation("androidx.concurrent:concurrent-futures-ktx:1.1.0-rc01")
 //    implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0")
