@@ -554,10 +554,10 @@ various classes, such as PercentFrameLayout and PercentRelativeLayout.
     testImplementation("org.robolectric:robolectric:4.2.1")
 
 
-    debugImplementation("com.facebook.stetho:stetho:1.4.2")
-    debugImplementation("com.facebook.stetho:stetho-okhttp3:1.4.2")
-    debugImplementation("com.facebook.stetho:stetho-urlconnection:1.4.2")
-    debugImplementation("com.facebook.stetho:stetho-js-rhino:1.4.2")
+    debugImplementation("com.facebook.stetho:stetho:1.6.0")
+    debugImplementation("com.facebook.stetho:stetho-okhttp3:1.6.0")
+    debugImplementation("com.facebook.stetho:stetho-urlconnection:1.6.0")
+    debugImplementation("com.facebook.stetho:stetho-js-rhino:1.6.0")
 
 //    implementation ("com.android.support:support-core-utils:28.0.0")
     // Set this dependency to use JUnit 4 rules
