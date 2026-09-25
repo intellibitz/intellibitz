@@ -3,7 +3,7 @@
 # Build: docker build -f ubuntu-Dockerfile -t intellibitz/ubuntu:24.04 .
 # Run:   docker run --name ubuntu --rm -it intellibitz/ubuntu:24.04
 
-FROM ubuntu:24.04
+FROM ubuntu:26.04
 
 LABEL maintainer="Muthu Ramadoss <muthu.ramadoss@gmail.com>"
 LABEL description="Ubuntu 24.04 LTS Development Environment"
