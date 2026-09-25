@@ -1,1 +1,0 @@
-emulator -skin HVGA-L-HTC-Dream-B -scale 0.7 -timezone Asia/Calcutta -sdcard /opt/sdcard/g1.sdcard "$@"

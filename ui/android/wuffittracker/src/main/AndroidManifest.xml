@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <application
+        android:name=".WuffITApplication"
+        android:label="@string/app_name"
+        android:description="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+
+        <activity
+            android:name=".activity.WuffITTracker"
+            android:label="@string/app_name"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="com.androidworks.navsys.wuffit.ACTION_MAIN_MENU" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.SelectTracker"
+            android:label="@string/select_tracker_activity_label"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.androidworks.navsys.wuffit.ACTION_SELECT_TRACKER" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.SetupWuffIT"
+            android:label="@string/setup_wuffit_activity_label"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.androidworks.navsys.wuffit.ACTION_SETUP_WUFFIT" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.RequestLocation"
+            android:label="@string/request_location_activity_label"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.androidworks.navsys.wuffit.ACTION_REQUEST_LOCATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".activity.DisplayLocation"
+            android:label="@string/display_location_activity_label"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.androidworks.navsys.wuffit.ACTION_DISPLAY_LOCATION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name=".content.TrackerProvider"
+            android:authorities="com.androidworks.navsys.wuffit.content.Tracker"
+            android:exported="false" />
+
+        <receiver
+            android:name=".content.WuffITSMSReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <service
+            android:name=".service.SMSHandler"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.androidworks.navsys.wuffit.SERVICE_SMS_HANDLER" />
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>

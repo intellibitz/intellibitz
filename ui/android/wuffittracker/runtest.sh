@@ -1,2 +1,0 @@
-./compiletests.sh
-./instrument.sh "$@"
