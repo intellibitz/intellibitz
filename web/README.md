@@ -40,7 +40,14 @@ web/
 - **Compute Engine**: Provisioning VM instances and persistent disks (`compute-instances-create.sh`, `compute-disks-create.sh`)
 - **IAM & Service Accounts**: Creating service accounts and inspecting OAuth scopes (`iam-serviceaccounts-create.sh`, `scopeinfo-serviceaccounts.sh`)
 - **Cloud SDK**: Automated SDK installation (`install-cloudsdk.sh`)
+- **[AT&T Demo Suite](file:///home/ramadoss/github.com/intellibitz/intellibitz/web/google/att/README.md)**: Cloud-backed Android client and App Engine demonstration backend.
 
-### 3. Java EE Enterprise Platforms ([`web/javaee/`](file:///home/ramadoss/github.com/intellibitz/intellibitz/web/javaee))
+### 3. Java EE Enterprise Platforms ([`web/javaee/`](file:///home/ramadoss/github.com/intellibitz/intellibitz/web/javaee/README.md))
 - **[IntelliDocs](file:///home/ramadoss/github.com/intellibitz/intellibitz/web/javaee/intellidocs)**: Multi-module Maven enterprise application containing `intellidocs-ear`, `intellidocs-ejb`, `intellidocs-war`, unit tests, and comprehensive user guide.
 - **[IntelliMeet](file:///home/ramadoss/github.com/intellibitz/intellibitz/web/javaee/intellimeet)**: Enterprise collaboration and meeting platform built on JBoss Seam, EJB 3, and JSF (`32tango`), paired with the companion Android mobile client (`dating`).
+
+---
+
+## Licensing
+
+Distributed under the repository's root **[MIT License](file:///home/ramadoss/github.com/intellibitz/intellibitz/LICENSE)**.

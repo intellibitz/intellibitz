@@ -28,4 +28,10 @@ This directory provides system administration scripts, environment configuration
 | **Go** | [`lang/go/`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/go) | Go modules, workspaces (`go.work`), testing, and packaging (`myGo.sh`). |
 | **Clojure** | [`lang/clojure/`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/clojure) | Clojure Reader, data structures, and evaluation guide (`myClojure.md`). |
 | **Expect** | [`lang/expect/`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/expect) | Interactive session automation for OpenVPN and SFTP (`expect-openvpn.exp`, `expect-sftp.exp`). |
-| **PHP** | [`lang/php/`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/php) | Legacy Web application archive (`intelligeek`). |
+| **PHP** | [`lang/php/`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/php/README.md) | Community portal and interactive web applications ([`intelligeek`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/php/intelligeek)). |
+
+---
+
+## Licensing
+
+Distributed under the repository's root **[MIT License](file:///home/ramadoss/github.com/intellibitz/intellibitz/LICENSE)**.

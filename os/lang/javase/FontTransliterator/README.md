@@ -1,42 +1,44 @@
-FontTransliterator
-==================
+# FontTransliterator
 
-Universal Transliterator for Global Languages
+Universal desktop transliterator and phonetic font mapper for Indian and global languages, built on Java SE and modern Gradle.
 
-STED - README
-========================
+---
 
-Thank you for downloading STED!
+## Overview
 
-STED PLATFORM
-========================
-Developed and Tested on JDK 1.7.0 on Ubuntu Linux.
-    ** IMPORTANT: **
-JDK 1.7.0 or later is required for running STED 0.80 or later.
+**FontTransliterator** (originally developed as part of the STED project) provides desktop phonetic keyboard mapping, Unicode conversion, and font transliteration capabilities across Indic scripts (including Tamil, Devanagari, and Telugu) and Latin alphabets.
 
-Installing STED
-========================
-Unzip the dowloaded zip file, into a folder.
-    ** UNIX: **
-    Edit 'bin/sted.sh' to SET JAVA_HOME etc., and run 'sted.sh' from bin folder.
-    ** WINDOWS: **
-    Edit 'bin/sted.bat' to SET JAVA_HOME etc., and run 'sted.bat' from bin folder.
+## Features
 
-Uninstalling STED
-==========================
-  To uninstall STED, simply delete the contents of the STED home installation directory.
+- **Phonetic Keyboard Mapping**: Dynamic character keypad mapping and phonetic rule evaluation.
+- **Font Conversion & Mapping**: Convert between legacy 8-bit non-Unicode font encodings (BAMINI, TAB, TAM) and modern Unicode standard.
+- **Desktop GUI**: Cross-platform Java Swing interface (`STEDGUI`) with multi-document editor (`DesktopFrame`), font keypad inspector, and mapping table editor.
+- **Modern Build System**: Configured with modern Gradle Kotlin DSL ([`build.gradle.kts`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/javase/FontTransliterator/build.gradle.kts)).
 
-Licensing STED
-==========================
-Please read License.txt that was bundled with STED for licensing terms.
+## Project Structure
 
-Contact STED
-=======================
-  IntelliBitz Technologies
-  http://androidrocks.googlecode.com
-  http://www.intellibitz.com
-  http://groups.google.com/group/etoe
-  http://sted.sourceforge.net
-  sted@intellibitz.com
+```
+FontTransliterator/
+├── build.gradle.kts        # Modern Gradle build configuration
+├── src/                    # Java SE application source code
+│   └── intellibitz/sted/   # Core packages: actions, launch, ui, util
+├── fonts/                  # TrueType and font resource bundles
+├── settings/               # Mapping XML rules (BAMINI, TAB, TAM)
+└── bin/                    # Launcher scripts (sted.sh, sted.bat)
+```
 
+## Building & Running
 
+```bash
+# Build with Gradle
+gradle build
+
+# Run application
+gradle run
+# Or via launcher script
+./bin/sted.sh
+```
+
+## License
+
+This project is licensed under the [MIT License](file:///home/ramadoss/github.com/intellibitz/intellibitz/LICENSE).

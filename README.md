@@ -51,11 +51,12 @@ Operating system administration and programming language environments.
 - **[Windows & WSL](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/win)**: WSL configuration and Windows service scripts.
 - **[Language Toolchains](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang)**:
   - **[Kotlin](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/kotlin)**: Tutorial suite (`KotlinLearn`), sandbox (`KotlinPlay`), multiplatform modules (`multiplatform`), web clients (`jsfront`, `mpfsweb`).
-  - **[Java SE](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/javase)**: Tamil font transliterator desktop application (`FontTransliterator`), text editors (`sted`).
+  - **[Java SE](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/javase)**: Tamil font transliterator desktop application ([`FontTransliterator`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/javase/FontTransliterator/README.md)), text editors ([`sted`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/javase/sted/README.md)).
   - **[Python & AI](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/python)**: Modern [uv package manager](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/python/uv.md) (`uv.sh`), Python 3.12/3.13, Hugging Face Hub CLI guide ([`huggingface.md`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/python/huggingface.md)), Google Colab & Gemini API ([`colab.md`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/python/colab.md)), Meta Llama 3 ([`meta-llama.md`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/python/meta-llama.md)).
   - **[Go](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/go)**: Workspaces, modules, testing, and binaries.
   - **[Clojure](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/clojure)**: Language Reader syntax and data structure reference ([`myClojure.md`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/clojure/myClojure.md)).
   - **[Expect](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/expect)**: OpenVPN and SFTP interactive automation scripts ([`expect-openvpn.exp`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/expect/expect-openvpn.exp), [`expect-sftp.exp`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/expect/expect-sftp.exp)).
+  - **[PHP](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/php/README.md)**: Web community portal and interactive AJAX services ([`intelligeek`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/php/intelligeek)).
 
 ### 🔄 [DevOps & Source Control (`scm/`)](file:///home/ramadoss/github.com/intellibitz/intellibitz/scm/README.md)
 CI/CD workflows, containerization, and developer tooling.
@@ -68,9 +69,10 @@ CI/CD workflows, containerization, and developer tooling.
 
 ### 📱 [User Interfaces & Clients (`ui/`)](file:///home/ramadoss/github.com/intellibitz/intellibitz/ui/README.md)
 Mobile client applications and web frontend living standards.
-- **[Android Applications](file:///home/ramadoss/github.com/intellibitz/intellibitz/ui/android)**:
-  - **[IntelliDroid](file:///home/ramadoss/github.com/intellibitz/intellibitz/ui/android/IntelliDroid)**: Primary Android client built with modern Gradle, Java, and Kotlin.
-  - **Legacy Application Suites**: Location trackers (`wuffittracker`), event managers (`MEvents`), social readers (`TwRends`, `UDigg`), mobile exchange (`booksExchange`), fight club (`fiteclub`).
+- **[Android Applications Suite (`ui/android/`)](file:///home/ramadoss/github.com/intellibitz/intellibitz/ui/android/README.md)**:
+  - **[IntelliDroid](file:///home/ramadoss/github.com/intellibitz/intellibitz/ui/android/IntelliDroid/README.md)**: Flagship modern enterprise client (SDK 35, Gradle 8.13, AGP 8.7.2, Kotlin 2.0.21, Coroutines, Room, Firebase FCM, Socket.IO).
+  - **Modernized 100% Kotlin Modules**: Event tracker ([`MEvents`](file:///home/ramadoss/github.com/intellibitz/intellibitz/ui/android/MEvents/README.md)), Twitter trends ([`TwRends`](file:///home/ramadoss/github.com/intellibitz/intellibitz/ui/android/TwRends/README.md)), social bookmarking ([`UDigg`](file:///home/ramadoss/github.com/intellibitz/intellibitz/ui/android/UDigg/README.md)), GPS telemetry & tests ([`wuffittracker`](file:///home/ramadoss/github.com/intellibitz/intellibitz/ui/android/wuffittracker/README.md)).
+  - **Full-Stack Reference Suites**: Barcode scanner book exchange ([`booksExchange`](file:///home/ramadoss/github.com/intellibitz/intellibitz/ui/android/booksExchange/README.md)), sparring network ([`fiteclub`](file:///home/ramadoss/github.com/intellibitz/intellibitz/ui/android/fiteclub/README.md)), proximity discovery ([`mobeegal`](file:///home/ramadoss/github.com/intellibitz/intellibitz/ui/android/mobeegal/README.md)).
   - **Device Tools**: ADB data pull/push utilities, KVM acceleration setup (`install-kvm.sh`), and [`local.properties.example`](file:///home/ramadoss/github.com/intellibitz/intellibitz/ui/android/local.properties.example).
 - **[Web Client Standards](file:///home/ramadoss/github.com/intellibitz/intellibitz/ui/client/README.md)**: Curated WHATWG & W3C specifications for HTML, CSS, JavaScript, HTTP/3, WebSockets, Storage, and URL.
 - **[AsciiDoc Documentation](file:///home/ramadoss/github.com/intellibitz/intellibitz/ui/asciidoc)**: Asciidoctor authoring documentation.
@@ -78,10 +80,10 @@ Mobile client applications and web frontend living standards.
 ### 🌐 [Web & Cloud Infrastructure (`web/`)](file:///home/ramadoss/github.com/intellibitz/intellibitz/web/README.md)
 Web servers, cloud provisioning, and enterprise backend architectures.
 - **[Web Servers](file:///home/ramadoss/github.com/intellibitz/intellibitz/web)**: Configuration recipes for Apache HTTP Server, Nginx, Caddy TLS reverse proxy, Node.js, and Apache Tomcat.
-- **[Google Cloud Platform](file:///home/ramadoss/github.com/intellibitz/intellibitz/web/google)**: CLI scripts for Compute Engine VM and disk creation, IAM service accounts, OAuth scope inspection, and Cloud SDK automation.
-- **[Java EE Enterprise Backends](file:///home/ramadoss/github.com/intellibitz/intellibitz/web/javaee)**: Multi-module Maven enterprise architectures:
-  - **IntelliDocs**: Enterprise document platform (`intellidocs-ear`, `intellidocs-ejb`, `intellidocs-war`).
-  - **IntelliMeet**: Collaborative meeting platform (`32tango` backend paired with companion `dating` Android mobile client).
+- **[Google Cloud Platform](file:///home/ramadoss/github.com/intellibitz/intellibitz/web/google)**: CLI scripts for Compute Engine VM and disk creation, IAM service accounts, OAuth scope inspection, Cloud SDK automation, and [AT&T Demo Suite](file:///home/ramadoss/github.com/intellibitz/intellibitz/web/google/att/README.md).
+- **[Java EE Enterprise Backends](file:///home/ramadoss/github.com/intellibitz/intellibitz/web/javaee/README.md)**: Multi-module Maven enterprise architectures:
+  - **[IntelliDocs](file:///home/ramadoss/github.com/intellibitz/intellibitz/web/javaee/intellidocs)**: Enterprise document platform (`intellidocs-ear`, `intellidocs-ejb`, `intellidocs-war`).
+  - **[IntelliMeet](file:///home/ramadoss/github.com/intellibitz/intellibitz/web/javaee/intellimeet)**: Collaborative meeting platform (`32tango` backend paired with companion `dating` Android mobile client).
 
 ---
 
