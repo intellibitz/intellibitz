@@ -549,7 +549,7 @@ various classes, such as PercentFrameLayout and PercentRelativeLayout.
 //    testImplementation("androidx.test.ext:junit:1.1.1")
 //    testImplementation("androidx.arch.core:core-testing:2.1.0")
 //    testImplementation("androidx.annotation:annotation:1.1.0")
-    testImplementation("org.json:json:20180813")
+    testImplementation("org.json:json:20260814")
     testImplementation("org.mockito:mockito-core:3.3.3")
     testImplementation("org.robolectric:robolectric:4.2.1")
 
