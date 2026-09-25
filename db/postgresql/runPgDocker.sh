@@ -19,7 +19,7 @@ docker exec -it -u postgres -w /var/lib/postgresql postgres /bin/bash #runs shel
 
 
 docker run -d -v /mnt/NTFS:/mnt/NTFS --name pg -e POSTGRES_PASSWORD=admin -p 65432:5432 postgres #runs daemon
-docker restart <container-id> #restarts daemon
+# docker restart <container-id> #restarts daemon
 
 docker exec -it pg /bin/bash #runs shell as root
 apt-get update && apt-get install sudo procps vim file less

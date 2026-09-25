@@ -10,7 +10,7 @@ multipass shell postgres-d
 
 # docker run -d -v /mnt/NTFS:/mnt/NTFS --name pg -e POSTGRES_PASSWORD=admin -p 65432:5432 postgres #runs daemon
 docker run -d -v /mnt/NTFS:/mnt/NTFS --name pg -e POSTGRES_PASSWORD=admin -p 65432:5432 intellibitz/postgres #runs daemon
-docker restart <container-id> #restarts daemon
+# docker restart <container-id> #restarts daemon
 
 docker run -it --rm --network host --user postgres --workdir /var/lib/postgresql intellibitz/postgres /bin/bash #runs shell
 docker exec -it -u postgres pg /bin/bash #runs shell as user postgres

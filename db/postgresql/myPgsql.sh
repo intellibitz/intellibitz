@@ -29,17 +29,17 @@ sudo su - postgres #postgres user
 postgresql://username@host:port/database #connection string format
 
 cat $PGDATA/postgresql.conf #postgres config file
-listen_addresses = '*' #$PGDATA/postgresql.conf
+# listen_addresses = '*' #$PGDATA/postgresql.conf
 cat $PGDATA/pg_hba.conf #client authentication config file
-host all postgres 127.0.0.1/32 trust #$PGDATA/pg_hba.conf
+# host all postgres 127.0.0.1/32 trust #$PGDATA/pg_hba.conf
 
 pg_ctl status -D /var/lib/postgresql/data
 export PGDATA=/var/lib/postgresql/data
 export EDITOR=/usr/bin/vim
 
-pg_ctl status|initdb|reload|promote
-pg_ctl start|stop|restart
-pg_ctl stop -m <smart|fast|immediate>
+# pg_ctl status|initdb|reload|promote
+# pg_ctl start|stop|restart
+# pg_ctl stop -m <smart|fast|immediate>
 
 pstree -p postgres
 ps -C postgres -af
@@ -70,13 +70,13 @@ oid2name -d template1 -f 3395 #inspect single specfied file in specified db
 oid2name -s #shows tablespaces
 
 cat /postgres/16/data/postgresql.conf
-shared_buffers = 512MB
-maintenance_work_mem = 128MB
-checkpoint_completion_target = 0.7
-wal_buffers = 16MB
-work_mem = 32MB
-min_wal_size = 1GB
-max_wal_size = 2GB
+# shared_buffers = 512MB
+# maintenance_work_mem = 128MB
+# checkpoint_completion_target = 0.7
+# wal_buffers = 16MB
+# work_mem = 32MB
+# min_wal_size = 1GB
+# max_wal_size = 2GB
 
 $ $EDITOR $PGDATA/pg_hba.conf
 ... modify the file as you wish ...
@@ -86,16 +86,16 @@ server signaled
 #It is worth noting that a superuser role can instrument the cluster to reload the configuration
 #by means of an SQL statement. Calling the special function pg_reload_conf() will perform the
 #same action as issuing a reload to pg_ctl:
-postgres=# SELECT pg_reload_conf();
+# postgres=# SELECT pg_reload_conf();
 
 pg_hba.conf file:
 #<connection-type> <database> <role> <remote-machine> <auth-method>
-host    all       luca      carmensita        scram-sha-256
+# host    all       luca      carmensita        scram-sha-256
 hostssl all       test      192.168.222.1/32  scram-sha-256
-host    digikamdb pgwatch2  192.168.222.4/32  trust
-host    digikamdb enrico    carmensita        reject
+# host    digikamdb pgwatch2  192.168.222.4/32  trust
+# host    digikamdb enrico    carmensita        reject
 
-postgres=# SELECT file_name, line_number, type,
+# postgres=# SELECT file_name, line_number, type,
 database, user_name,
 address, auth_method
 FROM pg_hba_file_rules;

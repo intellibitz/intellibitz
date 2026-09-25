@@ -10,18 +10,18 @@ sudo passwd ubuntu
 multipass list
 multipass info xrdp-mantic
 
-remmina -c rdp://<ipaddr>
+# remmina -c rdp://<ipaddr>
 
 #X11 forwarding
-ForwardX11 yes #~/.ssh/config
-multipass exec <name> -- bash -c "echo `cat ~/.ssh/id_rsa.pub` >> ~/.ssh/authorized_keys"
-ssh -X ubuntu@<ipaddr>
+# ForwardX11 yes #~/.ssh/config
+# multipass exec <name> -- bash -c "echo `cat ~/.ssh/id_rsa.pub` >> ~/.ssh/authorized_keys"
+# ssh -X ubuntu@<ipaddr>
 export XAUTHORITY=~/.Xauthority 
 
 #/etc/ssh/sshd_config
-X11Forwarding yes 
-X11DisplayOffset 10
-X11UseLocalhost yes
+# X11Forwarding yes 
+# X11DisplayOffset 10
+# X11UseLocalhost yes
 
 sudo apt install x11-apps
 xlogo &

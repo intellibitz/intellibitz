@@ -43,7 +43,7 @@ cp support-files/mysql.server /etc/init.d/mysql.server
 #https://dev.mysql.com/doc/refman/8.0/en/creating-accounts.html
 mysql -u root -p
 mysql -u root --skip-password
-mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'root-password';
+# mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY 'root-password';
 mysqladmin -u root -p shutdown
 
 #Creating Accounts and Granting Privileges
@@ -100,27 +100,27 @@ GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP
   TO 'custom'@'%.example.com';
 
 #Checking Account Privileges and Properties
-mysql> SHOW GRANTS FOR 'admin'@'localhost';
+# mysql> SHOW GRANTS FOR 'admin'@'localhost';
 
-mysql> SET print_identified_with_as_hex = ON;
-mysql> SHOW CREATE USER 'admin'@'localhost'\G
+# mysql> SET print_identified_with_as_hex = ON;
+# mysql> SHOW CREATE USER 'admin'@'localhost'\G
 
 #Revoking Account Privileges
 REVOKE ALL
   ON *.*
-  FROM 'finley'@'%.example.com';
+#   FROM 'finley'@'%.example.com';
 
 REVOKE RELOAD
   ON *.*
-  FROM 'admin'@'localhost';
+#   FROM 'admin'@'localhost';
 
 REVOKE CREATE,DROP
   ON expenses.*
-  FROM 'custom'@'host47.example.com';
+#   FROM 'custom'@'host47.example.com';
 
 REVOKE INSERT,UPDATE,DELETE
   ON customer.addresses
-  FROM 'custom'@'%.example.com';
+#   FROM 'custom'@'%.example.com';
 
 #Dropping Accounts
 DROP USER 'finley'@'localhost';
@@ -133,84 +133,59 @@ DROP USER 'dummy'@'localhost';
 mysql -h host -u user -p
 
 #Entering Queries
-mysql> SELECT VERSION(), CURRENT_DATE;
-mysql> SELECT SIN(PI()/4), (4+1)*5;
-mysql> SELECT VERSION(); SELECT NOW();
-mysql> SELECT
-    -> USER()
-    -> ,
-    -> CURRENT_DATE;
-mysql> SELECT
-    -> USER()
-    -> \c
+# mysql> SELECT VERSION(), CURRENT_DATE;
+# mysql> SELECT SIN(PI()/4), (4+1)*5;
+# mysql> SELECT VERSION(); SELECT NOW();
+# mysql> SELECT
+#     -> USER()
+#     -> ,
+#     -> CURRENT_DATE;
+# mysql> SELECT
+#     -> USER()
+#     -> \c
 
 #https://dev.mysql.com/doc/refman/8.0/en/database-use.html
 #Creating and Using a Database
-mysql> SHOW DATABASES;
+# mysql> SHOW DATABASES;
 
 #Getting Information About Databases and Tables
-mysql> SELECT DATABASE();
-mysql> SHOW TABLES;
-mysql> DESCRIBE pet;
+# mysql> SELECT DATABASE();
+# mysql> SHOW TABLES;
+# mysql> DESCRIBE pet;
 
 #https://dev.mysql.com/doc/refman/8.0/en/creating-database.html
-mysql> CREATE DATABASE menagerie;
-mysql> USE menagerie
+# mysql> CREATE DATABASE menagerie;
+# mysql> USE menagerie
 mysql -h host -u user -p menagerie
 
-CREATE DATABASE `birthdays`;
-USE birthdays;
-CREATE TABLE tourneys (
-name varchar(30),
-wins real,
-best real,
-size real
-);
-INSERT INTO tourneys (name, wins, best, size)
-VALUES ('Dolly', '7', '245', '8.5'),
-('Etta', '4', '283', '9'),
-('Irma', '9', '266', '7'),
-('Barbara', '2', '197', '7.5'),
-('Gladys', '13', '273', '8');
-CREATE TABLE dinners (
-name varchar(30),
-birthdate date,
-entree varchar(30),
-side varchar(30),
-dessert varchar(30)
-);
-INSERT INTO dinners (name, birthdate, entree, side, dessert)
-VALUES ('Dolly', '1946-01-19', 'steak', 'salad', 'cake'),
-('Etta', '1938-01-25', 'chicken', 'fries', 'ice cream'),
-('Irma', '1941-02-18', 'tofu', 'fries', 'cake'),
-('Barbara', '1948-12-25', 'tofu', 'salad', 'ice cream'),
-('Gladys', '1944-05-28', 'steak', 'fries', 'ice cream');
+# Sample SQL schema and data moved to myMySQL.sql
+# mysql -u root -p < myMySQL.sql
 
 #https://dev.mysql.com/doc/refman/8.0/en/creating-tables.html
-mysql> SHOW TABLES;
-mysql> CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20),
-       species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
-mysql> DESCRIBE pet;
-mysql> LOAD DATA LOCAL INFILE '/path/pet.txt' INTO TABLE pet;
-mysql> LOAD DATA LOCAL INFILE '/path/pet.txt' INTO TABLE pet
-       LINES TERMINATED BY '\r\n';
-mysql> INSERT INTO pet
-       VALUES ('Puffball','Diane','hamster','f','1999-03-30',NULL);
+# mysql> SHOW TABLES;
+# mysql> CREATE TABLE pet (name VARCHAR(20), owner VARCHAR(20),
+#        species VARCHAR(20), sex CHAR(1), birth DATE, death DATE);
+# mysql> DESCRIBE pet;
+# mysql> LOAD DATA LOCAL INFILE '/path/pet.txt' INTO TABLE pet;
+# mysql> LOAD DATA LOCAL INFILE '/path/pet.txt' INTO TABLE pet
+#        LINES TERMINATED BY '\r\n';
+# mysql> INSERT INTO pet
+#        VALUES ('Puffball','Diane','hamster','f','1999-03-30',NULL);
 
 #https://dev.mysql.com/doc/refman/8.0/en/retrieving-data.html
-SELECT what_to_select
-FROM which_table
-WHERE conditions_to_satisfy;
+# SELECT what_to_select
+# FROM which_table
+# WHERE conditions_to_satisfy;
 
 
 #Using mysql in Batch Mode
-mysql < batch-file
+# mysql < batch-file
 mysql -e "source batch-file"
-mysql -h host -u user -p < batch-file
-mysql < batch-file | more
-mysql < batch-file > mysql.out
-mysql> source filename;
-mysql> \. filename
+# mysql -h host -u user -p < batch-file
+# mysql < batch-file | more
+# mysql < batch-file > mysql.out
+# mysql> source filename;
+# mysql> \. filename
 
 #https://dev.mysql.com/doc/refman/8.0/en/programs-overview.html
 #Invoking MySQL Programs
@@ -232,8 +207,8 @@ mysql -p test
 # a set of system variables, some of which may be set at startup, at runtime, or both.
 # System variable names use underscores rather than dashes, and when referenced at runtime
 # (for example, using SET or SELECT statements), must be written using underscores:
-SET GLOBAL general_log = ON;
-SELECT @@GLOBAL.general_log;
+# SET GLOBAL general_log = ON;
+# SELECT @@GLOBAL.general_log;
 
 mysql -u root -p -e "SELECT VERSION();SELECT NOW()"
 
@@ -263,9 +238,9 @@ mysql --port=13306 --protocol=TCP
 
 #https://dev.mysql.com/doc/refman/8.0/en/programs-development.html
 my_print_defaults client mysql
---port=3306
---socket=/tmp/mysql.sock
---no-auto-rehash
+# --port=3306
+# --socket=/tmp/mysql.sock
+# --no-auto-rehash
 
 #https://dev.mysql.com/doc/refman/8.0/en/security.html
 

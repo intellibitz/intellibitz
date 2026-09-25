@@ -7,10 +7,10 @@ sudo su
 service --status-all
 service --status-all | grep '\[ + \]'
 service --status-all | grep '\[ - \]'
-service <service-name> start
-service <service-name> stop
-service <service-name> restart
-service <service-name> status
+# service <service-name> start
+# service <service-name> stop
+# service <service-name> restart
+# service <service-name> status
 ls /etc/init.d
 
 systemctl --type service --all
@@ -39,15 +39,15 @@ curl ifconfig.me #prints public ip
 sudo apt-get install openssh-server
 sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.factory-defaults
 sudo chmod a-w /etc/ssh/sshd_config.factory-defaults
-sudo gedit /etc/ssh/sshd_config
+# sudo gedit /etc/ssh/sshd_config
 sudo systemctl enable ssh
 sudo systemctl start ssh
 sudo ss -lnp | grep sshd
 ssh-keygen -t rsa -b 4096
-ssh-copy-id <username>@<host>
+# ssh-copy-id <username>@<host>
 
 timedatectl list-timezones
-sudo timedatectl set-timezone <timeszone>
+# sudo timedatectl set-timezone <timeszone>
 
 systemd-analyze cat-config systemd/logind.conf
 sudo systemctl restart systemd-logind
@@ -55,10 +55,10 @@ sudo systemctl restart systemd-logind
 #If for some reason you wish to enable the root account, simply give it a password:
 sudo passwd
 #Sudo will prompt you for your password, and then ask you to supply a new password for root as shown below:
-[sudo] password for username: (enter your own password)
-Enter new UNIX password: (enter a new password for root)
-Retype new UNIX password: (repeat new password for root)
-passwd: password updated successfully
+# [sudo] password for username: (enter your own password)
+# Enter new UNIX password: (enter a new password for root)
+# Retype new UNIX password: (repeat new password for root)
+# passwd: password updated successfully
 #• To disable the root account password, use the following passwd syntax:
 sudo passwd -l root
 
@@ -88,24 +88,24 @@ sudo chmod 0750 /home/username
  /etc/adduser.conf
 # and modify the DIR_MODE variable to something
 #appropriate, so that all new home directories will receive the correct permissions.
-DIR_MODE=0750
+# DIR_MODE=0750
 
 #SSH Access by Disabled Users
 #Simply disabling/locking a user password will not prevent a user from logging into your server remotely if they have
 #previously set up SSH public key authentication. They will still be able to gain shell access to the server, without
 #the need for any password. Remember to check the users home directory for files that will allow for this type of
 #authenticated SSH access, e.g.
- /home/username/.ssh/authorized_keys.
+#  /home/username/.ssh/authorized_keys.
 #Remove or rename the directory .ssh/ in the user’s home folder to prevent further SSH authentication capabilities.
 #Be sure to check for any established SSH connections by the disabled user, as it is possible they may have existing
 #inbound or outbound connections. Kill any that are found.
-who | grep username (to get the pts/# terminal)
+who | grep username # (to get the pts/# terminal)
 sudo pkill -f pts/#
 #Restrict SSH access to only user accounts that should have it. For example, you may create a group called “sshlogin”
 sudo addgroup sshlogin
 #and add the group name as the value associated with the AllowGroups variable located in the file
- /etc/ssh/sshd_config
-AllowGroups sshlogin
+#  /etc/ssh/sshd_config
+# AllowGroups sshlogin
 #Then add your permitted SSH users to the group “sshlogin”, and restart the SSH service.
 sudo adduser username sshlogin
 sudo systemctl restart sshd.service
@@ -123,7 +123,7 @@ ss -tulw
 #Get the Monitor’s device name
 xrandr | grep " connected" | cut -f1 -d " "
 #Change the brightness level
-xrandr --output [monitor-name] --brightness [brightness-level]
+# xrandr --output [monitor-name] --brightness [brightness-level]
 xrandr --output LVDS-1 --brightness 0.75
 
 cat /sys/class/backlight/intel_backlight/brightness

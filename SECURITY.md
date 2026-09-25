@@ -1,21 +1,32 @@
 # Security Policy
 
-## Supported Versions
+IntelliBitz takes the security of our repositories, scripts, and software seriously.
 
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
+---
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 5.1.x   | :white_check_mark: |
-| 5.0.x   | :x:                |
-| 4.0.x   | :white_check_mark: |
-| < 4.0   | :x:                |
+## Supported Components
+
+Security updates and patches are actively maintained for current branch releases:
+
+| Component | Status | Notes |
+| :--- | :--- | :--- |
+| `main` branch scripts | :white_check_mark: Supported | Actively maintained |
+| Docker configurations | :white_check_mark: Supported | Security-reviewed container configs |
+| Kotlin & Android active projects | :white_check_mark: Supported | `IntelliDroid`, Kotlin learn modules |
+| Legacy experimental archives | :x: End of Life | Provided for historical/reference use |
+
+---
 
 ## Reporting a Vulnerability
 
-Use this section to tell people how to report a vulnerability.
+If you discover a security vulnerability or potential credential leak within any component of this repository:
 
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+1. **Do NOT open a public GitHub issue.**
+2. Send an email to the repository maintainer with:
+   - A description of the issue and potential impact.
+   - Affected files and line numbers.
+   - Steps to reproduce or proof-of-concept.
+3. You can expect an initial acknowledgement within 48 hours.
+4. Once verified, a patch will be applied and released promptly.
+
+Thank you for helping keep IntelliBitz and our community secure!
