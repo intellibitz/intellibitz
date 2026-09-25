@@ -456,7 +456,7 @@ various classes, such as PercentFrameLayout and PercentRelativeLayout.
         // excluding org.json which is provided by Android
         exclude(mapOf("group" to "org.json", "module" to "json"))
     }
-    implementation("com.googlecode.libphonenumber:libphonenumber:8.3.2")
+    implementation("com.googlecode.libphonenumber:libphonenumber:9.0.39")
     implementation("com.android.volley:volley:1.1.0")
 //https://developer.android.com/jetpack/androidx/releases/work
 //    // optional - RxJava2 support
