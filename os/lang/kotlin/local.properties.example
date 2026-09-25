@@ -1,9 +1,0 @@
-## Android SDK Local Configuration Example
-# Copy this file to local.properties in this project directory if needed.
-# Alternatively, set the ANDROID_HOME or ANDROID_SDK_ROOT environment variable.
-#
-# Linux / macOS:
-# sdk.dir=/home/username/Android/Sdk
-#
-# Windows:
-# sdk.dir=C\:\\Users\\username\\AppData\\Local\\Android\\Sdk

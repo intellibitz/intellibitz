@@ -26,14 +26,22 @@ out/
 *.project
 *.classpath
 .settings/
+.apt_generated/
+.factorypath
+.springBeans
+.sts4-cache
+bin/
 
 # NetBeans
+nbproject/
 nbproject/private/
+nbbuild.xml
 build/
 nbbuild/
 dist/
 nbdist/
 .nb-attrs
+.nb-gradle/
 
 # Visual Studio Code
 .vscode/
@@ -65,6 +73,10 @@ build/
 
 # --- Android ---
 local.properties
+*keystore.properties
+*.keystore
+*.jks
+*google-services.json
 .externalNativeBuild/
 .cxx/
 captures/
@@ -72,6 +84,19 @@ captures/
 *.ap_
 *.aab
 *.dex
+R.java
+
+# --- Compiled Binaries & Libraries ---
+*.exe
+*.exe~
+*.dll
+*.dylib
+*.test
+*.out
+
+# --- Rust / Cargo ---
+Cargo.lock
+**/*.rs.bk
 
 # --- Python ---
 __pycache__/

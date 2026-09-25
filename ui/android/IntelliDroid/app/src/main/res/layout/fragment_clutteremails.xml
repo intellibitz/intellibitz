@@ -11,7 +11,7 @@
     android:showDividers="middle"
     tools:context="intellibitz.intellidroid.MainActivity">
 
-    <include layout="@layout/toolbar_clutteremails" />
+    <include layout="@layout/toolbar_clutteremail" />
     <!--
         <android.support.design.widget.AppBarLayout
             android:id="@+id/app_bar"

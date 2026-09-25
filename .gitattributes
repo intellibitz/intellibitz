@@ -25,7 +25,7 @@
 *.yaml text eol=lf
 *.json text eol=lf
 *.sql text eol=lf
-*.sql text eol=lf
+gradlew text eol=lf
 
 # Windows scripts require CRLF
 *.bat text eol=crlf
