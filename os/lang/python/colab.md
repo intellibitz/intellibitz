@@ -1,40 +1,52 @@
-# Google Colaboratory (Colab) Quickstart
+# Google Colaboratory (Colab) & Gemini AI Integration
 
-Reference guide for Google Colaboratory, Gemini API integration, and cloud GPU environments.
-
----
-
-## Overview
-
-[Google Colaboratory](https://colab.research.google.com/) provides hosted Jupyter notebook runtimes in the browser with:
-- Zero local configuration required
-- Free access to GPUs / TPUs
-- Collaborative sharing and Google Drive synchronization
+Reference guide for Google Colaboratory runtimes and Gemini multimodal AI model integration.
 
 ---
 
-## Gemini API Quickstart
+## 1. Google Colab Environment
 
-The Gemini API allows integration of multimodal models (text, code, image, audio) created by Google DeepMind.
+[Google Colaboratory](https://colab.research.google.com/) provides hosted Jupyter runtimes with:
+- Zero local setup required
+- Cloud GPU (T4, A100, H100) and TPU acceleration
+- Google Drive synchronization and instant sharing
 
-1. **Get an API Key**:
-   - Visit [Google AI Studio](https://aistudio.google.com/).
-   - Create an API key for your project.
+---
 
-2. **Install the Python SDK**:
-   ```bash
-   pip install -U google-genai
-   ```
+## 2. Gemini Multimodal API
 
-3. **Initialize and Generate**:
-   ```python
-   import os
-   from google import genai
+Use Google DeepMind's official Python SDK (`google-genai`) for Gemini models:
 
-   client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
-   response = client.models.generate_content(
-       model="gemini-2.5-flash",
-       contents="Explain quantum computing in simple terms.",
-   )
-   print(response.text)
-   ```
+### Installation
+```bash
+pip install --upgrade google-genai
+```
+
+### Python SDK Quickstart
+```python
+import os
+from google import genai
+
+# Initialize the Gemini client
+client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+
+# Generate content with Gemini models
+response = client.models.generate_content(
+    model="gemini-2.5-flash",
+    contents="Explain modern microservice design patterns with Ktor.",
+)
+
+print(response.text)
+```
+
+### Multimodal Input (Image & Vision)
+```python
+from PIL import Image
+
+image = Image.open("architecture_diagram.png")
+response = client.models.generate_content(
+    model="gemini-2.5-flash",
+    contents=[image, "Review this system architecture and recommend optimizations."],
+)
+print(response.text)
+```

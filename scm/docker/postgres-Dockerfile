@@ -1,2 +1,9 @@
-FROM postgres:latest
-ENV POSTGRES_PASSWORD admin
+# syntax=docker/dockerfile:1
+FROM postgres:17-alpine
+
+LABEL maintainer="IntelliBitz <info@intellibitz.com>"
+LABEL description="PostgreSQL 17 Alpine Container"
+
+# Define container healthcheck
+HEALTHCHECK --interval=10s --timeout=5s --start-period=10s --retries=5 \
+  CMD pg_isready -U "${POSTGRES_USER:-postgres}" -d "${POSTGRES_DB:-postgres}" || exit 1

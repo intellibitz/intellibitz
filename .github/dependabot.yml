@@ -1,0 +1,31 @@
+version: 2
+updates:
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  # Maintain Docker images in Compose and Dockerfiles
+  - package-ecosystem: "docker"
+    directory: "/scm/docker"
+    schedule:
+      interval: "weekly"
+
+  # Maintain Docker dependencies in db/postgresql
+  - package-ecosystem: "docker"
+    directory: "/db/postgresql"
+    schedule:
+      interval: "weekly"
+
+  # Maintain Docker dependencies in db/mysql
+  - package-ecosystem: "docker"
+    directory: "/db/mysql"
+    schedule:
+      interval: "weekly"
+
+  # Maintain Gradle dependencies in active Android client
+  - package-ecosystem: "gradle"
+    directory: "/ui/android/IntelliDroid"
+    schedule:
+      interval: "weekly"

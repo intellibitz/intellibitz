@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  shell-validation:
+    name: Validate Shell Scripts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Syntax Check All Shell Scripts
+        run: |
+          echo "Validating .sh files with bash -n..."
+          errors=0
+          while IFS= read -r file; do
+            if ! bash -n "$file"; then
+              echo "Syntax error in $file"
+              errors=$((errors + 1))
+            fi
+          done < <(find . -name "*.sh" -not -path "*/.*")
+          if [ "$errors" -ne 0 ]; then
+            echo "Total errors: $errors"
+            exit 1
+          fi
+          echo "All shell scripts passed syntax validation."
+
+      - name: Verify Executable Permissions on Scripts
+        run: |
+          echo "Checking executable permissions on .sh and gradlew..."
+          missing_x=0
+          while IFS= read -r file; do
+            if [ ! -x "$file" ]; then
+              echo "Missing executable permission: $file"
+              missing_x=$((missing_x + 1))
+            fi
+          done < <(find . \( -name "*.sh" -o -name "*.exp" -o -name "gradlew" \) -not -path "*/.*")
+          if [ "$missing_x" -ne 0 ]; then
+            echo "Total missing +x: $missing_x"
+            exit 1
+          fi
+          echo "All scripts have executable permissions."
+
+  docker-compose-validation:
+    name: Validate Docker Compose Configurations
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Verify Compose Files Syntax
+        run: |
+          for compose_file in \
+            db/postgresql/docker-compose.yml \
+            db/mysql/docker-compose.yml \
+            scm/docker/docker-compose.yaml; do
+            if [ -f "$compose_file" ]; then
+              echo "Validating $compose_file..."
+              docker compose -f "$compose_file" config --quiet || exit 1
+            fi
+          done
+          echo "All compose files are syntactically valid."

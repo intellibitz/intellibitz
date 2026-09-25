@@ -21,13 +21,9 @@ group = "intellibitz"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    gradlePluginPortal()
     google()
-    jcenter()
     mavenCentral()
-    maven {
-        url = uri("https://dl.bintray.com/kotlin/kotlin-eap")
-    }
+    gradlePluginPortal()
 }
 
 android {

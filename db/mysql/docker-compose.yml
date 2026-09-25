@@ -1,31 +1,46 @@
-# https://docs.docker.com/get-started/08_using_compose/
-
-# docker compose up -d
-# docker compose down
+# MySQL 8.4 LTS + Node.js 22 LTS Docker Compose Stack
+# Usage:
+#   docker compose up -d
+#   docker compose down
 
 services:
   app:
-    image: node:18-alpine
+    image: node:22-alpine
+    container_name: intellibitz-node-app
+    restart: unless-stopped
     command: sh -c "yarn install && yarn run dev"
     ports:
-      - 127.0.0.1:3000:3000
+      - "127.0.0.1:3000:3000"
     working_dir: /app
     volumes:
       - ./:/app
+    depends_on:
+      mysql:
+        condition: service_healthy
     environment:
       MYSQL_HOST: mysql
       MYSQL_USER: root
-      MYSQL_PASSWORD: secret
-      MYSQL_DB: todos
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-secret}
+      MYSQL_DB: ${MYSQL_DATABASE:-todos}
 
   mysql:
-    image: mysql:8.0
+    image: mysql:8.4
+    container_name: intellibitz-mysql
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3306:3306"
     volumes:
       - todo-mysql-data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: secret
-      MYSQL_DATABASE: todos
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD:-secret}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-todos}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_PASSWORD:-secret}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
 
 volumes:
   todo-mysql-data:
-
+    name: intellibitz-mysql-data

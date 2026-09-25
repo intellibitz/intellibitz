@@ -6,11 +6,13 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT" />
-  <img src="https://img.shields.io/badge/OS-Linux%20%7C%20Windows%20WSL-orange.svg" alt="OS Support" />
-  <img src="https://img.shields.io/badge/Docker-Engine%20%26%20Compose-2496ED.svg" alt="Docker" />
-  <img src="https://img.shields.io/badge/Kotlin-Multiplatform-7F52FF.svg" alt="Kotlin" />
-  <img src="https://img.shields.io/badge/Android-Gradle%20Suite-3DDC84.svg" alt="Android" />
-  <img src="https://img.shields.io/badge/Database-PostgreSQL%20%7C%20MySQL%20%7C%20SQLite-336791.svg" alt="Databases" />
+  <img src="https://img.shields.io/badge/CI-GitHub%20Actions-2088FF.svg" alt="GitHub CI" />
+  <img src="https://img.shields.io/badge/Dependabot-Enabled-02569B.svg" alt="Dependabot" />
+  <img src="https://img.shields.io/badge/Docker-Compose%20v2%20%7C%20Alpine-2496ED.svg" alt="Docker" />
+  <img src="https://img.shields.io/badge/Kotlin-2.0%2B-7F52FF.svg" alt="Kotlin" />
+  <img src="https://img.shields.io/badge/Python-3.13%20%7C%20uv-3776AB.svg" alt="Python" />
+  <img src="https://img.shields.io/badge/PostgreSQL-17%20Alpine-336791.svg" alt="PostgreSQL" />
+  <img src="https://img.shields.io/badge/MySQL-8.4%20LTS-4479A1.svg" alt="MySQL" />
 </p>
 
 ---
@@ -50,7 +52,7 @@ Operating system administration and programming language environments.
 - **[Language Toolchains](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang)**:
   - **[Kotlin](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/kotlin)**: Tutorial suite (`KotlinLearn`), sandbox (`KotlinPlay`), multiplatform modules (`multiplatform`), web clients (`jsfront`, `mpfsweb`).
   - **[Java SE](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/javase)**: Tamil font transliterator desktop application (`FontTransliterator`), text editors (`sted`).
-  - **[Python & AI](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/python)**: Conda/pip setups, Hugging Face Hub CLI guide ([`huggingface.md`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/python/huggingface.md)), Google Colab & Gemini API ([`colab.md`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/python/colab.md)), Meta Llama 3 ([`meta-llama.md`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/python/meta-llama.md)).
+  - **[Python & AI](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/python)**: Modern [uv package manager](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/python/uv.md) (`uv.sh`), Python 3.12/3.13, Hugging Face Hub CLI guide ([`huggingface.md`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/python/huggingface.md)), Google Colab & Gemini API ([`colab.md`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/python/colab.md)), Meta Llama 3 ([`meta-llama.md`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/python/meta-llama.md)).
   - **[Go](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/go)**: Workspaces, modules, testing, and binaries.
   - **[Clojure](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/clojure)**: Language Reader syntax and data structure reference ([`myClojure.md`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/clojure/myClojure.md)).
   - **[Expect](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/expect)**: OpenVPN and SFTP interactive automation scripts ([`expect-openvpn.exp`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/expect/expect-openvpn.exp), [`expect-sftp.exp`](file:///home/ramadoss/github.com/intellibitz/intellibitz/os/lang/expect/expect-sftp.exp)).
