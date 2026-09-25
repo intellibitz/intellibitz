@@ -417,11 +417,11 @@ Important: There is a known bug in the android.support.v7.media.MediaRouter clas
 // Backports portions of the media framework, including MediaBrowser and MediaSession.
     implementation("androidx.media:media:1.2.0-alpha04")
 //    // Interacting with MediaSessions
-    implementation("androidx.media2:media2-session:1.1.0-alpha01")
+    implementation("androidx.media2:media2-session:1.3.0")
 //    // optional - UI widgets for VideoView and MediaControlView
-    implementation("androidx.media2:media2-widget:1.1.0-alpha01")
+    implementation("androidx.media2:media2-widget:1.3.0")
 //    // optional - Implementation of a SessionPlayer
-    implementation("androidx.media2:media2-player:1.1.0-alpha01")
+    implementation("androidx.media2:media2-player:1.3.0")
 /*
 The Design package provides APIs to support adding material design components and patterns to your apps.
 The Design Support library adds support for various material design components and patterns for app
