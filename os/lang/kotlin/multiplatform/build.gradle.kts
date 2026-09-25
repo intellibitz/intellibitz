@@ -1,29 +1,25 @@
-/*
-https://docs.gradle.org/current/userguide/kotlin_dsl.html
-Applying plugins
-You can declare your plugins within the subprojects to which they apply, but we recommend that you also declare them
-within the root project build script. This makes it easier to keep plugin versions consistent across projects within
- a build. The approach also improves the performance of the build.
- */
 plugins {
-    kotlin("multiplatform") version "1.4.0" apply false
-    kotlin("android") version "1.4.0" apply false
-    kotlin("jvm") version "1.4.0" apply false
-    kotlin("js") version "1.4.0" apply false
-    kotlin("plugin.serialization") version "1.4.0" apply false
-    id("org.gretty") version ("3.0.3") apply (false)
-//    id("org.akhikhl.gretty") version ("2.0.0") apply (false)
-//    id("com.google.cloud.tools.appengine") apply (false)
+    kotlin("multiplatform") version "2.0.21" apply false
+    kotlin("android") version "2.0.21" apply false
+    kotlin("jvm") version "2.0.21" apply false
+    kotlin("js") version "2.0.21" apply false
+    kotlin("plugin.serialization") version "2.0.21" apply false
+    id("com.android.application") version "8.7.2" apply false
+    id("com.android.library") version "8.7.2" apply false
 }
-buildscript{
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
     dependencies {
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.0")
-        classpath("com.android.tools.build:gradle:4.0.1")
-        classpath("com.google.cloud.tools:appengine-gradle-plugin:2.2.0")
-        classpath("org.gretty:gretty:3.0.3")
-        classpath("org.jetbrains.kotlin:kotlin-serialization:1.4.0")
-//        classpath("gradle.plugin.org.gretty:gretty:3.0.3")
-//        classpath("org.akhikhl.gretty:gretty:2.0.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21")
+        classpath("com.android.tools.build:gradle:8.7.2")
+        classpath("com.google.cloud.tools:appengine-gradle-plugin:2.5.0")
+        classpath("org.gretty:gretty:4.1.6")
+        classpath("org.jetbrains.kotlin:kotlin-serialization:2.0.21")
     }
 }
 
@@ -31,10 +27,15 @@ group = "com.intellibitz"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    mavenCentral()
     google()
+    mavenCentral()
     gradlePluginPortal()
 }
 
-allprojects{
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
 }

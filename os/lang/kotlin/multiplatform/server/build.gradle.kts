@@ -9,14 +9,6 @@ plugins {
 //    application
 }
 
-repositories{
-    maven {
-        url = uri("https://dl.bintray.com/kotlin/ktor")
-    }
-    maven {
-        url = uri("https://dl.bintray.com/kotlin/kotlinx")
-    }
-}
 
 dependencies {
     implementation(project(":shared"))
@@ -37,8 +29,7 @@ project(":server").evaluationDependsOn(":shared")
 project(":server").evaluationDependsOnChildren()
 
 gretty {
-//    contextPath = '/'
-    servletContainer = "jetty9"  // What App Engine Flexible uses
+    servletContainer = "jetty11"
 }
 
 appengine {

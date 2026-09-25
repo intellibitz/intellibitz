@@ -5,15 +5,14 @@ group = "com.intellibitz"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    maven {
-        url = uri("https://dl.bintray.com/kotlin/kotlinx")
-    }
+    mavenCentral()
+    gradlePluginPortal()
 }
 
 dependencies {
     implementation(project(":shared"))
     testImplementation(kotlin("test-js"))
-    implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.7.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.11.0")
 }
 
 kotlin {
@@ -21,15 +20,15 @@ kotlin {
         browser {
             binaries.executable()
             webpackTask {
-                cssSupport.enabled = true
+                cssSupport { }
             }
             runTask {
-                cssSupport.enabled = true
+                cssSupport { }
             }
             testTask {
                 useKarma {
                     useChromeHeadless()
-                    webpackConfig.cssSupport.enabled = true
+                    webpackConfig.cssSupport { }
                 }
             }
         }

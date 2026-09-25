@@ -11,7 +11,7 @@ dependencies {
 }
 
 application {
-    mainClassName = "MainKt"
+    mainClass.set("MainKt")
 }
 
 java {

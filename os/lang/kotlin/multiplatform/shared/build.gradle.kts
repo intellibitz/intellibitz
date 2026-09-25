@@ -1,13 +1,13 @@
 plugins {
     kotlin("multiplatform") apply true
-    id("com.android.library") apply(true)
-    id("kotlin-android-extensions") apply(true)
+    id("com.android.library") apply true
+    id("kotlin-parcelize") apply true
 }
 group = "com.intellibitz"
 version = "1.0-SNAPSHOT"
 
 kotlin {
-    android()
+    androidTarget()
     iosX64("ios") {
         binaries {
             framework {
@@ -25,19 +25,22 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                implementation("androidx.core:core-ktx:1.3.1")
+                implementation("androidx.core:core-ktx:1.15.0")
             }
         }
-        val androidTest by getting
+        val androidUnitTest by getting
     }
 }
+
 android {
-    compileSdkVersion(30)
+    namespace = "intellibitz.shared"
+    compileSdk = 35
     defaultConfig {
-        minSdkVersion(24)
-        targetSdkVersion(30)
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = 24
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildTypes {
         getByName("release") {

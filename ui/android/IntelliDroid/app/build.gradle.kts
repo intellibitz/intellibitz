@@ -12,7 +12,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     kotlin("kapt")
-    id("kotlin-android-extensions")
+    id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
     id("com.google.gms.google-services")
 }
@@ -27,56 +27,21 @@ repositories {
 }
 
 android {
-    /**
-     * compileSdkVersion specifies the Android API level Gradle should use to
-     * compile your app. This means your app can use the API features included in
-     * this API level and lower.
-     */
-    compileSdkVersion(30)
-    /**
-     * buildToolsVersion specifies the version of the SDK build tools, command-line
-     * utilities, and compiler that Gradle should use to build your app. You need to
-     * download the build tools using the SDK Manager.
-     *
-     * This property is optional because the plugin uses a recommended version of
-     * the build tools by default.
-     */
-    buildToolsVersion("30.0.2")
+    namespace = "intellibitz.intellidroid"
+    compileSdk = 35
+
     buildFeatures {
-//The databinding library is bundled with the Android Gradle plugin.
-// You do not need to declare a dependency on the library, but you must enable it.
-//    implementation("androidx.databinding:databinding:3.6.0-alpha10")
         dataBinding = true
     }
 
-    /**
-     * The defaultConfig block encapsulates default settings and entries for all
-     * build variants, and can override some attributes in main/AndroidManifest.xml
-     * dynamically from the build system. You can configure product flavors to override
-     * these values for different versions of your app.
-     */
     defaultConfig {
-        /**
-         * applicationId uniquely identifies the package for publishing.
-         * However, your source code should still reference the package name
-         * defined by the package attribute in the main/AndroidManifest.xml file.
-         */
         applicationId = "intellibitz.intellidroid"
-        minSdkVersion(24)
-        targetSdkVersion(30)
+        minSdk = 24
+        targetSdk = 35
         versionCode = 1
-// Defines a user-friendly version name for your app.
         versionName = "1.0"
         vectorDrawables.useSupportLibrary = true
-//https://developer.android.com/studio/build/multidex
-//If your minSdkVersion is set to 21 or higher, multidex is enabled by default and you do not need the multidex support library.
-        // Enabling multidex support. (only for sdk 20 or lower)
-        multiDexEnabled = true
-//Don't use MultiDexTestRunner, which is deprecated; use AndroidJUnitRunner instead.
-////When you write instrumentation tests for multidex apps, no additional configuration is required
-//// if you use a MonitoringInstrumentation (or an AndroidJUnitRunner) instrumentation.
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-//        testInstrumentationRunner = "intellibitz.intellidroid.test.MultiDexTestRunner"
         externalNativeBuild {
             cmake {
                 cppFlags("-frtti -fexceptions")
@@ -84,202 +49,101 @@ android {
         }
     }
 
-    // The flavorSelection property uses the following format:
-    // flavorSelection "dimension_name", "flavor_name"
-
-    // Chooses the "color" flavor from libraries that specify a "shape"
-    // dimension.
-//        flavorSelection "color", "shape"
-    // Specifies one flavor dimension.
-    flavorDimensions("color")
-    /**
-     * The productFlavors block is where you can configure multiple product flavors.
-     * This allows you to create different versions of your app that can
-     * override the defaultConfig block with their own settings. Product flavors
-     * are optional, and the build system does not create them by default.
-     *
-     * This example creates a free and paid product flavor. Each product flavor
-     * then specifies its own application ID, so that they can exist on the Google
-     * Play Store, or an Android device, simultaneously.
-     *
-     * If you declare product flavors, you must also declare flavor dimensions
-     * and assign each flavor to a flavor dimension.
-     */
+    flavorDimensions += "color"
     productFlavors {
-        // Define separate dev and prod product flavors.
         create("dev") {
-            // Assigns this product flavor to the "color" flavor dimension.
-            // This step is optional if you are using only one dimension.
             dimension = "color"
-            // dev utilizes minSDKVersion = 21 to allow the Android gradle plugin
-            // to pre-dex each module and produce an APK that can be tested on
-            // Android Lollipop without time consuming dex merging processes.
-            minSdkVersion(24)
-//            minSdkVersion 11
+            minSdk = 24
+            targetSdk = 35
             applicationId = "intellibitz.intellidroid.dev"
             versionCode = 1
             versionName = "1.0-dev"
         }
         create("qa") {
-            // Assigns this product flavor to the "color" flavor dimension.
-            // This step is optional if you are using only one dimension.
             dimension = "color"
-//        targets 4.4 kitkat
-            minSdkVersion(24)
+            minSdk = 24
+            targetSdk = 35
             applicationId = "intellibitz.intellidroid.qa"
             versionCode = 1
             versionName = "1.0-qa"
         }
         create("uat") {
-            // Assigns this product flavor to the "color" flavor dimension.
-            // This step is optional if you are using only one dimension.
             dimension = "color"
-            minSdkVersion(24)
+            minSdk = 24
+            targetSdk = 35
             applicationId = "intellibitz.intellidroid.uat"
             versionCode = 1
             versionName = "1.0-uat"
         }
         create("prod") {
-            // Assigns this product flavor to the "color" flavor dimension.
-            // This step is optional if you are using only one dimension.
             dimension = "color"
-            // The actual minSdkVersion for the application.
-//        targets 3.0 honeycomb 97.3% of devices
-//        targets api15 - 4.0.3 icecream 97.3% of devices
-            minSdkVersion(24)
-        }
-/*
-2.2	Froyo	8	0.1%
-2.3.3 -
-2.3.7	Gingerbread	10	1.7%
-
-4.0.3 -
-4.0.4	Ice Cream Sandwich	15	1.6%
-
-4.1.x	Jelly Bean	16	6.0%
-4.2.x	17	8.3%
-4.3	18	2.4%
-
-4.4	KitKat	19	29.2%
-
-5.0	Lollipop	21	14.1%
-5.1	22	21.4%
-
-6.0	Marshmallow	23	15.2%
-
-Data collected during a 7-day period ending on August 1, 2016.
- */
-//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-//        testInstrumentationRunner "com.android.test.runner.MultiDexTestRunner"
-//        testInstrumentationRunner "com.google.android.apps.common.testing.testrunner.GoogleInstrumentationTestRunner"
-//        testInstrumentationRunner "android.test.InstrumentationTestRunner"
-//        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-//        restricts resource configuration to locales
-//        resConfigs "en", "in"
-/*
-        jackOptions {
-            enabled false
-        }
-*/
-    }
-
-
-    val props = Properties()
-    props.load(project.file("${projectDir}/keystore.properties").inputStream())
-    signingConfigs {
-        create("release") {
-            storeFile = file("${projectDir}/" + props.getProperty("storeFile"))
-            storePassword = props.getProperty("storePassword")
-            keyAlias = props.getProperty("keyAlias")
-            keyPassword = props.getProperty("keyPassword")
+            minSdk = 24
+            targetSdk = 35
         }
     }
 
-    /**
-     * The buildTypes block is where you can configure multiple build types.
-     * By default, the build system defines two build types: debug and release. The
-     * debug build type is not explicitly shown in the default build configuration,
-     * but it includes debugging tools and is signed with the debug key. The release
-     * build type applies Proguard settings and is not signed by default.
-     */
+    val keystorePropsFile = project.file("${projectDir}/keystore.properties")
+    if (keystorePropsFile.exists()) {
+        val props = Properties()
+        keystorePropsFile.inputStream().use { props.load(it) }
+        signingConfigs {
+            create("release") {
+                storeFile = file("${projectDir}/" + props.getProperty("storeFile"))
+                storePassword = props.getProperty("storePassword")
+                keyAlias = props.getProperty("keyAlias")
+                keyPassword = props.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         getByName("debug") {
             applicationIdSuffix = ".debug"
         }
 
         getByName("release") {
-//            linke minfied, be careful about what gets removed
-//            shrinkResources true
-/*
-            < ? xml version = "1.0" encoding = "utf-8" ? >
-            < resources xmlns: tools = "http://schemas.android.com/tools"
-            tools:keep = "@layout/l_used*_c,@layout/l_used_a,@layout/l_used_b*"/>
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools"
-    tools:shrinkMode="safe"
-    tools:discard="@layout/unused2"/>
-*/
-//            the below minifyEnabled is for progaurd.. turn it on for production
             isMinifyEnabled = false
-            signingConfig = signingConfigs.getByName("release")
+            signingConfigs.findByName("release")?.let {
+                signingConfig = it
+            }
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
-/*
-    externalNativeBuild {
-        cmake {
-            path "CMakeLists.txt"
-        }
-    }
-*/
-
-        /**
-         * The "initWith" property allows you to copy configurations from other build types,
-         * so you don"t have to configure one from the beginning. You can then configure
-         * just the settings you want to change. The following line initializes
-         * "jnidebug" using the debug build type, and changes only the
-         * applicationIdSuffix and versionNameSuffix settings.
-         */
 
         create("jnidebug") {
-
-            // This copies the debuggable attribute and debug signing configurations.
             initWith(getByName("debug"))
-
             applicationIdSuffix = ".jnidebug"
             isJniDebuggable = true
         }
     }
 
-
     testOptions {
         unitTests {
-            unitTests.isReturnDefaultValues = true
+            isReturnDefaultValues = true
         }
     }
-    compileOptions {
-        targetCompatibility = JavaVersion.VERSION_1_8
-        sourceCompatibility = JavaVersion.VERSION_1_8
-    }
-    kotlinOptions {
-        // work-runtime-ktx 2.1.0 and above now requires Java 8
-        jvmTarget = "1.8"
 
-        // Enable Coroutines and Flow APIs
-        freeCompilerArgs =
-            freeCompilerArgs + "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
-        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlinx.coroutines.FlowPreview"
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
-    lintOptions {
-        tasks.findByName("lint")?.enabled = false
-        isQuiet = true
-        isAbortOnError = false
+
+    lint {
+        quiet = true
+        abortOnError = false
     }
 
     useLibrary("org.apache.http.legacy")
-//    useLibrary("android.test")
     useLibrary("android.test.runner")
-    useLibrary ("android.test.base")
+    useLibrary("android.test.base")
     useLibrary("android.test.mock")
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        optIn.addAll("kotlinx.coroutines.ExperimentalCoroutinesApi", "kotlinx.coroutines.FlowPreview")
+    }
+}
 
 /*
     implementationOptions {
@@ -303,7 +167,6 @@ Data collected during a 7-day period ending on August 1, 2016.
         release.setRoot("build-types/release")
     }
 */
-}
 
 dependencies {
 //    implementation(project(":shared"))
@@ -457,7 +320,7 @@ various classes, such as PercentFrameLayout and PercentRelativeLayout.
         exclude(mapOf("group" to "org.json", "module" to "json"))
     }
     implementation("com.googlecode.libphonenumber:libphonenumber:9.0.39")
-    implementation("com.android.volley:volley:1.1.0")
+    implementation("com.android.volley:volley:1.2.1")
 //https://developer.android.com/jetpack/androidx/releases/work
 //    // optional - RxJava2 support
 //    implementation "androidx.work:work-rxjava2:$work_version"
