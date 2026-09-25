@@ -489,7 +489,7 @@ various classes, such as PercentFrameLayout and PercentRelativeLayout.
     androidTestImplementation("androidx.test:core:1.2.0")
     // Core library
 // Required -- JUnit 4 framework
-    androidTestImplementation("junit:junit:4.13")
+    androidTestImplementation("junit:junit:4.13.2")
     // Optional -- Mockito framework
     androidTestImplementation("org.mockito:mockito-core:3.3.3")
 // AndroidJUnitRunner and JUnit Rules
@@ -532,7 +532,7 @@ various classes, such as PercentFrameLayout and PercentRelativeLayout.
     testImplementation(kotlin("test"))
     testImplementation(kotlin("test-junit"))
 // Required -- JUnit 4 framework
-    testImplementation("junit:junit:4.13")
+    testImplementation("junit:junit:4.13.2")
     testImplementation("androidx.test.espresso:espresso-core:3.2.0")
     // Optional -- Robolectric environment
     testImplementation("androidx.test:core:1.2.0")
