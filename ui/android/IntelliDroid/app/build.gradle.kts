@@ -445,7 +445,7 @@ various classes, such as PercentFrameLayout and PercentRelativeLayout.
 //    The recyclerview library adds the RecyclerView class. This class provides support for the RecyclerView widget,
 // a view for efficiently displaying large data sets by providing a limited window of data items.
     implementation("androidx.recyclerview:recyclerview:1.2.0-alpha05")
-    implementation("androidx.viewpager2:viewpager2:1.1.0-alpha01")
+    implementation("androidx.viewpager2:viewpager2:1.1.0")
 //https://developer.android.com/studio/build/multidex
 //If your minSdkVersion is set to 21 or higher, multidex is enabled by default and you do not need the multidex support library.
     // Enabling multidex support. (only for sdk 20 or lower)
